@@ -1,0 +1,9 @@
+.small-icon i {
+    font-size: 1rem; /* Más pequeño */
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  .small-icon:hover i {
+    opacity: 0.7; /* Ligeramente más tenue al pasar el mouse */
+  }
+  

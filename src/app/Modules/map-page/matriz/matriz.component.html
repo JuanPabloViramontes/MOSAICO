@@ -1,0 +1,93 @@
+<!-- Selector de nivel de detalle -->
+<div class="mb-3 text-end">
+  <div class="btn-group" role="group">
+    <button class="btn btn-outline-primary" [class.active]="matrizNivel === 'resumido'" (click)="matrizNivel = 'resumido'">Resumido</button>
+    <button class="btn btn-outline-primary" [class.active]="matrizNivel === 'intermedio'" (click)="matrizNivel = 'intermedio'">Intermedio</button>
+    <button class="btn btn-outline-primary" [class.active]="matrizNivel === 'completo'" (click)="matrizNivel = 'completo'">Completo</button>
+  </div>
+    <!-- Campo de búsqueda -->
+  <div class="search-container" style="width: 300px;">
+    <div class="input-group">
+      <input type="text" 
+             class="form-control" 
+             placeholder="Buscar buenas prácticas..."
+             [(ngModel)]="searchTerm"
+             (keyup.enter)="applySearch()">
+      <button class="btn btn-outline-primary" (click)="applySearch()">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Tabla -->
+<div class="table-responsive">
+  <table class="table table-bordered table-striped align-middle text-center">
+    <thead class="table-primary">
+      <tr>
+        <th>Estado</th>
+        <th>Naturaleza de la política pública</th>
+        <th>Buena práctica</th>
+        <th *ngIf="matrizNivel !== 'resumido'">Resumen de la buena práctica</th>
+        <th *ngIf="matrizNivel !== 'resumido'">Categoría</th>
+        <th *ngIf="matrizNivel !== 'resumido'">Subcategoría</th>
+        <th *ngIf="matrizNivel === 'completo'" colspan="8">Población objetivo</th>
+        <th *ngIf="matrizNivel === 'completo'">Actores involucrados</th>
+      </tr>
+      <tr *ngIf="matrizNivel === 'completo'">
+        <th colspan="6"></th>
+        <th>Retornado(a)s</th>
+        <th>Tránsito</th>
+        <th>Mexicanos en el extranjero</th>
+        <th>Refugiado(a)s y asilado(a)s</th>
+        <th>Migración de destino</th>
+        <th>Migración interna</th>
+        <th>Población no migrante</th>
+        <th>Personas desplazadas internas</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let row of filteredData">
+        <td>{{ row.estado }}</td>
+        <td>{{ row.naturaleza_politica_publica }}</td>
+        <td>
+          <button class="btn btn-link text-primary text-decoration-underline p-0" (click)="openModal(row)">
+            {{ row.buena_practica }}
+          </button>
+        </td>
+
+        <td *ngIf="matrizNivel !== 'resumido'">{{ row.resumen }}</td>
+        <td *ngIf="matrizNivel !== 'resumido'">{{ row.categoria }}</td>
+        <td *ngIf="matrizNivel !== 'resumido'">{{ row.subcategoria }}</td>
+
+        <ng-container *ngIf="matrizNivel === 'completo'">
+          <td>{{ row.poblacion_objetivo?.retornados }}</td>
+          <td>{{ row.poblacion_objetivo?.transito }}</td>
+          <td>{{ row.poblacion_objetivo?.mexicanos_extranjero }}</td>
+          <td>{{ row.poblacion_objetivo?.refugiados_asilados }}</td>
+          <td>{{ row.poblacion_objetivo?.migracion_destino }}</td>
+          <td>{{ row.poblacion_objetivo?.migracion_interna }}</td>
+          <td>{{ row.poblacion_objetivo?.poblacion_no_migrante }}</td>
+          <td>{{ row.poblacion_objetivo?.personas_desplazadas }}</td>
+          <td>{{ row.actores_involucrados }}</td>
+        </ng-container>
+      </tr>
+
+      <tr *ngIf="filteredData.length === 0">
+        <td [attr.colspan]="matrizNivel === 'resumido' ? 3 : matrizNivel === 'intermedio' ? 6 : 15" class="text-center">
+          No hay buenas prácticas para esta selección.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<app-modal-practica
+  *ngIf="modalVisible && selectedPractica"
+  [show]="modalVisible"
+  [practica]="selectedPractica"
+  (closeModal)="closeModal()">
+</app-modal-practica>

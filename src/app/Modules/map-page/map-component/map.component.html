@@ -1,0 +1,100 @@
+<!-- HERO / ENCABEZADO -->
+<div class="container-fluid p-0">
+  <div
+    class="text-white text-center position-relative overflow-hidden py-4"
+    [ngStyle]="selectedState ? {} : defaultBackgroundStyle"
+    style="min-height: 280px;"
+  >
+    <!-- Fondo difuminado solo si hay estado seleccionado -->
+    <div
+      *ngIf="selectedState && carouselImages.length > 0"
+      class="background-blur-image"
+      [ngStyle]="{
+        backgroundImage: 'url(' + carouselImages[0] + ')'
+      }"
+    ></div>
+
+    <!-- Contenido -->
+    <div class="custom-container mx-auto px-3 position-relative" style="max-width: 700px; z-index: 2;">
+      <!-- Vista general -->
+      <div *ngIf="!selectedState">
+        <nav class="navbar" style="height: 100px; display: flex; justify-content: center; align-items: center;">
+        <a class="navbar-brand" [routerLink]="['/']" style="height: 100%; display: flex; align-items: center;">
+          <img src="../../../../assets/images/Mosaico-logo-sinFondo.png" alt="Mosaico" style="max-height: 300px; width: auto;" />
+        </a>
+      </nav>      
+        <h2 class="h4 fw-normal text-white-50 mb-4">
+          Un mapa interactivo sobre las políticas migratorias a nivel local
+        </h2>
+        <p class="lead text-light">
+          Explora las <strong>buenas prácticas</strong> en contexto <strong>migratorio</strong> a nivel local.
+        </p>
+      </div>
+
+      <!-- Vista de estado seleccionado -->
+      <div *ngIf="selectedState">
+        <h1 class="h3 fw-bold text-light mb-2">{{ selectedState.name }}</h1>
+        <p class="small text-light mb-3">{{ selectedState.practices }}</p>
+
+        <div id="stateCarousel"
+             class="carousel slide mt-2"
+             data-bs-ride="carousel"
+             data-bs-interval="5000"
+             data-bs-pause="hover"
+             data-bs-wrap="true"
+             style="max-height: 200px; overflow: hidden;">
+          <div class="carousel-inner">
+            <div *ngFor="let img of carouselImages; let i = index"
+                 [class]="i === 0 ? 'carousel-item active' : 'carousel-item'">
+              <img [src]="img"
+                   class="d-block w-100"
+                   alt="Imagen {{ i + 1 }}">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#stateCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#stateCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+
+        <button (click)="clearSelection()" class="btn btn-outline-light btn-sm mt-3 px-4">
+          Volver al mapa completo
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENEDOR DEL MAPA CON FILTROS ADENTRO -->
+<div class="container my-4 position-relative">
+  <!-- Filtros flotantes dentro del mapa -->
+  <div
+    class="position-absolute top-0 end-0 m-3 bg-white bg-opacity-75 rounded-3 shadow-sm px-3 py-2"
+    style="z-index: 10; width: 260px; max-height: 90%; overflow-y: auto; font-size: 0.85rem;"
+  >
+    <div>
+      <app-layers side="left" (filtersChanged)="onFiltersChanged($event)"></app-layers>
+      <hr class="my-2" />
+    </div>
+  </div>
+
+  <!-- Mapa -->
+  <div class="map-container shadow rounded">
+    <div id="map-container" class="map" style="height: 600px;"></div>
+  </div>
+</div>
+
+<!-- MATRIZ DE DATOS -->
+<div>
+  <app-matriz 
+    [selectedState]="selectedMatrixState" 
+    [selectedRegions]="regionesSeleccionadas"
+    [selectedCategories]="categoriasSeleccionadas"
+    [selectedBorders]="selectedBorders"
+    [selectedNaturalezas]="selectedNaturalezas"
+    [selectedPoblacionObjetivo]="poblacionSeleccionada"
+    [mostrarSoloInterseccionalidad]="mostrarConInterseccionalidades"> 
+  </app-matriz>
+</div>

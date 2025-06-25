@@ -1,0 +1,9 @@
+.region-toggle-card {
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .filtros-horizontal {
+    overflow-x: auto;
+  }
+  

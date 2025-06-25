@@ -1,0 +1,42 @@
+<div class="modal-backdrop d-flex justify-content-center align-items-center">
+  <div class="modal-container bg-white p-4 rounded-3 shadow-lg position-relative" style="max-width: 700px; width: 100%;">
+    <button class="btn-close position-absolute top-0 end-0 m-3" (click)="close()"></button>
+
+    <ng-container *ngIf="practica">
+      <h4 class="mb-3 fw-bold text-primary">{{ practica.buena_practica }}</h4>
+
+      <div class="mb-3">
+        <p><strong class="text-secondary">Estado:</strong> {{ practica.estado }}</p>
+        <p><strong class="text-secondary">Resumen:</strong> {{ practica.resumen }}</p>
+        <p><strong class="text-secondary">Categoría:</strong> {{ practica.categoria }}</p>
+        <p><strong class="text-secondary">Subcategoría:</strong> {{ practica.subcategoria }}</p>
+        <p><strong class="text-secondary">Tema Covid:</strong> {{ practica.tema_covid }}</p>
+      </div>
+
+      <div class="mb-3">
+        <h6 class="fw-bold text-dark border-bottom pb-1">Población objetivo</h6>
+        <ul class="mb-2">
+          <li><strong>Retornados:</strong> {{ practica.poblacion_objetivo?.retornados }}</li>
+          <li><strong>Tránsito:</strong> {{ practica.poblacion_objetivo?.transito }}</li>
+          <li><strong>Mexicanos en el extranjero:</strong> {{ practica.poblacion_objetivo?.mexicanos_extranjero }}</li>
+        </ul>
+      </div>
+
+      <div>
+        <h6 class="fw-bold text-dark border-bottom pb-1">Criterios de buena práctica</h6>
+        <ul>
+          <li><strong>Innovación:</strong> {{ practica.criterios_buenas_practicas?.innovacion }}</li>
+          <li><strong>Eficacia:</strong> {{ practica.criterios_buenas_practicas?.eficacia }}</li>
+        </ul>
+      </div>
+
+      <div class="text-end mt-4">
+        <!-- <button class="btn btn-outline-primary btn-sm" (click)="descargarPDF()">Descargar PDF</button> -->
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="!practica">
+      <p class="text-muted">No se encontró información de la práctica.</p>
+    </ng-container>
+  </div>
+</div>

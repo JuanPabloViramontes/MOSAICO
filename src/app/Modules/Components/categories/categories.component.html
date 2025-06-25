@@ -1,0 +1,79 @@
+<div class="container text-center my-4">
+    <h4 class="fw-bold text-dark">
+      Descubre las categorías que conforman el mosaico de buenas prácticas
+    </h4>
+  </div>
+  
+  <div id="multiCardCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-wrap="true" data-bs-interval="false">
+    <div class="carousel-inner">
+      <div *ngFor="let group of groupedCards; let i = index; trackBy: trackByGroupIndex"
+           [class]="i === 0 ? 'carousel-item active' : 'carousel-item'">
+        <div class="d-flex justify-content-center flex-nowrap gap-4 px-5">
+          <div *ngFor="let card of group; trackBy: trackByCardId" class="card shadow-sm hover-effect" 
+               (click)="openModal(card)" style="cursor:pointer;">
+            <img [src]="card.image" class="card-img-top" [alt]="card.title">
+            <div class="card-body">
+              <h5 class="card-title">{{ card.title }}</h5>
+              <p class="card-text">{{ card.text }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <button class="carousel-control-prev" type="button" data-bs-target="#multiCardCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#multiCardCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="cardModal" tabindex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cardModalLabel">{{selectedCard?.title}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <!-- Sección de imágenes interactivas -->
+            <div class="col-md-6">
+              <div class="image-gallery">
+                <img [src]="selectedCard?.modalContent.images[activeImageIndex]?.src" 
+                     class="img-fluid rounded main-image" 
+                     [alt]="selectedCard?.modalContent.images[activeImageIndex]?.caption">
+  
+                <div class="gallery-controls mt-2">
+                  <button class="btn btn-sm btn-outline-secondary" (click)="prevImage()">
+                    <i class="bi bi-chevron-left"></i>
+                  </button>
+                  <span class="mx-2">
+                    {{activeImageIndex + 1}} / {{selectedCard?.modalContent.images?.length}}
+                  </span>
+                  <button class="btn btn-sm btn-outline-secondary" (click)="nextImage()">
+                    <i class="bi bi-chevron-right"></i>
+                  </button>
+                </div>
+  
+                <p class="text-muted text-center mt-2">
+                  {{selectedCard?.modalContent.images[activeImageIndex]?.caption}}
+                </p>
+              </div>
+            </div>
+  
+            <!-- Sección de contenido -->
+            <div class="col-md-6">
+              <p>{{selectedCard?.modalContent.description}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

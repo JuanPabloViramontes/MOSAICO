@@ -1,0 +1,18 @@
+<div class="flip-container"
+     (mouseenter)="flipped = true"
+     (mouseleave)="flipped = false">
+  <div class="flipper" [class.flipped]="flipped">
+    <div class="front">
+      <div class="card h-100 text-center p-3">
+        <h5 class="card-title">Frente</h5>
+        <p class="card-text">Contenido visible al principio</p>
+      </div>
+    </div>
+    <div class="back">
+      <div class="card h-100 text-center p-3 bg-primary text-white">
+        <h5 class="card-title">Reverso</h5>
+        <p class="card-text">Texto genérico al pasar el mouse</p>
+      </div>
+    </div>
+  </div>
+</div>

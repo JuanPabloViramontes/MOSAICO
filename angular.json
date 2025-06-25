@@ -21,14 +21,14 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
+  "src/favicon.ico",
+  "src/assets"
+],
             "styles": [
-              "src/styles.css"
-            ],
+  "node_modules/bootstrap/dist/css/bootstrap.min.css",
+  "node_modules/leaflet/dist/leaflet.css",
+  "src/styles.css"
+],
             "scripts": []
           },
           "configurations": {
@@ -57,6 +57,11 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "allowedHosts": [
+              "https://744d-2806-103e-18-2b5c-5def-aa4-639d-4b91.ngrok-free.app/"
+            ]
+          },
           "configurations": {
             "production": {
               "buildTarget": "Mosaico:build:production"
@@ -79,10 +84,8 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"

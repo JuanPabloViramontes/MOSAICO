@@ -16,15 +16,17 @@ export class LayersComponent {
     poblacion_objetivo: string[],
     conInterseccionalidades: boolean
   }>();
-    selectedCategories: number[] = [];
   showRegions = false;
   showCategories = false;
   showBorders = false;
-  selectedBorders: string[] = [];
-  selectedNaturalezas: string[] = [];
-  selected_naturaleza_politica_publica: string[] = [];
+  selectedCategories: number[] = [];
+selectedRegions: string[] = [];
+selectedBorders: string[] = [];
+selectedNaturalezas: string[] = [];
+selectedPoblacionesObjetivo: string[] = [];
+mostrarConInterseccionalidades = false;
+
   showNaturaleza = false;
-  mostrarConInterseccionalidades = false;
 
 naturaleza_politica_publica = [
   { key: 'Creación de instituciones', label: 'Creación de instituciones' },
@@ -79,7 +81,7 @@ naturaleza_politica_publica = [
     { categoria: '13. Reunificación familiar', id: 'categoria13', label: 'Reunificación familiar' }
   ];  
 
-  selectedRegions: string[] = [];
+
 
   poblacionObjetivo = [
     { key: 'retornados', label: 'Retornados' },
@@ -92,85 +94,85 @@ naturaleza_politica_publica = [
     { key: 'personas_desplazadas', label: 'Personas desplazadas' }
   ];
   
-  selectedPoblacionesObjetivo: string[] = [];
+
   showPoblaciones = false;
 
-  toggleBorder(border: any, event: Event) {
-    const checked = (event.target as HTMLInputElement).checked;
-    if (checked) {
-      this.selectedBorders.push(border.key);
-    } else {
-      this.selectedBorders = this.selectedBorders.filter(b => b !== border.key);
-    }
-    this.emitFilters();
+  // Regiones
+toggleRegion(region: any, event: Event) {
+  const checked = (event.target as HTMLInputElement).checked;
+  if (checked) {
+    this.selectedRegions = [...this.selectedRegions, region.key];
+  } else {
+    this.selectedRegions = this.selectedRegions.filter(r => r !== region.key);
   }
+  this.emitFilters();
+}
 
-  isBorderChecked(border: any): boolean {
-    return this.selectedBorders.includes(border.key);
-  }
+isRegionChecked(region: any): boolean {
+  return this.selectedRegions.includes(region.key);
+}
 
-  isNaturalezaChecked(naturaleza: { key: string; label: string }): boolean {
-    return this.selectedNaturalezas.includes(naturaleza.label);
+// Fronteras
+toggleBorder(border: any, event: Event) {
+  const checked = (event.target as HTMLInputElement).checked;
+  if (checked) {
+    this.selectedBorders = [...this.selectedBorders, border.key];
+  } else {
+    this.selectedBorders = this.selectedBorders.filter(b => b !== border.key);
   }
-  
-  toggleNaturaleza(naturaleza: { key: string; label: string }, event: Event): void {
-    const checked = (event.target as HTMLInputElement).checked;
-  
-    if (checked) {
-      this.selectedNaturalezas.push(naturaleza.label); // <--- Usamos el `label`, no el `key`
-    } else {
-      this.selectedNaturalezas = this.selectedNaturalezas.filter(n => n !== naturaleza.label);
-    }
-  
-    this.emitFilters();
-  }
-  
-  toggleRegion(region: any, event: Event) {
-    const checked = (event.target as HTMLInputElement).checked;
-    if (checked) {
-      this.selectedRegions.push(region.key);
-    } else {
-      this.selectedRegions = this.selectedRegions.filter(r => r !== region.key);
-    }
-    this.emitFilters();
-  }
+  this.emitFilters();
+}
 
-  isRegionChecked(region: any): boolean {
-    return this.selectedRegions.includes(region.key);
-  }
+isBorderChecked(border: any): boolean {
+  return this.selectedBorders.includes(border.key);
+}
 
-  toggleCategory(categoria: any, event: Event) {
-    const checked = (event.target as HTMLInputElement).checked;
-    // Extraemos el número del string seleccionado para guardar solo el número
-    const catNum = Number(categoria.categoria.split('.')[0].trim());
-    if (checked) {
-      this.selectedCategories.push(catNum);
-    } else {
-      this.selectedCategories = this.selectedCategories.filter(c => c !== catNum);
-    }
-    this.emitFilters();
+// Naturaleza (antes guardabas labels, ahora siempre keys)
+toggleNaturaleza(naturaleza: { key: string; label: string }, event: Event): void {
+  const checked = (event.target as HTMLInputElement).checked;
+  if (checked) {
+    this.selectedNaturalezas = [...this.selectedNaturalezas, naturaleza.key];
+  } else {
+    this.selectedNaturalezas = this.selectedNaturalezas.filter(n => n !== naturaleza.key);
   }
-  
+  this.emitFilters();
+}
 
-  isCategoryChecked(categoria: any): boolean {
-    const catNum = Number(categoria.categoria.split('.')[0].trim());
-    return this.selectedCategories.includes(catNum);
-  }
+isNaturalezaChecked(naturaleza: { key: string; label: string }): boolean {
+  return this.selectedNaturalezas.includes(naturaleza.key);
+}
 
-  togglePoblacion(poblacion: any, event: Event) {
-    const checked = (event.target as HTMLInputElement).checked;
-    if (checked) {
-      this.selectedPoblacionesObjetivo.push(poblacion.key);
-    } else {
-      this.selectedPoblacionesObjetivo = this.selectedPoblacionesObjetivo.filter(p => p !== poblacion.key);
-    }
-    this.emitFilters();
+// Categorías (usando número, igual creamos nuevos arrays)
+toggleCategory(categoria: any, event: Event) {
+  const checked = (event.target as HTMLInputElement).checked;
+  const catNum = Number(categoria.categoria.split('.')[0].trim());
+  if (checked) {
+    this.selectedCategories = [...this.selectedCategories, catNum];
+  } else {
+    this.selectedCategories = this.selectedCategories.filter(c => c !== catNum);
   }
-  
-  isPoblacionChecked(poblacion: any): boolean {
-    return this.selectedPoblacionesObjetivo.includes(poblacion.key);
+  this.emitFilters();
+}
+
+isCategoryChecked(categoria: any): boolean {
+  const catNum = Number(categoria.categoria.split('.')[0].trim());
+  return this.selectedCategories.includes(catNum);
+}
+
+// Población objetivo
+togglePoblacion(poblacion: any, event: Event) {
+  const checked = (event.target as HTMLInputElement).checked;
+  if (checked) {
+    this.selectedPoblacionesObjetivo = [...this.selectedPoblacionesObjetivo, poblacion.key];
+  } else {
+    this.selectedPoblacionesObjetivo = this.selectedPoblacionesObjetivo.filter(p => p !== poblacion.key);
   }
-  
+  this.emitFilters();
+}
+
+isPoblacionChecked(poblacion: any): boolean {
+  return this.selectedPoblacionesObjetivo.includes(poblacion.key);
+}
 
   emitFilters() {
   this.filtersChanged.emit({
@@ -178,9 +180,10 @@ naturaleza_politica_publica = [
     categories: this.selectedCategories,
     borders: this.selectedBorders,
     naturaleza_politica_publica: this.selectedNaturalezas,
-    poblacion_objetivo: this.selectedPoblacionesObjetivo ,
+    poblacion_objetivo: this.selectedPoblacionesObjetivo,
     conInterseccionalidades: this.mostrarConInterseccionalidades
   });
 }
+
 
 }

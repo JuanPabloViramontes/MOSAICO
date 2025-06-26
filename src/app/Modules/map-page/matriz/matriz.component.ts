@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./matriz.component.css'],
   standalone: false
 })
-export class MatrizComponent implements OnInit {
+export class MatrizComponent implements OnInit, OnChanges {
   @Input() selectedRegions: string[] = [];
   @Input() selectedState: string | null = null;
   @Input() selectedCategories: number[] = [];
@@ -16,6 +16,16 @@ export class MatrizComponent implements OnInit {
   @Input() selectedNaturalezas: string[] = [];
   @Input() selectedPoblacionObjetivo: string[] = [];
   @Input() mostrarSoloInterseccionalidad: boolean = false; // <-- ESTA LÍNEA
+  @Output() onDownloadPDF = new EventEmitter<{practica: any, filteredData: any[]}>();
+  @Output() filteredStatesChanged = new EventEmitter<string[]>();
+
+
+descargarPDF(practica: any) {
+  this.onDownloadPDF.emit({
+    practica: practica,
+    filteredData: this.filteredData
+  });
+}
 
   matrizNivel: 'resumido' | 'intermedio' | 'completo' = 'completo';
 
@@ -26,7 +36,7 @@ export class MatrizComponent implements OnInit {
   };
   
   regionStatesMap: { [key: string]: string[] } = {
-    norte: ['Baja California', 'Baja California sur', 'Sonora', 'Chihuahua', 'Coahuila', 'Nuevo León', 'Tamaulipas', 'Sinaloa', 'Durango'],
+    norte: ['Baja California', 'Baja California Sur', 'Sonora', 'Chihuahua', 'Coahuila', 'Nuevo León', 'Tamaulipas', 'Sinaloa', 'Durango'],
     occidente: ['Nayarit', 'Zacatecas', 'Jalisco', 'Aguascalientes', 'Colima', 'Guanajuato', 'Michoacán', 'San Luis Potosí'],
     centro: ['Querétaro', 'Hidalgo', 'México', 'Ciudad de México', 'Tlaxcala', 'Morelos', 'Puebla'],
     sureste: ['Guerrero', 'Veracruz', 'Oaxaca', 'Tabasco', 'Chiapas', 'Yucatán', 'Campeche', 'Quintana Roo']
@@ -61,6 +71,11 @@ export class MatrizComponent implements OnInit {
       }
     });
   }
+
+ ngOnChanges() {
+  this.emitFilteredStates();
+}
+
   
   // Agrega esta propiedad
 searchTerm: string = '';
@@ -70,47 +85,100 @@ get filteredData(): any[] {
   const hasRegion = this.selectedRegions.length > 0;
   const hasBorder = this.selectedBorders.length > 0;
   const hasState = !!this.selectedState;
+  const hasCategory = this.selectedCategories.length > 0;
+  const hasNaturaleza = this.selectedNaturalezas.length > 0;
+  const hasPoblacion = this.selectedPoblacionObjetivo.length > 0;
+  const hasInterseccionalidad = this.mostrarSoloInterseccionalidad;
+  const hasSearch = !!this.searchTerm?.trim();
 
-  let filteredStates: string[] = [];
+  const hasAnyFilter = hasRegion || hasBorder || hasState || hasCategory || hasNaturaleza || hasPoblacion || hasInterseccionalidad || hasSearch;
 
-  if (hasBorder) {
-    filteredStates = this.selectedBorders.flatMap(border => this.borderStatesMap[border] || []);
-  } else if (hasRegion) {
-    filteredStates = this.selectedRegions.flatMap(region => this.regionStatesMap[region] || []);
+  // Si no hay filtros activos, no mostrar nada
+  if (!hasAnyFilter) {
+    return [];
   }
 
-  if (hasState && this.selectedState) {
-    filteredStates.push(this.selectedState);
-  }
+  // 🔁 Obtener todos los estados que coinciden por filtro
+  const statesFromBorders = hasBorder ? this.selectedBorders.flatMap(border => this.borderStatesMap[border] || []) : [];
+  const statesFromRegions = hasRegion ? this.selectedRegions.flatMap(region => this.regionStatesMap[region] || []) : [];
+  const statesFromState = hasState && this.selectedState ? [this.selectedState] : [];
 
-  const allFilteredStates = Array.from(new Set(filteredStates.map(s => s.trim())));
+  // 🔁 Intersección entre los filtros geográficos
+  let geographicStates: string[] = [];
+
+  if (hasRegion || hasBorder || hasState) {
+    const sets = [statesFromBorders, statesFromRegions, statesFromState]
+      .filter(arr => arr.length > 0)
+      .map(arr => new Set(arr.map(s => s.trim().toLowerCase())));
+
+    if (sets.length === 1) {
+      geographicStates = Array.from(sets[0]);
+    } else {
+      // Obtener la intersección de todos los conjuntos
+      geographicStates = Array.from(
+        sets.reduce((a, b) => new Set([...a].filter(x => b.has(x))))
+      );
+    }
+
+    // Si no hay intersección, terminar temprano
+    if (geographicStates.length === 0) {
+      return [];
+    }
+  }
 
   return this.allData.filter(row => {
-    const rowState = row.estado?.trim();
+    const rowState = row.estado?.trim().toLowerCase();
     const categoriaNum = parseInt(row.categoria?.split('.')[0], 10);
     const naturaleza = row.naturaleza_politica_publica?.trim();
 
-    const matchesState = allFilteredStates.length === 0 || allFilteredStates.includes(rowState);
-    const matchesCategory = this.selectedCategories.length === 0 || this.selectedCategories.includes(categoriaNum);
-    const matchesNaturaleza = this.selectedNaturalezas.length === 0 || this.selectedNaturalezas.includes(naturaleza);
-
     const poblacionObj = row.poblacion_objetivo || {};
-    const matchesPoblacion = this.selectedPoblacionObjetivo.length === 0 ||
-      this.selectedPoblacionObjetivo.some(key => poblacionObj[key] === 1);
 
-    const matchesInterseccionalidad = !this.mostrarSoloInterseccionalidad ||
-      Object.values(poblacionObj).filter(val => val === 1).length > 1;
+    const matchesGeo = geographicStates.length === 0 || geographicStates.includes(rowState);
+    const matchesCategory = !hasCategory || this.selectedCategories.includes(categoriaNum);
+    const matchesNaturaleza = !hasNaturaleza || this.selectedNaturalezas.includes(naturaleza);
+    const matchesPoblacion = !hasPoblacion || this.selectedPoblacionObjetivo.some(key => poblacionObj[key] === 1);
+    const matchesInterseccionalidad = !hasInterseccionalidad || Object.values(poblacionObj).filter(val => val === 1).length > 1;
+    const matchesSearch = !hasSearch || Object.values(row).some(val =>
+      val && val.toString().toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
 
-    // Nueva condición para la búsqueda
-    const matchesSearch = !this.searchTerm || 
-      Object.values(row).some(val => 
-        val && val.toString().toLowerCase().includes(this.searchTerm.toLowerCase())
-      );
-
-    return matchesState && matchesCategory && matchesNaturaleza && 
-           matchesPoblacion && matchesInterseccionalidad && matchesSearch;
+    // 👇 Lógica AND: debe cumplir todo lo activo
+    return matchesGeo &&
+           matchesCategory &&
+           matchesNaturaleza &&
+           matchesPoblacion &&
+           matchesInterseccionalidad &&
+           matchesSearch;
   });
 }
+
+get stateCounts(): { [estado: string]: number } {
+  const counts: { [estado: string]: number } = {};
+
+  for (const row of this.filteredData) {
+    const estado = row.estado?.trim();
+    if (estado) {
+      counts[estado] = (counts[estado] || 0) + 1;
+    }
+  }
+
+  return counts;
+}
+
+@Output() filteredStateCountsChanged = new EventEmitter<{ [estado: string]: number }>();
+
+emitFilteredStates(): void {
+  const estados = this.filteredData.map(item => item.estado?.trim()).filter(Boolean);
+  const counts: { [estado: string]: number } = {};
+  estados.forEach(estado => {
+    counts[estado] = (counts[estado] || 0) + 1;
+  });
+
+  this.filteredStatesChanged.emit([...new Set(estados)]);
+  this.filteredStateCountsChanged.emit(counts);
+}
+
+
 
 // Método para aplicar la búsqueda
 applySearch() {

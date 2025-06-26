@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
@@ -19,7 +19,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./map.component.css'],
   standalone: false,
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit  {
   private map!: Map;
   private allData: any[] = [];
   private statesLayer!: VectorLayer<VectorSource>;
@@ -35,6 +35,7 @@ export class MapComponent implements OnInit {
   public poblacionSeleccionada: string[] = [];
   public carouselImages: string[] = [];
   public mostrarConInterseccionalidades: boolean = false;
+
 
 
   private stateImages: {[key: string]: string[]} = {
@@ -91,6 +92,60 @@ export class MapComponent implements OnInit {
       this.initializeMap();
     });
   }
+private _estadosDesdeMatriz: string[] = [];
+
+set estadosDesdeMatriz(value: string[]) {
+  this._estadosDesdeMatriz = value;
+  if (this.map && value) {
+    this.applyMatrixStates(value);
+  }
+}
+
+get estadosDesdeMatriz() {
+  return this._estadosDesdeMatriz;
+}
+public applyMatrixStates(states: string[]): void {
+  const source = this.statesLayer.getSource();
+  if (!source) return;
+
+  const normalizedCounts: Record<string, number> = {};
+
+  // Contar ocurrencias normalizadas
+  for (const raw of states) {
+    const norm = this.normalizeStateName(raw);
+    normalizedCounts[norm] = (normalizedCounts[norm] || 0) + 1;
+  }
+
+  source.forEachFeature((feature) => {
+    const name = this.normalizeStateName(feature.get('name') || '');
+    const count = normalizedCounts[name] || 0;
+    const highlight = count > 0;
+
+    feature.set('count', count);
+    feature.set('highlight', highlight);
+    feature.setStyle(this.getFeatureStyle(feature));
+  });
+
+  this.statesLayer.changed();
+}
+private normalizeStateName(stateName: string): string {
+  return stateName
+    .toLowerCase()
+    .normalize("NFD")                  // separa acentos
+    .replace(/[\u0300-\u036f]/g, "")  // elimina acentos
+    .replace(/\s+/g, '')              // elimina espacios
+    .replace(/[^a-z]/g, '');          // elimina caracteres especiales si hubiera
+}
+
+
+filteredMatrixStates: string[] = [];
+
+onFilteredStatesChanged(filteredStates: string[]) {
+  this.filteredMatrixStates = filteredStates || [];
+  this.applyMatrixStates(this.filteredMatrixStates);
+}
+
+
 
   private async loadData(): Promise<void> {
     try {
@@ -108,15 +163,6 @@ export class MapComponent implements OnInit {
       this.allData = [];
     }
   }
-  private normalizeStateName(stateName: string): string {
-    return stateName
-      .toLowerCase()
-      .normalize("NFD")                  // separa acentos
-      .replace(/[\u0300-\u036f]/g, "")  // elimina acentos
-      .replace(/\s+/g, '')              // elimina espacios
-      .replace(/[^a-z]/g, '');          // elimina caracteres especiales si hubiera
-  }
-  
 
   private initializeMap(): void {
     // 1. Configuración del visor centrado en México
@@ -268,291 +314,91 @@ export class MapComponent implements OnInit {
           width: 2
         }),
         fill: new Fill({
-          color: 'rgba(255, 153, 0, 0.2)'
+          color: 'rgba(19, 82, 207, 0.2)'
         })
       })
     });
     this.map.addInteraction(hoverSelect);
-    
-    this.regionLayers = {
-      norte: this.createRegionLayer(['Baja California', 'Baja California Sur', 'Sonora', 'Chihuahua', 'Coahuila', 'Durango', 'Nuevo León', 'Tamaulipas', 'Sinaloa']),
-      occidente: this.createRegionLayer(['Jalisco', 'Colima', 'Nayarit', 'Zacatecas', 'Aguascalientes']),
-      centro: this.createRegionLayer(['México', 'Ciudad de México', 'Hidalgo', 'Querétaro', 'Tlaxcala', 'Puebla', 'Morelos', 'Michoacán', 'Guanajuato']),
-      sureste: this.createRegionLayer(['Chiapas', 'Tabasco', 'Campeche', 'Yucatán', 'Quintana Roo', 'Oaxaca', 'Veracruz', 'Guerrero', 'San Luis Potosí'])
-    };
-
-    Object.values(this.regionLayers).forEach(layer => {
-      this.map.addLayer(layer);
-      layer.setVisible(false); // ocultas por default
-    });
   }
-  
- private getFeatureStyle(feature: any): Style | Style[] {
-  const styles: Style[] = [];
+private getFeatureStyle(feature: any): Style {
+  const count = feature.get('count') || 0; // Número de veces que aparece
+  const maxCount = 13;
 
-  if (feature.get('highlightByInterseccionalidad')) {
-    styles.push(new Style({
-      fill: new Fill({ color: 'rgba(142, 68, 173, 0.2)' }),
-      stroke: new Stroke({ color: '#8e44ad', width: 2 })
-    }));
-  }
-
-  if (feature.get('highlightByPoblacion')) {
-    styles.push(new Style({
-      fill: new Fill({ color: 'rgba(230, 126, 34, 0.2)' }),
-      stroke: new Stroke({ color: '#e67e22', width: 2 })
-    }));
-  }
-
-  if (feature.get('highlightByNaturaleza')) {
-    styles.push(new Style({
-      fill: new Fill({ color: 'rgba(41, 128, 185, 0.2)' }),
-      stroke: new Stroke({ color: '#2980b9', width: 2 })
-    }));
-  }
-
-  if (feature.get('highlightByCategory')) {
-    styles.push(new Style({
-      fill: new Fill({ color: 'rgba(39, 174, 96, 0.2)' }),
-      stroke: new Stroke({ color: '#27ae60', width: 2 })
-    }));
-  }
+  // Escala de opacidad para el fondo normal (sin highlight)
+  const baseOpacity = Math.min(0.1 + (0.5 * count / maxCount), 0.6);
 
   if (feature.get('highlight')) {
-    styles.push(new Style({
-      fill: new Fill({ color: 'rgba(211, 84, 0, 0.2)' }),
-      stroke: new Stroke({ color: '#d35400', width: 2 })
-    }));
+    // Para resaltado: relleno más fuerte y borde más grueso
+    return new Style({
+      fill: new Fill({ color: `rgba(70, 130, 180, ${Math.min(0.4 + 0.6 * count / maxCount, 0.9)})` }), // azul steelblue con opacidad variable y más alta
+      stroke: new Stroke({ color: '#483D8B', width: 4 }) // borde dark slate blue más grueso
+    });
   }
 
-  // Si no hay filtros activos, estilo gris base
-  if (styles.length === 0) {
-    styles.push(new Style({
-      stroke: new Stroke({ color: '#cccccc', width: 1 }),
-      fill: new Fill({ color: 'rgba(200, 200, 200, 0.2)' })
-    }));
-  }
-
-  return styles;
+  // Para estado normal: relleno más claro y borde más fino
+  return new Style({
+    fill: new Fill({ color: `rgba(173, 216, 230, ${baseOpacity * 0.6})` }), // azul claro con opacidad proporcional menor
+    stroke: new Stroke({ color: '#7B68EE', width: 1.5 }) // borde lavanda suave, más fino
+  });
 }
 
 
   // Método para limpiar la selección (modificado)
   clearSelection(): void {
-    if (this.selectedFeature) {
-      this.selectedFeature.setStyle(null);
-      this.selectedFeature = null;
-    }
-  
-    this.selectedState = null;
-    this.selectedMatrixState = null;
-    this.regionesSeleccionadas = [];
-    this.categoriasSeleccionadas = [];
-    this.carouselImages  = [];
-  
-    // Resetear estilos
-    const source = this.statesLayer.getSource();
-    if (source) {
-      source.forEachFeature((feature) => {
-        feature.set('highlight', false);
-      });
-      this.updateLayerStyle();
-    }
-  
-    this.map.getView().animate({ center: fromLonLat([-102.0, 23.8]), zoom: 5, duration: 500 });
+  const source = this.statesLayer.getSource();
+  if (source) {
+    source.forEachFeature(feature => feature.set('highlight', false));
+    this.statesLayer.changed();
   }
+
+  this.selectedState = null;
+  this.selectedMatrixState = null;
+  this.regionesSeleccionadas = [];
+  this.categoriasSeleccionadas = [];
+  this.carouselImages = [];
+  
+  // Centrar vista
+  this.map.getView().animate({ center: fromLonLat([-102.0, 23.8]), zoom: 5, duration: 500 });
+}
+
   
 
     // NUEVO: Crear capas regionales
-    private createRegionLayer(states: string[]): VectorLayer<VectorSource> {
-      const source = new VectorSource({
-        url: 'assets/data/mx.json',
-        format: new GeoJSON()
-      });
     
-      return new VectorLayer({
-        source,
-        style: (feature) => {
-          const stateName = feature.get('name');
-          if (!states.includes(stateName)) return undefined;
-    
-          const stateData = this.allData.find(item => item.estado === stateName);
-          const categoriaNum = parseInt(stateData?.categoria?.split('.')[0], 10) || 0;
-          const isHighlighted = this.categoriasSeleccionadas.length === 0 || 
-                              this.categoriasSeleccionadas.includes(categoriaNum);
-    
-          return new Style({
-            stroke: new Stroke({
-              color: isHighlighted ? '#00b894' : '#cccccc',
-              width: isHighlighted ? 2 : 1
-            }),
-            fill: new Fill({
-              color: isHighlighted ? 'rgba(0, 184, 148, 0.4)' : 'rgba(200, 200, 200, 0.2)'
-            })
-          });
-        },
-        zIndex: 5
-      });
-    }
   
-    // NUEVO: Método que se llama desde <app-region-layer-toggle>
-    onRegionsChanged(selectedRegions: string[]) {
-      this.regionesSeleccionadas = selectedRegions;
-      for (const key in this.regionLayers) {
-        this.regionLayers[key].setVisible(selectedRegions.includes(key));
-      }
-    }
+   
 
-    onBordersChanged(borders: string[]) {
-      // Obtener todos los estados de esas fronteras
-      this.highlightedBorderStates.clear();
-      for (const border of borders) {
-        const states = this.borderStatesMap[border] || [];
-        states.forEach(state => this.highlightedBorderStates.add(state));
-      }
-    
-      // Marcar estados en el mapa
-      const source = this.statesLayer.getSource();
-      if (source) {
-        source.forEachFeature(f => {
-          const name = f.get('name');
-          f.set('highlight', this.highlightedBorderStates.has(name));
-        });
-        this.updateLayerStyle();
-      }
-    }
-    onFiltersChanged(event: {
-      regions: string[],
-      categories: number[],
-      borders: string[],
-      naturaleza_politica_publica: string[],
-      poblacion_objetivo: string[],
-      conInterseccionalidades: boolean
-    }) {
-      this.regionesSeleccionadas = event.regions;
-      this.categoriasSeleccionadas = event.categories;
-      this.selectedBorders = event.borders;
-      this.selectedNaturalezas = event.naturaleza_politica_publica;
-      this.poblacionSeleccionada = event.poblacion_objetivo || [];
-      this.mostrarConInterseccionalidades = event.conInterseccionalidades;
-    
-      // Mostrar capas regionales
-      for (const key in this.regionLayers) {
-        this.regionLayers[key].setVisible(this.regionesSeleccionadas.includes(key));
-      }
-    
-      this.onBordersChanged(this.selectedBorders);
-      this.applyInterseccionalidadFilter(); 
-this.applyPoblacionFilter();
-this.applyNaturalezaFilter();
-this.applyCategoryFilter();
-this.updateLayerStyle(); // Esto forza el redibujado
+    onBordersChanged(feature: any): boolean {
+  if (this.regionesSeleccionadas.length === 0) return true;
+  
+  const stateName = feature.get('name');
+  return this.regionesSeleccionadas.includes(stateName);
+}
+   onFiltersChanged(event: {
+  regions: string[],
+  categories: number[],
+  borders: string[],
+  naturaleza_politica_publica: string[],
+  poblacion_objetivo: string[],
+  conInterseccionalidades: boolean
+}) {
+  this.regionesSeleccionadas = event.regions;
+  this.categoriasSeleccionadas = event.categories;
+  this.selectedBorders = event.borders;
+  this.selectedNaturalezas = event.naturaleza_politica_publica;
+  this.poblacionSeleccionada = event.poblacion_objetivo || [];
+  this.mostrarConInterseccionalidades = event.conInterseccionalidades;
 
-    }
-private applyInterseccionalidadFilter(): void {
-  const source = this.statesLayer.getSource();
-  if (!source) return;
-
-  source.forEachFeature(feature => {
-    const stateName = feature.get('name');
-    const stateData = this.allData.find(item => 
-      item.estado?.trim().toLowerCase() === stateName?.trim().toLowerCase()
-    );
-
-    // Resetear siempre el highlight primero
-    feature.set('highlightByInterseccionalidad', false);
-
-    // Solo proceder si el filtro está activado y hay datos
-    if (this.mostrarConInterseccionalidades && stateData?.condicion_vulnerabilidad) {
-      const vulnerabilidades = stateData.condicion_vulnerabilidad;
-      
-      // Verificar si alguna condición de vulnerabilidad es 1 (true)
-      const tieneInterseccionalidad = Object.values(vulnerabilidades).some(
-        val => val === 1 || val === '1' || val === true
-      );
-      
-      feature.set('highlightByInterseccionalidad', tieneInterseccionalidad);
-    }
-  });
-
-  this.updateLayerStyle();
+  // Forzar actualización de estados filtrados
+  this.emitFilteredStates();
+  this.applyMatrixStates(this.filteredMatrixStates);
+  this.statesLayer.changed();
 }
 
-private applyPoblacionFilter(): void {
-  const source = this.statesLayer.getSource();
-  if (!source) return;
-
-  source.forEachFeature(feature => {
-    const stateName = feature.get('name');
-    const stateData = this.allData.find(item => item.estado === stateName);
-
-    if (!stateData || !stateData.poblacion_objetivo) {
-      feature.set('highlightByPoblacion', false);
-      return;
-    }
-
-    const poblacionObj = stateData.poblacion_objetivo;
-const hasMatch = this.poblacionSeleccionada.length > 0 && this.poblacionSeleccionada.some(key => poblacionObj[key] === 1);
-
-    feature.set('highlightByPoblacion', hasMatch);
-  });
-
-  this.updateLayerStyle();
-}
-
-    private applyNaturalezaFilter(): void {
-  const source = this.statesLayer.getSource();
-  if (!source) return;
-
-  if (this.selectedNaturalezas.length === 0) {
-    source.forEachFeature(f => f.set('highlightByNaturaleza', false));
-    this.updateLayerStyle();
-    return;
-  }
-
-  source.forEachFeature(feature => {
-    const stateName = feature.get('name');
-    const stateData = this.allData.find(item => item.estado === stateName);
-
-    if (!stateData) {
-      feature.set('highlightByNaturaleza', false);
-      return;
-    }
-
-    const naturalezaState = stateData.naturaleza_politica_publica || '';
-    const naturalezaMatch = this.selectedNaturalezas.includes(naturalezaState);
-
-    feature.set('highlightByNaturaleza', naturalezaMatch);
-  });
-
-  this.updateLayerStyle();
-}
-
-    
-   private applyCategoryFilter(): void {
-  const source = this.statesLayer.getSource();
-  if (!source) return;
-
-  if (this.categoriasSeleccionadas.length === 0) {
-    source.forEachFeature(f => f.set('highlightByCategory', false));
-    this.updateLayerStyle();
-    return;
-  }
-
-  source.forEachFeature(feature => {
-    const stateName = feature.get('name');
-    const stateData = this.allData.find(item => item.estado === stateName);
-
-    if (stateData) {
-      const categoriaNum = parseInt(stateData.categoria?.split('.')[0], 10) || 0;
-      const shouldHighlight = this.categoriasSeleccionadas.includes(categoriaNum);
-      feature.set('highlightByCategory', shouldHighlight);
-    } else {
-      feature.set('highlightByCategory', false);
-    }
-  });
-
-  this.updateLayerStyle();
+emitFilteredStates(): void {
+  const estadosUnicos = [...new Set(this.filteredMatrixStates.map(s => s.trim()))].filter(s => !!s);
+  // Aquí emites un evento o actualizas algo con estadosUnicos
+  console.log('Estados filtrados emitidos:', estadosUnicos);
 }
 
 
@@ -573,24 +419,6 @@ const hasMatch = this.poblacionSeleccionada.length > 0 && this.poblacionSeleccio
       } else {
         return this.defaultBackgroundStyle;
       }
-    }
-    
-    private getStyledFeature(name: string, strokeColor: string, fillColor: string): Style {
-      return new Style({
-        stroke: new Stroke({
-          color: strokeColor,
-          width: 3
-        }),
-        fill: new Fill({
-          color: fillColor
-        }),
-        text: new Text({
-          text: name,
-          font: 'bold 12px Arial',
-          fill: new Fill({ color: '#000' }),
-          stroke: new Stroke({ color: '#fff', width: 2 })
-        })
-      });
     }
         
     public defaultBackgroundStyle = {

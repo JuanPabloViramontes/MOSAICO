@@ -89,12 +89,13 @@
 <!-- MATRIZ DE DATOS -->
 <div>
   <app-matriz 
+  (filteredStatesChanged)="onFilteredStatesChanged($event)"
     [selectedState]="selectedMatrixState" 
     [selectedRegions]="regionesSeleccionadas"
     [selectedCategories]="categoriasSeleccionadas"
     [selectedBorders]="selectedBorders"
     [selectedNaturalezas]="selectedNaturalezas"
     [selectedPoblacionObjetivo]="poblacionSeleccionada"
-    [mostrarSoloInterseccionalidad]="mostrarConInterseccionalidades"> 
+    [mostrarSoloInterseccionalidad]="mostrarConInterseccionalidades">
   </app-matriz>
 </div>

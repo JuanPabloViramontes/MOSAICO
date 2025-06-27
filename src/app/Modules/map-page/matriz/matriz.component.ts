@@ -179,7 +179,6 @@ emitFilteredStates(): void {
 }
 
 
-
 // Método para aplicar la búsqueda
 applySearch() {
   // El getter filteredData ya se actualiza automáticamente

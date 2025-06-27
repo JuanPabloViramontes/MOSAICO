@@ -63,14 +63,14 @@
         <td *ngIf="matrizNivel !== 'resumido'">{{ row.subcategoria }}</td>
 
         <ng-container *ngIf="matrizNivel === 'completo'">
-          <td>{{ row.poblacion_objetivo?.retornados }}</td>
-          <td>{{ row.poblacion_objetivo?.transito }}</td>
-          <td>{{ row.poblacion_objetivo?.mexicanos_extranjero }}</td>
-          <td>{{ row.poblacion_objetivo?.refugiados_asilados }}</td>
-          <td>{{ row.poblacion_objetivo?.migracion_destino }}</td>
-          <td>{{ row.poblacion_objetivo?.migracion_interna }}</td>
-          <td>{{ row.poblacion_objetivo?.poblacion_no_migrante }}</td>
-          <td>{{ row.poblacion_objetivo?.personas_desplazadas }}</td>
+          <td [title]="'Migrantes retornados'">{{ row.poblacion_objetivo?.retornados === 1 ? '🔁🙋‍♂️' : '❌' }}</td>
+<td [title]="'Migrantes en tránsito'">{{ row.poblacion_objetivo?.transito === 1 ? '🚶‍♀️🌫️' : '❌' }}</td>
+<td [title]="'Mexicanos en el extranjero'">{{ row.poblacion_objetivo?.mexicanos_extranjero === 1 ? '🤝🌍' : '❌' }}</td>
+<td [title]="'Refugiados / Asilados'">{{ row.poblacion_objetivo?.refugiados_asilados === 1 ? '🛡️🧍' : '❌' }}</td>
+<td [title]="'Migración internacional'">{{ row.poblacion_objetivo?.migracion_destino === 1 ? '🌍🧑‍🤝‍🧑' : '❌' }}</td>
+<td [title]="'Migración interna'">{{ row.poblacion_objetivo?.migracion_interna === 1 ? '🏘️🔄' : '❌' }}</td>
+<td [title]="'Población no migrante'">{{ row.poblacion_objetivo?.poblacion_no_migrante === 1 ? '📍🧑‍🤝‍🧑' : '❌' }}</td>
+<td [title]="'Personas desplazadas internas'">{{ row.poblacion_objetivo?.personas_desplazadas === 1 ? '⚠️🏚️' : '❌' }}</td>
           <td>{{ row.actores_involucrados }}</td>
         </ng-container>
       </tr>

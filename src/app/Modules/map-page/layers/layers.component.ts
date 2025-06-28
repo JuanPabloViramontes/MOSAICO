@@ -15,6 +15,7 @@ export class LayersComponent {
     naturaleza_politica_publica: string[],
     poblacion_objetivo: string[],
     conInterseccionalidades: boolean
+    tipos_de_actor: string | null ,
   }>();
   showRegions = false;
   showCategories = false;
@@ -25,8 +26,34 @@ selectedBorders: string[] = [];
 selectedNaturalezas: string[] = [];
 selectedPoblacionesObjetivo: string[] = [];
 mostrarConInterseccionalidades = false;
+showNaturaleza = false;
+selectedTipoDeActor: string | null = null;
+showTiposDeActor = false;
+showPoblaciones = false;
 
-  showNaturaleza = false;
+  tiposDeActor = [
+  "Organismos internacionales",
+  "Autoridades federales",
+  "Autoridades municipales",
+  "OSC",
+  "Albergues",
+  "Instituciones académicas",
+  "Organizaciones religiosas",
+  "Colectivos de personas en contexto de movilidad",
+  "Iniciativa privada",
+  "Representaciones consulares",
+  "Autoridades del sector salud",
+  "Autoridades del sector educación",
+  "Autoridades del sector de seguridad",
+  "Autoridades del sector de empleo",
+  "Autoridades del sector económico",
+  "Autoridades que atienden agendas de protección a derechos humanos",
+  "Autoridades registrales",
+  "Autoridades del sector cultural",
+  "Autoridades de desarrollo urbano, vivienda y/o ordenamiento territorial",
+  "Autoridades legislativas",
+  "OFAMs"
+];
 
 naturaleza_politica_publica = [
   { key: 'Creación de instituciones', label: 'Creación de instituciones' },
@@ -93,9 +120,6 @@ naturaleza_politica_publica = [
     { key: 'poblacion_no_migrante', label: 'Población no migrante' },
     { key: 'personas_desplazadas', label: 'Personas desplazadas' }
   ];
-  
-
-  showPoblaciones = false;
 
   // Regiones
 toggleRegion(region: any, event: Event) {
@@ -181,9 +205,8 @@ isPoblacionChecked(poblacion: any): boolean {
     borders: this.selectedBorders,
     naturaleza_politica_publica: this.selectedNaturalezas,
     poblacion_objetivo: this.selectedPoblacionesObjetivo,
-    conInterseccionalidades: this.mostrarConInterseccionalidades
-  });
+    conInterseccionalidades: this.mostrarConInterseccionalidades,
+    tipos_de_actor: this.selectedTipoDeActor || null }
+  );
 }
-
-
 }

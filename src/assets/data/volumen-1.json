@@ -40,6 +40,7 @@
       },
       "anio_implementacion": 2020,
       "actores_involucrados": "Secretaría General de Gobierno lidera. Involucra a instancias como el INM, CEDH. También cuenta con un consejo consultivo",
+      "tipos_actores": ["OFAMs", "En colaboración con OSC", "En colaboración con autoridades federales"],
       "resultados": "Coordinación de la política migratoria (temas presupuestales, ejecución, planeación de programas)",
       "comentarios": "En colaboración con autoridades federales, OSC y OFAMs"
     },
@@ -83,6 +84,7 @@
       },
       "anio_implementacion": 2021,
       "actores_involucrados": "Subsecretaría de Auntos Migratorios del Estado de Baja California",
+      "tipos_actores": ["OFAMs", "En colaboración con albergues", "En colaboración con OSC"],
       "resultados": "Generan incentivos de condonación de pagos, donativos mensuales, entre otros aspectos para el buen funcionamiento de albergues e SC.",
       "comentarios": "En colaboración con OSC, albergues y OFAMs"
     },
@@ -126,6 +128,7 @@
       },
       "anio_implementacion": 2020,
       "actores_involucrados": "Subsecretaría de Asuntos Migratorios del Estado de Baja California en coordinación con el INM",
+      "tipos_actores": ["OFAMs", "En colaboración con autoridades federales"],
       "resultados": "Apoyo en derecho a la identidad, servicios de salud, oferta de empleo, etc.",
       "comentarios": "En colaboración con autoridades federales"
     },
@@ -169,6 +172,7 @@
         },
         "anio_implementacion": 2017,
         "actores_involucrados": "Secretaría de Educación del Estado de Baja California",
+        "tipos_actores": ["Autoridades del sector educación"],
         "resultados": "",
         "comentarios": "Autoridades del sector educación"
       },
@@ -212,6 +216,7 @@
         },
         "anio_implementacion": 2021,
         "actores_involucrados": "Poder Ejecutivo del Gobierno del Estado de Baja California",
+        "tipos_actores": ["En colaboración con autoridades federales", "En colaboración con autoridades municipales"],
         "resultados": "",
         "comentarios": "En colaboración con autoridades municipales"
       },
@@ -255,6 +260,7 @@
         },
         "anio_implementacion": 2022,
         "actores_involucrados": "Comisión Interinstitucional Contra la Trata de Personas",
+        "tipos_actores": ["Autoridades que atienden agendas de protección a derechos humanos", "En colaboración con autoridades federales"],
         "resultados": "",
         "comentarios": "Autoridades que atienden agendas de protección a derechos humanos"
       },
@@ -298,6 +304,7 @@
         },
         "anio_implementacion": null,
         "actores_involucrados": "",
+        "tipos_actores": ["Autoridades del sector salud", "En colaboración con albergues"],
         "resultados": "",
         "comentarios": ""
       },
@@ -341,6 +348,7 @@
         },
         "anio_implementacion": null,
         "actores_involucrados": "",
+        "tipos_actores": ["Autoridades que atienden agendas de protección a derechos humanos"],
         "resultados": "",
         "comentarios": ""
       },
@@ -384,6 +392,7 @@
         },
         "anio_implementacion": null,
         "actores_involucrados": "",
+        "tipos_actores": ["Autoridades que atienden agendas de protección a derechos humanos"],
         "resultados": "",
         "comentarios": ""
       },
@@ -427,6 +436,7 @@
           },
           "anio_implementacion": 2022,
           "actores_involucrados": "",
+          "tipos_actores": ["OFAMs", "Autoridades del sector económico", "Autoridades registrales"],
           "resultados": "Apoyo en derecho a la identidad, servicios de salud, oferta de empleo, Contacto consular y vinculación con otros organismos, etc.",
           "comentarios": ""
         },
@@ -470,6 +480,7 @@
           },
           "anio_implementacion": 2018,
           "actores_involucrados": "",
+          "tipos_actores": ["OFAMs", "En colaboración con autoridades federales", "En colaboración con OSC", "En colaboración con autoridades municipales", "En colaboración con instituciones académicas"],
           "resultados": "Coordinación de la política migratoria (temas presupuestales, ejecución, planeación de programas)",
           "comentarios": ""
         },
@@ -513,6 +524,7 @@
           },
           "anio_implementacion": 2019,
           "actores_involucrados": "",
+          "tipos_actores": ["OFAMs", "En colaboración con autoridades federales", "Autoridades registrales", "En colaboración con representaciones consulares"],
           "resultados": "Apoyo en derecho a la identidad, servicios de salud, oferta de empleo, Contacto consular y vinculación con otros organismos, etc.",
           "comentarios": ""
         },
@@ -556,6 +568,7 @@
           },
           "anio_implementacion": 2019,
           "actores_involucrados": "",
+          "tipos_actores": ["OFAMs", "En colaboración con organismos internacionales"],
           "resultados": "Comisión de NNA; asistencia humanitaria; salud.",
           "comentarios": ""
         },
@@ -599,6 +612,7 @@
           },
           "anio_implementacion": 2020,
           "actores_involucrados": "",
+          "tipos_actores": ["Autoridades que atienden agendas de protección a derechos humanos", "En colaboración con organismos internacionales"],
           "resultados": "Atención a NNA",
           "comentarios": ""
         },
@@ -642,6 +656,7 @@
           },
           "anio_implementacion": 2020,
           "actores_involucrados": "",
+          "tipos_actores": ["Autoridades del sector salud", "En colaboración con organismos internacionales"],
           "resultados": "Atención a NNA",
           "comentarios": ""
         },
@@ -685,6 +700,7 @@
               },
               "anio_implementacion": 2023,
               "actores_involucrados": "",
+              "tipos_actores": ["Autoridades legislativas"],
               "resultados": "",
               "comentarios": ""
             },
@@ -728,6 +744,7 @@
               },
               "anio_implementacion": 2021,
               "actores_involucrados": "H. Congreso del Estado de Chihuahua",
+              "tipos_actores": ["Autoridades legislativas"],
               "resultados": "Reformas legales y establecimiento del Día Estatal del Migrante",
               "comentarios": ""
             },
@@ -771,6 +788,7 @@
               },
               "anio_implementacion": 2023,
               "actores_involucrados": "",
+              "tipos_actores": ["Autoridades que atienden agendas de protección a derechos humanos", "En colaboración con organismos internacionales", "En colaboración con autoridades federales"],
               "resultados": "Protección y asistencia a NNA migrantes no acompañados",
               "comentarios": ""
             },
@@ -814,6 +832,7 @@
               },
               "anio_implementacion": null,
               "actores_involucrados": "",
+              "tipos_actores": ["OFAMs", "Autoridades registrales", "En colaboración con autoridades federales", "En colaboración con autoridades municipales"],
               "resultados": "Garantizan el derecho a la identidad ofreciendo servicios de acceso a documentación",
               "comentarios": ""
             },
@@ -857,6 +876,7 @@
               },
               "anio_implementacion": null,
               "actores_involucrados": "",
+              "tipos_actores": ["OFAMs", "En colaboración con autoridades municipales"],
               "resultados": "Vinculación para acceso a servicios municipales",
               "comentarios": ""
             },
@@ -900,6 +920,7 @@
                   },
                   "anio_implementacion": null,
                   "actores_involucrados": "",
+                  "tipos_actores": ["OFAMs", "En colaboración con autoridades municipales", "En colaboración con representaciones consulares"],
                   "resultados": "Coordinación con mas de 20 dependencias para facilitar procesos de vinculación y acceso a servicios",
                   "comentarios": ""
                 },
@@ -943,6 +964,7 @@
                   },
                   "anio_implementacion": null,
                   "actores_involucrados": "",
+                  "tipos_actores": ["OFAMs"],
                   "resultados": "",
                   "comentarios": ""
                 },
@@ -986,6 +1008,7 @@
                   },
                   "anio_implementacion": null,
                   "actores_involucrados": "",
+                  "tipos_actores": ["OFAMs", "En colaboración con representaciones consulares"],
                   "resultados": "Reunificación familiar temporal",
                   "comentarios": ""
                 },
@@ -1029,6 +1052,7 @@
                   },
                   "anio_implementacion": null,
                   "actores_involucrados": "",
+                  "tipos_actores": ["OFAMs", "En colaboración con representaciones consulares"],
                   "resultados": "",
                   "comentarios": ""
                 },
@@ -1072,6 +1096,7 @@
                   },
                   "anio_implementacion": null,
                   "actores_involucrados": "",
+                  "tipos_actores": ["OFAMs"],
                   "resultados": "",
                   "comentarios": ""
                 },
@@ -1115,6 +1140,7 @@
                   },
                   "anio_implementacion": null,
                   "actores_involucrados": "",
+                  "tipos_actores": ["OFAMs", "En colaboración con autoridades municipales", "En colaboración con OSC"],
                   "resultados": "Reunificación familiar temporal",
                   "comentarios": ""
                 },
@@ -1158,6 +1184,7 @@
                   },
                   "anio_implementacion": null,
                   "actores_involucrados": "",
+                  "tipos_actores": ["OFAMs"],
                   "resultados": "Trabajaron vinculación con SALUD para que las personas migrantes pudieran acceder a la vacunación contra COVID 19",
                   "comentarios": ""
                 },
@@ -1458,7 +1485,6 @@
                         "eficacia": false
                       },
                       "anio_implementacion": null,
-                      "actores_involucrados": "",
                       "resultados": "Con auxilio de las Oficinas de Representación en Estados Unidos. Facilitación de documentos, trámites, obtención de actas. (Gestión de trámites)",
                       "comentarios": ""
                     },
@@ -1501,7 +1527,6 @@
                         "eficacia": false
                       },
                       "anio_implementacion": null,
-                      "actores_involucrados": "",
                       "resultados": "Apoyo a familiares de personas fallecidas en el extranjero, apoyo económico, gestión de trámites y de traslado.",
                       "comentarios": ""
                     },
@@ -1545,6 +1570,7 @@
                       },
                       "anio_implementacion": null,
                       "actores_involucrados": "",
+                
                       "resultados": "Apoyo económico para el desarrollo de programas de: servicios, venta de productos, transformación, establecimientos de alimentos procesados, productos agropecuarios.",
                       "comentarios": ""
                     },

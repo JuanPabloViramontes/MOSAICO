@@ -4,8 +4,18 @@
     <button class="btn btn-outline-primary" [class.active]="matrizNivel === 'resumido'" (click)="matrizNivel = 'resumido'">Resumido</button>
     <button class="btn btn-outline-primary" [class.active]="matrizNivel === 'intermedio'" (click)="matrizNivel = 'intermedio'">Intermedio</button>
     <button class="btn btn-outline-primary" [class.active]="matrizNivel === 'completo'" (click)="matrizNivel = 'completo'">Completo</button>
+    <button 
+      class="btn" 
+      [ngClass]="showAllPracticas ? 'btn-primary' : 'btn-outline-primary'" 
+      (click)="toggleShowAll()">
+      Mostrar todas las buenas prácticas
+    </button>
+    <button class="btn btn-success" (click)="descargarPDF(null)">
+      <i class="bi bi-download"></i> Descargar PDF
+    </button>
   </div>
-    <!-- Campo de búsqueda -->
+  
+  <!-- Campo de búsqueda -->
   <div class="search-container" style="width: 300px;">
     <div class="input-group">
       <input type="text" 
@@ -27,6 +37,7 @@
       <tr>
         <th>Estado</th>
         <th>Naturaleza de la política pública</th>
+        <th>Tipos de actor</th> <!-- NUEVA COLUMNA -->
         <th>Buena práctica</th>
         <th *ngIf="matrizNivel !== 'resumido'">Resumen de la buena práctica</th>
         <th *ngIf="matrizNivel !== 'resumido'">Categoría</th>
@@ -35,7 +46,7 @@
         <th *ngIf="matrizNivel === 'completo'">Actores involucrados</th>
       </tr>
       <tr *ngIf="matrizNivel === 'completo'">
-        <th colspan="6"></th>
+        <th colspan="7"></th> <!-- Ajustado para nueva columna -->
         <th>Retornado(a)s</th>
         <th>Tránsito</th>
         <th>Mexicanos en el extranjero</th>
@@ -52,6 +63,7 @@
       <tr *ngFor="let row of filteredData">
         <td>{{ row.estado }}</td>
         <td>{{ row.naturaleza_politica_publica }}</td>
+        <td>{{ formatTiposActores(row.tipos_actores) }}</td> <!-- NUEVA COLUMNA -->
         <td>
           <button class="btn btn-link text-primary text-decoration-underline p-0" (click)="openModal(row)">
             {{ row.buena_practica }}
@@ -64,19 +76,19 @@
 
         <ng-container *ngIf="matrizNivel === 'completo'">
           <td [title]="'Migrantes retornados'">{{ row.poblacion_objetivo?.retornados === 1 ? '🔁🙋‍♂️' : '❌' }}</td>
-<td [title]="'Migrantes en tránsito'">{{ row.poblacion_objetivo?.transito === 1 ? '🚶‍♀️🌫️' : '❌' }}</td>
-<td [title]="'Mexicanos en el extranjero'">{{ row.poblacion_objetivo?.mexicanos_extranjero === 1 ? '🤝🌍' : '❌' }}</td>
-<td [title]="'Refugiados / Asilados'">{{ row.poblacion_objetivo?.refugiados_asilados === 1 ? '🛡️🧍' : '❌' }}</td>
-<td [title]="'Migración internacional'">{{ row.poblacion_objetivo?.migracion_destino === 1 ? '🌍🧑‍🤝‍🧑' : '❌' }}</td>
-<td [title]="'Migración interna'">{{ row.poblacion_objetivo?.migracion_interna === 1 ? '🏘️🔄' : '❌' }}</td>
-<td [title]="'Población no migrante'">{{ row.poblacion_objetivo?.poblacion_no_migrante === 1 ? '📍🧑‍🤝‍🧑' : '❌' }}</td>
-<td [title]="'Personas desplazadas internas'">{{ row.poblacion_objetivo?.personas_desplazadas === 1 ? '⚠️🏚️' : '❌' }}</td>
+          <td [title]="'Migrantes en tránsito'">{{ row.poblacion_objetivo?.transito === 1 ? '🚶‍♀️🌫️' : '❌' }}</td>
+          <td [title]="'Mexicanos en el extranjero'">{{ row.poblacion_objetivo?.mexicanos_extranjero === 1 ? '🤝🌍' : '❌' }}</td>
+          <td [title]="'Refugiados / Asilados'">{{ row.poblacion_objetivo?.refugiados_asilados === 1 ? '🛡️🧍' : '❌' }}</td>
+          <td [title]="'Migración internacional'">{{ row.poblacion_objetivo?.migracion_destino === 1 ? '🌍🧑‍🤝‍🧑' : '❌' }}</td>
+          <td [title]="'Migración interna'">{{ row.poblacion_objetivo?.migracion_interna === 1 ? '🏘️🔄' : '❌' }}</td>
+          <td [title]="'Población no migrante'">{{ row.poblacion_objetivo?.poblacion_no_migrante === 1 ? '📍🧑‍🤝‍🧑' : '❌' }}</td>
+          <td [title]="'Personas desplazadas internas'">{{ row.poblacion_objetivo?.personas_desplazadas === 1 ? '⚠️🏚️' : '❌' }}</td>
           <td>{{ row.actores_involucrados }}</td>
         </ng-container>
       </tr>
 
       <tr *ngIf="filteredData.length === 0">
-        <td [attr.colspan]="matrizNivel === 'resumido' ? 3 : matrizNivel === 'intermedio' ? 6 : 15" class="text-center">
+        <td [attr.colspan]="matrizNivel === 'resumido' ? 4 : matrizNivel === 'intermedio' ? 7 : 16" class="text-center">
           No hay buenas prácticas para esta selección.
         </td>
       </tr>

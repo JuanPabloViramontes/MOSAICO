@@ -30,12 +30,19 @@
         </ul>
       </div>
 
-      <div class="text-end mt-4">
-        <button class="btn btn-outline-primary btn-sm" (click)="descargarPDF()">Descargar PDF</button>
-      </div>
+    <!-- Dentro del ng-container *ngIf="practica" -->
+<div class="mb-3">
+  <button 
+    class="btn btn-primary"
+    (click)="openVolumeDoc(practica.volumen)">
+    Ver documento {{ practica.volumen }}
+  </button>
+</div>
+
     </ng-container>
 
     <ng-container *ngIf="!practica">
+      
       <p class="text-muted">No se encontró información de la práctica.</p>
     </ng-container>
   </div>

@@ -128,6 +128,22 @@
         </div>
       </div>
 
+<!-- Tipo de actor -->
+<div class="mb-3">
+  <label for="tipoActorSelect" class="form-label fw-bold">Tipo de actor</label>
+  <select
+    id="tipoActorSelect"
+    class="form-select"
+    [(ngModel)]="selectedTipoDeActor"
+    (change)="emitFilters()"
+  >
+    <option [ngValue]="null" disabled selected>-- Selecciona un tipo --</option>
+    <option *ngFor="let tipo of tiposDeActor" [ngValue]="tipo">
+      {{ tipo }}
+    </option>
+  </select>
+</div>
+
       <!-- Naturaleza -->
       <div class="flex-fill">
         <h6 class="fw-bold d-flex justify-content-between align-items-center"

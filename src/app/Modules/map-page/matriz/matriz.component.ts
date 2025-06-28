@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -15,7 +15,8 @@ export class MatrizComponent implements OnInit, OnChanges {
   @Input() selectedBorders: string[] = [];
   @Input() selectedNaturalezas: string[] = [];
   @Input() selectedPoblacionObjetivo: string[] = [];
-  @Input() mostrarSoloInterseccionalidad: boolean = false; // <-- ESTA LÍNEA
+  @Input() mostrarSoloInterseccionalidad: boolean = false; 
+  @Input() selectedTiposDeActor: string | null = null;
   @Output() onDownloadPDF = new EventEmitter<{practica: any, filteredData: any[]}>();
   @Output() filteredStatesChanged = new EventEmitter<string[]>();
 
@@ -82,6 +83,18 @@ searchTerm: string = '';
 
 // Modifica el getter filteredData para incluir la búsqueda
 get filteredData(): any[] {
+   const hasSearch = !!this.searchTerm?.trim();
+
+  if (this.showAllPracticas) {
+    const all = this.allData;
+    return hasSearch
+      ? all.filter(row => Object.values(row).some(val =>
+          val && val.toString().toLowerCase().includes(this.searchTerm.toLowerCase())
+        ))
+      : all;
+  }
+
+
   const hasRegion = this.selectedRegions.length > 0;
   const hasBorder = this.selectedBorders.length > 0;
   const hasState = !!this.selectedState;
@@ -89,9 +102,10 @@ get filteredData(): any[] {
   const hasNaturaleza = this.selectedNaturalezas.length > 0;
   const hasPoblacion = this.selectedPoblacionObjetivo.length > 0;
   const hasInterseccionalidad = this.mostrarSoloInterseccionalidad;
-  const hasSearch = !!this.searchTerm?.trim();
+  const hasTipoDeActor = !!this.selectedTiposDeActor;
 
-  const hasAnyFilter = hasRegion || hasBorder || hasState || hasCategory || hasNaturaleza || hasPoblacion || hasInterseccionalidad || hasSearch;
+
+  const hasAnyFilter = hasRegion || hasBorder || hasState || hasCategory || hasNaturaleza || hasPoblacion || hasInterseccionalidad || hasTipoDeActor || hasSearch;
 
   // Si no hay filtros activos, no mostrar nada
   if (!hasAnyFilter) {
@@ -107,32 +121,43 @@ get filteredData(): any[] {
   let geographicStates: string[] = [];
 
   if (hasRegion || hasBorder || hasState) {
-    const sets = [statesFromBorders, statesFromRegions, statesFromState]
-      .filter(arr => arr.length > 0)
-      .map(arr => new Set(arr.map(s => s.trim().toLowerCase())));
+  const sets = [statesFromBorders, statesFromRegions, statesFromState]
+    .filter(arr => arr.length > 0)
+    .map(arr => new Set(arr.map(s => s.trim().toLowerCase())));
 
-    if (sets.length === 1) {
-      geographicStates = Array.from(sets[0]);
-    } else {
-      // Obtener la intersección de todos los conjuntos
-      geographicStates = Array.from(
-        sets.reduce((a, b) => new Set([...a].filter(x => b.has(x))))
-      );
-    }
-
-    // Si no hay intersección, terminar temprano
-    if (geographicStates.length === 0) {
-      return [];
-    }
+  if (sets.length === 0) {
+    geographicStates = [];
+  } else if (sets.length === 1) {
+    geographicStates = Array.from(sets[0]);
+  } else {
+    geographicStates = Array.from(
+      sets.reduce((a, b) => new Set([...a].filter(x => b.has(x))))
+    );
   }
+
+  if (geographicStates.length === 0) {
+    return [];
+  }
+}
+
 
   return this.allData.filter(row => {
     const rowState = row.estado?.trim().toLowerCase();
     const categoriaNum = parseInt(row.categoria?.split('.')[0], 10);
     const naturaleza = row.naturaleza_politica_publica?.trim();
+    const tiposActoresArray: string[] = Array.isArray(row.tipos_actores)
+  ? row.tipos_actores
+  : typeof row.tipos_actores === 'string'
+    ? row.tipos_actores.split(',').map((a: string) => a.trim())
+    : [];
+
+const selectedActor = this.selectedTiposDeActor?.toLowerCase().trim();
+
+const matchesTipoDeActor = !hasTipoDeActor || tiposActoresArray.some(
+  actor => actor.toLowerCase().trim() === selectedActor
+);
 
     const poblacionObj = row.poblacion_objetivo || {};
-
     const matchesGeo = geographicStates.length === 0 || geographicStates.includes(rowState);
     const matchesCategory = !hasCategory || this.selectedCategories.includes(categoriaNum);
     const matchesNaturaleza = !hasNaturaleza || this.selectedNaturalezas.includes(naturaleza);
@@ -148,7 +173,8 @@ get filteredData(): any[] {
            matchesNaturaleza &&
            matchesPoblacion &&
            matchesInterseccionalidad &&
-           matchesSearch;
+           matchesSearch &&
+          matchesTipoDeActor;
   });
 }
 
@@ -178,7 +204,36 @@ emitFilteredStates(): void {
   this.filteredStateCountsChanged.emit(counts);
 }
 
+showAllPracticas: boolean = false;
+toggleShowAll() {
+  this.showAllPracticas = !this.showAllPracticas;
+}
 
+
+clearFilters() {
+  this.selectedRegions = [];
+  this.selectedState = null;
+  this.selectedCategories = [];
+  this.selectedBorders = [];
+  this.selectedNaturalezas = [];
+  this.selectedPoblacionObjetivo = [];
+  this.mostrarSoloInterseccionalidad = false;
+  this.searchTerm = '';
+  this.showAllPracticas = true; 
+  this.selectedTiposDeActor = null;
+}
+
+formatTiposActores(tiposActores: string[] | string | undefined): string {
+  if (!tiposActores) return '';
+  if (Array.isArray(tiposActores)) {
+    return tiposActores.join(', ');
+  } else if (typeof tiposActores === 'string') {
+    return tiposActores;
+  }
+  return '';
+}
+
+ 
 // Método para aplicar la búsqueda
 applySearch() {
   // El getter filteredData ya se actualiza automáticamente
@@ -194,4 +249,4 @@ applySearch() {
     this.modalVisible = false;
     this.selectedPractica = null;
   }
-}
+   }

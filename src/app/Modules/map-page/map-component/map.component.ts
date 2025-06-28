@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
@@ -12,6 +12,8 @@ import { click, pointerMove } from 'ol/events/condition';
 import { fromLonLat } from 'ol/proj';
 import { forkJoin, lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import html2pdf from 'html2pdf.js';
+
 
 @Component({
   selector: 'app-map',
@@ -35,8 +37,8 @@ export class MapComponent implements OnInit  {
   public poblacionSeleccionada: string[] = [];
   public carouselImages: string[] = [];
   public mostrarConInterseccionalidades: boolean = false;
-
-
+  public selectedTiposDeActor: string | null = null;
+  
 
   private stateImages: {[key: string]: string[]} = {
     'Nuevo León': ['assets/images/Estados/nuevoleon1.jpeg', 'assets/images/Estados/nuevoleon2.jpg', 'assets/images/Estados/nuevoleon3.jpg'],
@@ -137,15 +139,12 @@ private normalizeStateName(stateName: string): string {
     .replace(/[^a-z]/g, '');          // elimina caracteres especiales si hubiera
 }
 
-
 filteredMatrixStates: string[] = [];
 
 onFilteredStatesChanged(filteredStates: string[]) {
   this.filteredMatrixStates = filteredStates || [];
   this.applyMatrixStates(this.filteredMatrixStates);
 }
-
-
 
   private async loadData(): Promise<void> {
     try {
@@ -184,25 +183,6 @@ onFilteredStatesChanged(filteredStates: string[]) {
       format: new GeoJSON()
     });
 
-    // Estilo normal con etiquetas
-    const normalStyle = (feature: any) => {
-      const stateName = feature.get('name') || '';
-      return new Style({
-        stroke: new Stroke({
-          color: '#3388ff',
-          width: 1.5
-        }),
-        fill: new Fill({
-          color: 'rgba(51, 136, 255, 0.2)'
-        }),
-        text: new Text({
-          text: stateName,
-          font: 'bold 12px Arial',
-          fill: new Fill({ color: '#000' }),
-          stroke: new Stroke({ color: '#fff', width: 2 })
-        })
-      });
-    };
 
     // Estilo para selección
     const selectedText = new Text({
@@ -320,6 +300,7 @@ onFilteredStatesChanged(filteredStates: string[]) {
     });
     this.map.addInteraction(hoverSelect);
   }
+  
 private getFeatureStyle(feature: any): Style {
   const count = feature.get('count') || 0; // Número de veces que aparece
   const maxCount = 13;
@@ -380,7 +361,8 @@ private getFeatureStyle(feature: any): Style {
   borders: string[],
   naturaleza_politica_publica: string[],
   poblacion_objetivo: string[],
-  conInterseccionalidades: boolean
+  conInterseccionalidades: boolean,
+  tipos_de_actor: string | null
 }) {
   this.regionesSeleccionadas = event.regions;
   this.categoriasSeleccionadas = event.categories;
@@ -388,6 +370,7 @@ private getFeatureStyle(feature: any): Style {
   this.selectedNaturalezas = event.naturaleza_politica_publica;
   this.poblacionSeleccionada = event.poblacion_objetivo || [];
   this.mostrarConInterseccionalidades = event.conInterseccionalidades;
+  this.selectedTiposDeActor = event.tipos_de_actor;
 
   // Forzar actualización de estados filtrados
   this.emitFilteredStates();
@@ -425,6 +408,28 @@ emitFilteredStates(): void {
       'background-color': '#123456', // o el color/fondo que tenías antes
       'min-height': '300px'
     };
-    
+    generarPDF({ practica, filteredData }: { practica: any, filteredData: any[] }) {
+  const element = document.createElement('div');
+  element.innerHTML = `
+    <h1>Buenas prácticas</h1>
+    <ul>
+      ${filteredData.map(row => `
+        <li>
+          <strong>${row.buena_practica}</strong> - ${row.estado} - ${row.naturaleza_politica_publica}
+        </li>
+      `).join('')}
+    </ul>
+  `;
+
+  const opt = {
+    margin:       0.5,
+    filename:     'buenas-practicas.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2 },
+    jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(element).save();
+}
     
 }

@@ -90,12 +90,14 @@
 <div>
   <app-matriz 
   (filteredStatesChanged)="onFilteredStatesChanged($event)"
+   (onDownloadPDF)="generarPDF($event)"
     [selectedState]="selectedMatrixState" 
     [selectedRegions]="regionesSeleccionadas"
     [selectedCategories]="categoriasSeleccionadas"
     [selectedBorders]="selectedBorders"
     [selectedNaturalezas]="selectedNaturalezas"
     [selectedPoblacionObjetivo]="poblacionSeleccionada"
-    [mostrarSoloInterseccionalidad]="mostrarConInterseccionalidades">
+    [mostrarSoloInterseccionalidad]="mostrarConInterseccionalidades"
+    [selectedTiposDeActor]="selectedTiposDeActor">
   </app-matriz>
 </div>

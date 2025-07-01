@@ -1,85 +1,21 @@
-.map-container {
+.header-background {
   position: relative;
-  width: 100%;
-  height: 80vh;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+  overflow: hidden;
 }
 
-.map {
-  width: 100%;
-  height: 100%;
-}
-
-.map-overlay {
+.header-background::before {
+  content: "";
   position: absolute;
-  top: 20px;      /* Distancia desde el borde superior */
-  right: 20px;    /* Distancia desde el borde derecho */
-  background: rgba(255, 255, 255, 0.9); /* Fondo más sólido */
-  padding: 12px 15px;
-  border-radius: 8px;
-  z-index: 1;
-  max-width: 260px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Sombra sutil */
-  border: 1px solid rgba(0,0,0,0.1); /* Borde delgado */
-}
-
-/* Transición suave para el cambio de contenido */
-.container > div {
-  transition: all 0.3s ease;
-}
-
-/* Estilo para el botón de volver */
-.btn-outline-light:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-.filtro-container {
-  max-width: 100%;
-}
-
-.filtro-container .form-control,
-.filtro-container .form-select {
-  min-width: 200px;
-  max-width: 250px;
-  flex: 1 1 auto;
-}
-.custom-container {
-  max-width: 700px; /* ancho reducido */
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.blur-background {
-  object-fit: contain;
-  height: 300px;
-  width: 100%;
-  background-color: rgb(0, 0, 0);
-}
-
-.background-blur-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
+  background-image: url('/assets/images/mapaFondo.png');
   background-size: cover;
   background-position: center;
-  filter: blur(4px) brightness(0.7);
-  z-index: 1;
-}
-/* Scroll más fino para los filtros */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-}
-
-/* Ajustes visuales para los filtros */
-.position-absolute .form-check-label {
-  font-size: 0.85rem;
-}
-.position-absolute h6,
-.position-absolute h5 {
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  z-index: -1;
 }

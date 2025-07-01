@@ -1,0 +1,21 @@
+/* Oculta elementos con esta clase en pantalla */
+.only-pdf {
+  display: none;
+}
+
+/* Oculta elementos con esta clase solo en impresión/PDF */
+.no-print {
+  display: block;
+}
+
+@media print {
+  /* En impresión/PDF muestra los elementos con only-pdf */
+  .only-pdf {
+    display: block !important;
+  }
+
+  /* En impresión/PDF oculta los elementos con no-print */
+  .no-print {
+    display: none !important;
+  }
+}

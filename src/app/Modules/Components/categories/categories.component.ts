@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 
 declare var bootstrap: any;
 
@@ -9,127 +9,132 @@ declare var bootstrap: any;
   standalone: false,
 })
 export class CategoriesComponent implements AfterViewInit {
-  cards = [
-    { 
-      title: 'Estado o región', 
-      text: '¿Dónde se implementó la buena práctica?', 
-      image: 'assets/images/atardecer.jpg',
-      modalContent: {
-        description: 'Esta categoría indica en qué estado de la República Mexicana ocurrió la experiencia. Ayuda a identificar qué zonas del país están impulsando políticas migratorias innovadoras.',
-        images: [
-          { src: 'assets/images/atardecer-detail1.jpg', caption: 'Atardecer en la playa' },
-          { src: 'assets/images/atardecer-detail2.jpg', caption: 'Atardecer en la montaña' }
-        ],
-      }
-    },
-    { 
-      title: 'Estado fronterizo', 
-      text: '¿Está el estado ubicado en una frontera internacional?', 
-      image: 'assets/images/cempa.jpg',
-      modalContent: {
-        description: 'Aquí se especifica si la entidad es fronteriza con Estados Unidos o Guatemala/Belice. Esto importa porque los contextos migratorios pueden ser muy diferentes en zonas de frontera.',
-        images: [
-          { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
-          { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
-        ],
-      }
-    },
-    { 
-      title: 'Tema de la buena práctica', 
-      text: '¿De qué trata la acción o política implementada?', 
-      image: 'assets/images/atardecer.jpg',
-      modalContent: {
-        description: 'Esta categoría permite conocer en qué área se centró la buena práctica. Aquí agrupamos distintas formas en que los gobiernos locales están respondiendo a los desafíos de la migración desde la legislación, la atención directa, los servicios básicos, la vinculación con otras autoridades y la integración comunitaria.',
-        images: [
-          { src: 'assets/images/atardecer-detail1.jpg', caption: 'Atardecer en la playa' },
-          { src: 'assets/images/atardecer-detail2.jpg', caption: 'Atardecer en la montaña' }
-        ],
-      }
-    },
-    { 
-      title: 'Covid-19', 
-      text: '¿La buena práctica surgió como respuesta a la pandemia?', 
-      image: 'assets/images/cempa.jpg',
-      modalContent: {
-        description: 'Señala si la acción está relacionada con los desafíos que trajo la emergencia sanitaria por Covid-19, como salud, empleo, albergue o regularización migratoria.',
-        images: [
-          { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
-          { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
-        ],
-      }
-    },
-    { 
-      title: 'Flujo o situación migratoria', 
-      text: '¿A qué tipo de movilidad responde la práctica?', 
-      image: 'assets/images/atardecer.jpg',
-      modalContent: {
-        description: 'Esta categoría identifica el perfil principal de las personas a quienes va dirigida la acción. Las buenas prácticas pueden atender a quienes migran dentro del país, cruzan fronteras, regresan, buscan protección o incluso a la población que no está en situación de movilidad pero que forma parte del contexto migratorio.',
-        images: [
-          { src: 'assets/images/atardecer-detail1.jpg', caption: 'Atardecer en la playa' },
-          { src: 'assets/images/atardecer-detail2.jpg', caption: 'Atardecer en la montaña' }
-        ],
-      }
-    },
-    { 
-      title: 'Interseccionalidad', 
-      text: '¿La buena práctica toma en cuenta las distintas desigualdades que pueden afectar a una misma persona migrante?', 
-      image: 'assets/images/cempa.jpg',
-      modalContent: {
-        description: 'Esta categoría permite identificar si la acción considera las experiencias y necesidades específicas de grupos de población que, además de estar en situación de migración, enfrentan otras condiciones de vulnerabilidad. La interseccionalidad ayuda a diseñar respuestas más justas, inclusivas y efectivas.',
-        images: [
-          { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
-          { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
-        ],
-      }
-    },
-    { 
-      title: 'Volumen de procedencia', 
-      text: 'Volumen 1, Volumen 2, Volumen 3', 
-      image: 'assets/images/atardecer.jpg',
-    },
-    { 
-      title: 'Actores involucrados', 
-      text: '¿Quiénes participaron en la buena práctica?', 
-      image: 'assets/images/cempa.jpg',
-      modalContent: {
-        description: 'Aquí se detallan los actores clave: gobiernos municipales o estatales, sociedad civil, organismos internacionales, sector privado o comunidades locales.',
-        images: [
-          { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
-          { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
-        ],
-      }
-    },
-    { 
-      title: 'Temporalidad', 
-      text: '¿En qué año se implementó la buena práctica?', 
-      image: 'assets/images/cempa.jpg',
-      modalContent: {
-        description: 'Este filtro permite conocer el momento en que se puso en marcha la acción o política pública. Puede ayudarte a identificar prácticas recientes, acciones sostenidas en el tiempo o intervenciones que surgieron como respuesta a un contexto específico. Nota: Algunas buenas prácticas pueden haberse iniciado en un año determinado pero mantenerse activas o haber evolucionado con el tiempo.',
-        images: [
-          { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
-          { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
-        ],
-      }
-    },
-  ];
-
+  @ViewChild('carouselTrack', { static: true }) carousel!: ElementRef;
   selectedCard: any = null;
   activeImageIndex: number = 0;
 
-  get groupedCards() {
-    const groups = [];
-    for (let i = 0; i < this.cards.length; i += 4) {
-      groups.push(this.cards.slice(i, i + 4));
+  cards = [
+    {
+      title: 'Estado o región',
+      image: 'assets/images/variables/variables-01.png',
+      modalContent: {
+      question: '¿Dónde se implementó la buena práctica?',
+      description: 'Este campo indica en qué estado de la República Mexicana se desarrolló la experiencia. Nos permite reconocer qué territorios están construyendo respuestas locales a los retos de la migración, visibilizando esfuerzos que promueven la dignidad, inclusión y derechos de las personas en movilidad.',
+          images: [
+          { src: 'assets/images/regiones.png', caption: 'Regiones' },
+        ],
+      }
+    },
+    {
+      title: 'Estado fronterizo',
+      image: 'assets/images/variables/variables-02.png',
+      modalContent: {
+        question: '¿La entidad tiene frontera internacional?',
+        description: 'Aquí se señala si el estado colinda con Estados Unidos, Guatemala o Belice. Las dinámicas migratorias en zonas fronterizas suelen ser más complejas y requieren respuestas específicas para proteger derechos, atender necesidades urgentes y facilitar procesos de tránsito, retorno o integración.',
+        images: [
+          { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
+          { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
+        ],
+      }
+    },
+    {
+      title: 'Tema de la buena práctica',
+      image: 'assets/images/variables/variables-03.png',
+      modalContent: {
+        question: '¿Cuál fue el enfoque de la acción implementada?',
+        description: 'Identifica el área central de la buena práctica: desde el acceso a derechos como salud, educación o vivienda, hasta la integración comunitaria, la atención humanitaria, la regularización o la participación ciudadana.',
+        images: [
+          { src: 'assets/images/atardecer-detail1.jpg', caption: 'Atardecer en la playa' },
+          { src: 'assets/images/atardecer-detail2.jpg', caption: 'Atardecer en la montaña' }
+        ],
+      }
+    },
+    {
+      title: 'Covid-19',
+      image: 'assets/images/variables/variables-04.png',
+      modalContent: {
+        question: '¿Está relacionada con la emergencia sanitaria por Covid-19?',
+        description: 'Indica si la buena práctica respondió a los desafíos derivados de la pandemia, como acceso a servicios de salud, empleo, albergue o regularización migratoria.',
+        images: [
+          { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
+          { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
+        ],
+      }
+    },
+    {
+      title: 'Flujo o situación migratoria',
+      image: 'assets/images/variables/variables-05.png',
+      modalContent: {
+        question: '¿A qué tipo de movilidad responde la acción?',
+        description: 'Esta categoría señala a qué perfil de población migrante está dirigida la práctica: personas en tránsito, solicitantes de asilo, población retornada, niñez migrante, personas desplazadas internas o comunidades receptoras.',
+        images: [
+          { src: 'assets/images/atardecer-detail1.jpg', caption: 'Atardecer en la playa' },
+          { src: 'assets/images/atardecer-detail2.jpg', caption: 'Atardecer en la montaña' }
+        ],
+      }
+    },
+    {
+      title: 'Interseccionalidad',
+      image: 'assets/images/variables/variables-06.png',
+      modalContent: {
+        question: '¿La acción toma en cuenta otras condiciones de vulnerabilidad?',
+        description: 'Este criterio permite identificar si la práctica considera factores como género, edad, diversidad, discapacidad, etnia o situación socioeconómica.',
+        images: [
+          { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
+          { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
+        ],
+      }
+    },
+    {
+      title: 'Volumen de procedencia',
+      image: 'assets/images/variables/variables-07.png',
+      modalContent: {
+        question: '¿En qué volumen del repositorio se encuentra la práctica?',
+        description: 'Este campo ubica la buena práctica dentro del repositorio, según su año de registro o incorporación.',
+        images: [
+          { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
+          { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
+        ],
+      }
+    },
+    {
+      title: 'Actores involucrados',
+      image: 'assets/images/variables/variables-08.png',
+      modalContent: {
+        question: '¿Quiénes participaron en la implementación?',
+        description: '¿Quiénes participaron en la implementación? Describe los actores clave que hicieron posible la práctica: autoridades estatales o municipales, organizaciones de la sociedad civil, agencias internacionales, sector privado o comunidades migrantes.',
+        images: [
+          { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
+          { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
+        ],
+      }
+    },
+    {
+      title: 'Temporalidad',
+      image: 'assets/images/variables/variables-09.png',
+      modalContent: {
+        question: '¿Cuándo se puso en marcha la acción?',
+        description: 'Permite conocer el año de inicio de la práctica, su continuidad o adaptación a nuevos contextos.',
+        images: [
+          { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
+          { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
+        ],
+      }
     }
-    return groups;
+  ];
+
+  scrollCarousel(direction: number) {
+    const cardWidth = 240; // Tarjetas más compactas
+    const container = this.carousel.nativeElement;
+    container.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
   }
 
   ngAfterViewInit() {
     const carouselElement = document.getElementById('multiCardCarousel');
     if (carouselElement) {
       new bootstrap.Carousel(carouselElement, {
-        interval: 5000,  // Opcional: cambio automático cada 5s
-        wrap: true,      // Esto hace el loop infinito
+        interval: 5000,
+        wrap: true,
         keyboard: true,
         ride: 'carousel'
       });
@@ -137,27 +142,25 @@ export class CategoriesComponent implements AfterViewInit {
   }
 
   openModal(card: any) {
-    // Crear copia profunda mínima para evitar referencias mutables
     this.selectedCard = JSON.parse(JSON.stringify(card));
     this.activeImageIndex = 0;
     const modal = document.getElementById('cardModal');
     if (modal) {
-      // @ts-ignore
       new bootstrap.Modal(modal).show();
     }
   }
 
   nextImage() {
     if (this.selectedCard && this.selectedCard.modalContent.images) {
-      this.activeImageIndex = 
+      this.activeImageIndex =
         (this.activeImageIndex + 1) % this.selectedCard.modalContent.images.length;
     }
   }
 
   prevImage() {
     if (this.selectedCard && this.selectedCard.modalContent.images) {
-      this.activeImageIndex = 
-        (this.activeImageIndex - 1 + this.selectedCard.modalContent.images.length) % 
+      this.activeImageIndex =
+        (this.activeImageIndex - 1 + this.selectedCard.modalContent.images.length) %
         this.selectedCard.modalContent.images.length;
     }
   }
@@ -168,12 +171,7 @@ export class CategoriesComponent implements AfterViewInit {
     }
   }
 
-  trackByGroupIndex(index: number, item: any): number {
-    return index;
-  }
-  
   trackByCardId(index: number, card: any): any {
     return card.id || index;
   }
-  
 }

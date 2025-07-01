@@ -108,18 +108,16 @@ naturaleza_politica_publica = [
     { categoria: '13. Reunificación familiar', id: 'categoria13', label: 'Reunificación familiar' }
   ];  
 
-
-
-  poblacionObjetivo = [
-    { key: 'retornados', label: 'Retornados' },
-    { key: 'transito', label: 'En tránsito' },
-    { key: 'mexicanos_extranjero', label: 'Mexicanos en el extranjero' },
-    { key: 'refugiados_asilados', label: 'Refugiados y asilados' },
-    { key: 'migracion_destino', label: 'Migración de destino' },
-    { key: 'migracion_interna', label: 'Migración interna' },
-    { key: 'poblacion_no_migrante', label: 'Población no migrante' },
-    { key: 'personas_desplazadas', label: 'Personas desplazadas' }
-  ];
+ poblacionObjetivo = [
+  { key: 'retornados', label: '🔁🙋‍♂️ Retornados' },
+  { key: 'transito', label: '🚶‍♀️🌫️ En tránsito' },
+  { key: 'mexicanos_extranjero', label: '🤝🌍 Mexicanos en el extranjero' },
+  { key: 'refugiados_asilados', label: '🛡️🧍 Refugiados y asilados' },
+  { key: 'migracion_destino', label: '🌍🧑‍🤝‍🧑 Migración de destino' },
+  { key: 'migracion_interna', label: '🏘️🔄 Migración interna' },
+  { key: 'poblacion_no_migrante', label: '📍🧑‍🤝‍🧑 Población no migrante' },
+  { key: 'personas_desplazadas', label: '⚠️🏚️ Personas desplazadas' }
+];
 
   // Regiones
 toggleRegion(region: any, event: Event) {

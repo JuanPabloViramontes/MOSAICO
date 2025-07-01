@@ -1,22 +1,21 @@
-<h1 class="text-center my-4">Mosaico de buenas prácticas</h1>
-
+ <h2 class="fw-bold mb-4 text-center">Mosaico de buenas prácticas</h2>
 <div class="boxesContainer">
   <div class="cardBox" *ngFor="let card of cards; let i = index">
     <div class="card">
-      <div class="front" [ngStyle]="{ 'background-color': pastelColors[i % pastelColors.length] }">
-        <h3>{{ card.title }}</h3>
-        <strong>&#x21bb;</strong>
+      <!-- Front side -->
+     <div class="front" >
+        <ng-container *ngIf="card.frontImage">
+          <img [src]="card.frontImage" alt="Frente" class="card-img"/>
+        </ng-container>
+       
       </div>
-      <div class="back" [ngStyle]="{ 'background-color': pastelBacks[i % pastelBacks.length] }">
-        <h3>{{ card.backTitle }}</h3>
 
-        <!-- Si es lista -->
-        <ul *ngIf="card.descriptionList">
-          <li *ngFor="let item of card.descriptionList">{{ item }}</li>
-        </ul>
-
-        <!-- Si es solo texto plano -->
-        <p *ngIf="!card.descriptionList">{{ card.description }}</p>
+      <!-- Back side -->
+      <div class="back">
+        <ng-container *ngIf="card.backImage">
+          <img [src]="card.backImage" alt="Reverso" class="card-img"/>
+        </ng-container>
+       
       </div>
     </div>
   </div>

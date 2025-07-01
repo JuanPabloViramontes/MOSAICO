@@ -6,7 +6,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NavMenuComponent } from './Modules/Components/nav-menu/nav-menu.component';
-import { FooterComponent } from './Modules/footer/footer.component';
+import { FooterComponent } from './Modules/Components/footer/footer.component';
 
 
 @NgModule({

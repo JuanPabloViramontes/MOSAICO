@@ -1,28 +1,21 @@
 <!-- Selector de nivel de detalle -->
-<div class="mb-3 text-end">
+<div class="mb-3 text-end no-print">
   <div class="btn-group" role="group">
     <button class="btn btn-outline-primary" [class.active]="matrizNivel === 'resumido'" (click)="matrizNivel = 'resumido'">Resumido</button>
     <button class="btn btn-outline-primary" [class.active]="matrizNivel === 'intermedio'" (click)="matrizNivel = 'intermedio'">Intermedio</button>
     <button class="btn btn-outline-primary" [class.active]="matrizNivel === 'completo'" (click)="matrizNivel = 'completo'">Completo</button>
-    <button 
-      class="btn" 
-      [ngClass]="showAllPracticas ? 'btn-primary' : 'btn-outline-primary'" 
-      (click)="toggleShowAll()">
+    <button class="btn" [ngClass]="showAllPracticas ? 'btn-primary' : 'btn-outline-primary'" (click)="toggleShowAll()">
       Mostrar todas las buenas prácticas
     </button>
-    <button class="btn btn-success" (click)="descargarPDF(null)">
+    <button class="btn btn-success" (click)="descargarPDF()">
       <i class="bi bi-download"></i> Descargar PDF
     </button>
   </div>
-  
+
   <!-- Campo de búsqueda -->
-  <div class="search-container" style="width: 300px;">
+  <div class="search-container mt-2" style="width: 300px;">
     <div class="input-group">
-      <input type="text" 
-             class="form-control" 
-             placeholder="Buscar buenas prácticas..."
-             [(ngModel)]="searchTerm"
-             (keyup.enter)="applySearch()">
+      <input type="text" class="form-control" placeholder="Buscar buenas prácticas..." [(ngModel)]="searchTerm" (keyup.enter)="applySearch()">
       <button class="btn btn-outline-primary" (click)="applySearch()">
         <i class="bi bi-search"></i>
       </button>
@@ -30,70 +23,72 @@
   </div>
 </div>
 
-<!-- Tabla -->
-<div class="table-responsive">
-  <table class="table table-bordered table-striped align-middle text-center">
-    <thead class="table-primary">
-      <tr>
-        <th>Estado</th>
-        <th>Naturaleza de la política pública</th>
-        <th>Tipos de actor</th> <!-- NUEVA COLUMNA -->
-        <th>Buena práctica</th>
-        <th *ngIf="matrizNivel !== 'resumido'">Resumen de la buena práctica</th>
-        <th *ngIf="matrizNivel !== 'resumido'">Categoría</th>
-        <th *ngIf="matrizNivel !== 'resumido'">Subcategoría</th>
-        <th *ngIf="matrizNivel === 'completo'" colspan="8">Población objetivo</th>
-        <th *ngIf="matrizNivel === 'completo'">Actores involucrados</th>
-      </tr>
-      <tr *ngIf="matrizNivel === 'completo'">
-        <th colspan="7"></th> <!-- Ajustado para nueva columna -->
-        <th>Retornado(a)s</th>
-        <th>Tránsito</th>
-        <th>Mexicanos en el extranjero</th>
-        <th>Refugiado(a)s y asilado(a)s</th>
-        <th>Migración de destino</th>
-        <th>Migración interna</th>
-        <th>Población no migrante</th>
-        <th>Personas desplazadas internas</th>
-        <th></th>
-      </tr>
-    </thead>
+<!-- CONTENEDOR PARA PDF -->
+<div id="pdfContainer" style="padding: 20px; background-color: #fff; color: #000; font-family: Arial, sans-serif;">
+  <!-- Encabezado institucional visible solo en PDF -->
+  <div class="only-pdf" style="text-align: center; margin-bottom: 20px;">
+    <img src="assets/images/oim-logo.png" alt="Logo OIM" height="60" style="margin-bottom: 10px;" />
+    <h2 style="margin: 0;">Matriz de Buenas Prácticas</h2>
+    <h5 style="margin: 0;">Gobiernos locales y migración en México</h5>
+    <p style="margin-top: 10px; font-size: 0.9rem;">
+      Fecha de descarga: {{ currentDate | date:'longDate' }}
+    </p>
+  </div>
 
-    <tbody>
-      <tr *ngFor="let row of filteredData">
-        <td>{{ row.estado }}</td>
-        <td>{{ row.naturaleza_politica_publica }}</td>
-        <td>{{ formatTiposActores(row.tipos_actores) }}</td> <!-- NUEVA COLUMNA -->
-        <td>
-          <button class="btn btn-link text-primary text-decoration-underline p-0" (click)="openModal(row)">
-            {{ row.buena_practica }}
-          </button>
-        </td>
+  <!-- Introducción visible solo en PDF -->
+  <p class="only-pdf" style="font-size: 0.95rem; text-align: justify;">
+    Este documento presenta un conjunto de buenas prácticas implementadas por gobiernos locales en coordinación con diversos actores,
+    con el objetivo de atender los retos asociados a la movilidad humana en México. La información contenida es útil para tomadores
+    de decisiones, organizaciones de la sociedad civil, y cualquier entidad interesada en replicar o adaptar iniciativas exitosas
+    en sus territorios.
+  </p>
 
-        <td *ngIf="matrizNivel !== 'resumido'">{{ row.resumen }}</td>
-        <td *ngIf="matrizNivel !== 'resumido'">{{ row.categoria }}</td>
-        <td *ngIf="matrizNivel !== 'resumido'">{{ row.subcategoria }}</td>
+  <!-- TABLA -->
+  <div class="table-responsive" id="matrizTabla">
+    <table class="table table-bordered table-striped align-middle text-center">
+      <thead class="table-primary">
+        <tr>
+          <th>Estado</th>
+          <th>Naturaleza de la política pública</th>
+          <th>Tipos de actor</th>
+          <th>Buena práctica</th>
+          <th *ngIf="matrizNivel !== 'resumido'" style="min-width: 250px;">Resumen de la buena práctica</th>
+          <th *ngIf="matrizNivel !== 'resumido'" style="min-width: 200px;">Categoría</th>
+          <th *ngIf="matrizNivel !== 'resumido'">Subcategoría</th>
+          <th *ngIf="matrizNivel === 'completo'">Población objetivo</th>
+          <th *ngIf="matrizNivel === 'completo'">Actores involucrados</th>
+        </tr>
+      </thead>
 
-        <ng-container *ngIf="matrizNivel === 'completo'">
-          <td [title]="'Migrantes retornados'">{{ row.poblacion_objetivo?.retornados === 1 ? '🔁🙋‍♂️' : '❌' }}</td>
-          <td [title]="'Migrantes en tránsito'">{{ row.poblacion_objetivo?.transito === 1 ? '🚶‍♀️🌫️' : '❌' }}</td>
-          <td [title]="'Mexicanos en el extranjero'">{{ row.poblacion_objetivo?.mexicanos_extranjero === 1 ? '🤝🌍' : '❌' }}</td>
-          <td [title]="'Refugiados / Asilados'">{{ row.poblacion_objetivo?.refugiados_asilados === 1 ? '🛡️🧍' : '❌' }}</td>
-          <td [title]="'Migración internacional'">{{ row.poblacion_objetivo?.migracion_destino === 1 ? '🌍🧑‍🤝‍🧑' : '❌' }}</td>
-          <td [title]="'Migración interna'">{{ row.poblacion_objetivo?.migracion_interna === 1 ? '🏘️🔄' : '❌' }}</td>
-          <td [title]="'Población no migrante'">{{ row.poblacion_objetivo?.poblacion_no_migrante === 1 ? '📍🧑‍🤝‍🧑' : '❌' }}</td>
-          <td [title]="'Personas desplazadas internas'">{{ row.poblacion_objetivo?.personas_desplazadas === 1 ? '⚠️🏚️' : '❌' }}</td>
-          <td>{{ row.actores_involucrados }}</td>
-        </ng-container>
-      </tr>
+      <tbody>
+        <tr *ngFor="let row of filteredData">
+          <td>{{ row.estado }}</td>
+          <td>{{ row.naturaleza_politica_publica }}</td>
+          <td>{{ formatTiposActores(row.tipos_actores) }}</td>
+          <td>
+            <button class="btn btn-link text-primary text-decoration-underline p-0" (click)="openModal(row)">
+              {{ row.buena_practica }}
+            </button>
+          </td>
 
-      <tr *ngIf="filteredData.length === 0">
-        <td [attr.colspan]="matrizNivel === 'resumido' ? 4 : matrizNivel === 'intermedio' ? 7 : 16" class="text-center">
-          No hay buenas prácticas para esta selección.
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          <td *ngIf="matrizNivel !== 'resumido'" style="min-width: 250px;">{{ row.resumen }}</td>
+          <td *ngIf="matrizNivel !== 'resumido'" style="min-width: 200px;">{{ row.categoria }}</td>
+          <td *ngIf="matrizNivel !== 'resumido'">{{ row.subcategoria }}</td>
+
+          <ng-container *ngIf="matrizNivel === 'completo'">
+            <td>{{ getPoblacionEmojis(row.poblacion_objetivo) }}</td>
+            <td>{{ row.actores_involucrados }}</td>
+          </ng-container>
+        </tr>
+
+        <tr *ngIf="filteredData.length === 0">
+          <td [attr.colspan]="matrizNivel === 'resumido' ? 4 : matrizNivel === 'intermedio' ? 7 : 9" class="text-center">
+            No hay buenas prácticas para esta selección.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <!-- Modal -->

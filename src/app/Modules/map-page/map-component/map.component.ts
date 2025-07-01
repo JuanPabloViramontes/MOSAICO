@@ -23,6 +23,8 @@ import html2pdf from 'html2pdf.js';
 })
 export class MapComponent implements OnInit  {
   private map!: Map;
+  private mapView!: View;
+  mostrarFiltrosYMapa = false;
   private allData: any[] = [];
   private statesLayer!: VectorLayer<VectorSource>;
   private selectedFeature: any = null;
@@ -42,34 +44,35 @@ export class MapComponent implements OnInit  {
 
   private stateImages: {[key: string]: string[]} = {
     'Nuevo León': ['assets/images/Estados/nuevoleon1.jpeg', 'assets/images/Estados/nuevoleon2.jpg', 'assets/images/Estados/nuevoleon3.jpg'],
-    // ...
+    'Jalisco': ['assets/images/Estados/nuevoleon1.jpeg', 'assets/images/OIM3.jpeg', 'assets/images/OIM4.jpeg'],
+
   };
   
   private statePractices: {[key: string]: string} = {
-    'Aguascalientes': 'Aguascalientes ha implementado programas de regularización migratoria...',
-    'Baja California': 'Baja California cuenta con centros de atención humanitaria...',
+    'Aguascalientes': 'Aguascalientes es un estado con presencia migratoria moderada y diversa. Recibe personas extranjeras en tránsito, solicitantes de asilo y residentes temporales, principalmente de Guatemala, Cuba, Nicaragua, Haití, Honduras y Venezuela. También es punto de retorno para personas mexicanas repatriadas desde Estados Unidos, y registra baja incidencia de migración irregular, incluida la de niñas, niños y adolescentes.',
+    'Baja California': 'Baja California es un estado fronterizo con alto flujo migratorio: personas en tránsito, solicitantes de asilo haitianos y centroamericanos, trabajadores agrícolas (incluyendo población indígena), y deportados. Cuenta con una Ley estatal para la atención de migrantes que garantiza trato digno, no discriminación y protección especial a niñas, niños y víctimas de delito así como ONGs  y albergues locales complementan con asistencia legal, humanitaria e integración comunitaria.',
     'Baja California Sur': 'Programas de integración laboral en el sector turístico...',
-    'Campeche': 'Estrategias de protección a migrantes en tránsito...',
+    'Campeche': 'Campeche es un estado que se caracteriza principalmente por flujos internos y de retorno. Su perfil migratorio destaca la articulación entre gobiernos y sociedad civil mediante comités estatales y municipales para atender a migrantes y garantizar su acceso a derechos humanos, así cómo la implemetación protocolos de atención, mecanismos de quejas ante la CNDH y acciones con enfoque en no discriminación.',
     'Chiapas': 'Modelo de atención integral en la frontera sur...',
-    'Chihuahua': 'Programas de cooperación transfronteriza...',
-    'Ciudad de México': 'La CDMX cuenta con centros de atención integral para migrantes...',
-    'Coahuila': 'Sistema de documentación para migrantes...',
-    'Colima': 'Programas de salud para población migrante...',
-    'Durango': 'Estrategias contra la discriminación...',
+    'Chihuahua': 'Chihuahua es un estado fonterizo con grandes flujos de tránsito, retorno y presencia de personas desplazadas internas de otras entidades federativas. Cuenta con programas de protección a solicitantes de asilo y deportados desde EE. UU, e implementa atención a niñez migrante, albergues y brigadas móviles, en coordinación con organismos internacionales, con enfoque humanitario y de derechos.',
+    'Ciudad de México': 'Ciudad de México es el principal punto de llegada y destino, con atención a solicitantes de asilo, refugio, tránsito y retorno. Cuenta con una legislación avanzada protege contra la discriminación; se facilitan asilo, salud, albergue y asesoría jurídica. La capital opera con un enfoque interseccional, atendiendo prioridades por género, edad y condición migratoria.',
+    'Coahuila': 'Coahuila es un estado fronterizo con presencia priniciplamente de flujo migratorio de tránsito; cuenta con albergues, brigadas de salud y asesoría legal cerca de cruces. Asimismo tiene programas por medio de los cuales se gestiona el retorno asistido y promueve la integración laboral de deportados y refugiados. Sus protocolos incluyen atención psicosocial, protección de infancia migrante y denuncia de violaciones de derechos.',
+    'Colima': 'Colima es un estado  con flujos de tránsito y retorno. Se enfoca en asistencia a migrantes centroamericanos en ruta hacia el norte, y establece colaboradores entre autoridades municipales y colectivos para otorgar atención médica, jurídica y prevención de trata, especialmente a mujeres y niñas.',
+    'Durango': 'Durango es un estado con presencia de persoans en tránsito, movilidad interna y retorno. Opera programas de identificación de víctimas de trata, campañas de sensibilización en municipios rurales, y colaboración con la CNDH. Atiende a poblaciones indígenas migrantes con enfoque diferencial.',
     'Guanajuato': 'Red de albergues comunitarios...',
-    'Guerrero': 'Programas de retorno voluntario asistido...',
+    'Guerrero': 'Estado de origen, tránsito y retorno, con alta vulnerabilidad. Promueve acciones contra la trata de personas y la migración forzada, asimismo opera brigadas, módulos de atención y acompañamiento psicosocial para población retornada, con especial atención a mujeres, niñas y comunidades indígenas.',
     'Hidalgo': 'Proyectos productivos para migrantes retornados...',
-    'Jalisco': 'Jalisco ha implementado programas de integración laboral para migrantes...',
+    'Jalisco': 'Jalisco es una entidad clave en el panorama migratorio nacional, ya que confluyen en su territorio los cuatro principales flujos: tránsito, destino, retorno y migración interna. Además, alberga a personas solicitantes y sujetas de Protección Internacional. En coordinación con organismos internacionales, el estado ha fortalecido sus programas con enfoque de integración local, promoviendo el acceso a servicios de salud, empleo y educación para personas migrantes y refugiadas. Cuenta con albergues tanto gubernamentales como de la sociedad civil, varios de ellos con enfoque familiar, y atención a niñas, niños y adolescentes en situación de movilidad.',
     'México': 'Sistema de alerta temprana para migrantes...',
-    'Michoacán': 'Red de defensores comunitarios...',
+    'Michoacán': 'Michoacán es un estado perteneciente a la región historíca de la migración con presencia principalmente de flujos migratorios de de origen, tránsito, y retorno con presencia de personas retornadas desde EE. UU, asimismo se han identificado personas Desplazadas Internas. Entre sus servicios, ofrece asistencia legal y vocacional a deportados, y programas de prevención de tráfico de personas.',
     'Morelos': 'Programas educativos interculturales...',
     'Nayarit': 'Estrategias de protección a menores migrantes...',
     'Nuevo León': 'Sistema de información sobre derechos migratorios...',
-    'Oaxaca': 'Programas de preservación cultural para comunidades migrantes...',
-    'Puebla': 'Red de traductores para procedimientos administrativos...',
-    'Querétaro': 'Programas de vivienda temporal...',
+    'Oaxaca': 'Oaxaca es un estado de origen, tránsito y retorno, con una importante presencia de comunidades indígenas migrantes. Las dinámicas migratorias están marcadas por la pobreza, la desigualdad y la migración forzada, tanto interna como internacional, el estado ha impulsado acciones de protección para personas retornadas, búsqueda de personas desaparecidas, atención psicojurídica a familiares y mecanismos de acompañamiento comunitario. Sus acciones y políticas destacan por sus enfoques intercultural e interseccional, especialmente en la atención a mujeres, niñez migrante e integrantes de pueblos originarios, promoviendo procesos dignos y seguros.',
+    'Puebla': 'Puebla es un estado de tránsito, destino y retorno para personas migrantes, incluyendo población repatriada desde Estados Unidos, cuenta con centros estatales que ofrecen asistencia médica, jurídica y psicosocial a quienes retornan, así como talleres de reintegración social y laboral. Se destaca la protección a mujeres, infancia y población LGBTTTIQ+, junto con iniciativas comunitarias y campañas interculturales que promueven la inclusión y combaten la discriminación.',
+    'Querétaro': 'Querétaro es un estado de destino, tránsito y retorno, con una creciente presencia de personas migrantes y repatriadas desde Estados Unidos. A través del Consejo Estatal de Atención a Migrantes y un marco normativo local, se implementan programas de acompañamiento integral para personas en retorno voluntario, que incluyen asistencia psicosocial, orientación legal, capacitación laboral y apoyo al emprendimiento. También se han fortalecido mecanismos de protección a solicitantes de asilo y población en situación de vulnerabilidad, con especial atención a mujeres, niñez migrante.',
     'Quintana Roo': 'Estrategias de protección en zonas turísticas...',
-    'San Luis Potosí': 'Programas contra la trata de personas...',
+    'San Luis Potosí': 'San Luis Potosí es un estado de tránsito, destino y retorno, con población extranjera en movilidad y personas mexicanas repatriadas desde Estados Unidos. Cuenta con una red de 58 enlaces municipales coordinados por el Instituto de Migración y Enlace Internacional, que promueven acceso a servicios, derechos humanos e integración comunitaria. Destacan programas de reunificación familiar para adultos mayores, atención a niñas, niños y adolescentes en movilidad, y colaboración con albergues y organizaciones civiles. El estado impulsa acciones con enfoque intercultural e interseccional, priorizando a mujeres, pueblos indígenas y personas en situación de vulnerabilidad.',
     'Sinaloa': 'Red de atención a migrantes extracontinentales...',
     'Sonora': 'Programas fronterizos de protección consular...',
     'Tabasco': 'Estrategias de adaptación climática para comunidades migrantes...',
@@ -77,7 +80,7 @@ export class MapComponent implements OnInit  {
     'Tlaxcala': 'Programas de reunificación familiar...',
     'Veracruz': 'Red de atención a víctimas de violencia...',
     'Yucatán': 'Programas de integración lingüística...',
-    'Zacatecas': 'Estrategias de desarrollo económico para comunidades expulsoras...'
+    'Zacatecas': 'Zacatecas es un estado históricamente expulsor de población, con fuerte vínculo con comunidades migrantes en Estados Unidos. Registra flujos de retorno y tránsito. La entidad destaca por un robusto marco institucional liderado por la Secretaría del Zacatecano Migrante (SEZAMI), que implementa programas de reunificación familiar, reintegración laboral, traslado humanitario y asesoría jurídica para personas en movilidad. A través de leyes locales, consejos interinstitucionales y plataformas digitales, promueve la protección de derechos, el vínculo con la diáspora y la participación comunitaria, con énfasis en mujeres, personas adultas mayores y niñez migrante.'
   };
 
   borderStatesMap: { [key: string]: string[] } = {
@@ -163,26 +166,35 @@ onFilteredStatesChanged(filteredStates: string[]) {
     }
   }
 
+public hacerZoomAMexico(): void {
+  this.mostrarFiltrosYMapa = true;
+  if (this.map) {
+    const mexicoCenter = fromLonLat([-102.0, 23.8]);
+
+    this.map.getView().animate({
+      center: mexicoCenter,
+      zoom: 5,
+      duration: 1000
+    });
+  }
+}
+
   private initializeMap(): void {
     // 1. Configuración del visor centrado en México
-    const view = new View({
-      center: fromLonLat([-102.0, 23.8]),
-      zoom: 5,
-      minZoom: 4,
-      maxZoom: 10
-    });
+   this.mapView = new View({
+  center: fromLonLat([0, 20]), // Vista global
+  zoom: 2,
+  minZoom: 2,
+  maxZoom: 10
+});
+
 
     // 2. Capa base
     const baseLayer = new TileLayer({
       source: new OSM()
     });
 
-    // 3. Cargar archivo GeoJSON
-    const statesSource = new VectorSource({
-      url: 'assets/data/mx.json',
-      format: new GeoJSON()
-    });
-
+   
 
     // Estilo para selección
     const selectedText = new Text({
@@ -213,12 +225,11 @@ onFilteredStatesChanged(filteredStates: string[]) {
   zIndex: 3
 });
 
-
     // 4. Crear el mapa
     this.map = new Map({
       target: 'map-container',
       layers: [baseLayer, this.statesLayer],
-      view: view
+      view: this.mapView
     });
 
     // 5. Interacción de selección con clic (modificado)

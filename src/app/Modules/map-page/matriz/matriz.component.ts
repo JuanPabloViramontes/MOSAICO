@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { forkJoin } from 'rxjs';
+import html2pdf from 'html2pdf.js';
 
 @Component({
   selector: 'app-matriz',
@@ -9,6 +10,7 @@ import { forkJoin } from 'rxjs';
   standalone: false
 })
 export class MatrizComponent implements OnInit, OnChanges {
+  currentDate: Date = new Date();
   @Input() selectedRegions: string[] = [];
   @Input() selectedState: string | null = null;
   @Input() selectedCategories: number[] = [];
@@ -20,16 +22,28 @@ export class MatrizComponent implements OnInit, OnChanges {
   @Output() onDownloadPDF = new EventEmitter<{practica: any, filteredData: any[]}>();
   @Output() filteredStatesChanged = new EventEmitter<string[]>();
 
+descargarPDF(): void {
+  setTimeout(() => {
+    const element = document.getElementById('pdfContainer');
 
-descargarPDF(practica: any) {
-  this.onDownloadPDF.emit({
-    practica: practica,
-    filteredData: this.filteredData
-  });
+    if (!element) {
+      console.error('No se encontró el contenedor del PDF');
+      return;
+    }
+
+    const opt = {
+      margin:       0.5,
+      filename:     `Matriz_Buenas_Practicas_${new Date().toISOString().split('T')[0]}.pdf`,
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
+    };
+
+    html2pdf().set(opt).from(element).save();
+  }, 100);
 }
 
   matrizNivel: 'resumido' | 'intermedio' | 'completo' = 'completo';
-
 
   borderStatesMap: { [key: string]: string[] } = {
     frontera_norte: ['Baja California', 'Sonora', 'Chihuahua', 'Coahuila', 'Nuevo León', 'Tamaulipas'],
@@ -231,6 +245,23 @@ formatTiposActores(tiposActores: string[] | string | undefined): string {
     return tiposActores;
   }
   return '';
+}
+
+getPoblacionEmojis(poblacion: any): string {
+  if (!poblacion) return '';
+
+  const emojis = [];
+
+  if (poblacion.retornados === 1) emojis.push('🔁🙋‍♂️');
+  if (poblacion.transito === 1) emojis.push('🚶‍♀️🌫️');
+  if (poblacion.mexicanos_extranjero === 1) emojis.push('🇲🇽🤝🌍');
+  if (poblacion.refugiados_asilados === 1) emojis.push('🛡️🧍');
+  if (poblacion.migracion_destino === 1) emojis.push('🌍🧑‍🤝‍🧑');
+  if (poblacion.migracion_interna === 1) emojis.push('🏘️🔄');
+  if (poblacion.poblacion_no_migrante === 1) emojis.push('📍🧑‍🤝‍🧑');
+  if (poblacion.personas_desplazadas === 1) emojis.push('⚠️🏚️');
+
+  return emojis.join(', ');
 }
 
  

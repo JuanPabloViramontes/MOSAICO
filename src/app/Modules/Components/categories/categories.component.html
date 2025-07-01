@@ -1,79 +1,90 @@
 <div class="container text-center my-4">
-    <h4 class="fw-bold text-dark">
-      Descubre las categorías que conforman el mosaico de buenas prácticas
-    </h4>
-  </div>
-  
-  <div id="multiCardCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-wrap="true" data-bs-interval="false">
-    <div class="carousel-inner">
-      <div *ngFor="let group of groupedCards; let i = index; trackBy: trackByGroupIndex"
-           [class]="i === 0 ? 'carousel-item active' : 'carousel-item'">
-        <div class="d-flex justify-content-center flex-nowrap gap-4 px-5">
-          <div *ngFor="let card of group; trackBy: trackByCardId" class="card shadow-sm hover-effect" 
-               (click)="openModal(card)" style="cursor:pointer;">
-            <img [src]="card.image" class="card-img-top" [alt]="card.title">
-            <div class="card-body">
-              <h5 class="card-title">{{ card.title }}</h5>
-              <p class="card-text">{{ card.text }}</p>
-            </div>
-          </div>
-        </div>
+  <h4 class="fw-bold text-dark">
+    Descubre las categorías que conforman el mosaico de buenas prácticas
+  </h4>
+</div>
+
+<!-- CARRUSEL CONTINUO -->
+<div class="carousel-wrapper position-relative px-5">
+  <!-- Botón previo -->
+  <button class="carousel-btn left" (click)="scrollCarousel(-1)">
+    <i class="bi bi-chevron-left"></i>
+  </button>
+
+  <!-- Contenedor deslizable -->
+  <div #carouselTrack class="carousel-track d-flex gap-4 overflow-auto px-2 py-3">
+    <div *ngFor="let card of cards; trackBy: trackByCardId"
+         class="card shadow-sm hover-effect flex-shrink-0"
+         style="cursor: pointer; width: 280px; height: 280px;"
+         (click)="openModal(card)">
+
+      <!-- Imagen -->
+      <img [src]="card.image"
+           class="card-img-top"
+           style="height: 160px; object-fit: cover; border-radius: 0.5rem 0.5rem 0 0;">
+
+      <!-- Contenido inferior -->
+      <div class="card-body text-center p-2">
+        <small class="text-muted fw-semibold" style="font-size: 0.95rem;">
+          {{ card.title }}
+        </small>
       </div>
     </div>
-  
-    <button class="carousel-control-prev" type="button" data-bs-target="#multiCardCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#multiCardCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </button>
   </div>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="cardModal" tabindex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="cardModalLabel">{{selectedCard?.title}}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <!-- Sección de imágenes interactivas -->
-            <div class="col-md-6">
-              <div class="image-gallery">
-                <img [src]="selectedCard?.modalContent.images[activeImageIndex]?.src" 
-                     class="img-fluid rounded main-image" 
+
+  <!-- Botón siguiente -->
+  <button class="carousel-btn right" (click)="scrollCarousel(1)">
+    <i class="bi bi-chevron-right"></i>
+  </button>
+</div>
+
+<!-- MODAL -->
+<div class="modal fade" id="cardModal" tabindex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cardModalLabel">{{ selectedCard?.title }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <!-- Imágenes -->
+          <div class="col-md-6">
+            <div class="image-gallery">
+              <div class="text-center mb-3">
+                <img [src]="selectedCard?.modalContent.images[activeImageIndex]?.src"
+                     class="img-fluid rounded main-image"
+                     style="max-height: 400px; width: auto;"
                      [alt]="selectedCard?.modalContent.images[activeImageIndex]?.caption">
-  
-                <div class="gallery-controls mt-2">
-                  <button class="btn btn-sm btn-outline-secondary" (click)="prevImage()">
-                    <i class="bi bi-chevron-left"></i>
-                  </button>
-                  <span class="mx-2">
-                    {{activeImageIndex + 1}} / {{selectedCard?.modalContent.images?.length}}
-                  </span>
-                  <button class="btn btn-sm btn-outline-secondary" (click)="nextImage()">
-                    <i class="bi bi-chevron-right"></i>
-                  </button>
-                </div>
-  
-                <p class="text-muted text-center mt-2">
-                  {{selectedCard?.modalContent.images[activeImageIndex]?.caption}}
-                </p>
               </div>
-            </div>
-  
-            <!-- Sección de contenido -->
-            <div class="col-md-6">
-              <p>{{selectedCard?.modalContent.description}}</p>
+              <div class="gallery-controls mt-2 text-center">
+                <button class="btn btn-sm btn-outline-secondary" (click)="prevImage()">
+                  <i class="bi bi-chevron-left"></i>
+                </button>
+                <span class="mx-2">
+                  {{ activeImageIndex + 1 }} / {{ selectedCard?.modalContent.images?.length }}
+                </span>
+                <button class="btn btn-sm btn-outline-secondary" (click)="nextImage()">
+                  <i class="bi bi-chevron-right"></i>
+                </button>
+              </div>
+              <p class="text-muted text-center mt-2">
+                {{ selectedCard?.modalContent.images[activeImageIndex]?.caption }}
+              </p>
             </div>
           </div>
+          <!-- Descripción -->
+          <div class="col-md-6">
+            <h6 class="fw-semibold text-primary mb-2">
+              {{ selectedCard?.modalContent.question }}
+            </h6>
+            <p>{{ selectedCard?.modalContent.description }}</p>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
-  
+</div>

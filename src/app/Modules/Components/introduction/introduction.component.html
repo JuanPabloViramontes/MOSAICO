@@ -1,19 +1,56 @@
-<div class="container py-5">
-    <div class="row align-items-center">
-      <!-- Columna de texto -->
-      <div class="col-md-6">
-        <h2 class="fw-bold">¿Qué son las buenas prácticas migrantes?</h2>
-        <h5 class="text-muted mb-4">OIM - CONOFAM</h5>
-        <p class="lead">
-          Las buenas prácticas migrantes son iniciativas o políticas implementadas a nivel local que promueven la inclusión, el bienestar y los derechos de las personas migrantes. 
-          Su objetivo es mejorar la calidad de vida y fomentar la cohesión social en contextos diversos.
-        </p>
-      </div>
-  
-      <!-- Columna de imagen -->
-      <div class="col-md-6 text-center">
-        <img [src]="imageSrc" [alt]="imageAlt" class="img-fluid rounded shadow" *ngIf="imageSrc">
+<div class="container-fluid px-0">
+  <div class="row align-items-stretch rounded-4 overflow-hidden"
+       style="min-height: 300px; background: linear-gradient(15deg, #0a1f3a 0%, #1a365d 50%, #0a2742 100%);">
+
+    <!-- Imagen principal -->
+    <div class="col-md-5 d-flex align-items-stretch p-0">
+      <img src="assets/images/OIM2.jpg"
+           alt="OIM"
+           class="img-fluid w-100"
+           style="object-fit: cover;">
+    </div>
+
+    <!-- Descripción inicial -->
+    <div class="col-md-7 text-white d-flex flex-column justify-content-center p-4">
+      <h3 class="fw-bold mb-3 text-center text-md-start">¿Qué son las buenas prácticas migrantes?</h3>
+      <p class="small" style="line-height: 1.7;">
+        Las buenas prácticas migratorias son acciones, programas o políticas implementadas principalmente a nivel local que buscan garantizar la protección, inclusión y bienestar de las personas migrantes y refugiadas. Estas iniciativas responden a los desafíos de la movilidad humana desde un enfoque de derechos humanos, interculturalidad y no discriminación.
+      </p>
+
+      <!-- Botón o acción para propósito -->
+      <div class="text-center mt-3">
+        <button class="btn btn-outline-light btn-sm" type="button"
+                data-bs-toggle="collapse" data-bs-target="#propositoCollapse"
+                aria-expanded="false" aria-controls="propositoCollapse">
+          Conoce nuestro propósito
+        </button>
       </div>
     </div>
   </div>
-  
+<!-- Contenido colapsable -->
+<!-- Contenido colapsable -->
+<div class="collapse mt-4" id="propositoCollapse">
+  <div class="card shadow-lg border-0 rounded-4 overflow-hidden"
+       style="background: linear-gradient(to right, #ffffff, #f5f7fa);">
+
+    <div class="row g-0 align-items-stretch">
+      
+      <!-- Texto del propósito -->
+      <div class="col-md-8 p-4 d-flex flex-column justify-content-center order-2 order-md-1">
+        <h5 class="fw-bold text-primary mb-3">¿Cuál es el propósito de Mosaico?</h5>
+        <p class="text-dark" style="line-height: 1.8; font-size: 0.95rem;">
+          El propósito de esta página web es dar a conocer una selección de buenas prácticas desarrolladas por distintas entidades federativas en México, recopiladas por la Organización Internacional para las Migraciones (OIM) en colaboración con la Coordinación Nacional de Oficinas Estatales de Atención a Migrantes (CONOFAM), a través de tres volúmenes titulados: 
+          <strong>“Buenas prácticas en política migratoria desde el ámbito local”</strong>.
+        </p>
+      </div>
+
+      <!-- Imagen del propósito -->
+      <div class="col-md-4 p-0 order-1 order-md-2">
+        <img src="assets/images/OIM.png"
+             alt="Propósito OIM"
+             class="img-fluid w-100 h-100 object-fit-cover rounded-end"
+             style="object-fit: cover;">
+      </div>
+    </div>
+  </div>
+</div>

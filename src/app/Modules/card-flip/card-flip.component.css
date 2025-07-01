@@ -1,89 +1,96 @@
 /* Contenedor general */
 .boxesContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
-    padding: 2rem;
-  }
-  
-  /* Cada tarjeta contenedora */
-  .cardBox {
-    width: 250px;
-    min-height: 300px;
-    max-height: 360px;
-    perspective: 1000px;
-  }
-  
-  /* Efecto flip */
-  .card {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.8s;
-  }
-  
-  .card:hover {
-    transform: rotateY(180deg);
-  }
-  
-  /* Cara frontal y trasera */
-  .front,
-  .back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    border-radius: 0.5rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-  
-  /* Estilos frontales */
-  .front {
-    background-color: #f9d5e5; /* rosa pastel */
-  }
-  
-  .back {
-    background-color: #d5f4e6; /* verde pastel */
-    transform: rotateY(180deg);
-  }
-  
-  /* Textos */
-  .front h3,
-  .back h3 {
-    font-size: 1rem; /* título más pequeño */
-    margin-bottom: 0.5rem;
-    text-align: center;
-  }
-  
-  .front p,
-  .back p,
-  .back li {
-    font-size: 0.95rem;
-    line-height: 1.4;
-    margin-bottom: 0.4rem;
-    text-align: left;
-    word-wrap: break-word;
-  }
-  
-  /* Listas */
-  .back ul {
-    padding-left: 1.2rem;
-    margin: 0;
-  }
-  
-  /* Ícono de flecha en el frente */
-  .front strong {
-    font-size: 1.5rem;
-    margin-top: auto;
-    align-self: center;
-  }
-  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0; /* Sin relleno */
+  margin: 0 auto;
+  max-width: 1000px; /* o el ancho que defina tus filas completas */
+}
+
+
+/* Cada tarjeta contenedora */
+.cardBox {
+  width: 250px;
+  min-height: 300px;
+  max-height: 360px;
+  perspective: 1000px;
+}
+
+/* Efecto flip */
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+}
+
+.card:hover {
+  transform: rotateY(180deg);
+}
+
+/* Cara frontal y trasera */
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* Fondo más formal */
+}
+
+
+/* Fondo trasero adicional (ahora azul suave también) */
+.back {
+  transform: rotateY(180deg);
+}
+
+/* Textos */
+.front h3,
+.back h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.front p,
+.back p,
+.back li {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin-bottom: 0.4rem;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+/* Listas */
+.back ul {
+  padding-left: 1.2rem;
+  margin: 0;
+}
+
+/* Ícono de flecha en el frente */
+.front strong {
+  font-size: 1.5rem;
+  margin-top: auto;
+  align-self: center;
+}
+
+.mosaico-wrapper {
+  padding: 3rem 1rem;
+  background: linear-gradient(to bottom, #eaf4fb, #ffffff); /* fondo suave */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

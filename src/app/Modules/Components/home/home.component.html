@@ -1,12 +1,18 @@
 <div class="container-fluid p-0">
-  <div class="text-white text-center py-5"
-       style="
-         background-color: #2c3e50;
-         background-image:
-           linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-           linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-         background-size: 20px 20px;
-       ">
+ <div class="text-white text-center py-5"
+     style=" 
+       background-image: 
+         linear-gradient(rgba(146, 174, 202, 0.95), rgba(255, 255, 255, 0.95)),
+         url('../../../../assets/images/mapaFondo.png');
+       background-size: cover;
+       background-position: center;
+       background-repeat: no-repeat;
+       background-blend-mode: multiply;
+       outline: 4px solid #2c3e50; /* ✅ línea azul alrededor */
+       outline-offset: -8px;       /* ✅ pega el borde al div */
+     ">
+
+
     
     <div class="container">
       <nav class="navbar" style="height: 100px; display: flex; justify-content: center; align-items: center;">
@@ -15,19 +21,22 @@
         </a>
       </nav>      
       
-      
-      <h2 class="h4 fw-normal text-white-50 mb-4">
-        Un mapa interactivo sobre las políticas migratorias a nivel local
+      <h2 class="lead text-light">
+       <strong>Un mapa interactivo sobre las políticas migratorias a nivel local</strong> 
       </h2>
       <p class="lead text-light">
         Explora las <strong>buenas prácticas</strong> en contexto <strong>migratorio</strong> a nivel local.
       </p>
-      <a [routerLink]="['/map']" class="btn btn-success btn-lg mt-4 px-5 shadow">Mapa interactivo</a>
+      <a [routerLink]="['/map']"
+   class="btn btn-lg mt-4 px-5 shadow text-white"
+   style="background-color: #1a365d; border: none;">
+   Mapa interactivo
+</a>
     </div>
   </div>
 </div>
-  <app-introduction class="d-block my-5"></app-introduction>
-  <app-categories class="d-block my-5"></app-categories>
-  <app-card-flip></app-card-flip>
-  <app-documents class="d-block my-5"></app-documents>
 
+<app-introduction class="d-block my-5"></app-introduction>
+<app-categories class="d-block my-5"></app-categories>
+<app-card-flip></app-card-flip>
+<app-documents class="d-block my-5"></app-documents>

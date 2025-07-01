@@ -39,7 +39,7 @@
           "eficacia": 1
         },
         "anio_implementacion": "N/A",
-        "actores_involucrados": "OIM, CEDH, OSC, COMAR, Gobierno Estatal",
+        "autoridades_enunciadas": "OIM, CEDH, OSC, COMAR, Gobierno Estatal",
         "resultados": "Acercamiento coordinado de servicios, resultados positivos en atención, modelo replicable, beneficio directo en el acceso a derechos y servicios",
         "comentarios": "Modelo articulador, requiere voluntad institucional y espacio físico para su réplica, permite la coordinación entre instituciones y OSC; modelo replicable en otros estados."
       },
@@ -82,7 +82,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Subsecretaría de Gobierno, Secretaría del Trabajo, Derechos Humanos, INM, OIM, CEDH, Protección Civil, OSC, Cruz Roja, albergues",
+        "autoridades_enunciadas": "Subsecretaría de Gobierno, Secretaría del Trabajo, Derechos Humanos, INM, OIM, CEDH, Protección Civil, OSC, Cruz Roja, albergues",
         "resultados": "Siete sesiones de la mesa general y dos de la mesa especial para protocolos; acuerdos interinstitucionales.",
         "comentarios": "Requiere secretaría técnica y compromiso de actores; modelo replicable"
       },
@@ -125,7 +125,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Secretaría de Educación, Igualdad e Inclusión, DIF, OSC",
+        "autoridades_enunciadas": "Secretaría de Educación, Igualdad e Inclusión, DIF, OSC",
         "resultados": "80 estancias infantiles reciben NNA migrantes; 36 NNA incorporados en escuelas en visitas recientes",
         "comentarios": "Modelo replicable, enfoque comunitario, fortalece integración social"
       },
@@ -168,7 +168,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Secretaría de Igualdad e Inclusión, organizaciones civiles, participantes de grupos prioritarios",
+        "autoridades_enunciadas": "Secretaría de Igualdad e Inclusión, organizaciones civiles, participantes de grupos prioritarios",
         "resultados": "7 emisiones, impulso económico y cultural",
         "comentarios": "Adaptable a múltiples contextos; modelo de inclusión sociolaboral"
       },
@@ -211,7 +211,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Secretaría de Salud, Igualdad e Inclusión, albergues, OSC",
+        "autoridades_enunciadas": "Secretaría de Salud, Igualdad e Inclusión, albergues, OSC",
         "resultados": "Seis clínicas vinculadas a albergues; cobertura y acceso efectivo; atención a COVID-19",
         "comentarios": "Práctica adaptable a otras entidades, fortalece derecho a la salud"
       },
@@ -254,7 +254,7 @@
           "eficacia": 0
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Congreso Estatal, instituciones de atención a víctimas, OSC",
+        "autoridades_enunciadas": "Congreso Estatal, instituciones de atención a víctimas, OSC",
         "resultados": "Inclusión explícita en la ley; referente innovador a nivel nacional",
         "comentarios": null
       },
@@ -297,7 +297,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "DIF estatal, INM, consulados (Guatemala, El Salvador, Honduras), Save the Children, ACNUR, OIM, PPNNA federal",
+        "autoridades_enunciadas": "DIF estatal, INM, consulados (Guatemala, El Salvador, Honduras), Save the Children, ACNUR, OIM, PPNNA federal",
         "resultados": "De 2021 a 2022, 518 NNA no acompañados y 2,313 personas en núcleos familiares atendidas; el 90% de los beneficiarios son adolescentes, 85% hombres.",
         "comentarios": "Modelo sencillo, efectivo, con presupuesto propio y alianzas estratégicas, puede replicarse en otras entidades."
       },
@@ -340,7 +340,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Gobernador, Secretarios estatales, presidentes municipales, sociedad civil, INM, GN, OSC, instituciones educativas",
+        "autoridades_enunciadas": "Gobernador, Secretarios estatales, presidentes municipales, sociedad civil, INM, GN, OSC, instituciones educativas",
         "resultados": "Implementación de líneas estratégicas, directorio de programas, módulos de atención, fondo de apoyo, fortalecimiento de Grupos Beta.",
         "comentarios": "Institucionalizado en ley y reglamento; articulador clave de política migratoria estatal."
       },
@@ -383,7 +383,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Fundación KIND, comisión de búsqueda, DIF Sonora, autoridades de EE.UU., PPNNA",
+        "autoridades_enunciadas": "Fundación KIND, comisión de búsqueda, DIF Sonora, autoridades de EE.UU., PPNNA",
         "resultados": "Reunificaciones familiares exitosas, mejora de la calidad de vida de NNA migrantes, modelo replicable en otras entidades.",
         "comentarios": "Surge de una fundamentación clara y es fácilmente replicable en otros estados fronterizos."
       },
@@ -426,7 +426,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Dirección de Atención a Migrantes, enlaces municipales, autoridades municipales, OSC",
+        "autoridades_enunciadas": "Dirección de Atención a Migrantes, enlaces municipales, autoridades municipales, OSC",
         "resultados": "Cobertura del 92% de municipios, atención descentralizada, modelo replicable y sostenible",
         "comentarios": "Estrategia de bajo costo, fortalece red institucional y corresponsabilidad local"
       },
@@ -469,7 +469,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Dirección de Atención a Migrantes, gobierno estatal, enlaces municipales.",
+        "autoridades_enunciadas": "Dirección de Atención a Migrantes, gobierno estatal, enlaces municipales.",
         "resultados": "Reunificación familiar con atención directa y personalizada",
         "comentarios": "Facilita reunificación familiar, apoya acceso a derechos básicos, mayor área de oportunidad es la fragilidad ante los cambios de política migratoria."
       },
@@ -512,7 +512,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Secretaría de Desarrollo Social, Subsecretaría de Desarrollo Social y Humano y la Dirección General de Atención al Migrante.",
+        "autoridades_enunciadas": "Secretaría de Desarrollo Social, Subsecretaría de Desarrollo Social y Humano y la Dirección General de Atención al Migrante.",
         "resultados": "Atención específica y directa con impacto sobre la calidad de vida de su público objetivo en su esfera de derechos.",
         "comentarios": "Tiene presupuesto asignado lo que lo fortalece, sin embargo depende de la coordinación de dos instituciones lo que puede burocratizar los procesos."
       },
@@ -555,7 +555,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Congreso Estatal, Secretaría de Desarrollo Social, la Subsecretaría de Desarrollo Social y Humano, así como de los clubes y federaciones de organizaciones de migrantes hidalguenses.",
+        "autoridades_enunciadas": "Congreso Estatal, Secretaría de Desarrollo Social, la Subsecretaría de Desarrollo Social y Humano, así como de los clubes y federaciones de organizaciones de migrantes hidalguenses.",
         "resultados": "Inclusión explícita de migrantes en normativa estatal",
         "comentarios": null
       },
@@ -598,7 +598,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Instituto de Atención y Protección a Migrantes, Consulado de EE.UU., clubes de migrantes",
+        "autoridades_enunciadas": "Instituto de Atención y Protección a Migrantes, Consulado de EE.UU., clubes de migrantes",
         "resultados": "228 personas beneficiadas entre 2018 y 2022; fortalecimiento de vínculos familiares",
         "comentarios": "Modelo replicable y de bajo costo; atiende población históricamente excluida de la reunificación"
       },
@@ -641,7 +641,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Dirección General de Registro Civil, Instituto de Atención y Protección a Migrantes",
+        "autoridades_enunciadas": "Dirección General de Registro Civil, Instituto de Atención y Protección a Migrantes",
         "resultados": "2,100 personas reconocidas con doble nacionalidad de 2015 a 2022, de las cuales 1,646 son menores de edad",
         "comentarios": "Replicable a nivel nacional, mejora el acceso a derechos"
       },
@@ -684,7 +684,7 @@
           "eficacia": 0
         },
         "anio_implementacion": null,
-        "actores_involucrados": "ICATEN, Instituto de Atención y Protección a Migrantes",
+        "autoridades_enunciadas": "ICATEN, Instituto de Atención y Protección a Migrantes",
         "resultados": "Opciones efectivas de reinserción social y laboral para migrantes retornados",
         "comentarios": "Buena práctica replicable con baja inversión; enfoque de empleabilidad y derechos"
       },
@@ -727,7 +727,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Instituto de Atención y Protección a Migrantes y sus Familias, Consejo Consultivo de Migración, asociaciones de migrantes",
+        "autoridades_enunciadas": "Instituto de Atención y Protección a Migrantes y sus Familias, Consejo Consultivo de Migración, asociaciones de migrantes",
         "resultados": "Programa realizado exitosamente en dos ocasiones, incentiva la participación comunitaria",
         "comentarios": "Modelo motivacional y participativo, fortalece identidad y comunidad migrante"
       },
@@ -770,7 +770,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Secretaría del Migrante y Enlace Internacional, municipios, Secretaría de Salud, OSC",
+        "autoridades_enunciadas": "Secretaría del Migrante y Enlace Internacional, municipios, Secretaría de Salud, OSC",
         "resultados": "Cobertura en varios municipios, atención a población migrante indígena, prevención de contagios y mejora en condiciones de salud",
         "comentarios": "Modelo replicable en crisis sanitaria y con pueblos indígenas migrantes"
       },
@@ -813,7 +813,7 @@
           "eficacia": 0
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Secretaría del Migrante y Enlace Internacional, clubes de migrantes, ayuntamientos, Consulado de EE.UU.",
+        "autoridades_enunciadas": "Secretaría del Migrante y Enlace Internacional, clubes de migrantes, ayuntamientos, Consulado de EE.UU.",
         "resultados": "Participación amplia de clubes y municipios; fortalecimiento de vínculos familiares y comunitarios",
         "comentarios": "Práctica consolidada, con reglas de operación y financiamiento asignado"
       },
@@ -856,7 +856,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Secretaría del Migrante y Enlace Internacional, Instituto de la Mujer, Instituto de Personas con Discapacidad, Congreso del Estado, OSC",
+        "autoridades_enunciadas": "Secretaría del Migrante y Enlace Internacional, Instituto de la Mujer, Instituto de Personas con Discapacidad, Congreso del Estado, OSC",
         "resultados": "Eliminación de barreras en acceso a programas; sensibilización y adaptación normativa; impacto positivo en la inclusión social",
         "comentarios": "Práctica innovadora, replicable en otros estados, fortalece derechos"
       },
@@ -899,7 +899,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Secretaría del Migrante y Enlace Internacional, Secretaría de Gobierno, Secretaría de Seguridad Pública, DIF estatal, Secretaría de Salud, Finanzas, Desarrollo Social, Procuraduría de Derechos Humanos, OSC",
+        "autoridades_enunciadas": "Secretaría del Migrante y Enlace Internacional, Secretaría de Gobierno, Secretaría de Seguridad Pública, DIF estatal, Secretaría de Salud, Finanzas, Desarrollo Social, Procuraduría de Derechos Humanos, OSC",
         "resultados": "Acciones coordinadas, atención humanitaria efectiva, protección de derechos en situaciones de emergencia migratoria",
         "comentarios": "Modelo replicable, fortalece gobernanza migratoria y respuesta a crisis"
       },
@@ -942,7 +942,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Secretaría de Igualdad de Género, DVV Internacional, OSC, SEPAMI, Pastoral Social, FOCA A.C., Secretaría del Bienestar",
+        "autoridades_enunciadas": "Secretaría de Igualdad de Género, DVV Internacional, OSC, SEPAMI, Pastoral Social, FOCA A.C., Secretaría del Bienestar",
         "resultados": "14 cursos (2021-2022), más de 140 personas migrantes beneficiadas, talleres infantiles paralelos",
         "comentarios": "Modelo replicable y flexible, con perspectiva de género e inclusión"
       },
@@ -985,7 +985,7 @@
           "eficacia": 0
         },
         "anio_implementacion": null,
-        "actores_involucrados": "DIF Chiapas, CNDH, DIF municipales",
+        "autoridades_enunciadas": "DIF Chiapas, CNDH, DIF municipales",
         "resultados": "Instrumento jurídico y operativo que previene violaciones de derechos y homogeniza criterios de atención",
         "comentarios": "Replicable en otros estados y sistemas DIF"
       },
@@ -1028,7 +1028,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "DIF Chiapas, delegaciones regionales, equipos multidisciplinarios",
+        "autoridades_enunciadas": "DIF Chiapas, delegaciones regionales, equipos multidisciplinarios",
         "resultados": "Más de 4,300 NNA migrantes atendidos entre enero-mayo 2023",
         "comentarios": "Modelo adaptable a otras entidades, promueve protección integral"
       },
@@ -1071,7 +1071,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Secretaría de Protección Civil, PNUD, instituciones estatales y federales",
+        "autoridades_enunciadas": "Secretaría de Protección Civil, PNUD, instituciones estatales y federales",
         "resultados": "Secretaría certificada, acciones de atención en múltiples crisis, herramientas y lecciones aprendidas documentadas",
         "comentarios": "Modelo replicable; fortalece capacidades estatales en contexto de movilidad"
       },
@@ -1114,7 +1114,7 @@
           "eficacia": 1
         },
         "anio_implementacion": null,
-        "actores_involucrados": "Secretaría de Educación Pública, Secretaría de Bienestar, DIF Chiapas, sector privado",
+        "autoridades_enunciadas": "Secretaría de Educación Pública, Secretaría de Bienestar, DIF Chiapas, sector privado",
         "resultados": "Más de 645 NNA migrantes atendidos y 288 certificados de primaria otorgados (2021)",
         "comentarios": null
       }

@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
@@ -14,7 +14,6 @@ import { forkJoin, lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import html2pdf from 'html2pdf.js';
 
-
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -22,6 +21,8 @@ import html2pdf from 'html2pdf.js';
   standalone: false,
 })
 export class MapComponent implements OnInit  {
+   @ViewChild('mapaYmatriz') mapaYmatriz!: ElementRef;
+   public mapaAnimado = false;
   private map!: Map;
   private mapView!: View;
   mostrarFiltrosYMapa = false;
@@ -168,6 +169,12 @@ onFilteredStatesChanged(filteredStates: string[]) {
 
 public hacerZoomAMexico(): void {
   this.mostrarFiltrosYMapa = true;
+
+  // Reinicia la animación por si ya se había activado antes
+  this.mapaAnimado = false;
+  setTimeout(() => this.mapaAnimado = true, 50); // delay mínimo para reiniciar
+
+  // Zoom al mapa
   if (this.map) {
     const mexicoCenter = fromLonLat([-102.0, 23.8]);
 
@@ -177,7 +184,17 @@ public hacerZoomAMexico(): void {
       duration: 1000
     });
   }
+
+  // Scroll casi al mismo tiempo que el zoom
+ setTimeout(() => {
+  const offset = 100; // distancia desde el top (ajústalo a tu gusto)
+  const y = this.mapaYmatriz.nativeElement.getBoundingClientRect().top + window.scrollY - offset;
+
+  window.scrollTo({ top: y, behavior: 'smooth' });
+}, 300);
+
 }
+
 
   private initializeMap(): void {
     // 1. Configuración del visor centrado en México
@@ -188,13 +205,10 @@ public hacerZoomAMexico(): void {
   maxZoom: 10
 });
 
-
     // 2. Capa base
     const baseLayer = new TileLayer({
       source: new OSM()
     });
-
-   
 
     // Estilo para selección
     const selectedText = new Text({
@@ -293,7 +307,6 @@ public hacerZoomAMexico(): void {
   });
 
   this.map.addInteraction(select);
-
 
     // 6. Interacción hover opcional
     const hoverSelect = new Select({

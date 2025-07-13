@@ -10,15 +10,15 @@
         "resumen": "Centro de atención integral junto a COMAR que brinda información, orientación legal y canalización, con participación de la CEDH, OIM y organizaciones civiles especializadas en población migrante.",
         "naturaleza_politica_publica": "Creación de instituciones",
         "categoria": "7. Buenas prácticas en la transversalización de servicios para la atención a personas en situación de migración (acceso a la identidad; salud; educación; seguridad; etc.)",
-        "subcategoria": "7.3 Garantizar el derecho a la identidad y la obtención de documentos",
+        "subcategoria": "7.3 Garantizar el derecho a la identidad y la obtención de documentos, 2.2 Mecanismos para garantizar el acceso a la información sobre programas, políticas y servicios",
         "tema_covid": 1,
         "buena_practica_vigente": 1,
         "poblacion_objetivo": {
-          "retornados": 0,
+          "retornados": 1,
           "transito": 1,
           "mexicanos_extranjero": 0,
           "refugiados_asilados": 1,
-          "migracion_destino": 0,
+          "migracion_destino": 1,
           "migracion_interna": 0,
           "poblacion_no_migrante": 1,
           "personas_desplazadas": 0
@@ -32,14 +32,19 @@
           "lgbtiq": 0
         },
         "criterios_buenas_practicas": {
-          "sostenibilidad": 1,
+          "sostenibilidad": 0,
           "asociacion": 1,
           "innovacion": 1,
           "replicabilidad": 1,
           "eficacia": 1
         },
-        "anio_implementacion": "N/A",
+        "anio_implementacion": "2022",
         "autoridades_enunciadas": "OIM, CEDH, OSC, COMAR, Gobierno Estatal",
+         "tipos_actores": [
+         "En colaboración con organismos internacionales",
+         "En colaboración con autoridades federales",
+         "En colaboración con OSC"
+         ],
         "resultados": "Acercamiento coordinado de servicios, resultados positivos en atención, modelo replicable, beneficio directo en el acceso a derechos y servicios",
         "comentarios": "Modelo articulador, requiere voluntad institucional y espacio físico para su réplica, permite la coordinación entre instituciones y OSC; modelo replicable en otros estados."
       },
@@ -81,8 +86,15 @@
           "replicabilidad": 1,
           "eficacia": 1
         },
-        "anio_implementacion": null,
+        "anio_implementacion": 2022,
         "autoridades_enunciadas": "Subsecretaría de Gobierno, Secretaría del Trabajo, Derechos Humanos, INM, OIM, CEDH, Protección Civil, OSC, Cruz Roja, albergues",
+        "tipos_actores": [
+          "En colaboración con organismos internacionales",
+          "En colaboración con autoridades federales",
+          "En colaboración con OSC",
+          "En colaboración con albergues",
+          "En colaboración con organizaciones religiosas"
+        ],
         "resultados": "Siete sesiones de la mesa general y dos de la mesa especial para protocolos; acuerdos interinstitucionales.",
         "comentarios": "Requiere secretaría técnica y compromiso de actores; modelo replicable"
       },
@@ -94,7 +106,7 @@
         "numero": 3,
         "buena_practica": "Vinculación entre albergues, estancias infantiles y escuelas",
         "resumen": "Vinculación entre albergues, estancias infantiles y escuelas, para garantizar el acceso a la educación de NNA migrantes y refugiados",
-        "naturaleza_politica_publica": "Fortalecimiento de instituciones ya existentes",
+        "naturaleza_politica_publica": "Programas públicos",
         "categoria": "7. Buenas prácticas en la transversalización de servicios para la atención a personas en situación de migración (acceso a la identidad; salud; educación; seguridad; etc.)",
         "subcategoria": "7.2 Acceso a la educación",
         "tema_covid": 0,
@@ -118,14 +130,19 @@
           "lgbtiq": 0
         },
         "criterios_buenas_practicas": {
-          "sostenibilidad": 0,
+          "sostenibilidad": 1,
           "asociacion": 1,
           "innovacion": 1,
           "replicabilidad": 1,
           "eficacia": 1
         },
-        "anio_implementacion": null,
+        "anio_implementacion": 2022,
         "autoridades_enunciadas": "Secretaría de Educación, Igualdad e Inclusión, DIF, OSC",
+        "tipos_actores": [
+          "En colaboración con OSC",
+          "En colaboración con autoridades municipales",
+          "Autoridades del sector educación"
+        ],
         "resultados": "80 estancias infantiles reciben NNA migrantes; 36 NNA incorporados en escuelas en visitas recientes",
         "comentarios": "Modelo replicable, enfoque comunitario, fortalece integración social"
       },
@@ -139,7 +156,7 @@
         "resumen": "Feria mensual de emprendimiento, empoderamiento y capacitación, ubicada en un espacio público y céntrico. Abierta a migrantes, refugiados, indígenas, personas privadas de la libertad y con discapacidad, con enfoque participativo y cultural.",
         "naturaleza_politica_publica": "Programas públicos",
         "categoria": "9. Buenas prácticas en la transversalización de programas y acciones que fomentan el empleo y autoempleo a personas en situación de migración",
-        "subcategoria": "9.1 Apoyos económicos para proyectos de autoempleo",
+        "subcategoria": "9.2. Estrategias para difundir emprendimientos de personas en situación de migración",
         "tema_covid": 1,
         "buena_practica_vigente": 1,
         "poblacion_objetivo": {
@@ -154,7 +171,7 @@
         },
         "condicion_vulnerabilidad": {
           "nna": 0,
-          "mujeres": 0,
+          "mujeres": 1,
           "personas_mayores": 0,
           "pueblos_originarios": 1,
           "personas_discapacidad": 0,
@@ -167,8 +184,12 @@
           "replicabilidad": 1,
           "eficacia": 1
         },
-        "anio_implementacion": null,
+        "anio_implementacion": 2022,
         "autoridades_enunciadas": "Secretaría de Igualdad e Inclusión, organizaciones civiles, participantes de grupos prioritarios",
+        "tipos_actores": [
+           "En colaboración con OSC",
+           "Autoridades que atienden agendas de protección a derechos humanos"
+         ],
         "resultados": "7 emisiones, impulso económico y cultural",
         "comentarios": "Adaptable a múltiples contextos; modelo de inclusión sociolaboral"
       },
@@ -210,8 +231,13 @@
           "replicabilidad": 1,
           "eficacia": 1
         },
-        "anio_implementacion": null,
+        "anio_implementacion": 2022,
         "autoridades_enunciadas": "Secretaría de Salud, Igualdad e Inclusión, albergues, OSC",
+        "tipos_actores": [
+           "En colaboración con OSC",
+           "En colaboración con albergues",
+           "Autoridades que atienden agendas de protección a derechos humanos"
+         ],
         "resultados": "Seis clínicas vinculadas a albergues; cobertura y acceso efectivo; atención a COVID-19",
         "comentarios": "Práctica adaptable a otras entidades, fortalece derecho a la salud"
       },
@@ -223,7 +249,7 @@
         "numero": 6,
         "buena_practica": "Reconocimiento del desplazamiento forzado interno en la legislación de atención a víctimas",
         "resumen": "La Ley de Víctimas estatal reconoce expresamente el desplazamiento forzado interno como categoría de vulnerabilidad, base jurídica para la atención.",
-        "naturaleza_politica_publica": "creación o reformas a leyes o reglamentos",
+        "naturaleza_politica_publica": "Creación o reformas a leyes o reglamentos",
         "categoria": "1. Buenas prácticas en la creación o reforma las legislaciones locales y/o sus reglamentos",
         "subcategoria": "1.1 Leyes y reglamentos que facultan y regulan la participación de las instituciones del estado en la atención a la población en situación de migración",
         "tema_covid": 0,
@@ -236,7 +262,7 @@
           "migracion_destino": 0,
           "migracion_interna": 0,
           "poblacion_no_migrante": 1,
-          "personas_desplazadas": 0
+          "personas_desplazadas": 1
         },
         "condicion_vulnerabilidad": {
           "nna": 1,
@@ -253,8 +279,13 @@
           "replicabilidad": 1,
           "eficacia": 0
         },
-        "anio_implementacion": null,
+        "anio_implementacion": 2022,
         "autoridades_enunciadas": "Congreso Estatal, instituciones de atención a víctimas, OSC",
+        "tipos_actores": [
+           "Autoridades legislativas",
+           "En colaboración con OSC",
+           "Autoridades que atienden agendas de protección a derechos humanos"
+         ],
         "resultados": "Inclusión explícita en la ley; referente innovador a nivel nacional",
         "comentarios": null
       },
@@ -296,8 +327,14 @@
           "replicabilidad": 1,
           "eficacia": 1
         },
-        "anio_implementacion": null,
+        "anio_implementacion": 2018,
         "autoridades_enunciadas": "DIF estatal, INM, consulados (Guatemala, El Salvador, Honduras), Save the Children, ACNUR, OIM, PPNNA federal",
+        "tipos_actores": [
+          "En colaboración con autoridades federales",
+          "En colaboración con organismos internacionales",
+          "En colaboración con representaciones consulares",
+          "Autoridades que atienden agendas de protección a derechos humanos"
+        ],
         "resultados": "De 2021 a 2022, 518 NNA no acompañados y 2,313 personas en núcleos familiares atendidas; el 90% de los beneficiarios son adolescentes, 85% hombres.",
         "comentarios": "Modelo sencillo, efectivo, con presupuesto propio y alianzas estratégicas, puede replicarse en otras entidades."
       },
@@ -315,11 +352,11 @@
         "tema_covid": 1,
         "buena_practica_vigente": 0,
         "poblacion_objetivo": {
-          "retornados": 0,
-          "transito": 0,
+          "retornados": 1,
+          "transito": 1,
           "mexicanos_extranjero": 0,
           "refugiados_asilados": 0,
-          "migracion_destino": 0,
+          "migracion_destino": 1,
           "migracion_interna": 0,
           "poblacion_no_migrante": 0,
           "personas_desplazadas": 0
@@ -339,8 +376,14 @@
           "replicabilidad": 0,
           "eficacia": 1
         },
-        "anio_implementacion": null,
+        "anio_implementacion": 2022,
         "autoridades_enunciadas": "Gobernador, Secretarios estatales, presidentes municipales, sociedad civil, INM, GN, OSC, instituciones educativas",
+        "tipos_actores": [
+          "En colaboración con autoridades municipales",
+          "En colaboración con OSC",
+          "En colaboración con autoridades federales",
+          "Autoridades del sector educación"
+        ],
         "resultados": "Implementación de líneas estratégicas, directorio de programas, módulos de atención, fondo de apoyo, fortalecimiento de Grupos Beta.",
         "comentarios": "Institucionalizado en ley y reglamento; articulador clave de política migratoria estatal."
       },
@@ -382,8 +425,13 @@
           "replicabilidad": 1,
           "eficacia": 1
         },
-        "anio_implementacion": null,
+        "anio_implementacion": 2018,
         "autoridades_enunciadas": "Fundación KIND, comisión de búsqueda, DIF Sonora, autoridades de EE.UU., PPNNA",
+        "tipos_actores": [
+          "En colaboración con organismos internacionales",
+          "En colaboración con autoridades federales",
+          "Autoridades que atienden agendas de protección a derechos humanos"
+        ],
         "resultados": "Reunificaciones familiares exitosas, mejora de la calidad de vida de NNA migrantes, modelo replicable en otras entidades.",
         "comentarios": "Surge de una fundamentación clara y es fácilmente replicable en otros estados fronterizos."
       },
@@ -401,7 +449,7 @@
         "tema_covid": 1,
         "buena_practica_vigente": 1,
         "poblacion_objetivo": {
-          "retornados": 0,
+          "retornados": 1,
           "transito": 1,
           "mexicanos_extranjero": 0,
           "refugiados_asilados": 1,
@@ -425,8 +473,12 @@
           "replicabilidad": 1,
           "eficacia": 1
         },
-        "anio_implementacion": null,
+        "anio_implementacion": 2023,
         "autoridades_enunciadas": "Dirección de Atención a Migrantes, enlaces municipales, autoridades municipales, OSC",
+        "tipos_actores": [
+          "En colaboración con autoridades municipales",
+          "Autoridades que atienden agendas de protección a derechos humanos"
+        ],
         "resultados": "Cobertura del 92% de municipios, atención descentralizada, modelo replicable y sostenible",
         "comentarios": "Estrategia de bajo costo, fortalece red institucional y corresponsabilidad local"
       },
@@ -449,8 +501,8 @@
           "mexicanos_extranjero": 0,
           "refugiados_asilados": 0,
           "migracion_destino": 0,
-          "migracion_interna": 1,
-          "poblacion_no_migrante": 0,
+          "migracion_interna": 0,
+          "poblacion_no_migrante": 1,
           "personas_desplazadas": 0
         },
         "condicion_vulnerabilidad": {
@@ -468,8 +520,12 @@
           "replicabilidad": 1,
           "eficacia": 1
         },
-        "anio_implementacion": null,
+        "anio_implementacion": 2022,
         "autoridades_enunciadas": "Dirección de Atención a Migrantes, gobierno estatal, enlaces municipales.",
+        "tipos_actores": [
+          "En colaboración con autoridades municipales",
+          "Autoridades Estatales"
+        ],
         "resultados": "Reunificación familiar con atención directa y personalizada",
         "comentarios": "Facilita reunificación familiar, apoya acceso a derechos básicos, mayor área de oportunidad es la fragilidad ante los cambios de política migratoria."
       },
@@ -489,7 +545,7 @@
         "poblacion_objetivo": {
           "retornados": 1,
           "transito": 0,
-          "mexicanos_extranjero": 0,
+          "mexicanos_extranjero": 1,
           "refugiados_asilados": 0,
           "migracion_destino": 0,
           "migracion_interna": 0,
@@ -511,8 +567,12 @@
           "replicabilidad": 1,
           "eficacia": 1
         },
-        "anio_implementacion": null,
+        "anio_implementacion": 2023,
         "autoridades_enunciadas": "Secretaría de Desarrollo Social, Subsecretaría de Desarrollo Social y Humano y la Dirección General de Atención al Migrante.",
+        "tipos_actores": [
+          "Autoridades Estatales",
+          "Autoridades del sector económico"
+        ],
         "resultados": "Atención específica y directa con impacto sobre la calidad de vida de su público objetivo en su esfera de derechos.",
         "comentarios": "Tiene presupuesto asignado lo que lo fortalece, sin embargo depende de la coordinación de dos instituciones lo que puede burocratizar los procesos."
       },
@@ -532,9 +592,9 @@
         "poblacion_objetivo": {
           "retornados": 1,
           "transito": 1,
-          "mexicanos_extranjero": 0,
-          "refugiados_asilados": 1,
-          "migracion_destino": 0,
+          "mexicanos_extranjero": 1,
+          "refugiados_asilados": 0,
+          "migracion_destino": 1,
           "migracion_interna": 1,
           "poblacion_no_migrante": 0,
           "personas_desplazadas": 1
@@ -554,569 +614,689 @@
           "replicabilidad": 1,
           "eficacia": 1
         },
-        "anio_implementacion": null,
+        "anio_implementacion": 2020,
         "autoridades_enunciadas": "Congreso Estatal, Secretaría de Desarrollo Social, la Subsecretaría de Desarrollo Social y Humano, así como de los clubes y federaciones de organizaciones de migrantes hidalguenses.",
+        "tipos_actores": [
+          "Autoridades Estatales",
+          "En colaboración con colectivos de personas en contexto de movilidad",
+          "Autoridades del sector económico"
+        ],
         "resultados": "Inclusión explícita de migrantes en normativa estatal",
         "comentarios": null
       },
       {
-        "volumen": 2,
-        "region": "Occidente",
-        "estado": "Nayarit",
-        "estados_fronterizos": "No aplica",
-        "numero": 2,
-        "buena_practica": "Programa de reunificación familiar: “Uniendo Corazones Nayaritas”",
-        "resumen": "Facilita la reunificación temporal de adultos mayores nayaritas con hijos en EE.UU.; gobierno cubre transporte nacional y trámites, beneficiario cubre vuelos internacionales y cita consular.",
-        "naturaleza_politica_publica": "Programas públicos",
-        "categoria": "13. Buenas prácticas en procesos de reunificación familiar",
-        "subcategoria": "13.1. Reunificación familiar temporal",
-        "tema_covid": 0,
-        "buena_practica_vigente": 0,
-        "poblacion_objetivo": {
-          "retornados": 0,
-          "transito": 0,
-          "mexicanos_extranjero": 1,
-          "refugiados_asilados": 0,
-          "migracion_destino": 0,
-          "migracion_interna": 0,
-          "poblacion_no_migrante": 0,
-          "personas_desplazadas": 0
-        },
-        "condicion_vulnerabilidad": {
-          "nna": 0,
-          "mujeres": 0,
-          "personas_mayores": 1,
-          "pueblos_originarios": 0,
-          "personas_discapacidad": 0,
-          "lgbtiq": 0
-        },
-        "criterios_buenas_practicas": {
-          "sostenibilidad": 0,
-          "asociacion": 1,
-          "innovacion": 1,
-          "replicabilidad": 1,
-          "eficacia": 1
-        },
-        "anio_implementacion": null,
-        "autoridades_enunciadas": "Instituto de Atención y Protección a Migrantes, Consulado de EE.UU., clubes de migrantes",
-        "resultados": "228 personas beneficiadas entre 2018 y 2022; fortalecimiento de vínculos familiares",
-        "comentarios": "Modelo replicable y de bajo costo; atiende población históricamente excluida de la reunificación"
-      },
+     "volumen": 2,
+     "region": "Occidente",
+     "estado": "Nayarit",
+     "estados_fronterizos": "No aplica",
+     "numero": 1,
+     "buena_practica": "Atención a mujeres en contextos de movilidad en vinculación con el Instituto para la Mujer Nayarita",
+     "resumen": "Identificación de necesidades y canalización de mujeres migrantes a programas estatales, articulando la atención entre diversas dependencias para asegurar atención técnica y especializada en un marco de derechos.",
+     "naturaleza_politica_publica": "Creación de comités o espacios de vinculación interinstitucional",
+     "categoria": "4. Buenas prácticas en el establecimiento de mecanismos de vinculación interinstitucional así como de mecanismos que involucren a la sociedad civil y otros sectores",
+     "subcategoria": "4.3 Mecanismos para articular los gobiernos municipales y los estatales en acciones específicas para la atención a personas en situación de migración",
+     "tema_covid": 1,
+     "buena_practica_vigente": 1,
+     "poblacion_objetivo": {
+       "retornados": 0,
+       "transito": 1,
+       "mexicanos_extranjero": 0,
+       "refugiados_asilados": 1,
+       "migracion_destino": 0,
+       "migracion_interna": 1,
+       "poblacion_no_migrante": 0,
+       "personas_desplazadas": 1
+     },
+     "condicion_vulnerabilidad": {
+       "nna": 0,
+       "mujeres": 1,
+       "personas_mayores": 0,
+       "pueblos_originarios": 0,
+       "personas_discapacidad": 1,
+       "lgbtiq": 0
+     },
+     "criterios_buenas_practicas": {
+       "sostenibilidad": 0,
+       "asociacion": 1,
+       "innovacion": 0,
+       "replicabilidad": 1,
+       "eficacia": 1
+     },
+     "anio_implementacion": 2024,
+     "autoridades_enunciadas": "Instituto para la Mujer Nayarita, Secretaría General de Gobierno, Salud, Educación, Trabajo, Desarrollo Social, Turismo, DIF, Fiscalía, Pueblos Indígenas, Consejo Estatal de Población, Ayuntamientos",
+     "tipos_actores": [
+      "Autoridades Estatales",
+      "Autoridades que atienden agendas de protección a derechos humanos",
+      "En colaboración con autoridades municipales",
+      "Autoridades del sector económico"
+    ],
+     "resultados": "Atención y vinculación efectiva de mujeres migrantes vulnerables a diversos servicios públicos; fortalecimiento de redes de protección",
+     "comentarios": "Mecanismo replicable, promueve la transversalidad institucional y enfoque de género"
+   },
+   {
+     "volumen": 2,
+     "region": "Occidente",
+     "estado": "Nayarit",
+     "estados_fronterizos": "No aplica",
+     "numero": 2,
+     "buena_practica": "Programa de reunificación familiar: \"Uniendo Corazones Nayaritas\"",
+     "resumen": "Facilita la reunificación temporal de adultos mayores nayaritas con hijos en EE.UU.; gobierno cubre transporte nacional y trámites, beneficiario cubre vuelos internacionales y cita consular.",
+     "naturaleza_politica_publica": "Programas públicos",
+     "categoria": "13. Buenas prácticas en procesos de reunificación familiar",
+     "subcategoria": "13.1. Reunificación familiar temporal",
+     "tema_covid": 0,
+     "buena_practica_vigente": 0,
+     "poblacion_objetivo": {
+       "retornados": 0,
+       "transito": 0,
+       "mexicanos_extranjero": 1,
+       "refugiados_asilados": 0,
+       "migracion_destino": 0,
+       "migracion_interna": 0,
+       "poblacion_no_migrante": 0,
+       "personas_desplazadas": 0
+     },
+     "condicion_vulnerabilidad": {
+       "nna": 0,
+       "mujeres": 0,
+       "personas_mayores": 1,
+       "pueblos_originarios": 0,
+       "personas_discapacidad": 0,
+       "lgbtiq": 0
+     },
+     "criterios_buenas_practicas": {
+       "sostenibilidad": 0,
+       "asociacion": 1,
+       "innovacion": 1,
+       "replicabilidad": 1,
+       "eficacia": 1
+     },
+     "anio_implementacion": 2021,
+     "autoridades_enunciadas": "Instituto de Atención y Protección a Migrantes, Consulado de EE.UU., clubes de migrantes",
+     "tipos_actores": [
+      "En colaboración con colectivos de personas en contexto de movilidad",
+      "En colaboración con representaciones consulares",
+      "Autoridades que atienden agendas de protección a derechos humanos"
+    ],
+     "resultados": "228 personas beneficiadas entre 2018 y 2022; fortalecimiento de vínculos familiares",
+     "comentarios": "Modelo replicable y de bajo costo; atiende población históricamente excluida de la reunificación"
+   },
+   {
+     "volumen": 2,
+     "region": "Occidente",
+     "estado": "Nayarit",
+     "estados_fronterizos": "No aplica",
+     "numero": 3,
+     "buena_practica": "Políticas estatales de acceso al derecho de identidad de personas en contextos de movilidad humana (Registro Civil)",
+     "resumen": "Facilitación del acceso a identidad mediante emisión y corrección de documentos para migrantes y sus familias, con enlace del Registro Civil ubicado en el mismo edificio de atención a migrantes; apoyado por legislación local.",
+     "naturaleza_politica_publica": "Fortalecimiento de instituciones ya existentes",
+     "categoria": "7. Buenas prácticas en la transversalización de servicios para la atención a personas en situación de migración (acceso a la identidad; salud; educación; seguridad; etc.)",
+     "subcategoria": "7.3 Garantizar el derecho a la identidad y la obtención de documentos",
+     "tema_covid": 1,
+     "buena_practica_vigente": 0,
+     "poblacion_objetivo": {
+       "retornados": 1,
+       "transito": 0,
+       "mexicanos_extranjero": 1,
+       "refugiados_asilados": 0,
+       "migracion_destino": 0,
+       "migracion_interna": 0,
+       "poblacion_no_migrante": 0,
+       "personas_desplazadas": 0
+     },
+     "condicion_vulnerabilidad": {
+       "nna": 1,
+       "mujeres": 0,
+       "personas_mayores": 0,
+       "pueblos_originarios": 0,
+       "personas_discapacidad": 0,
+       "lgbtiq": 0
+     },
+     "criterios_buenas_practicas": {
+       "sostenibilidad": 1,
+       "asociacion": 1,
+       "innovacion": 0,
+       "replicabilidad": 1,
+       "eficacia": 1
+     },
+     "anio_implementacion": 2019,
+     "autoridades_enunciadas": "Dirección General de Registro Civil, Instituto de Atención y Protección a Migrantes",
+     "tipos_actores": [
+      "Autoridades registrales",
+      "Autoridades que atienden agendas de protección a derechos humanos"
+    ],
+     "resultados": "2,100 personas reconocidas con doble nacionalidad de 2015 a 2022, de las cuales 1,646 son menores de edad",
+     "comentarios": "Replicable a nivel nacional, mejora el acceso a derechos"
+   },
+   {
+     "volumen": 2,
+     "region": "Occidente",
+     "estado": "Nayarit",
+     "estados_fronterizos": "No aplica",
+     "numero": 4,
+     "buena_practica": "Políticas estatales de acceso a empleos dignos y/o esquemas de autoempleo de personas en contextos de movilidad humana: Convenio con ICATEN",
+     "resumen": "Convenio con ICATEN para cursos de capacitación y reinserción laboral de migrantes retornados, en áreas como electricidad, administración, turismo, artesanías, bienestar, entre otras.",
+     "naturaleza_politica_publica": "Programas públicos",
+     "categoria": "4. Buenas prácticas en el establecimiento de mecanismos de vinculación interinstitucional así como de mecanismos que involucren a la sociedad civil y otros sectores",
+     "subcategoria": "4.3 Mecanismos para articular los gobiernos municipales y los estatales en acciones específicas para la atención a personas en situación de migración",
+     "tema_covid": 1,
+     "buena_practica_vigente": 0,
+     "poblacion_objetivo": {
+       "retornados": 1,
+       "transito": 0,
+       "mexicanos_extranjero": 0,
+       "refugiados_asilados": 0,
+       "migracion_destino": 0,
+       "migracion_interna": 0,
+       "poblacion_no_migrante": 0,
+       "personas_desplazadas": 0
+     },
+     "condicion_vulnerabilidad": {
+       "nna": 0,
+       "mujeres": 0,
+       "personas_mayores": 0,
+       "pueblos_originarios": 0,
+       "personas_discapacidad": 0,
+       "lgbtiq": 0
+     },
+     "criterios_buenas_practicas": {
+       "sostenibilidad": 1,
+       "asociacion": 1,
+       "innovacion": 1,
+       "replicabilidad": 0,
+       "eficacia": 0
+     },
+     "anio_implementacion": 2024,
+     "autoridades_enunciadas": "ICATEN, Instituto de Atención y Protección a Migrantes",
+    "tipos_actores": [
+      "Autoridades Estatales",
+      "Autoridades que atienden agendas de protección a derechos humanos"
+    ],
+     "resultados": "Opciones efectivas de reinserción social y laboral para migrantes retornados",
+     "comentarios": "Buena práctica replicable con baja inversión; enfoque de empleabilidad y derechos"
+   },
+   {
+     "volumen": 2,
+     "region": "Occidente",
+     "estado": "Nayarit",
+     "estados_fronterizos": "No aplica",
+     "numero": 5,
+     "buena_practica": "Premio estatal a migrante Nayarita \"Ernesto Galarza\"",
+     "resumen": "Reconocimiento anual a personas o asociaciones de migrantes nayaritas que contribuyen al desarrollo del estado, la unidad familiar, cultura, turismo, identidad y derechos humanos; postulación mediante convocatoria y dictaminación por el Consejo Consultivo de Migración.",
+     "naturaleza_politica_publica": "Programas públicos",
+     "categoria": "4. Buenas prácticas en el establecimiento de mecanismos de vinculación interinstitucional así como de mecanismos que involucren a la sociedad civil y otros sectores",
+     "subcategoria": "4.2 Consejos consultivos",
+     "tema_covid": 1,
+     "buena_practica_vigente": 0,
+     "poblacion_objetivo": {
+       "retornados": 1,
+       "transito": 0,
+       "mexicanos_extranjero": 1,
+       "refugiados_asilados": 0,
+       "migracion_destino": 0,
+       "migracion_interna": 0,
+       "poblacion_no_migrante": 0,
+       "personas_desplazadas": 0
+     },
+     "condicion_vulnerabilidad": {
+       "nna": 0,
+       "mujeres": 0,
+       "personas_mayores": 0,
+       "pueblos_originarios": 0,
+       "personas_discapacidad": 0,
+       "lgbtiq": 0
+     },
+     "criterios_buenas_practicas": {
+       "sostenibilidad": 1,
+       "asociacion": 1,
+       "innovacion": 1,
+       "replicabilidad": 1,
+       "eficacia": 1
+     },
+     "anio_implementacion": 2019,
+     "autoridades_enunciadas": "Instituto de Atención y Protección a Migrantes y sus Familias, Consejo Consultivo de Migración, asociaciones de migrantes",
+     "tipos_actores": [
+      "Autoridades Estatales",
+      "Autoridades que atienden agendas de protección a derechos humanos",
+      "En colaboración con colectivos de personas en contexto de movilidad"
+    ],
+     "resultados": "Programa realizado exitosamente en dos ocasiones, incentiva la participación comunitaria",
+     "comentarios": "Modelo motivacional y participativo, fortalece identidad y comunidad migrante"
+   },
+   {
+     "volumen": 2,
+     "region": "Centro",
+     "estado": "Guanajuato",
+     "estados_fronterizos": "No aplica",
+     "numero": 1,
+     "buena_practica": "Operativo Jornaleros Agrícolas Indígenas Migrantes",
+     "resumen": "Programa estatal para la atención integral y asistencia humanitaria en salud y prevención de COVID-19 a jornaleros agrícolas migrantes indígenas y sus familias, con entrega de kits de higiene y acciones de promoción de salud en municipios de alta presencia migrante.",
+     "naturaleza_politica_publica": "Programas públicos",
+     "categoria": "7. Buenas prácticas en la transversalización de servicios para la atención a personas en situación de migración (acceso a la identidad; salud; educación; seguridad; etc.)",
+     "subcategoria": "7.1 Acceso a los servicios de salud",
+     "tema_covid": 1,
+     "buena_practica_vigente": 0,
+     "poblacion_objetivo": {
+       "retornados": 0,
+       "transito": 0,
+       "mexicanos_extranjero": 0,
+       "refugiados_asilados": 0,
+       "migracion_destino": 0,
+       "migracion_interna": 1,
+       "poblacion_no_migrante": 0,
+       "personas_desplazadas": 0
+     },
+     "condicion_vulnerabilidad": {
+       "nna": 0,
+       "mujeres": 0,
+       "personas_mayores": 0,
+       "pueblos_originarios": 1,
+       "personas_discapacidad": 0,
+       "lgbtiq": 0
+     },
+     "criterios_buenas_practicas": {
+       "sostenibilidad": 1,
+       "asociacion": 1,
+       "innovacion": 0,
+       "replicabilidad": 1,
+       "eficacia": 1
+     },
+     "anio_implementacion": 2021,
+     "autoridades_enunciadas": "Secretaría del Migrante y Enlace Internacional, municipios, Secretaría de Salud, OSC",
+     "tipos_actores": [
+      "En colaboración con OSC",
+      "En colaboración con autoridades municipales",
+      "Autoridades Estatales"
+    ],
+     "resultados": "Cobertura en varios municipios, atención a población migrante indígena, prevención de contagios y mejora en condiciones de salud",
+     "comentarios": "Modelo replicable en crisis sanitaria y con pueblos indígenas migrantes"
+   },
       {
-        "volumen": 2,
-        "region": "Occidente",
-        "estado": "Nayarit",
-        "estados_fronterizos": "No aplica",
-        "numero": 3,
-        "buena_practica": "Políticas estatales de acceso al derecho de identidad de personas en contextos de movilidad humana (Registro Civil)",
-        "resumen": "Facilitación del acceso a identidad mediante emisión y corrección de documentos para migrantes y sus familias, con enlace del Registro Civil ubicado en el mismo edificio de atención a migrantes; apoyado por legislación local.",
-        "naturaleza_politica_publica": "Fortalecimiento de instituciones ya existentes",
-        "categoria": "7. Buenas prácticas en la transversalización de servicios para la atención a personas en situación de migración (acceso a la identidad; salud; educación; seguridad; etc.)",
-        "subcategoria": "7.3 Garantizar el derecho a la identidad y la obtención de documentos",
-        "tema_covid": 1,
-        "buena_practica_vigente": 0,
-        "poblacion_objetivo": {
-          "retornados": 1,
-          "transito": 0,
-          "mexicanos_extranjero": 0,
-          "refugiados_asilados": 0,
-          "migracion_destino": 0,
-          "migracion_interna": 0,
-          "poblacion_no_migrante": 0,
-          "personas_desplazadas": 0
-        },
-        "condicion_vulnerabilidad": {
-          "nna": 1,
-          "mujeres": 0,
-          "personas_mayores": 0,
-          "pueblos_originarios": 0,
-          "personas_discapacidad": 0,
-          "lgbtiq": 0
-        },
-        "criterios_buenas_practicas": {
-          "sostenibilidad": 1,
-          "asociacion": 1,
-          "innovacion": 0,
-          "replicabilidad": 1,
-          "eficacia": 1
-        },
-        "anio_implementacion": null,
-        "autoridades_enunciadas": "Dirección General de Registro Civil, Instituto de Atención y Protección a Migrantes",
-        "resultados": "2,100 personas reconocidas con doble nacionalidad de 2015 a 2022, de las cuales 1,646 son menores de edad",
-        "comentarios": "Replicable a nivel nacional, mejora el acceso a derechos"
-      },
-      {
-        "volumen": 2,
-        "region": "Occidente",
-        "estado": "Nayarit",
-        "estados_fronterizos": "No aplica",
-        "numero": 4,
-        "buena_practica": "Políticas estatales de acceso a empleos dignos y/o esquemas de autoempleo de personas en contextos de movilidad humana: Convenio con ICATEN",
-        "resumen": "Convenio con ICATEN para cursos de capacitación y reinserción laboral de migrantes retornados, en áreas como electricidad, administración, turismo, artesanías, bienestar, entre otras.",
-        "naturaleza_politica_publica": "Programas públicos",
-        "categoria": "4. Buenas prácticas en el establecimiento de mecanismos de vinculación interinstitucional así como de mecanismos que involucren a la sociedad civil y otros sectores",
-        "subcategoria": "4.3 Mecanismos para articular los gobiernos municipales y los estatales en acciones específicas para la atención a personas en situación de migración",
-        "tema_covid": 1,
-        "buena_practica_vigente": 0,
-        "poblacion_objetivo": {
-          "retornados": 1,
-          "transito": 0,
-          "mexicanos_extranjero": 0,
-          "refugiados_asilados": 0,
-          "migracion_destino": 0,
-          "migracion_interna": 0,
-          "poblacion_no_migrante": 0,
-          "personas_desplazadas": 0
-        },
-        "condicion_vulnerabilidad": {
-          "nna": 0,
-          "mujeres": 0,
-          "personas_mayores": 0,
-          "pueblos_originarios": 0,
-          "personas_discapacidad": 0,
-          "lgbtiq": 0
-        },
-        "criterios_buenas_practicas": {
-          "sostenibilidad": 1,
-          "asociacion": 1,
-          "innovacion": 1,
-          "replicabilidad": 0,
-          "eficacia": 0
-        },
-        "anio_implementacion": null,
-        "autoridades_enunciadas": "ICATEN, Instituto de Atención y Protección a Migrantes",
-        "resultados": "Opciones efectivas de reinserción social y laboral para migrantes retornados",
-        "comentarios": "Buena práctica replicable con baja inversión; enfoque de empleabilidad y derechos"
-      },
-      {
-        "volumen": 2,
-        "region": "Occidente",
-        "estado": "Nayarit",
-        "estados_fronterizos": "No aplica",
-        "numero": 5,
-        "buena_practica": "Premio estatal a migrante Nayarita “Ernesto Galarza”",
-        "resumen": "Reconocimiento anual a personas o asociaciones de migrantes nayaritas que contribuyen al desarrollo del estado, la unidad familiar, cultura, turismo, identidad y derechos humanos; postulación mediante convocatoria y dictaminación por el Consejo Consultivo de Migración.",
-        "naturaleza_politica_publica": "Programas públicos",
-        "categoria": "4. Buenas prácticas en el establecimiento de mecanismos de vinculación interinstitucional así como de mecanismos que involucren a la sociedad civil y otros sectores",
-        "subcategoria": "4.2 Consejos consultivos",
-        "tema_covid": 1,
-        "buena_practica_vigente": 0,
-        "poblacion_objetivo": {
-          "retornados": 1,
-          "transito": 0,
-          "mexicanos_extranjero": 1,
-          "refugiados_asilados": 0,
-          "migracion_destino": 0,
-          "migracion_interna": 0,
-          "poblacion_no_migrante": 0,
-          "personas_desplazadas": 0
-        },
-        "condicion_vulnerabilidad": {
-          "nna": 0,
-          "mujeres": 0,
-          "personas_mayores": 0,
-          "pueblos_originarios": 0,
-          "personas_discapacidad": 0,
-          "lgbtiq": 0
-        },
-        "criterios_buenas_practicas": {
-          "sostenibilidad": 1,
-          "asociacion": 1,
-          "innovacion": 1,
-          "replicabilidad": 1,
-          "eficacia": 1
-        },
-        "anio_implementacion": null,
-        "autoridades_enunciadas": "Instituto de Atención y Protección a Migrantes y sus Familias, Consejo Consultivo de Migración, asociaciones de migrantes",
-        "resultados": "Programa realizado exitosamente en dos ocasiones, incentiva la participación comunitaria",
-        "comentarios": "Modelo motivacional y participativo, fortalece identidad y comunidad migrante"
-      },
-      {
-        "volumen": 2,
-        "region": "Centro",
-        "estado": "Guanajuato",
-        "estados_fronterizos": "No aplica",
-        "numero": 1,
-        "buena_practica": "Operativo Jornaleros Agrícolas Indígenas Migrantes",
-        "resumen": "Programa estatal para la atención integral y asistencia humanitaria en salud y prevención de COVID-19 a jornaleros agrícolas migrantes indígenas y sus familias, con entrega de kits de higiene y acciones de promoción de salud en municipios de alta presencia migrante.",
-        "naturaleza_politica_publica": "Programas públicos",
-        "categoria": "7. Buenas prácticas en la transversalización de servicios para la atención a personas en situación de migración (acceso a la identidad; salud; educación; seguridad; etc.)",
-        "subcategoria": "7.1 Acceso a los servicios de salud",
-        "tema_covid": 1,
-        "buena_practica_vigente": 0,
-        "poblacion_objetivo": {
-          "retornados": 0,
-          "transito": 0,
-          "mexicanos_extranjero": 0,
-          "refugiados_asilados": 0,
-          "migracion_destino": 0,
-          "migracion_interna": 1,
-          "poblacion_no_migrante": 0,
-          "personas_desplazadas": 0
-        },
-        "condicion_vulnerabilidad": {
-          "nna": 0,
-          "mujeres": 0,
-          "personas_mayores": 0,
-          "pueblos_originarios": 1,
-          "personas_discapacidad": 0,
-          "lgbtiq": 0
-        },
-        "criterios_buenas_practicas": {
-          "sostenibilidad": 1,
-          "asociacion": 1,
-          "innovacion": 0,
-          "replicabilidad": 1,
-          "eficacia": 1
-        },
-        "anio_implementacion": null,
-        "autoridades_enunciadas": "Secretaría del Migrante y Enlace Internacional, municipios, Secretaría de Salud, OSC",
-        "resultados": "Cobertura en varios municipios, atención a población migrante indígena, prevención de contagios y mejora en condiciones de salud",
-        "comentarios": "Modelo replicable en crisis sanitaria y con pueblos indígenas migrantes"
-      },
-      {
-        "volumen": 2,
-        "region": "Centro",
-        "estado": "Guanajuato",
-        "estados_fronterizos": "No aplica",
-        "numero": 2,
-        "buena_practica": "Programas de reunificación familiar: “Mineros de Plata”",
-        "resumen": "Reunificación temporal de personas adultas mayores con familiares en EE.UU., cubriendo transporte, trámites y acompañamiento médico; coordinación con clubes de migrantes y ayuntamientos, beneficiando a familias guanajuatenses.",
-        "naturaleza_politica_publica": "Programas públicos",
-        "categoria": "13. Buenas prácticas en procesos de reunificación familiar",
-        "subcategoria": "13.1. Reunificación familiar temporal",
-        "tema_covid": 0,
-        "buena_practica_vigente": 0,
-        "poblacion_objetivo": {
-          "retornados": 0,
-          "transito": 0,
-          "mexicanos_extranjero": 1,
-          "refugiados_asilados": 0,
-          "migracion_destino": 0,
-          "migracion_interna": 0,
-          "poblacion_no_migrante": 0,
-          "personas_desplazadas": 0
-        },
-        "condicion_vulnerabilidad": {
-          "nna": 0,
-          "mujeres": 0,
-          "personas_mayores": 1,
-          "pueblos_originarios": 0,
-          "personas_discapacidad": 0,
-          "lgbtiq": 0
-        },
-        "criterios_buenas_practicas": {
-          "sostenibilidad": 1,
-          "asociacion": 1,
-          "innovacion": 0,
-          "replicabilidad": 1,
-          "eficacia": 0
-        },
-        "anio_implementacion": null,
-        "autoridades_enunciadas": "Secretaría del Migrante y Enlace Internacional, clubes de migrantes, ayuntamientos, Consulado de EE.UU.",
-        "resultados": "Participación amplia de clubes y municipios; fortalecimiento de vínculos familiares y comunitarios",
-        "comentarios": "Práctica consolidada, con reglas de operación y financiamiento asignado"
-      },
-      {
-        "volumen": 2,
-        "region": "Centro",
-        "estado": "Guanajuato",
-        "estados_fronterizos": "No aplica",
-        "numero": 3,
-        "buena_practica": "Homologación de reglas de operación de los programas sociales para que no sean discriminatorios contra personas en situación de migración",
-        "resumen": "Proceso de revisión y ajuste de reglas de operación de programas sociales estatales para garantizar la no discriminación a migrantes, con mesas técnicas y capacitación interinstitucional; incidencia para cambios legislativos en agenda estatal.",
-        "naturaleza_politica_publica": "creación o reformas a leyes o reglamentos",
-        "categoria": "1. Buenas prácticas en la creación o reforma las legislaciones locales y/o sus reglamentos",
-        "subcategoria": "1.2 Reformas a leyes y reglamentos que eliminan obstáculos o aspectos discriminatorios hacia personas en situación de migración",
-        "tema_covid": 0,
-        "buena_practica_vigente": 1,
-        "poblacion_objetivo": {
-          "retornados": 1,
-          "transito": 1,
-          "mexicanos_extranjero": 1,
-          "refugiados_asilados": 1,
-          "migracion_destino": 1,
-          "migracion_interna": 1,
-          "poblacion_no_migrante": 0,
-          "personas_desplazadas": 1
-        },
-        "condicion_vulnerabilidad": {
-          "nna": 0,
-          "mujeres": 1,
-          "personas_mayores": 0,
-          "pueblos_originarios": 0,
-          "personas_discapacidad": 1,
-          "lgbtiq": 0
-        },
-        "criterios_buenas_practicas": {
-          "sostenibilidad": 0,
-          "asociacion": 0,
-          "innovacion": 1,
-          "replicabilidad": 1,
-          "eficacia": 1
-        },
-        "anio_implementacion": null,
-        "autoridades_enunciadas": "Secretaría del Migrante y Enlace Internacional, Instituto de la Mujer, Instituto de Personas con Discapacidad, Congreso del Estado, OSC",
-        "resultados": "Eliminación de barreras en acceso a programas; sensibilización y adaptación normativa; impacto positivo en la inclusión social",
-        "comentarios": "Práctica innovadora, replicable en otros estados, fortalece derechos"
-      },
-      {
-        "volumen": 2,
-        "region": "Centro",
-        "estado": "Guanajuato",
-        "estados_fronterizos": "No aplica",
-        "numero": 4,
-        "buena_practica": "“Caravanas migrantes”: Protocolo de Acciones para atender a Personas y Caravanas Migrantes en Tránsito por el Estado de Guanajuato",
-        "resumen": "Protocolo estatal que articula a todas las dependencias para la atención de personas y caravanas migrantes en tránsito, asignando funciones específicas para la protección de derechos humanos y la atención humanitaria conforme a estándares nacionales e internacionales.",
-        "naturaleza_politica_publica": "Protocolos o mecanismos de actuación",
-        "categoria": "12. Buenas prácticas para la atención a situaciones de crisis o emergencia migratoria",
-        "subcategoria": "12.1 Profesionalización de las autoridades involucradas en la atención directa con población objetivo",
-        "tema_covid": 0,
-        "buena_practica_vigente": 0,
-        "poblacion_objetivo": {
-          "retornados": 0,
-          "transito": 1,
-          "mexicanos_extranjero": 0,
-          "refugiados_asilados": 0,
-          "migracion_destino": 0,
-          "migracion_interna": 0,
-          "poblacion_no_migrante": 0,
-          "personas_desplazadas": 0
-        },
-        "condicion_vulnerabilidad": {
-          "nna": 0,
-          "mujeres": 0,
-          "personas_mayores": 0,
-          "pueblos_originarios": 0,
-          "personas_discapacidad": 0,
-          "lgbtiq": 0
-        },
-        "criterios_buenas_practicas": {
-          "sostenibilidad": 1,
-          "asociacion": 1,
-          "innovacion": 0,
-          "replicabilidad": 1,
-          "eficacia": 1
-        },
-        "anio_implementacion": null,
-        "autoridades_enunciadas": "Secretaría del Migrante y Enlace Internacional, Secretaría de Gobierno, Secretaría de Seguridad Pública, DIF estatal, Secretaría de Salud, Finanzas, Desarrollo Social, Procuraduría de Derechos Humanos, OSC",
-        "resultados": "Acciones coordinadas, atención humanitaria efectiva, protección de derechos en situaciones de emergencia migratoria",
-        "comentarios": "Modelo replicable, fortalece gobernanza migratoria y respuesta a crisis"
-      },
-      {
-        "volumen": 2,
-        "region": "Sur-Sureste",
-        "estado": "Chiapas",
-        "estados_fronterizos": "frontera Sur",
-        "numero": 1,
-        "buena_practica": "Proyecto “Oficios con Perspectiva de Género y Derechos Humanos”",
-        "resumen": "Proyecto que impulsa la autonomía económica de mujeres migrantes mediante talleres de oficios no tradicionales, con perspectiva de género y derechos humanos, impartidos en colaboración con DVV Internacional. Incluye alojamiento, alimentación y guardería para NNA acompañantes.",
-        "naturaleza_politica_publica": "Programas públicos",
-        "categoria": "7. Buenas prácticas en la transversalización de servicios para la atención a personas en situación de migración (acceso a la identidad; salud; educación; seguridad; etc.)",
-        "subcategoria": "7.2 Acceso a la educación",
-        "tema_covid": 0,
-        "buena_practica_vigente": 0,
-        "poblacion_objetivo": {
-          "retornados": 0,
-          "transito": 1,
-          "mexicanos_extranjero": 0,
-          "refugiados_asilados": 0,
-          "migracion_destino": 0,
-          "migracion_interna": 0,
-          "poblacion_no_migrante": 0,
-          "personas_desplazadas": 0
-        },
-        "condicion_vulnerabilidad": {
-          "nna": 1,
-          "mujeres": 1,
-          "personas_mayores": 0,
-          "pueblos_originarios": 0,
-          "personas_discapacidad": 0,
-          "lgbtiq": 1
-        },
-        "criterios_buenas_practicas": {
-          "sostenibilidad": 1,
-          "asociacion": 1,
-          "innovacion": 1,
-          "replicabilidad": 1,
-          "eficacia": 1
-        },
-        "anio_implementacion": null,
-        "autoridades_enunciadas": "Secretaría de Igualdad de Género, DVV Internacional, OSC, SEPAMI, Pastoral Social, FOCA A.C., Secretaría del Bienestar",
-        "resultados": "14 cursos (2021-2022), más de 140 personas migrantes beneficiadas, talleres infantiles paralelos",
-        "comentarios": "Modelo replicable y flexible, con perspectiva de género e inclusión"
-      },
-      {
-        "volumen": 2,
-        "region": "Sur-Sureste",
-        "estado": "Chiapas",
-        "estados_fronterizos": "frontera Sur",
-        "numero": 2,
-        "buena_practica": "Protocolo de actuación para servidoras/es públicas/os adscritas/os al DIF estatal y municipales, para atención a NNA Migrantes",
-        "resumen": "Documento-guía para el personal del DIF estatal y municipal sobre procesos y procedimientos para la atención y protección de derechos de NNA migrantes, emitido tras recomendación de CNDH; establece lineamientos para la atención y salvaguarda de derechos en apego a normativa nacional e internacional.",
-        "naturaleza_politica_publica": "Protocolos o mecanismos de actuación",
-        "categoria": "1. Buenas prácticas en la creación o reforma las legislaciones locales y/o sus reglamentos",
-        "subcategoria": "1.1 Leyes y reglamentos que facultan y regulan la participación de las instituciones del estado en la atención a la población en situación de migración",
-        "tema_covid": 0,
-        "buena_practica_vigente": 0,
-        "poblacion_objetivo": {
-          "retornados": 0,
-          "transito": 1,
-          "mexicanos_extranjero": 0,
-          "refugiados_asilados": 0,
-          "migracion_destino": 1,
-          "migracion_interna": 0,
-          "poblacion_no_migrante": 0,
-          "personas_desplazadas": 1
-        },
-        "condicion_vulnerabilidad": {
-          "nna": 1,
-          "mujeres": 0,
-          "personas_mayores": 0,
-          "pueblos_originarios": 0,
-          "personas_discapacidad": 0,
-          "lgbtiq": 0
-        },
-        "criterios_buenas_practicas": {
-          "sostenibilidad": 1,
-          "asociacion": 1,
-          "innovacion": 0,
-          "replicabilidad": 1,
-          "eficacia": 0
-        },
-        "anio_implementacion": null,
-        "autoridades_enunciadas": "DIF Chiapas, CNDH, DIF municipales",
-        "resultados": "Instrumento jurídico y operativo que previene violaciones de derechos y homogeniza criterios de atención",
-        "comentarios": "Replicable en otros estados y sistemas DIF"
-      },
-      {
-        "volumen": 2,
-        "region": "Sur-Sureste",
-        "estado": "Chiapas",
-        "estados_fronterizos": "frontera Sur",
-        "numero": 3,
-        "buena_practica": "Rehabilitación de cinco Centros de Asistencia Social (CAS)",
-        "resumen": "Rehabilitación y habilitación de cinco Centros de Asistencia Social para brindar alojamiento, alimentación, atención médica, jurídica y psicológica a NNA migrantes en primera acogida, con equipos multidisciplinarios permanentes y fundamento en reformas a Ley de Migración y de Refugiados.",
-        "naturaleza_politica_publica": "Fortalecimiento de instituciones ya existentes",
-        "categoria": "6. Buenas prácticas para garantizar servicios de albergue dignos y suficientes",
-        "subcategoria": "6.2 Instalación y rehabilitación de albergues del estado",
-        "tema_covid": 0,
-        "buena_practica_vigente": 0,
-        "poblacion_objetivo": {
-          "retornados": 0,
-          "transito": 1,
-          "mexicanos_extranjero": 0,
-          "refugiados_asilados": 0,
-          "migracion_destino": 1,
-          "migracion_interna": 0,
-          "poblacion_no_migrante": 0,
-          "personas_desplazadas": 1
-        },
-        "condicion_vulnerabilidad": {
-          "nna": 1,
-          "mujeres": 0,
-          "personas_mayores": 0,
-          "pueblos_originarios": 0,
-          "personas_discapacidad": 0,
-          "lgbtiq": 0
-        },
-        "criterios_buenas_practicas": {
-          "sostenibilidad": 1,
-          "asociacion": 1,
-          "innovacion": 0,
-          "replicabilidad": 1,
-          "eficacia": 1
-        },
-        "anio_implementacion": null,
-        "autoridades_enunciadas": "DIF Chiapas, delegaciones regionales, equipos multidisciplinarios",
-        "resultados": "Más de 4,300 NNA migrantes atendidos entre enero-mayo 2023",
-        "comentarios": "Modelo adaptable a otras entidades, promueve protección integral"
-      },
-      {
-        "volumen": 2,
-        "region": "Sur-Sureste",
-        "estado": "Chiapas",
-        "estados_fronterizos": "frontera Sur",
-        "numero": 4,
-        "buena_practica": "Profesionalización en la atención a caravanas migrantes",
-        "resumen": "Estrategia de capacitación y certificación de la Secretaría de Protección Civil estatal para la atención a migrantes en situación de crisis, integrando gestión de riesgos, protocolos, ayuda humanitaria y coordinación interinstitucional, en alianza con PNUD.",
-        "naturaleza_politica_publica": "Protocolos o mecanismos de actuación",
-        "categoria": "12. Buenas prácticas para la atención a situaciones de crisis o emergencia migratoria",
-        "subcategoria": "12.1 Profesionalización de las autoridades involucradas en la atención directa con población objetivo",
-        "tema_covid": 0,
-        "buena_practica_vigente": 0,
-        "poblacion_objetivo": {
-          "retornados": 0,
-          "transito": 1,
-          "mexicanos_extranjero": 0,
-          "refugiados_asilados": 0,
-          "migracion_destino": 0,
-          "migracion_interna": 0,
-          "poblacion_no_migrante": 0,
-          "personas_desplazadas": 1
-        },
-        "condicion_vulnerabilidad": {
-          "nna": 0,
-          "mujeres": 0,
-          "personas_mayores": 0,
-          "pueblos_originarios": 0,
-          "personas_discapacidad": 0,
-          "lgbtiq": 0
-        },
-        "criterios_buenas_practicas": {
-          "sostenibilidad": 1,
-          "asociacion": 1,
-          "innovacion": 1,
-          "replicabilidad": 1,
-          "eficacia": 1
-        },
-        "anio_implementacion": null,
-        "autoridades_enunciadas": "Secretaría de Protección Civil, PNUD, instituciones estatales y federales",
-        "resultados": "Secretaría certificada, acciones de atención en múltiples crisis, herramientas y lecciones aprendidas documentadas",
-        "comentarios": "Modelo replicable; fortalece capacidades estatales en contexto de movilidad"
-      },
-      {
-        "volumen": 2,
-        "region": "Sur-Sureste",
-        "estado": "Chiapas",
-        "estados_fronterizos": "frontera Sur",
-        "numero": 5,
-        "buena_practica": "Programa de Educación Migrante en el Estado de Chiapas (PEMCH)",
-        "resumen": "Modelo de educación integral y flexible para NNA en movilidad, con inscripción, regularización, expedición de certificados y creación de centros educativos migrantes; tiene base normativa y presupuesto propio.",
-        "naturaleza_politica_publica": "Programas públicos",
-        "categoria": "7. Buenas prácticas en la transversalización de servicios para la atención a personas en situación de migración (acceso a la identidad; salud; educación; seguridad; etc.)",
-        "subcategoria": "7.2 Acceso a la educación",
-        "tema_covid": 0,
-        "buena_practica_vigente": 0,
-        "poblacion_objetivo": {
-          "retornados": 0,
-          "transito": 1,
-          "mexicanos_extranjero": 0,
-          "refugiados_asilados": 0,
-          "migracion_destino": 0,
-          "migracion_interna": 1,
-          "poblacion_no_migrante": 0,
-          "personas_desplazadas": 0
-        },
-        "condicion_vulnerabilidad": {
-          "nna": 1,
-          "mujeres": 0,
-          "personas_mayores": 0,
-          "pueblos_originarios": 0,
-          "personas_discapacidad": 0,
-          "lgbtiq": 0
-        },
-        "criterios_buenas_practicas": {
-          "sostenibilidad": 1,
-          "asociacion": 1,
-          "innovacion": 1,
-          "replicabilidad": 1,
-          "eficacia": 1
-        },
-        "anio_implementacion": null,
-        "autoridades_enunciadas": "Secretaría de Educación Pública, Secretaría de Bienestar, DIF Chiapas, sector privado",
-        "resultados": "Más de 645 NNA migrantes atendidos y 288 certificados de primaria otorgados (2021)",
-        "comentarios": null
-      }
+    "volumen": 2,
+    "region": "Centro",
+    "estado": "Guanajuato",
+    "estados_fronterizos": "No aplica",
+    "numero": 2,
+    "buena_practica": "Programas de reunificación familiar: \"Mineros de Plata\"",
+    "resumen": "Reunificación temporal de personas adultas mayores con familiares en EE.UU., cubriendo transporte, trámites y acompañamiento médico; coordinación con clubes de migrantes y ayuntamientos, beneficiando a familias guanajuatenses.",
+    "naturaleza_politica_publica": "Programas públicos",
+    "categoria": "13. Buenas prácticas en procesos de reunificación familiar",
+    "subcategoria": "13.1. Reunificación familiar temporal",
+    "tema_covid": 0,
+    "buena_practica_vigente": 0,
+    "poblacion_objetivo": {
+      "retornados": 0,
+      "transito": 0,
+      "mexicanos_extranjero": 1,
+      "refugiados_asilados": 0,
+      "migracion_destino": 0,
+      "migracion_interna": 0,
+      "poblacion_no_migrante": 0,
+      "personas_desplazadas": 0
+    },
+    "condicion_vulnerabilidad": {
+      "nna": 0,
+      "mujeres": 0,
+      "personas_mayores": 1,
+      "pueblos_originarios": 0,
+      "personas_discapacidad": 0,
+      "lgbtiq": 0
+    },
+    "criterios_buenas_practicas": {
+      "sostenibilidad": 1,
+      "asociacion": 1,
+      "innovacion": 0,
+      "replicabilidad": 1,
+      "eficacia": 0
+    },
+    "anio_implementacion": 2017,
+    "autoridades_enunciadas": "Secretaría del Migrante y Enlace Internacional, clubes de migrantes, ayuntamientos, Consulado de EE.UU.",
+    "tipos_actores": [
+      "En colaboración con autoridades municipales",
+      "En colaboración con colectivos de personas en contexto de movilidad",
+      "En colaboración con representaciones consulares"
+    ],
+    "resultados": "Participación amplia de clubes y municipios; fortalecimiento de vínculos familiares y comunitarios",
+    "comentarios": "Práctica consolidada, con reglas de operación y financiamiento asignado"
+  },
+  {
+    "volumen": 2,
+    "region": "Centro",
+    "estado": "Guanajuato",
+    "estados_fronterizos": "No aplica",
+    "numero": 3,
+    "buena_practica": "Homologación de reglas de operación de los programas sociales para que no sean discriminatorios contra personas en situación de migración",
+    "resumen": "Proceso de revisión y ajuste de reglas de operación de programas sociales estatales para garantizar la no discriminación a migrantes, con mesas técnicas y capacitación interinstitucional; incidencia para cambios legislativos en agenda estatal.",
+    "naturaleza_politica_publica": "Creación o reformas a leyes o reglamentos",
+    "categoria": "1. Buenas prácticas en la creación o reforma las legislaciones locales y/o sus reglamentos",
+    "subcategoria": "1.2 Reformas a leyes y reglamentos que eliminan obstáculos o aspectos discriminatorios hacia personas en situación de migración",
+    "tema_covid": 0,
+    "buena_practica_vigente": 1,
+    "poblacion_objetivo": {
+      "retornados": 1,
+      "transito": 1,
+      "mexicanos_extranjero": 1,
+      "refugiados_asilados": 1,
+      "migracion_destino": 1,
+      "migracion_interna": 0,
+      "poblacion_no_migrante": 1,
+      "personas_desplazadas": 0
+    },
+    "condicion_vulnerabilidad": {
+      "nna": 0,
+      "mujeres": 1,
+      "personas_mayores": 0,
+      "pueblos_originarios": 0,
+      "personas_discapacidad": 1,
+      "lgbtiq": 0
+    },
+    "criterios_buenas_practicas": {
+      "sostenibilidad": 0,
+      "asociacion": 0,
+      "innovacion": 1,
+      "replicabilidad": 1,
+      "eficacia": 1
+    },
+    "anio_implementacion": 2024,
+    "autoridades_enunciadas": "Secretaría del Migrante y Enlace Internacional, Instituto de la Mujer, Instituto de Personas con Discapacidad, Congreso del Estado, OSC",
+    "tipos_actores": [
+      "En colaboración con autoridades municipales",
+      "Autoridades legislativas",
+      "En colaboración con OSC",
+      "Autoridades que atienden agendas de protección a derechos humanos"
+    ],
+    "resultados": "Eliminación de barreras en acceso a programas; sensibilización y adaptación normativa; impacto positivo en la inclusión social",
+    "comentarios": "Práctica innovadora, replicable en otros estados, fortalece derechos"
+  },
+  {
+    "volumen": 2,
+    "region": "Centro",
+    "estado": "Guanajuato",
+    "estados_fronterizos": "No aplica",
+    "numero": 4,
+    "buena_practica": "\"Caravanas migrantes\": Protocolo de Acciones para atender a Personas y Caravanas Migrantes en Tránsito por el Estado de Guanajuato",
+    "resumen": "Protocolo estatal que articula a todas las dependencias para la atención de personas y caravanas migrantes en tránsito, asignando funciones específicas para la protección de derechos humanos y la atención humanitaria conforme a estándares nacionales e internacionales.",
+    "naturaleza_politica_publica": "Protocolos o mecanismos de actuación",
+    "categoria": "12. Buenas prácticas para la atención a situaciones de crisis o emergencia migratoria",
+    "subcategoria": "12.1 Profesionalización de las autoridades involucradas en la atención directa con población en situación de migración",
+    "tema_covid": 0,
+    "buena_practica_vigente": 0,
+    "poblacion_objetivo": {
+      "retornados": 0,
+      "transito": 1,
+      "mexicanos_extranjero": 0,
+      "refugiados_asilados": 0,
+      "migracion_destino": 0,
+      "migracion_interna": 0,
+      "poblacion_no_migrante": 0,
+      "personas_desplazadas": 0
+    },
+    "condicion_vulnerabilidad": {
+      "nna": 0,
+      "mujeres": 0,
+      "personas_mayores": 0,
+      "pueblos_originarios": 0,
+      "personas_discapacidad": 0,
+      "lgbtiq": 0
+    },
+    "criterios_buenas_practicas": {
+      "sostenibilidad": 1,
+      "asociacion": 1,
+      "innovacion": 0,
+      "replicabilidad": 1,
+      "eficacia": 1
+    },
+    "anio_implementacion": 2021,
+    "autoridades_enunciadas": "Secretaría del Migrante y Enlace Internacional, Secretaría de Gobierno, Secretaría de Seguridad Pública, DIF estatal, Secretaría de Salud, Finanzas, Desarrollo Social, Procuraduría de Derechos Humanos, OSC",
+    "tipos_actores": [
+      "Autoridades Estatales",
+      "Autoridades que atienden agendas de protección a derechos humanos",
+      "En colaboración con OSC",
+      "Autoridades del sector de seguridad",
+      "Autoridades del sector de empleo"
+    ],
+    "resultados": "Acciones coordinadas, atención humanitaria efectiva, protección de derechos en situaciones de emergencia migratoria",
+    "comentarios": "Modelo replicable, fortalece gobernanza migratoria y respuesta a crisis"
+  },
+  {
+    "volumen": 2,
+    "region": "Sur-Sureste",
+    "estado": "Chiapas",
+    "estados_fronterizos": "frontera Sur",
+    "numero": 1,
+    "buena_practica": "Proyecto \"Oficios con Perspectiva de Género y Derechos Humanos\"",
+    "resumen": "Proyecto que impulsa la autonomía económica de mujeres migrantes mediante talleres de oficios no tradicionales, con perspectiva de género y derechos humanos, impartidos en colaboración con DVV Internacional. Incluye alojamiento, alimentación y guardería para NNA acompañantes.",
+    "naturaleza_politica_publica": "Programas públicos",
+    "categoria": "7. Buenas prácticas en la transversalización de servicios para la atención a personas en situación de migración (acceso a la identidad; salud; educación; seguridad; etc.)",
+    "subcategoria": "7.2 Acceso a la educación",
+    "tema_covid": 0,
+    "buena_practica_vigente": 0,
+    "poblacion_objetivo": {
+      "retornados": 0,
+      "transito": 1,
+      "mexicanos_extranjero": 0,
+      "refugiados_asilados": 0,
+      "migracion_destino": 0,
+      "migracion_interna": 0,
+      "poblacion_no_migrante": 0,
+      "personas_desplazadas": 0
+    },
+    "condicion_vulnerabilidad": {
+      "nna": 1,
+      "mujeres": 1,
+      "personas_mayores": 0,
+      "pueblos_originarios": 0,
+      "personas_discapacidad": 0,
+      "lgbtiq": 1
+    },
+    "criterios_buenas_practicas": {
+      "sostenibilidad": 1,
+      "asociacion": 1,
+      "innovacion": 1,
+      "replicabilidad": 1,
+      "eficacia": 1
+    },
+    "anio_implementacion": 2022,
+    "autoridades_enunciadas": "Secretaría de Igualdad de Género, DVV Internacional, OSC, SEPAMI, Pastoral Social, FOCA A.C., Secretaría del Bienestar",
+    "tipos_actores": [
+      "Autoridades que atienden agendas de protección a derechos humanos",
+      "Autoridades Estatales",
+      "En colaboración con organizaciones religiosas"
+    ],
+    "resultados": "14 cursos (2021-2022), más de 140 personas migrantes beneficiadas, talleres infantiles paralelos",
+    "comentarios": "Modelo replicable y flexible, con perspectiva de género e inclusión"
+  },
+  {
+    "volumen": 2,
+    "region": "Sur-Sureste",
+    "estado": "Chiapas",
+    "estados_fronterizos": "frontera Sur",
+    "numero": 2,
+    "buena_practica": "Protocolo de actuación para servidoras/es públicas/os adscritas/os al DIF estatal y municipales, para atención a NNA Migrantes",
+    "resumen": "Documento-guía para el personal del DIF estatal y municipal sobre procesos y procedimientos para la atención y protección de derechos de NNA migrantes, emitido tras recomendación de CNDH; establece lineamientos para la atención y salvaguarda de derechos en apego a normativa nacional e internacional.",
+    "naturaleza_politica_publica": "Protocolos o mecanismos de actuación",
+    "categoria": "1. Buenas prácticas en la creación o reforma las legislaciones locales y/o sus reglamentos",
+    "subcategoria": "1.1 Leyes y reglamentos que facultan y regulan la participación de las instituciones del estado en la atención a la población en situación de migración",
+    "tema_covid": 0,
+    "buena_practica_vigente": 0,
+    "poblacion_objetivo": {
+      "retornados": 0,
+      "transito": 1,
+      "mexicanos_extranjero": 0,
+      "refugiados_asilados": 1,
+      "migracion_destino": 0,
+      "migracion_interna": 1,
+      "poblacion_no_migrante": 0,
+      "personas_desplazadas": 1
+    },
+    "condicion_vulnerabilidad": {
+      "nna": 1,
+      "mujeres": 0,
+      "personas_mayores": 0,
+      "pueblos_originarios": 0,
+      "personas_discapacidad": 0,
+      "lgbtiq": 0
+    },
+    "criterios_buenas_practicas": {
+      "sostenibilidad": 1,
+      "asociacion": 1,
+      "innovacion": 0,
+      "replicabilidad": 1,
+      "eficacia": 0
+    },
+    "anio_implementacion": 2020,
+    "autoridades_enunciadas": "DIF Chiapas, CNDH, DIF municipales",
+    "tipos_actores": [
+      "En colaboración con autoridades municipales",
+      "Autoridades que atienden agendas de protección a derechos humanos",
+      "Autoridades Estatales"
+    ],
+    "resultados": "Instrumento jurídico y operativo que previene violaciones de derechos y homogeniza criterios de atención",
+    "comentarios": "Replicable en otros estados y sistemas DIF"
+  },
+  {
+    "volumen": 2,
+    "region": "Sur-Sureste",
+    "estado": "Chiapas",
+    "estados_fronterizos": "frontera Sur",
+    "numero": 3,
+    "buena_practica": "Rehabilitación de cinco Centros de Asistencia Social (CAS)",
+    "resumen": "Rehabilitación y habilitación de cinco Centros de Asistencia Social para brindar alojamiento, alimentación, atención médica, jurídica y psicológica a NNA migrantes en primera acogida, con equipos multidisciplinarios permanentes y fundamento en reformas a Ley de Migración y de Refugiados.",
+    "naturaleza_politica_publica": "Fortalecimiento de instituciones ya existentes",
+    "categoria": "6. Buenas prácticas para garantizar servicios de albergue dignos y suficientes",
+    "subcategoria": "6.2 Instalación y rehabilitación de albergues del estado",
+    "tema_covid": 0,
+    "buena_practica_vigente": 0,
+    "poblacion_objetivo": {
+      "retornados": 0,
+      "transito": 1,
+      "mexicanos_extranjero": 0,
+      "refugiados_asilados": 1,
+      "migracion_destino": 0,
+      "migracion_interna": 1,
+      "poblacion_no_migrante": 0,
+      "personas_desplazadas": 1
+    },
+    "condicion_vulnerabilidad": {
+      "nna": 1,
+      "mujeres": 0,
+      "personas_mayores": 0,
+      "pueblos_originarios": 0,
+      "personas_discapacidad": 0,
+      "lgbtiq": 0
+    },
+    "criterios_buenas_practicas": {
+      "sostenibilidad": 1,
+      "asociacion": 1,
+      "innovacion": 0,
+      "replicabilidad": 1,
+      "eficacia": 1
+    },
+    "anio_implementacion": 2023,
+    "autoridades_enunciadas": "DIF Chiapas, delegaciones regionales, equipos multidisciplinarios",
+    "tipos_actores": [
+      "En colaboración con autoridades municipales",
+      "Autoridades que atienden agendas de protección a derechos humanos",
+      "Autoridades Estatales"
+    ],
+    "resultados": "Más de 4,300 NNA migrantes atendidos entre enero-mayo 2023",
+    "comentarios": "Modelo adaptable a otras entidades, promueve protección integral"
+  },
+  {
+    "volumen": 2,
+    "region": "Sur-Sureste",
+    "estado": "Chiapas",
+    "estados_fronterizos": "frontera Sur",
+    "numero": 4,
+    "buena_practica": "Profesionalización en la atención a caravanas migrantes",
+    "resumen": "Estrategia de capacitación y certificación de la Secretaría de Protección Civil estatal para la atención a migrantes en situación de crisis, integrando gestión de riesgos, protocolos, ayuda humanitaria y coordinación interinstitucional, en alianza con PNUD.",
+    "naturaleza_politica_publica": "Protocolos o mecanismos de actuación",
+    "categoria": "12. Buenas prácticas para la atención a situaciones de crisis o emergencia migratoria",
+    "subcategoria": "12.1 Profesionalización de las autoridades involucradas en la atención directa con población en situación de migración",
+    "tema_covid": 0,
+    "buena_practica_vigente": 0,
+    "poblacion_objetivo": {
+      "retornados": 0,
+      "transito": 1,
+      "mexicanos_extranjero": 0,
+      "refugiados_asilados": 0,
+      "migracion_destino": 0,
+      "migracion_interna": 0,
+      "poblacion_no_migrante": 0,
+      "personas_desplazadas": 1
+    },
+    "condicion_vulnerabilidad": {
+      "nna": 0,
+      "mujeres": 0,
+      "personas_mayores": 0,
+      "pueblos_originarios": 0,
+      "personas_discapacidad": 0,
+      "lgbtiq": 0
+    },
+    "criterios_buenas_practicas": {
+      "sostenibilidad": 1,
+      "asociacion": 1,
+      "innovacion": 1,
+      "replicabilidad": 1,
+      "eficacia": 1
+    },
+    "anio_implementacion": 2020,
+    "autoridades_enunciadas": "Secretaría de Protección Civil, PNUD, instituciones estatales y federales",
+    "tipos_actores": [
+      "En colaboración con autoridades federales",
+      "En colaboración con organismos internacionales",
+      "Autoridades Estatales"
+    ],
+    "resultados": "Secretaría certificada, acciones de atención en múltiples crisis, herramientas y lecciones aprendidas documentadas",
+    "comentarios": "Modelo replicable; fortalece capacidades estatales en contexto de movilidad"
+  },
+  {
+    "volumen": 2,
+    "region": "Sur-Sureste",
+    "estado": "Chiapas",
+    "estados_fronterizos": "frontera Sur",
+    "numero": 5,
+    "buena_practica": "Programa de Educación Migrante en el Estado de Chiapas (PEMCH)",
+    "resumen": "Modelo de educación integral y flexible para NNA en movilidad, con inscripción, regularización, expedición de certificados y creación de centros educativos migrantes; tiene base normativa y presupuesto propio.",
+    "naturaleza_politica_publica": "Programas públicos",
+    "categoria": "7. Buenas prácticas en la transversalización de servicios para la atención a personas en situación de migración (acceso a la identidad; salud; educación; seguridad; etc.)",
+    "subcategoria": "7.2 Acceso a la educación",
+    "tema_covid": 0,
+    "buena_practica_vigente": 0,
+    "poblacion_objetivo": {
+      "retornados": 0,
+      "transito": 1,
+      "mexicanos_extranjero": 0,
+      "refugiados_asilados": 0,
+      "migracion_destino": 1,
+      "migracion_interna": 0,
+      "poblacion_no_migrante": 0,
+      "personas_desplazadas": 0
+    },
+    "condicion_vulnerabilidad": {
+      "nna": 1,
+      "mujeres": 0,
+      "personas_mayores": 0,
+      "pueblos_originarios": 0,
+      "personas_discapacidad": 0,
+      "lgbtiq": 0
+    },
+    "criterios_buenas_practicas": {
+      "sostenibilidad": 1,
+      "asociacion": 1,
+      "innovacion": 1,
+      "replicabilidad": 1,
+      "eficacia": 1
+    },
+    "anio_implementacion": 2022,
+    "autoridades_enunciadas": "Secretaría de Educación Pública, Secretaría de Bienestar, DIF Chiapas, sector privado",
+    "tipos_actores": [
+      "Autoridades Estatales",
+      "Autoridades del sector educación",
+      "En colaboración con la iniciativa privada"
+    ],
+    "resultados": "Más de 645 NNA migrantes atendidos y 288 certificados de primaria otorgados (2021)",
+    "comentarios": "Modelo replicable y flexible, con perspectiva de género e inclusión"
+  }
     ]
   }

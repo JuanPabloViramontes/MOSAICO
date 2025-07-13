@@ -32,16 +32,16 @@ showTiposDeActor = false;
 showPoblaciones = false;
 
   tiposDeActor = [
-  "Organismos internacionales",
-  "Autoridades federales",
-  "Autoridades municipales",
-  "OSC",
-  "Albergues",
-  "Instituciones académicas",
-  "Organizaciones religiosas",
-  "Colectivos de personas en contexto de movilidad",
-  "Iniciativa privada",
-  "Representaciones consulares",
+  "En colaboración con organismos internacionales",
+  "En colaboración con autoridades federales",
+  "En colaboración con autoridades municipales",
+  "En colaboración con OSC",
+  "En colaboración con albergues",
+  "En colaboración con instituciones académicas",
+  "En colaboración con organizaciones religiosas",
+  "En colaboración con colectivos de personas en contexto de movilidad",
+  "En colaboración con la iniciativa privada",
+  "En colaboración con representaciones consulares",
   "Autoridades del sector salud",
   "Autoridades del sector educación",
   "Autoridades del sector de seguridad",
@@ -52,7 +52,8 @@ showPoblaciones = false;
   "Autoridades del sector cultural",
   "Autoridades de desarrollo urbano, vivienda y/o ordenamiento territorial",
   "Autoridades legislativas",
-  "OFAMs"
+  "OFAMs",
+  "Autoridades estatales"
 ];
 
 naturaleza_politica_publica = [

@@ -2568,6 +2568,10 @@
                           },
                           "anio_implementacion": 2008,
                           "autoridades_enunciadas": "Instituto para el Desarrollo de la Cultura Maya del estado de Yucatán",
+                          "tipos_actores": [
+                          "OFAMs",
+                          "En colaboración con autoridades municipales"
+                        ],
                           "resultados": "Los enlaces municipales mantienen actualizado al instituto sobre las necesidades identificadas por la población migrante en sus comunidades.",
                           "comentarios": ""
                         },
@@ -2612,6 +2616,10 @@
                           "anio_implementacion": 2009,
                           "autoridades_enunciadas": "Instituto para el Desarrollo de la Cultura Maya del estado de Yucatán",
                           "resultados": "",
+                          "tipos_actores": [
+                          "OFAMs",
+                          "Autoridades del sector educación"
+                        ],
                           "comentarios": ""
                         },
                         {
@@ -2654,6 +2662,10 @@
                           },
                           "anio_implementacion": 2017,
                           "autoridades_enunciadas": "Instituto para el Desarrollo de la Cultura Maya del estado de Yucatán",
+                            "tipos_actores": [
+                           "OFAMs",
+                           "En colaboración con representaciones consulares"
+                          ],
                           "resultados": "Reunificación familiar temporal. Enfoque a adultos mayores de 60 años. Y personas mayores como embajadores culturales.",
                           "comentarios": ""
                         },
@@ -2697,6 +2709,10 @@
                           },
                           "anio_implementacion": 2012,
                           "autoridades_enunciadas": "Instituto para el Desarrollo de la Cultura Maya del estado de Yucatán",
+                           "tipos_actores": [
+                           "OFAMs",
+                           "Autoridades registrales"
+                          ],
                           "resultados": "Brindar certeza jurídica a las personas yucatecas maya hablantes.",
                           "comentarios": ""
                         },
@@ -2707,7 +2723,7 @@
                           "estados_fronterizos": "No aplica",
                           "numero": 6,
                           "buena_practica": "CASA DEL YUCATECO EN SAN FRANCISCO, CALIFORNIA",
-                          "resumen": "espacio de atención, representación y vinculación para personas yucatecas residentes en EE. UU. Brinda asesoría en trámites como correcciones de actas, CURP, expedición de documentos y apoyo en situaciones extraordinarias. Además, funge como centro cultural con talleres de lengua maya y promueve la identidad yucateca en el extranjero. También opera como punto de contacto para el programa de reunificación familiar 'Cabecitas Blancas' y fortalece los vínculos entre la diáspora y las instituciones del estado.",
+                          "resumen": "Espacio de atención, representación y vinculación para personas yucatecas residentes en EE. UU. Brinda asesoría en trámites como correcciones de actas, CURP, expedición de documentos y apoyo en situaciones extraordinarias. Además, funge como centro cultural con talleres de lengua maya y promueve la identidad yucateca en el extranjero. También opera como punto de contacto para el programa de reunificación familiar 'Cabecitas Blancas' y fortalece los vínculos entre la diáspora y las instituciones del estado.",
                           "naturaleza_politica_publica": "Creación de instituciones",
                           "categoria": "3. Buenas prácticas en la creación y fortalecimiento de instituciones dedicadas a la atención e integración de personas en situación de migración",
                           "subcategoria": "",
@@ -2740,6 +2756,10 @@
                           },
                           "anio_implementacion": 2023,
                           "autoridades_enunciadas": "Instituto para el Desarrollo de la Cultura Maya del estado de Yucatán",
+                           "tipos_actores": [                            
+                            "OFAMs",
+                            "En colaboración con colectivos de personas en contexto de movilidad"
+                            ],
                           "resultados": "",
                           "comentarios": ""
                         }

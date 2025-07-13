@@ -50,12 +50,21 @@
   /* Fondo más formal */
 }
 
-
 /* Fondo trasero adicional (ahora azul suave también) */
 .back {
   transform: rotateY(180deg);
+  font-size: 0.75rem;
 }
-
+.card-text-back {
+  z-index: 1;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  color: #333;
+  height: 100%;
+  overflow-y: auto;
+}
 /* Textos */
 .front h3,
 .back h3 {
@@ -67,7 +76,7 @@
 .front p,
 .back p,
 .back li {
-  font-size: 0.95rem;
+  font-size: 0.75rem;
   line-height: 1.4;
   margin-bottom: 0.4rem;
   text-align: left;

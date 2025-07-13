@@ -19,3 +19,51 @@
   opacity: 0.5;
   z-index: -1;
 }
+
+.tooltip {
+  position: fixed;
+  z-index: 1070;
+  transform: translate(-50%, -100%); /* Centro horizontal, arriba vertical */
+  pointer-events: none;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  opacity: 0.95;
+}
+
+
+.tooltip .tooltip-arrow {
+  position: absolute;
+  display: block;
+  width: 0.8rem;
+  height: 0.4rem;
+}
+
+.bs-tooltip-top .tooltip-arrow {
+  bottom: 0;
+  left: calc(50% - 0.4rem);
+  border-left: 0.4rem solid transparent;
+  border-right: 0.4rem solid transparent;
+  border-top: 0.4rem solid rgba(0, 0, 0, 0.85);
+}
+
+.tooltip .tooltip-inner {
+  max-width: 200px;
+  padding: 0.25rem 0.5rem;
+  color: #fff;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.85);
+  border-radius: 0.25rem;
+}
+
+.tooltip-bootstrap {
+  position: absolute;
+  z-index: 1000;
+  background-color: #000;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  pointer-events: none;
+  transform: translate(-50%, -100%); /* Centra en X, arriba en Y */
+  white-space: nowrap;
+}

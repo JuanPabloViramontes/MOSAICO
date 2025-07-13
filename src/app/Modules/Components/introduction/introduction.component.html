@@ -1,55 +1,101 @@
 <div class="container-fluid px-0">
   <div class="row align-items-stretch rounded-4 overflow-hidden"
-       style="min-height: 300px; background: linear-gradient(15deg, #0a1f3a 0%, #1a365d 50%, #0a2742 100%);">
+       style="min-height: 300px; background: #004080;">
 
     <!-- Imagen principal -->
     <div class="col-md-5 d-flex align-items-stretch p-0">
       <img src="assets/images/OIM2.jpg"
            alt="OIM"
            class="img-fluid w-100"
-           style="object-fit: cover;">
+           style="object-fit: cover; transition: all 0.3s ease;"
+           onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.3)'"
+           onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
     </div>
 
     <!-- Descripción inicial -->
     <div class="col-md-7 text-white d-flex flex-column justify-content-center p-4">
-      <h3 class="fw-bold mb-3 text-center text-md-start">¿Qué son las buenas prácticas migrantes?</h3>
+      <h3 class="fw-bold mb-3 text-center text-md-start">Buenas Prácticas en Política Migratoria Local</h3>
       <p class="small" style="line-height: 1.7;">
-        Las buenas prácticas migratorias son acciones, programas o políticas implementadas principalmente a nivel local que buscan garantizar la protección, inclusión y bienestar de las personas migrantes y refugiadas. Estas iniciativas responden a los desafíos de la movilidad humana desde un enfoque de derechos humanos, interculturalidad y no discriminación.
+        Esta recopilación presenta iniciativas desarrolladas por entidades federativas en México para atender a personas en situación de movilidad. A través de tres volúmenes, se documentan programas y mecanismos implementados desde lo local.
       </p>
 
-      <!-- Botón o acción para propósito -->
+      <!-- Texto expandido -->
+      <div class="collapse" id="textoExpandido">
+        <p class="small" style="line-height: 1.7;">
+          Impulsada por la OIM y la CONOFAM, la iniciativa responde a una pregunta clave: ¿cómo se construye la política migratoria desde los territorios? Para ello, se aplicaron encuestas, entrevistas, análisis documental y encuentros regionales, recabando información directamente de las instituciones locales.
+        </p>
+        <p class="small" style="line-height: 1.7;">
+          Este esfuerzo refleja el compromiso de los estados con una migración más segura, ordenada e incluyente, y destaca la diversidad de enfoques en el país. Su sistematización facilita la detección de tendencias, brechas y oportunidades para avanzar hacia una agenda compartida con base en la experiencia de los gobiernos y actores locales.
+        </p>
+
+        <!-- Botón CONOFAM -->
+        <div class="text-center mt-3">
+          <a href="https://conofam.org/" target="_blank" class="btn btn-outline-light btn-sm d-inline-flex align-items-center gap-2">
+            <i class="bi bi-box-arrow-up-right"></i> Visitar sitio oficial de <strong>CONOFAM</strong>
+          </a>
+        </div>
+      </div>
+
+      <!-- Botones -->
       <div class="text-center mt-3">
-        <button class="btn btn-outline-light btn-sm" type="button"
-                data-bs-toggle="collapse" data-bs-target="#propositoCollapse"
-                aria-expanded="false" aria-controls="propositoCollapse">
+        <button class="btn btn-outline-light btn-sm me-2"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#textoExpandido"
+                aria-expanded="false"
+                aria-controls="textoExpandido">
+          Leer más
+        </button>
+
+        <!-- Botón "Conoce nuestro propósito" con mismo efecto -->
+        <button class="btn btn-outline-light btn-sm"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#propositoCollapse"
+                aria-expanded="false"
+                aria-controls="propositoCollapse">
           Conoce nuestro propósito
         </button>
       </div>
     </div>
   </div>
-<!-- Contenido colapsable -->
-<!-- Contenido colapsable -->
-<div class="collapse mt-4" id="propositoCollapse">
-  <div class="card shadow-lg border-0 rounded-4 overflow-hidden"
-       style="background: linear-gradient(to right, #ffffff, #f5f7fa);">
+</div>
+
+<!-- Sección colapsable del propósito -->
+<div class="collapse mt-4 transition-collapse" id="propositoCollapse" #propositoCollapse>
+  <div class="card shadow-lg border-0 rounded-4 overflow-hidden animate-fade-in"
+       style="background: #004080;">
 
     <div class="row g-0 align-items-stretch">
-      
-      <!-- Texto del propósito -->
-      <div class="col-md-8 p-4 d-flex flex-column justify-content-center order-2 order-md-1">
-        <h5 class="fw-bold text-primary mb-3">¿Cuál es el propósito de Mosaico?</h5>
-        <p class="text-dark" style="line-height: 1.8; font-size: 0.95rem;">
-          El propósito de esta página web es dar a conocer una selección de buenas prácticas desarrolladas por distintas entidades federativas en México, recopiladas por la Organización Internacional para las Migraciones (OIM) en colaboración con la Coordinación Nacional de Oficinas Estatales de Atención a Migrantes (CONOFAM), a través de tres volúmenes titulados: 
-          <strong>“Buenas prácticas en política migratoria desde el ámbito local”</strong>.
+      <!-- Texto -->
+      <div class="col-md-8 p-4 d-flex flex-column justify-content-center order-2 order-md-1 text-white">
+        <h5 class="fw-bold mb-3">Mosaico: Explorador de buenas prácticas en política migratoria local</h5>
+        <p class="small" style="line-height: 1.8;">
+          <strong>Mosaico</strong> es una herramienta interactiva y accesible que permite consultar las buenas prácticas recopiladas en los tres volúmenes.
+          A través de filtros por categoría, estado y población objetivo, facilita el análisis de iniciativas locales en migración.
+          Diseñado para personas tomadoras de decisiones, equipos técnicos, academia, organizaciones civiles y población en movilidad, Mosaico ofrece información clara y útil para inspirar acciones, fortalecer capacidades y fomentar la colaboración entre actores.
         </p>
+
+        <div class="text-center mt-3">
+          <button class="btn btn-outline-light btn-sm"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#propositoCollapse"
+                  aria-expanded="true"
+                  aria-controls="propositoCollapse">
+            Cerrar sección
+          </button>
+        </div>
       </div>
 
-      <!-- Imagen del propósito -->
-      <div class="col-md-4 p-0 order-1 order-md-2">
+      <!-- Imagen -->
+      <div class="col-md-4 order-1 order-md-2">
         <img src="assets/images/OIM.png"
              alt="Propósito OIM"
-             class="img-fluid w-100 h-100 object-fit-cover rounded-end"
-             style="object-fit: cover;">
+             class="img-fluid w-100 h-100"
+             style="object-fit: cover; min-height: 300px; transition: all 0.3s ease;"
+             onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.3)'"
+             onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
       </div>
     </div>
   </div>

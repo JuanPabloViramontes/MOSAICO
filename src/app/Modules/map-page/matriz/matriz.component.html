@@ -50,26 +50,31 @@
         <tr>
           <th>Estado</th>
           <th>Naturaleza de la política pública</th>
-          <th>Tipos de actor</th>
           <th>Buena práctica</th>
           <th *ngIf="matrizNivel !== 'resumido'" style="min-width: 250px;">Resumen de la buena práctica</th>
           <th *ngIf="matrizNivel !== 'resumido'" style="min-width: 200px;">Categoría</th>
           <th *ngIf="matrizNivel !== 'resumido'">Subcategoría</th>
           <th *ngIf="matrizNivel === 'completo'">Población objetivo</th>
-          <th *ngIf="matrizNivel === 'completo'">Actores involucrados</th>
+          <th *ngIf="matrizNivel === 'completo'">Tipos de actor</th>
+          <th *ngIf="matrizNivel === 'completo'">Autoridades enunciadas</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr *ngFor="let row of filteredData">
-          <td>{{ row.estado }}</td>
-          <td>{{ row.naturaleza_politica_publica }}</td>
-          <td>{{ formatTiposActores(row.tipos_actores) }}</td>
-          <td>
-            <button class="btn btn-link text-primary text-decoration-underline p-0" (click)="openModal(row)">
-              {{ row.buena_practica }}
-            </button>
-          </td>
+     <tr *ngFor="let row of filteredData; let i = index" [attr.id]="'practica-' + i">
+  <td>{{ row.estado }}</td>
+  <td>{{ row.naturaleza_politica_publica }}</td>
+  <td>
+  <a
+    href="https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2024-07/buenas-practicas-volumen-2_final.pdf"
+    target="_blank"
+    rel="noopener"
+    class="text-primary text-decoration-underline"
+  >
+    {{ row.buena_practica }}
+  </a>
+</td>
+
 
           <td *ngIf="matrizNivel !== 'resumido'" style="min-width: 250px;">{{ row.resumen }}</td>
           <td *ngIf="matrizNivel !== 'resumido'" style="min-width: 200px;">{{ row.categoria }}</td>
@@ -77,7 +82,8 @@
 
           <ng-container *ngIf="matrizNivel === 'completo'">
             <td>{{ getPoblacionEmojis(row.poblacion_objetivo) }}</td>
-            <td>{{ row.actores_involucrados }}</td>
+            <td>{{ formatTiposActores(row.tipos_actores) }}</td>
+            <td>{{ row.autoridades_enunciadas }}</td>
           </ng-container>
         </tr>
 

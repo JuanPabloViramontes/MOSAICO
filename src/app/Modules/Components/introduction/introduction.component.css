@@ -1,0 +1,40 @@
+/* Transición más elegante para el collapse */
+.transition-collapse.collapse {
+  transition: height 0.5s ease-in-out;
+}
+
+/* Animación de aparición suave */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+ .hover-effect {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .hover-effect:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+  .transition-collapse {
+  transition: height 0.35s ease, opacity 0.35s ease;
+  overflow: hidden;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

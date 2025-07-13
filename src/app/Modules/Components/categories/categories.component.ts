@@ -16,10 +16,10 @@ export class CategoriesComponent implements AfterViewInit {
   cards = [
     {
       title: 'Estado o región',
-      image: 'assets/images/variables/variables-01.png',
+      image: 'assets/images/variables/variables-01.jpg',
       modalContent: {
-      question: '¿Dónde se implementó la buena práctica?',
-      description: 'Este campo indica en qué estado de la República Mexicana se desarrolló la experiencia. Nos permite reconocer qué territorios están construyendo respuestas locales a los retos de la migración, visibilizando esfuerzos que promueven la dignidad, inclusión y derechos de las personas en movilidad.',
+      question: '¿DÓNDE SE IMPLEMENTÓ LA BUENA PRÁCTICA?',
+      description: 'Este campo indica en qué estado de la República Mexicana se desarrolló la acción. Nos permite reconocer qué territorios están construyendo respuestas locales a los retos de la migración, visibilizando esfuerzos que promueven la dignidad, inclusión y derechos de las personas en movilidad.',
           images: [
           { src: 'assets/images/regiones.png', caption: 'Regiones' },
         ],
@@ -27,10 +27,10 @@ export class CategoriesComponent implements AfterViewInit {
     },
     {
       title: 'Estado fronterizo',
-      image: 'assets/images/variables/variables-02.png',
+      image: 'assets/images/variables/variables-02.jpg',
       modalContent: {
-        question: '¿La entidad tiene frontera internacional?',
-        description: 'Aquí se señala si el estado colinda con Estados Unidos, Guatemala o Belice. Las dinámicas migratorias en zonas fronterizas suelen ser más complejas y requieren respuestas específicas para proteger derechos, atender necesidades urgentes y facilitar procesos de tránsito, retorno o integración.',
+        question: '¿LA ENTIDAD TIENE FRONTERA INTERNACIONAL?',
+        description: 'Aquí se señala si el estado colinda con Estados Unidos, Guatemala o Belice. Esta información es clave, ya que las dinámicas migratorias en zonas fronterizas suelen marcar lógicas específicas y requieren estrategias específicas para garantizar derechos y responder a contextos de alta movilidad.',
         images: [
           { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
           { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
@@ -39,10 +39,10 @@ export class CategoriesComponent implements AfterViewInit {
     },
     {
       title: 'Tema de la buena práctica',
-      image: 'assets/images/variables/variables-03.png',
+      image: 'assets/images/variables/variables-03.jpg',
       modalContent: {
-        question: '¿Cuál fue el enfoque de la acción implementada?',
-        description: 'Identifica el área central de la buena práctica: desde el acceso a derechos como salud, educación o vivienda, hasta la integración comunitaria, la atención humanitaria, la regularización o la participación ciudadana.',
+        question: '¿CUÁL FUE EL ENFOQUE DE LA ACCIÓN IMPLEMENTADA?',
+        description: 'Identifica el área central de la buena práctica, como salud, educación, vivienda, integración, atención humanitaria, regularización o participación ciudadana. Visibilizar estos enfoques permite mapear las prioridades territoriales y detectar áreas que requieren mayor atención o fortalecimiento.',
         images: [
           { src: 'assets/images/atardecer-detail1.jpg', caption: 'Atardecer en la playa' },
           { src: 'assets/images/atardecer-detail2.jpg', caption: 'Atardecer en la montaña' }
@@ -50,23 +50,11 @@ export class CategoriesComponent implements AfterViewInit {
       }
     },
     {
-      title: 'Covid-19',
-      image: 'assets/images/variables/variables-04.png',
-      modalContent: {
-        question: '¿Está relacionada con la emergencia sanitaria por Covid-19?',
-        description: 'Indica si la buena práctica respondió a los desafíos derivados de la pandemia, como acceso a servicios de salud, empleo, albergue o regularización migratoria.',
-        images: [
-          { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
-          { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
-        ],
-      }
-    },
-    {
       title: 'Flujo o situación migratoria',
-      image: 'assets/images/variables/variables-05.png',
+      image: 'assets/images/variables/variables-05.jpg',
       modalContent: {
-        question: '¿A qué tipo de movilidad responde la acción?',
-        description: 'Esta categoría señala a qué perfil de población migrante está dirigida la práctica: personas en tránsito, solicitantes de asilo, población retornada, niñez migrante, personas desplazadas internas o comunidades receptoras.',
+        question: '¿A QUÉ TIPO DE MOVILIDAD RESPONDE LA ACCIÓN?',
+        description: 'Esta categoría permite identificar a qué perfil de población migrante se dirige la práctica: personas en tránsito, solicitantes de asilo, retornadas, desplazadas internas o comunidades receptoras. Diferenciar estos perfiles ayuda a comprender mejor las necesidades específicas de cada grupo.',
         images: [
           { src: 'assets/images/atardecer-detail1.jpg', caption: 'Atardecer en la playa' },
           { src: 'assets/images/atardecer-detail2.jpg', caption: 'Atardecer en la montaña' }
@@ -75,10 +63,10 @@ export class CategoriesComponent implements AfterViewInit {
     },
     {
       title: 'Interseccionalidad',
-      image: 'assets/images/variables/variables-06.png',
+      image: 'assets/images/variables/variables-06.jpg',
       modalContent: {
-        question: '¿La acción toma en cuenta otras condiciones de vulnerabilidad?',
-        description: 'Este criterio permite identificar si la práctica considera factores como género, edad, diversidad, discapacidad, etnia o situación socioeconómica.',
+        question: '¿LA ACCIÓN TOMA EN CUENTA OTRAS CONDICIONES DE VULNERABILIDAD?',
+        description: 'Señala si la práctica considera factores como género, edad, discapacidad, diversidad, pertenencia étnica o situación socioeconómica. Esto permite identificar acciones con enfoque interseccional.',
         images: [
           { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
           { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
@@ -87,10 +75,10 @@ export class CategoriesComponent implements AfterViewInit {
     },
     {
       title: 'Volumen de procedencia',
-      image: 'assets/images/variables/variables-07.png',
+      image: 'assets/images/variables/variables-07.jpg',
       modalContent: {
-        question: '¿En qué volumen del repositorio se encuentra la práctica?',
-        description: 'Este campo ubica la buena práctica dentro del repositorio, según su año de registro o incorporación.',
+        question: '¿EN QUÉ VOLUMEN DEL REPOSITORIO SE ENCUENTRA LA PRÁCTICA?',
+        description: 'Este campo ubica la buena práctica dentro del repositorio, de acuerdo con el año en que fue registrada o integrada. Es útil para conocer la transformación de las respuestas institucionales a lo largo del tiempo y facilitar la consulta organizada de la información.',
         images: [
           { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
           { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
@@ -99,10 +87,10 @@ export class CategoriesComponent implements AfterViewInit {
     },
     {
       title: 'Actores involucrados',
-      image: 'assets/images/variables/variables-08.png',
+      image: 'assets/images/variables/variables-08.jpg',
       modalContent: {
-        question: '¿Quiénes participaron en la implementación?',
-        description: '¿Quiénes participaron en la implementación? Describe los actores clave que hicieron posible la práctica: autoridades estatales o municipales, organizaciones de la sociedad civil, agencias internacionales, sector privado o comunidades migrantes.',
+        question: '¿QUIÉNES PARTICIPARON EN LA IMPLEMENTACIÓN?',
+        description: 'Describe los actores clave involucrados en la puesta en marcha de la práctica, como gobiernos locales, organizaciones de la sociedad civil, agencias internacionales, sector privado o comunidades migrantes. Reconocer la participación multisectorial refuerza la importancia de la colaboración para lograr impactos sostenibles.',
         images: [
           { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
           { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
@@ -111,10 +99,10 @@ export class CategoriesComponent implements AfterViewInit {
     },
     {
       title: 'Temporalidad',
-      image: 'assets/images/variables/variables-09.png',
+      image: 'assets/images/variables/variables-09.jpg',
       modalContent: {
-        question: '¿Cuándo se puso en marcha la acción?',
-        description: 'Permite conocer el año de inicio de la práctica, su continuidad o adaptación a nuevos contextos.',
+        question: '¿CUÁNDO SE PUSO EN MARCHA LA ACCIÓN?',
+        description: 'Permite conocer el año de inicio de la práctica. Esta información es relevante para entender si se trata de una acción reciente, sostenida en el tiempo o adaptada a nuevos contextos, lo que puede indicar su efectividad y capacidad de respuesta ante escenarios cambiantes.',
         images: [
           { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
           { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
@@ -142,6 +130,7 @@ export class CategoriesComponent implements AfterViewInit {
   }
 
   openModal(card: any) {
+    
     this.selectedCard = JSON.parse(JSON.stringify(card));
     this.activeImageIndex = 0;
     const modal = document.getElementById('cardModal');
@@ -165,11 +154,26 @@ export class CategoriesComponent implements AfterViewInit {
     }
   }
 
-  onDropdownChange(option: string) {
-    if (this.selectedCard) {
-      this.selectedCard.modalContent.selectedOption = option;
-    }
+  onDropdownChange(event: Event) {
+  const target = event.target as HTMLSelectElement;
+  const value = target.value;
+
+  if (this.selectedCard) {
+    this.selectedCard.modalContent.selectedOption = value;
   }
+}
+selectedImageSrc: string | null = null;
+
+openImageLightbox() {
+  this.selectedImageSrc = this.selectedCard?.modalContent.images[this.activeImageIndex]?.src || null;
+  const lightboxModalEl = document.getElementById('imageLightbox');
+  if (lightboxModalEl) {
+    const modalInstance = new bootstrap.Modal(lightboxModalEl);
+    modalInstance.show();
+  }
+}
+
+
 
   trackByCardId(index: number, card: any): any {
     return card.id || index;

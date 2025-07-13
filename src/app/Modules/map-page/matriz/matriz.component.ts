@@ -23,25 +23,73 @@ export class MatrizComponent implements OnInit, OnChanges {
   @Output() filteredStatesChanged = new EventEmitter<string[]>();
 
 descargarPDF(): void {
-  setTimeout(() => {
-    const element = document.getElementById('pdfContainer');
+  const fecha = new Date().toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' });
 
-    if (!element) {
-      console.error('No se encontró el contenedor del PDF');
-      return;
+  const container = document.createElement('div');
+
+  // Estilo global para que no se corte
+  container.style.transform = 'scale(0.8)';
+  container.style.transformOrigin = 'top left';
+  container.style.width = '125%'; // importante para que el escalado no corte contenido
+
+  container.innerHTML = `
+    <div style="text-align: center; margin-bottom: 20px;">
+      <img src="assets/images/oim-logo.png" alt="Logo OIM" height="60" />
+      <h2 style="margin: 0;">Matriz de Buenas Prácticas</h2>
+      <h5 style="margin: 0;">Gobiernos locales y migración en México</h5>
+      <p style="margin-top: 10px; font-size: 0.9rem;">Fecha de descarga: ${fecha}</p>
+    </div>
+    <p style="font-size: 0.95rem; text-align: justify;">
+      Este documento presenta un conjunto de buenas prácticas implementadas por gobiernos locales en coordinación con diversos actores,
+      con el objetivo de atender los retos asociados a la movilidad humana en México. La información contenida es útil para tomadores
+      de decisiones, organizaciones de la sociedad civil, y cualquier entidad interesada en replicar o adaptar iniciativas exitosas
+      en sus territorios.
+    </p>
+  `;
+
+  // Clonar tabla
+  const tabla = document.querySelector('#matrizTabla')?.cloneNode(true) as HTMLElement;
+  if (tabla) {
+    container.appendChild(tabla);
+  } else {
+    console.error('No se encontró la tabla');
+    return;
+  }
+
+  // Estilos para que se vea mejor en PDF
+  const style = document.createElement('style');
+  style.textContent = `
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10px;
     }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 4px;
+      text-align: center;
+      vertical-align: top;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #e0e7ff;
+    }
+  `;
+  container.appendChild(style);
 
-    const opt = {
-      margin:       0.5,
-      filename:     `Matriz_Buenas_Practicas_${new Date().toISOString().split('T')[0]}.pdf`,
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2 },
-      jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
-    };
+  // PDF config
+  const options = {
+    margin:       [5, 5, 5, 5],
+    filename:     'Matriz_Buenas_Practicas.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2 },
+    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
+  };
 
-    html2pdf().set(opt).from(element).save();
-  }, 100);
+  html2pdf().set(options).from(container).save();
 }
+
 
   matrizNivel: 'resumido' | 'intermedio' | 'completo' = 'completo';
 
@@ -216,6 +264,7 @@ emitFilteredStates(): void {
 
   this.filteredStatesChanged.emit([...new Set(estados)]);
   this.filteredStateCountsChanged.emit(counts);
+  
 }
 
 showAllPracticas: boolean = false;

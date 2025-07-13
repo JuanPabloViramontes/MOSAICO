@@ -81,9 +81,6 @@ background: linear-gradient(
   </div>
 </div>
 
-
-
-
     <!-- 🌐 Vista general cuando no hay estado seleccionado -->
 <div
   *ngIf="!selectedState"
@@ -102,12 +99,12 @@ background: linear-gradient(
   "
 >
   <div class="container">
-    <nav class="navbar" style="height: 100px; display: flex; justify-content: center; align-items: center;">
+    <nav class="navbar" style="height: 80px; display: flex; justify-content: center; align-items: center;">
       <a class="navbar-brand" [routerLink]="['/']" style="height: 100%; display: flex; align-items: center;">
         <img
-          src="../../../../assets/images/Mosaico-logo-sinFondo.png"
+          src="../../../../assets/images/Mosaico.png"
           alt="Mosaico"
-          style="max-height: 300px; width: auto;"
+          style="max-height: 80px; width: auto;"
         />
       </a>
     </nav>
@@ -122,8 +119,6 @@ background: linear-gradient(
     </button>
   </div>
 </div>
-
-
 
 <!-- CONTENEDOR DEL MAPA CON FILTROS ADENTRO -->
 <div class="container my-4 position-relative">
@@ -146,10 +141,19 @@ background: linear-gradient(
   </div>
 </div>
 
+<div class="tooltip bs-tooltip-top show" role="tooltip" [style.top.px]="tooltipY" [style.left.px]="tooltipX" *ngIf="showTooltip">
+  <div class="tooltip-arrow"></div>
+  <div class="tooltip-inner">
+    {{ tooltipText }}
+  </div>
+</div>
+
+
 <!-- MATRIZ DE DATOS -->
 <div>
   <app-matriz 
     (filteredStatesChanged)="onFilteredStatesChanged($event)"
+    (filteredStateCountsChanged)="updateCountsOnMap($event)"
     (onDownloadPDF)="generarPDF($event)"
     [selectedState]="selectedMatrixState" 
     [selectedRegions]="regionesSeleccionadas"

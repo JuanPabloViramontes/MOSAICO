@@ -7,6 +7,16 @@ import { Component } from '@angular/core';
   styleUrl: './card-flip.component.css'
 })
 export class CardFlipComponent {
+
+  hoverImage: string = 'assets/images/cat-03.png';
+hoverFilter: string = 'none'; // Filtro por defecto
+
+onCardHover(image?: string, color?: string) {
+  this.hoverImage = image || 'assets/images/cat-03.png';
+  this.hoverFilter = 'brightness(1.05) contrast(1.1)';
+}
+
+
  cards = [
   {
     frontImage: 'assets/images/mosaico/categorias-01.jpg',
@@ -17,7 +27,9 @@ export class CardFlipComponent {
         <li>1.1 Leyes y reglamentos que facultan y regulan la participación de las instituciones del estado en la atención a la población en situación de migración</li>
         <li>1.2 Reformas a leyes y reglamentos que eliminan obstáculos o aspectos discriminatorios hacia personas en situación de migración</li>
       </ul>
-    `
+    `,
+    color: 'blue',
+    hoverPreview: 'assets/images/cat-02.png'
   },
   {
     frontImage: 'assets/images/mosaico/categorias-03.jpg',
@@ -28,7 +40,9 @@ export class CardFlipComponent {
         <li>2.1 Registros estatales de migrantes de acceso voluntario para proveerles de servicios.</li>
         <li>2.2 Mecanismos para garantizar el acceso a la información sobre programas, políticas y servicios.</li>
       </ul>
-    `
+    `,
+      color: 'orange',
+    hoverPreview: 'assets/images/cat-03.png'
   },
   {
     frontImage: 'assets/images/mosaico/categorias-05.jpg',
@@ -38,7 +52,9 @@ export class CardFlipComponent {
       <ul>
         <li>3.1 Plataformas virtuales y herramientas tecnológicas para que las personas migrantes puedan acceder a asesoría y servicios.</li>
       </ul>
-    `
+    `,
+      color: 'green',
+    hoverPreview: 'assets/images/cat-01.png'
   },
   {
     frontImage: 'assets/images/mosaico/categorias-07.jpg',

@@ -1,4 +1,3 @@
-// colomos-modal.component.ts
 import { Component, Output, EventEmitter, Input, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
@@ -7,11 +6,11 @@ import { Component, Output, EventEmitter, Input, ViewChild, ElementRef } from '@
   templateUrl: './introduction.component.html',
 })
 export class IntroductionComponent {
-
+  isTextoExpandido: boolean = false;
   isPropositoOpen = false;
   @Input() imageSrc: string = '';
   @Input() imageAlt: string = 'Imagen ilustrativa';
-@ViewChild('propositoCollapse') propositoCollapse!: ElementRef;
+  @ViewChild('propositoCollapse') propositoCollapse!: ElementRef;
 
 ngAfterViewInit() {
   const el = this.propositoCollapse?.nativeElement;

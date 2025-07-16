@@ -67,3 +67,75 @@
   transform: translate(-50%, -100%); /* Centra en X, arriba en Y */
   white-space: nowrap;
 }
+
+.estado-card-hover:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.estado-card-hover {
+  animation: fadeInUp 0.6s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.estado-card-hover {
+  border-left: 6px solid #00aaff;
+  padding-left: 1rem;
+}
+
+.hero-animate {
+  animation: fadeSlideUp 1s ease forwards;
+}
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.98);
+    pointer-events: none;
+  }
+}
+/* Animaciones para el video */
+.video-container {
+  width: 100%;
+  transition: opacity 0.8s ease;
+}
+
+.fade-in {
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 0;
+}
+
+/* Estilos para el video */
+video {
+  border-radius: 0.5rem;
+  background-color: #000;
+}

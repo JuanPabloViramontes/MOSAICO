@@ -109,16 +109,20 @@ naturaleza_politica_publica = [
     { categoria: '13. Reunificación familiar', id: 'categoria13', label: 'Reunificación familiar' }
   ];  
 
- poblacionObjetivo = [
-  { key: 'retornados', label: '🔁🙋‍♂️ Retornados' },
-  { key: 'transito', label: '🚶‍♀️🌫️ En tránsito' },
-  { key: 'mexicanos_extranjero', label: '🤝🌍 Mexicanos en el extranjero' },
-  { key: 'refugiados_asilados', label: '🛡️🧍 Refugiados y asilados' },
-  { key: 'migracion_destino', label: '🌍🧑‍🤝‍🧑 Migración de destino' },
-  { key: 'migracion_interna', label: '🏘️🔄 Migración interna' },
-  { key: 'poblacion_no_migrante', label: '📍🧑‍🤝‍🧑 Población no migrante' },
-  { key: 'personas_desplazadas', label: '⚠️🏚️ Personas desplazadas' }
+poblacionObjetivo = [
+  { key: 'retornados', label: 'Retornados', unicode: '0031' },
+  { key: 'transito', label: 'En tránsito', unicode: '0032' },
+  { key: 'mexicanos_extranjero', label: 'Mexicanos en el extranjero', unicode: '0033' },
+  { key: 'refugiados_asilados', label: 'Refugiados y asilados', unicode: '0034' },
+  { key: 'migracion_destino', label: 'Migración de destino', unicode: '0035' },
+  { key: 'migracion_interna', label: 'Migración interna', unicode: '0036' },
+  { key: 'poblacion_no_migrante', label: 'Población no migrante', unicode: '0037' },
+  { key: 'personas_desplazadas', label: 'Personas desplazadas', unicode: '0038' }
 ];
+
+getEmoji(unicode: string): string {
+  return `&#x${unicode};`;
+}
 
   // Regiones
 toggleRegion(region: any, event: Event) {

@@ -1,28 +1,25 @@
 <div class="card bg-light shadow p-3 region-toggle-card w-100">
-  <h5 class="mb-3">Filtros</h5>
+  <h5 class="mb-3">Filtrar por: </h5>
 
-  <div class="d-flex flex-column gap-4">
+  <div class="d-flex flex-column">
+    
     <!-- UBICACIÓN GEOGRÁFICA -->
-    <div>
+    <div class="filter-section">
       <h6 class="text-primary fw-bold">Ubicación geográfica</h6>
 
       <!-- Regiones -->
       <div class="flex-fill">
-        <h6 class="fw-bold d-flex justify-content-between align-items-center"
-            role="button"
+        <h6 class="fw-bold d-flex justify-content-between align-items-center" role="button"
             (click)="showRegions = !showRegions">
           Regiones
           <span [class]="showRegions ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></span>
         </h6>
         <div *ngIf="showRegions" class="ms-2 mt-2">
           <div *ngFor="let region of regions" class="form-check mb-1">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              [id]="region.key"
-              [checked]="isRegionChecked(region)"
-              (change)="toggleRegion(region, $event)"
-            />
+            <input type="checkbox" class="form-check-input"
+                   [id]="region.key"
+                   [checked]="isRegionChecked(region)"
+                   (change)="toggleRegion(region, $event)" />
             <label class="form-check-label fw-semibold" [for]="region.key">
               {{ region.name }}
             </label>
@@ -31,22 +28,18 @@
       </div>
 
       <!-- Fronteras -->
-      <div class="flex-fill">
-        <h6 class="fw-bold d-flex justify-content-between align-items-center"
-            role="button"
+      <div class="flex-fill mt-3">
+        <h6 class="fw-bold d-flex justify-content-between align-items-center" role="button"
             (click)="showBorders = !showBorders">
           Fronteras
           <span [class]="showBorders ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></span>
         </h6>
         <div *ngIf="showBorders" class="ms-2 mt-2">
           <div *ngFor="let border of borders" class="form-check mb-1">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              [id]="border.key"
-              [checked]="isBorderChecked(border)"
-              (change)="toggleBorder(border, $event)"
-            />
+            <input type="checkbox" class="form-check-input"
+                   [id]="border.key"
+                   [checked]="isBorderChecked(border)"
+                   (change)="toggleBorder(border, $event)" />
             <label class="form-check-label fw-semibold" [for]="border.key">
               {{ border.label }}
             </label>
@@ -55,112 +48,93 @@
       </div>
     </div>
 
-    <!-- SOCIEDAD -->
-    <div>
+    <!-- POBLACIÓN -->
+    <div class="filter-section">
       <h6 class="text-primary fw-bold">Población</h6>
 
       <!-- Población objetivo -->
       <div class="flex-fill">
-        <h6 class="fw-bold d-flex justify-content-between align-items-center"
-            role="button"
+        <h6 class="fw-bold d-flex justify-content-between align-items-center" role="button"
             (click)="showPoblaciones = !showPoblaciones">
           Población objetivo
           <span [class]="showPoblaciones ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></span>
         </h6>
+
         <div *ngIf="showPoblaciones" class="ms-2 mt-2">
           <div *ngFor="let poblacion of poblacionObjetivo" class="form-check mb-1">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              [id]="poblacion.key"
-              [checked]="isPoblacionChecked(poblacion)"
-              (change)="togglePoblacion(poblacion, $event)"
-            />
-            <label class="form-check-label fw-semibold" [for]="poblacion.key">
-              {{ poblacion.label }}
+            <input type="checkbox" class="form-check-input"
+                   [id]="poblacion.key"
+                   [checked]="isPoblacionChecked(poblacion)"
+                   (change)="togglePoblacion(poblacion, $event)" />
+            <label class="form-check-label fw-semibold d-flex align-items-center gap-2" [for]="poblacion.key">
+              <span class="emoji-icon" [innerHTML]="getEmoji(poblacion.unicode)"></span> {{ poblacion.label }}
             </label>
           </div>
-        </div>
-      </div>
 
-      <!-- Interseccionalidades -->
-      <div class="flex-fill">
-        <div class="form-check mt-3">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            id="interseccionalidad"
-            [(ngModel)]="mostrarConInterseccionalidades"
-            (change)="emitFilters()"
-          />
-          <label class="form-check-label fw-semibold" for="interseccionalidad">
-            Mostrar solo prácticas con otras interseccionalidades
-          </label>
+          <!-- Checkbox para interseccionalidades -->
+          <div class="form-check mt-3">
+            <input type="checkbox" class="form-check-input"
+                   id="interseccionalidad"
+                   [(ngModel)]="mostrarConInterseccionalidades"
+                   (change)="emitFilters()" />
+            <label class="form-check-label fw-semibold" for="interseccionalidad">
+              Mostrar solo prácticas con otras interseccionalidades
+            </label>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- SOBRE LA BUENA PRÁCTICA -->
-    <div>
+    <div class="filter-section">
       <h6 class="text-primary fw-bold">Acerca de la buena práctica</h6>
 
       <!-- Categorías -->
       <div class="flex-fill">
-        <h6 class="fw-bold d-flex justify-content-between align-items-center"
-            role="button"
+        <h6 class="fw-bold d-flex justify-content-between align-items-center" role="button"
             (click)="showCategories = !showCategories">
           Categorías
           <span [class]="showCategories ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></span>
         </h6>
         <div *ngIf="showCategories" class="ms-2 mt-2">
           <div *ngFor="let categoria of categorias" class="form-check mb-1">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              [id]="categoria.id"
-              [checked]="isCategoryChecked(categoria)"
-              (change)="toggleCategory(categoria, $event)"
-            />
-            <label class="form-check-label" [for]="categoria.id">
+            <input type="checkbox" class="form-check-input"
+                   [id]="categoria.id"
+                   [checked]="isCategoryChecked(categoria)"
+                   (change)="toggleCategory(categoria, $event)" />
+            <label class="form-check-label fw-semibold" [for]="categoria.id">
               {{ categoria.label }}
             </label>
           </div>
         </div>
       </div>
 
-<!-- Tipo de actor -->
-<div class="mb-3">
-  <label for="tipoActorSelect" class="form-label fw-bold">Tipo de actor</label>
-  <select
-    id="tipoActorSelect"
-    class="form-select"
-    [(ngModel)]="selectedTipoDeActor"
-    (change)="emitFilters()"
-  >
-    <option [ngValue]="null" disabled selected>-- Selecciona un tipo --</option>
-    <option *ngFor="let tipo of tiposDeActor" [ngValue]="tipo">
-      {{ tipo }}
-    </option>
-  </select>
-</div>
+      <!-- Tipo de actor -->
+      <div class="mb-3 mt-3">
+        <label for="tipoActorSelect" class="form-label fw-bold">Tipo de actor</label>
+        <select id="tipoActorSelect" class="form-select"
+                [(ngModel)]="selectedTipoDeActor"
+                (change)="emitFilters()">
+          <option [ngValue]="null" disabled selected>-- Selecciona un tipo --</option>
+          <option *ngFor="let tipo of tiposDeActor" [ngValue]="tipo">
+            {{ tipo }}
+          </option>
+        </select>
+      </div>
 
       <!-- Naturaleza -->
       <div class="flex-fill">
-        <h6 class="fw-bold d-flex justify-content-between align-items-center"
-            role="button"
+        <h6 class="fw-bold d-flex justify-content-between align-items-center" role="button"
             (click)="showNaturaleza = !showNaturaleza">
           Naturaleza de la política pública
           <span [class]="showNaturaleza ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></span>
         </h6>
         <div *ngIf="showNaturaleza" class="ms-2 mt-2">
           <div *ngFor="let naturaleza of naturaleza_politica_publica" class="form-check mb-1">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              [id]="naturaleza.key"
-              [checked]="isNaturalezaChecked(naturaleza)"
-              (change)="toggleNaturaleza(naturaleza, $event)"
-            />
+            <input type="checkbox" class="form-check-input"
+                   [id]="naturaleza.key"
+                   [checked]="isNaturalezaChecked(naturaleza)"
+                   (change)="toggleNaturaleza(naturaleza, $event)" />
             <label class="form-check-label fw-semibold" [for]="naturaleza.key">
               {{ naturaleza.label }}
             </label>

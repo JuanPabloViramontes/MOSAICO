@@ -1,39 +1,49 @@
 <div class="container-fluid p-0">
- <div class="text-white text-center py-5"
-     style=" 
-       background-image: 
-         linear-gradient(rgba(146, 174, 202, 0.95), rgba(255, 255, 255, 0.95)),
-         url('../../../../assets/images/mapaFondo.png');
-       background-size: cover;
-       background-position: center;
-       background-repeat: no-repeat;
-       background-blend-mode: multiply;
-       outline: 4px solid #004080; /* ✅ línea azul alrededor */
-       outline-offset: -8px;       /* ✅ pega el borde al div */
-     ">
-
+  <!-- Encabezado con imagen -->
+  <div class="text-white text-center py-5 rounded-top-4 overflow-hidden"
+       style="
+         background-image:
+           linear-gradient(rgba(146, 174, 202, 0.95), rgba(255, 255, 255, 0.95)),
+           url('../../../../assets/images/Banner.jpg');
+         background-size: cover;
+         background-position: center bottom;
+         background-repeat: no-repeat;
+         background-blend-mode: multiply;
+         outline: 4px solid #000000;
+         outline-offset: -8px;
+       ">
     <div class="container">
       <nav class="navbar" style="height: 100px; display: flex; justify-content: center; align-items: center;">
         <a class="navbar-brand" [routerLink]="['/']" style="height: 100%; display: flex; align-items: center;">
           <img src="../../../../assets/images/Mosaico.png" alt="Mosaico" style="max-height: 80px; width: auto;" />
         </a>
-      </nav>      
-      
+      </nav>
       <h2 class="lead text-light">
-       <strong>Un mapa interactivo sobre las políticas migratorias a nivel local</strong> 
+        <strong>Un mapa interactivo sobre las políticas migratorias a nivel local</strong>
       </h2>
       <p class="lead text-light">
-        Explora las <strong>buenas prácticas</strong> en contexto <strong>migratorio</strong> a nivel local.
+        <strong>Explora las buenas prácticas en contexto migratorio</strong>
       </p>
-      <a [routerLink]="['/map']"
-   class="btn btn-lg mt-4 px-5 shadow text-white"
-   style="background-color: #004080; border: none;">
-   Mapa interactivo
-</a>
     </div>
+  </div>
+
+  <!-- Franja azul con botón -->
+  <div class="text-center py-3 rounded-bottom-4" style="background-color: #0c2e8d;">
+    <a [routerLink]="['/map']"
+       class="btn btn-lg px-4 text-white rounded-3 oim-btn"
+       style="
+         border: 2px solid #ffffffcc;
+         background-color: rgba(255, 255, 255, 0.05);
+         transition: all 0.3s ease;
+         font-weight: 500;
+       ">
+       Mapa interactivo
+    </a>
   </div>
 </div>
 
+
+<!-- Secciones posteriores -->
 <app-introduction class="d-block my-5"></app-introduction>
 <app-categories class="d-block my-5"></app-categories>
 <app-card-flip></app-card-flip>

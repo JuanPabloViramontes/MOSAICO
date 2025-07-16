@@ -6,4 +6,43 @@
   .filtros-horizontal {
     overflow-x: auto;
   }
+  .position-absolute.top-0.end-0 {
+  top: 60px !important;
+}
+
+
+ .emoji-icon {
+  font-family: 'EmojiIcons', 'Open Sans', sans-serif;
+  /* opcional para que se note más el emoji */
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2.3em;
+  vertical-align: middle;
+  user-select: none;
   
+  /* Ajusta el margen derecho para que quede más pegado al texto */
+  margin-right: 0.2em; /* reduce o sube según prefieras */
+  
+  /* Opcional: ajusta el espacio a la izquierda si tienes varios emojis */
+  margin-left: 0;
+  
+  /* Para evitar que el emoji actúe como bloque */
+  display: inline;
+}
+
+.form-check-label {
+  display: flex;
+  align-items: center;
+  gap: 0.2em; /* controla el espacio entre emoji y texto */
+  margin: 0;
+  padding: 0;
+}
+
+.filter-section {
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: #fff;
+}
+

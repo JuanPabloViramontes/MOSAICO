@@ -1,27 +1,33 @@
-<!-- Selector de nivel de detalle -->
-<div class="mb-3 text-end no-print">
-  <div class="btn-group" role="group">
-    <button class="btn btn-outline-primary" [class.active]="matrizNivel === 'resumido'" (click)="matrizNivel = 'resumido'">Resumido</button>
-    <button class="btn btn-outline-primary" [class.active]="matrizNivel === 'intermedio'" (click)="matrizNivel = 'intermedio'">Intermedio</button>
-    <button class="btn btn-outline-primary" [class.active]="matrizNivel === 'completo'" (click)="matrizNivel = 'completo'">Completo</button>
-    <button class="btn" [ngClass]="showAllPracticas ? 'btn-primary' : 'btn-outline-primary'" (click)="toggleShowAll()">
-      Mostrar todas las buenas prácticas
-    </button>
-    <button class="btn btn-success" (click)="descargarPDF()">
-      <i class="bi bi-download"></i> Descargar PDF
-    </button>
-  </div>
+<!-- CONTENEDOR PARA PDF -->
+<div id="pdfContainer" style="padding: 20px; background-color: #fff; color: #000; font-family: Arial, sans-serif;">
 
-  <!-- Campo de búsqueda -->
-  <div class="search-container mt-2" style="width: 300px;">
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Buscar buenas prácticas..." [(ngModel)]="searchTerm" (keyup.enter)="applySearch()">
-      <button class="btn btn-outline-primary" (click)="applySearch()">
-        <i class="bi bi-search"></i>
-      </button>
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <!-- Filtros + buscador alineados con la tabla -->
+    <div class="mb-3 d-flex flex-wrap justify-content-between align-items-center no-print gap-2">
+      <!-- Campo de búsqueda -->
+      <div class="search-container" style="width: 300px;">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Buscar buenas prácticas..." [(ngModel)]="searchTerm" (keyup.enter)="applySearch()">
+          <button class="btn btn-outline-primary" (click)="applySearch()">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="btn-group" role="group">
+        <button class="btn btn-outline-primary" [class.active]="matrizNivel === 'resumido'" (click)="matrizNivel = 'resumido'">Resumido</button>
+        <button class="btn btn-outline-primary" [class.active]="matrizNivel === 'intermedio'" (click)="matrizNivel = 'intermedio'">Intermedio</button>
+        <button class="btn btn-outline-primary" [class.active]="matrizNivel === 'completo'" (click)="matrizNivel = 'completo'">Completo</button>
+        <button class="btn" [ngClass]="showAllPracticas ? 'btn-primary' : 'btn-outline-primary'" (click)="toggleShowAll()">
+          Mostrar todas las buenas prácticas
+        </button>
+        <button class="btn btn-success" (click)="descargarPDF()">
+          <i class="bi bi-download"></i> Descargar PDF
+        </button>
+      </div>
     </div>
-  </div>
-</div>
+
 
 <!-- CONTENEDOR PARA PDF -->
 <div id="pdfContainer" style="padding: 20px; background-color: #fff; color: #000; font-family: Arial, sans-serif;">
@@ -53,9 +59,9 @@
           <th>Buena práctica</th>
           <th *ngIf="matrizNivel !== 'resumido'" style="min-width: 250px;">Resumen de la buena práctica</th>
           <th *ngIf="matrizNivel !== 'resumido'" style="min-width: 200px;">Categoría</th>
-          <th *ngIf="matrizNivel !== 'resumido'">Subcategoría</th>
-          <th *ngIf="matrizNivel === 'completo'">Población objetivo</th>
-          <th *ngIf="matrizNivel === 'completo'">Tipos de actor</th>
+          <th *ngIf="matrizNivel !== 'resumido'" style="min-width: 200px;">Subcategoría</th>
+          <th *ngIf="matrizNivel === 'completo'" style="min-width: 170;">Población objetivo</th>
+          <th *ngIf="matrizNivel === 'completo'" style="min-width: 170px;">Tipos de actor</th>
           <th *ngIf="matrizNivel === 'completo'">Autoridades enunciadas</th>
         </tr>
       </thead>
@@ -74,14 +80,16 @@
     {{ row.buena_practica }}
   </a>
 </td>
-
-
           <td *ngIf="matrizNivel !== 'resumido'" style="min-width: 250px;">{{ row.resumen }}</td>
           <td *ngIf="matrizNivel !== 'resumido'" style="min-width: 200px;">{{ row.categoria }}</td>
           <td *ngIf="matrizNivel !== 'resumido'">{{ row.subcategoria }}</td>
 
           <ng-container *ngIf="matrizNivel === 'completo'">
-            <td>{{ getPoblacionEmojis(row.poblacion_objetivo) }}</td>
+            <td *ngIf="matrizNivel === 'completo'">
+              <span *ngFor="let poblacionItem of getActivePoblaciones(row.poblacion_objetivo)" class="emoji-icon">
+                {{ getEmoji(poblacionItem.unicode) }}
+              </span>
+            </td>
             <td>{{ formatTiposActores(row.tipos_actores) }}</td>
             <td>{{ row.autoridades_enunciadas }}</td>
           </ng-container>

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import html2pdf from 'html2pdf.js';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-matriz',
@@ -11,6 +12,8 @@ import html2pdf from 'html2pdf.js';
 })
 export class MatrizComponent implements OnInit, OnChanges {
   currentDate: Date = new Date();
+  @Input() showAllPracticas: boolean = true;
+@Input() modoResumen: 'resumido' | 'intermedio' | 'detallado' | 'completo' = 'resumido';
   @Input() selectedRegions: string[] = [];
   @Input() selectedState: string | null = null;
   @Input() selectedCategories: number[] = [];
@@ -90,8 +93,19 @@ descargarPDF(): void {
   html2pdf().set(options).from(container).save();
 }
 
+  poblacionObjetivo = [
+    { key: 'retornados', label: 'Retornados', unicode: '0031' },
+    { key: 'transito', label: 'En tránsito', unicode: '0032' },
+    { key: 'mexicanos_extranjero', label: 'Mexicanos en el extranjero', unicode: '0033' },
+    { key: 'refugiados_asilados', label: 'Refugiados y asilados', unicode: '0034' },
+    { key: 'migracion_destino', label: 'Migración de destino', unicode: '0035' },
+    { key: 'migracion_interna', label: 'Migración interna', unicode: '0036' },
+    { key: 'poblacion_no_migrante', label: 'Población no migrante', unicode: '0037' },
+    { key: 'personas_desplazadas', label: 'Personas desplazadas', unicode: '0038' }
+  ];
 
-  matrizNivel: 'resumido' | 'intermedio' | 'completo' = 'completo';
+
+  matrizNivel: 'resumido' | 'intermedio' | 'completo' = 'resumido';
 
   borderStatesMap: { [key: string]: string[] } = {
     frontera_norte: ['Baja California', 'Sonora', 'Chihuahua', 'Coahuila', 'Nuevo León', 'Tamaulipas'],
@@ -107,7 +121,8 @@ descargarPDF(): void {
 
   allData: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
+
   modalVisible = false;
   selectedPractica: any = null;
 
@@ -168,7 +183,13 @@ get filteredData(): any[] {
 
 
   const hasAnyFilter = hasRegion || hasBorder || hasState || hasCategory || hasNaturaleza || hasPoblacion || hasInterseccionalidad || hasTipoDeActor || hasSearch;
-
+ if (this.showAllPracticas) {
+    return this.allData.filter(row => {
+      return !hasSearch || Object.values(row).some(val =>
+        val && val.toString().toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    });
+  }
   // Si no hay filtros activos, no mostrar nada
   if (!hasAnyFilter) {
     return [];
@@ -267,7 +288,6 @@ emitFilteredStates(): void {
   
 }
 
-showAllPracticas: boolean = false;
 toggleShowAll() {
   this.showAllPracticas = !this.showAllPracticas;
 }
@@ -296,29 +316,29 @@ formatTiposActores(tiposActores: string[] | string | undefined): string {
   return '';
 }
 
-getPoblacionEmojis(poblacion: any): string {
-  if (!poblacion) return '';
-
-  const emojis = [];
-
-  if (poblacion.retornados === 1) emojis.push('🔁🙋‍♂️');
-  if (poblacion.transito === 1) emojis.push('🚶‍♀️🌫️');
-  if (poblacion.mexicanos_extranjero === 1) emojis.push('🇲🇽🤝🌍');
-  if (poblacion.refugiados_asilados === 1) emojis.push('🛡️🧍');
-  if (poblacion.migracion_destino === 1) emojis.push('🌍🧑‍🤝‍🧑');
-  if (poblacion.migracion_interna === 1) emojis.push('🏘️🔄');
-  if (poblacion.poblacion_no_migrante === 1) emojis.push('📍🧑‍🤝‍🧑');
-  if (poblacion.personas_desplazadas === 1) emojis.push('⚠️🏚️');
-
-  return emojis.join(', ');
+getEmoji(unicode: string): string {
+  return String.fromCharCode(parseInt(unicode, 16));
 }
 
- 
+
+getActivePoblaciones(poblacionData: any) {
+  if (!poblacionData) return [];
+  return this.poblacionObjetivo.filter(item => poblacionData[item.key] === 1);
+}
+
 // Método para aplicar la búsqueda
 applySearch() {
   // El getter filteredData ya se actualiza automáticamente
 }
+getPoblacionEmojis(poblacion: any): SafeHtml {
+  if (!poblacion) return this.sanitizer.bypassSecurityTrustHtml('');
 
+  const emojis = this.poblacionObjetivo
+    .filter(item => poblacion[item.key] === 1)
+    .map(item => `<span class="emoji-icon">${this.getEmoji(item.unicode)}</span>`);
+
+  return this.sanitizer.bypassSecurityTrustHtml(emojis.join(' '));
+}
 
   openModal(practica: any) {
     this.selectedPractica = practica;

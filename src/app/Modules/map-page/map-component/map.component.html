@@ -1,156 +1,189 @@
 <div class="container-fluid p-0">
-  <div class="text-white position-relative overflow-hidden" style="min-height: 400px;">
 
-    <!-- Vista cuando hay estado seleccionado -->
- <div *ngIf="selectedState"
-  style="
-background: linear-gradient(
-  135deg, 
-  rgba(15, 33, 69, 0.85) 0%,      /* Azul OIM oscuro semitransparente */
-  rgba(70, 90, 120, 0.75) 60%,    /* Azul grisáceo suave */
-  rgba(255, 255, 255, 0.85) 100%  /* Blanco semitransparente */
-);
-    outline: 4px solid #2c3e50;
-    outline-offset: -8px;
-    min-height: 400px;
-    padding: 3rem 0;
-  "
->
-  <div class="container">
-    <div class="row align-items-center gy-4">
-
-      <!-- Texto descriptivo con fondo oscuro semitransparente y centrado -->
-      <div class="col-lg-5">
-        <div 
-          class="p-4 rounded shadow-lg text-center"
-          style="background-color: rgba(15, 33, 69, 0.9); color: #e6ecf3; border: 1px solid #0f2145;"
-        >
-          <h1 class="fw-bold mb-3">{{ selectedState.name }}</h1>
-          <p class="small">{{ selectedState.practices }}</p>
-          <button (click)="clearSelection()" class="btn btn-outline-light btn-sm mt-4 px-4">
-            Volver al mapa completo
-          </button>
-        </div>
+  <!-- 🔹 Vista inicial con opciones -->
+  <div *ngIf="mostrarOpcionesIniciales" class="text-white text-center py-5"
+       style="
+         background-image: linear-gradient(rgba(146, 174, 202, 0.95), rgba(255, 255, 255, 0.95)), url('../../../../assets/images/Banner.jpg');
+         background-size: cover;
+         background-position: center;
+         background-repeat: no-repeat;
+         background-blend-mode: multiply;
+         outline: 4px solid #2c3e50;
+         outline-offset: -8px;
+         min-height: 400px;">
+    <div class="container">
+      <nav class="navbar mb-3" style="height: 80px; display: flex; justify-content: center; align-items: center;">
+        <a class="navbar-brand" [routerLink]="['/']" style="height: 100%; display: flex; align-items: center;">
+          <img src="../../../../assets/images/Mosaico.png" alt="Mosaico" style="max-height: 80px; width: auto;" />
+        </a>
+      </nav>
+      <h2 class="lead text-light fw-bold mb-3">
+        Un mapa interactivo sobre las políticas migratorias a nivel local
+      </h2>
+      <p class="lead text-light mb-4">
+        Explora las <strong>buenas prácticas</strong> en contexto <strong>migratorio</strong> a nivel local.
+      </p>
+      <div class="d-flex justify-content-center gap-4 flex-wrap">
+        <button class="btn btn-lg px-4 shadow text-white"
+                style="background-color: #0c2e8d; border: none;"
+                (click)="ocultarVideoYMostrarMapa()">
+          Empezar a interactuar
+        </button>
+        <button class="btn btn-outline-light btn-lg px-4"
+                (click)="mostrarVideoTutorial()">
+          Ver video tutorial
+        </button>
       </div>
-
-      <!-- Carrusel de imágenes con sombra y borde redondeado -->
-      <div class="col-lg-7">
-        <div
-          id="carouselEstado"
-          class="carousel slide shadow-lg rounded"
-          data-bs-ride="carousel"
-          *ngIf="carouselImages.length > 0"
-          style="max-height: 380px; overflow: hidden; border: 2px solid #0f2145;"
-        >
-          <div class="carousel-inner h-100">
-            <div
-              *ngFor="let img of carouselImages; let i = index"
-              class="carousel-item h-100"
-              [class.active]="i === 0"
-            >
-              <img
-                [src]="img"
-                class="d-block w-100 h-100"
-                style="object-fit: cover;"
-                alt="Imagen de {{selectedState.name}}"
-              />
-            </div>
-          </div>
-          <button
-            class="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselEstado"
-            data-bs-slide="prev"
-          >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Anterior</span>
-          </button>
-          <button
-            class="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselEstado"
-            data-bs-slide="next"
-          >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Siguiente</span>
-          </button>
-        </div>
-      </div>
-
     </div>
   </div>
-</div>
 
-    <!-- 🌐 Vista general cuando no hay estado seleccionado -->
-<div
-  *ngIf="!selectedState"
-  class="text-white text-center py-5"
-  style="
-    background-image: 
-      linear-gradient(rgba(146, 174, 202, 0.95), rgba(255, 255, 255, 0.95)),
-      url('../../../../assets/images/mapaFondo.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-blend-mode: multiply;
-    outline: 4px solid #2c3e50;
-    outline-offset: -8px;
-    min-height: 400px;
-  "
->
-  <div class="container">
-    <nav class="navbar" style="height: 80px; display: flex; justify-content: center; align-items: center;">
-      <a class="navbar-brand" [routerLink]="['/']" style="height: 100%; display: flex; align-items: center;">
-        <img
-          src="../../../../assets/images/Mosaico.png"
-          alt="Mosaico"
-          style="max-height: 80px; width: auto;"
-        />
-      </a>
-    </nav>
-    <h2 class="lead text-light">
-      <strong>Un mapa interactivo sobre las políticas migratorias a nivel local</strong>
-    </h2>
-    <p class="lead text-light">
-      Explora las <strong>buenas prácticas</strong> en contexto <strong>migratorio</strong> a nivel local.
-    </p>
-    <button class="btn btn-lg mt-4 px-5 shadow text-white" style="background-color: #1a365d; border: none;" (click)="hacerZoomAMexico()">
-      Empezar a interactuar
-    </button>
+  <!-- 🔸 Video tutorial -->
+  <div *ngIf="mostrarVideo" class="video-container position-relative text-center" style="margin: 30px auto; max-width: 960px;">
+    <!-- Encabezado homogéneo para video -->
+<div class="header-intro d-flex align-items-center justify-content-center mb-4 position-relative"
+         style="
+           background-color: #1a365d; 
+           color: white; 
+           padding: 12px 20px; 
+           border-radius: 8px;
+           box-shadow: 0 4px 6px rgb(26 54 93 / 0.5);
+         ">
+      <img src="../../../../assets/images/Mosaico.png" alt="Mosaico Logo" style="height: 40px; margin-right: 15px;" />
+      <div>
+        <h3 class="mb-0" style="font-weight: 700;">Video Tutorial</h3>
+        <p class="mb-0" style="font-size: 0.9rem; opacity: 0.85;">
+          Aprende a usar el mosaico para explorar buenas prácticas migratorias.
+        </p>
+      </div>
+    </div>
+    <div class="map-container shadow rounded overflow-hidden mb-3" style="height: 600px;">
+      <video #introVideo class="w-100" autoplay muted playsinline style="object-fit: cover; height: 100%; width: 100%;">
+        <source src="assets/videos/Manual_completo.mp4" type="video/mp4" />
+        Tu navegador no soporta el video.
+      </video>
+    </div>
+   <button (click)="cerrarVideoTutorial()" 
+        class="btn btn-outline-light btn-sm position-absolute start-0 top-0 translate-middle-y mt-4 ms-3"
+        style="z-index: 1;">
+  <i class="bi bi-arrow-left"></i> Volver
+</button>
   </div>
+
+  <!-- 🌐 Estado seleccionado -->
+<div *ngIf="selectedState" class="container-fluid px-0 my-3" #stateCard>
+    <div class="row align-items-stretch rounded-4 overflow-hidden shadow" style="min-height: 300px; background: linear-gradient(135deg, #0f2145, #2c3e50);">
+      <div class="col-md-5 d-flex align-items-stretch p-0">
+        <img [src]="carouselImages[0] || 'assets/images/default-estado.jpg'" alt="Imagen del estado"
+             class="img-fluid w-100 h-100"
+             style="object-fit: cover; transition: all 0.3s ease;"
+             onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.3)'"
+             onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'" />
+      </div>
+
+      <div class="col-md-7 text-white d-flex flex-column justify-content-center p-4">
+<div class="p-3 rounded shadow-lg text-center text-md-start estado-card-hover"
+     [ngStyle]="{
+       'transition': 'all 0.3s ease',
+       'border-left': '4px solid ' + getColorPorVolumen()
+     }">
+          <h2 class="fw-bold mb-2">{{ selectedState.name }}</h2>
+          <p class="small mb-3">{{ selectedState.practices }}</p>
+          <div class="d-flex justify-content-center gap-3 mt-3">
+            <button (click)="clearSelection()" class="btn btn-outline-light btn-sm px-4">
+              Volver al mapa completo
+            </button>
+            <a href="https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2024-07/buenas-practicas-volumen-2_final.pdf"
+               target="_blank"
+               class="btn btn-outline-light btn-sm px-4">
+              Ir al manual
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- 🗺️ Mapa interactivo -->
+<div class="container my-4 position-relative" *ngIf="mostrarMapa">
+
+ <div class="header-intro d-flex flex-wrap align-items-start justify-content-start gap-3 mb-4"
+     style="
+       background-color: #1a365d; 
+       color: white; 
+       padding: 20px; 
+       border-radius: 12px;
+       box-shadow: 0 4px 6px rgb(26 54 93 / 0.5);
+     ">
+
+  <!-- 🔙 Botón de regreso -->
+  <button (click)="volverAInicio()" 
+          class="btn btn-outline-light btn-sm me-3 mb-2">
+    <i class="bi bi-arrow-left"></i> Volver
+  </button>
+
+  <!-- 🔸 Logo + texto -->
+  <img src="../../../../assets/images/Mosaico.png" alt="Mosaico Logo" style="height: 40px;" />
+
+  <div class="flex-grow-1">
+    <h3 class="mb-1 fw-bold">Mapa Interactivo</h3>
+    <p class="mb-2" style="font-size: 0.9rem; opacity: 0.85;">
+      Explora las buenas prácticas a nivel local.
+    </p>
+
+    <!-- 🧭 Mini tutorial -->
+    <div class="bg-white bg-opacity-10 rounded px-3 py-2" style="font-size: 0.85rem;">
+      <p class="mb-1">🌎 Conoce el <strong>contexto migratorio</strong> por estado.</p>
+      <p class="mb-1">🎯 <strong>Selecciona los filtros</strong> que desees y conoce los estados con buenas prácticas coincidentes.</p>
+      <p class="mb-0">🔍 Busca <strong>palabras clave</strong> en la sección inferior izquierda.</p>
+    </div>
+  </div>
+
+  <!-- 🟥🟨🟩 Leyenda de colores por volumen -->
+  <div class="bg-white bg-opacity-10 rounded px-3 py-2"
+       style="font-size: 0.85rem; min-width: 230px;">
+    <p class="mb-1">
+      <span style="display: inline-block; width: 12px; height: 12px; background-color: #dc3545; border-radius: 2px; margin-right: 8px;"></span>
+      <strong>Volumen 1</strong> – rojo
+    </p>
+    <p class="mb-1">
+      <span style="display: inline-block; width: 12px; height: 12px; background-color: #ffc107; border-radius: 2px; margin-right: 8px;"></span>
+      <strong>Volumen 2</strong> – amarillo
+    </p>
+    <p class="mb-0">
+      <span style="display: inline-block; width: 12px; height: 12px; background-color: #28a745; border-radius: 2px; margin-right: 8px;"></span>
+      <strong>Volumen 3</strong> – verde
+    </p>
+  </div>
+
 </div>
 
-<!-- CONTENEDOR DEL MAPA CON FILTROS ADENTRO -->
-<div class="container my-4 position-relative">
 
-  <!-- ✅ Filtros flotantes (ocultos al inicio) -->
-  <div
-    *ngIf="mostrarFiltrosYMapa"
-    class="position-absolute top-0 end-0 m-3 bg-white bg-opacity-75 rounded-3 shadow-sm px-3 py-2"
-    style="z-index: 10; width: 260px; max-height: 90%; overflow-y: auto; font-size: 0.85rem;"
-  >
-    <div>
+  <!-- Contenedor del mapa y los filtros -->
+  <div class="map-container shadow rounded position-relative" #mapaYmatriz>
+
+    <!-- 🎛️ Panel de filtros -->
+<div *ngIf="mostrarFiltrosYMapa"
+     class="position-absolute end-0 me-3 mb-3 ms-3 bg-white bg-opacity-75 rounded-3 shadow-sm px-3 py-2"
+     style="top: -20px; z-index: 10; width: 260px; height: 100%; overflow-y: auto; font-size: 0.85rem;">
       <app-layers side="left" (filtersChanged)="onFiltersChanged($event)"></app-layers>
       <hr class="my-2" />
     </div>
-  </div>
 
-  <!-- ✅ Mapa siempre visible -->
-  <div class="map-container shadow rounded" #mapaYmatriz>
+    <!-- 🗺️ Mapa -->
     <div id="map-container" class="map" style="height: 600px;"></div>
   </div>
 </div>
 
-<div class="tooltip bs-tooltip-top show" role="tooltip" [style.top.px]="tooltipY" [style.left.px]="tooltipX" *ngIf="showTooltip">
-  <div class="tooltip-arrow"></div>
-  <div class="tooltip-inner">
-    {{ tooltipText }}
+
+  <!-- Tooltip personalizado -->
+  <div class="tooltip bs-tooltip-top show" role="tooltip"
+       [style.top.px]="tooltipY"
+       [style.left.px]="tooltipX"
+       *ngIf="showTooltip">
+    <div class="tooltip-arrow"></div>
+    <div class="tooltip-inner">{{ tooltipText }}</div>
   </div>
-</div>
-
-
-<!-- MATRIZ DE DATOS -->
-<div>
+  <!-- 📊 Matriz -->
+<div class="mt-5" *ngIf="!mostrarVideo">
   <app-matriz 
     (filteredStatesChanged)="onFilteredStatesChanged($event)"
     (filteredStateCountsChanged)="updateCountsOnMap($event)"
@@ -162,6 +195,9 @@ background: linear-gradient(
     [selectedNaturalezas]="selectedNaturalezas"
     [selectedPoblacionObjetivo]="poblacionSeleccionada"
     [mostrarSoloInterseccionalidad]="mostrarConInterseccionalidades"
-    [selectedTiposDeActor]="selectedTiposDeActor">
+    [selectedTiposDeActor]="selectedTiposDeActor"
+    [modoResumen]="modoResumen"
+    [showAllPracticas]="mostrarTodasLasPracticas">
   </app-matriz>
+</div>
 </div>

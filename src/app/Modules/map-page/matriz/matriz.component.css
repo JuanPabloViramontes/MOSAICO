@@ -19,3 +19,25 @@
     display: none !important;
   }
 }
+
+.emoji-unicode {
+   font-family: 'EmojiIcons', 'Open Sans', sans-serif;
+  font-size: 2.3rem;
+  letter-spacing: 0.2rem;
+}
+.emoji-icon {
+  font-family: 'EmojiIcons', 'Open Sans', sans-serif;
+  font-size: 2.3rem;
+  vertical-align: middle;
+}
+/* Estilo para TODOS los encabezados de la tabla */
+.table-primary th {
+  background-color: #0c2e8d;  /* Azul OIM */
+  color: white !important;    /* Texto blanco */
+  border-color: #0a2472;      /* Borde más oscuro (opcional) */
+}
+
+/* Opcional: Estilo para hover */
+.table-primary th:hover {
+  background-color: #0a2472;  /* Azul más oscuro al pasar el mouse */
+}

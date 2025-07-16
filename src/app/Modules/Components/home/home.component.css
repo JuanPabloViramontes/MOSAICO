@@ -1,3 +1,16 @@
 #impact-section {
-    margin-top: 200px; /* Ajusta este valor según lo necesites */
-  }
+  margin-top: 200px; /* Ajusta este valor según lo necesites */
+}
+
+.oim-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.oim-btn:active {
+  background-color: rgba(255, 255, 255, 0.12);
+  transform: scale(0.98);
+  box-shadow: none;
+}

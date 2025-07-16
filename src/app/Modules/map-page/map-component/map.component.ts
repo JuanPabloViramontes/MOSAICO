@@ -21,11 +21,13 @@ import html2pdf from 'html2pdf.js';
   standalone: false,
 })
 export class MapComponent implements OnInit  {
+  @ViewChild('stateCard') stateCard!: ElementRef<HTMLDivElement>;
    @ViewChild('mapaYmatriz') mapaYmatriz!: ElementRef;
+    @ViewChild('introVideo') introVideoRef!: ElementRef<HTMLVideoElement>;
+  private _estadosDesdeMatriz: string[] = [];
    public mapaAnimado = false;
   private map!: Map;
   private mapView!: View;
-  mostrarFiltrosYMapa = false;
   private allData: any[] = [];
   private statesLayer!: VectorLayer<VectorSource>;
   private selectedFeature: any = null;
@@ -45,10 +47,20 @@ export class MapComponent implements OnInit  {
   public tooltipX: number = 0;
   public tooltipY: number = 0;
   public showTooltip: boolean = false;
+mostrarFiltrosYMapa = false;
+mostrarOpcionesIniciales = true;
+mostrarVideo = false;
+mostrarMapa = false;
+public modoResumen: 'resumido' | 'intermedio' | 'completo' = 'resumido';
+public selectedCategories: string[] = [];
+
+
+
 
   private stateImages: {[key: string]: string[]} = {
     'Nuevo León': ['assets/images/Estados/nuevoleon1.jpeg', 'assets/images/Estados/nuevoleon2.jpg', 'assets/images/Estados/nuevoleon3.jpg'],
     'Jalisco': ['assets/images/Estados/nuevoleon1.jpeg', 'assets/images/OIM3.jpeg', 'assets/images/OIM4.jpeg'],
+     'Chihuahua': ['assets/images/Estados/chihuahua.png'],
 
   };
   
@@ -96,13 +108,16 @@ export class MapComponent implements OnInit  {
   highlightedBorderStates: Set<string> = new Set();
 
   constructor(private http: HttpClient) {}
-  
-  ngOnInit(): void {
-    this.loadData().then(() => {
-      this.initializeMap();
-    });
-  }
-private _estadosDesdeMatriz: string[] = [];
+
+ngOnInit(): void {
+  this.modoResumen = 'resumido';
+  this.selectedCategories = this.obtenerTodasLasCategorias();
+  this.loadData();
+}
+
+ngAfterViewInit() {
+  this.initializeMapWhenReady();
+}
 
 set estadosDesdeMatriz(value: string[]) {
   this._estadosDesdeMatriz = value;
@@ -115,12 +130,13 @@ get estadosDesdeMatriz() {
   return this._estadosDesdeMatriz;
 }
 public applyMatrixStates(states: string[]): void {
+  if (!this.statesLayer) return;
+
   const source = this.statesLayer.getSource();
   if (!source) return;
 
   const normalizedCounts: Record<string, number> = {};
 
-  // Contar ocurrencias normalizadas
   for (const raw of states) {
     const norm = this.normalizeStateName(raw);
     normalizedCounts[norm] = (normalizedCounts[norm] || 0) + 1;
@@ -138,6 +154,7 @@ public applyMatrixStates(states: string[]): void {
 
   this.statesLayer.changed();
 }
+
 private normalizeStateName(stateName: string): string {
   return stateName
     .toLowerCase()
@@ -146,6 +163,16 @@ private normalizeStateName(stateName: string): string {
     .replace(/\s+/g, '')              // elimina espacios
     .replace(/[^a-z]/g, '');          // elimina caracteres especiales si hubiera
 }
+private obtenerTodasLasCategorias(): string[] {
+  const categorias = new Set<string>();
+  for (const practica of this.allData) {
+    for (const cat of practica.categorias || []) {
+      categorias.add(cat);
+    }
+  }
+  return Array.from(categorias);
+}
+
 
 filteredMatrixStates: string[] = [];
 
@@ -172,7 +199,8 @@ onFilteredStatesChanged(filteredStates: string[]) {
     console.error('Error loading data:', error);
     this.allData = [];
   }
-  this.setPracticeCountsForAllStates(); // 👈 AÑADE ESTA LÍNEA
+  this.setPracticeCountsForAllStates();
+  this.hacerZoomAMexico(); // 👈 AÑADE ESTA LÍNEA
 }
 
 private setPracticeCountsForAllStates(): void {
@@ -202,6 +230,7 @@ private setPracticeCountsForAllStates(): void {
 
 
 public hacerZoomAMexico(): void {
+  
   this.mostrarFiltrosYMapa = true;
 
   // Reinicia la animación por si ya se había activado antes
@@ -220,17 +249,25 @@ public hacerZoomAMexico(): void {
   }
 
   // Scroll casi al mismo tiempo que el zoom
- setTimeout(() => {
+setTimeout(() => {
+  if (!this.mapaYmatriz || !this.mapaYmatriz.nativeElement) {
+    console.warn('mapaYmatriz no está disponible');
+    return;
+  }
+
   const offset = 100; // distancia desde el top (ajústalo a tu gusto)
   const y = this.mapaYmatriz.nativeElement.getBoundingClientRect().top + window.scrollY - offset;
 
   window.scrollTo({ top: y, behavior: 'smooth' });
 }, 300);
-
 }
 
 
   private initializeMap(): void {
+    if (!document.getElementById('map-container')) {
+    console.error('El contenedor del mapa no existe');
+    return;
+  }
     // 1. Configuración del visor centrado en México
    this.mapView = new View({
   center: fromLonLat([0, 20]), // Vista global
@@ -279,6 +316,7 @@ public hacerZoomAMexico(): void {
       layers: [baseLayer, this.statesLayer],
       view: this.mapView
     });
+    this.setPracticeCountsForAllStates();
 
     // 5. Interacción de selección con clic (modificado)
     const select = new Select({
@@ -288,55 +326,65 @@ public hacerZoomAMexico(): void {
     });
 
     select.on('select', (e) => {
-      if (this.selectedFeature) {
-        this.selectedFeature.setStyle(null);
-      }
-    
-      this.selectedFeature = e.selected[0];
-    
-      if (this.selectedFeature) {
-        const stateName = this.selectedFeature.get('name') || '';
-    
-        selectedText.setText(stateName);
-        this.selectedFeature.setStyle(this.selectedStyle);
-    
-        this.selectedState = {
-          name: stateName,
-          practices: this.statePractices[stateName] || 'Información no disponible.'
-        };
-    
-        this.selectedMatrixState = stateName;
-    
-        // Normalizar nombre para buscar imágenes
-        const normalizedState = this.normalizeStateName(stateName);
-    
-        // Cargar las imágenes del estado seleccionado desde el diccionario, si existen
-        this.carouselImages = this.stateImages[stateName] || [];
-    
-        // Ajustar vista al estado seleccionado
-        const extent = this.selectedFeature.getGeometry()?.getExtent();
-        if (extent) {
-          this.map.getView().fit(extent, { padding: [50, 50, 50, 50], duration: 500, maxZoom: 8 });
-        }
-    
-        // Determinar región a partir de capas visibles
-        const regionesEstado = Object.entries(this.regionLayers)
-        .filter(([region, layer]) => {
-          const features = layer.getSource()?.getFeatures() || [];
-          return features.some(f => f.get('name') === stateName);
-        })
-        .map(([region]) => region);
+  // Si había una selección previa, quitar estilo y desmarcar highlight
+  if (this.selectedFeature) {
+    this.selectedFeature.set('highlight', false);
+    this.selectedFeature.setStyle(null);
+  }
 
-      this.regionesSeleccionadas = regionesEstado; // Guardar referencia sin activar
+  // Asignar nueva selección
+  this.selectedFeature = e.selected[0];
 
-    } else {
-      // Limpiar selección
-      this.selectedState = null;
-      this.selectedMatrixState = null;
-      this.carouselImages = [];
-      this.regionesSeleccionadas = [];
+  if (this.selectedFeature) {
+    const stateName = this.selectedFeature.get('name') || '';
+
+    // ✅ Establecer nombre en el texto de selección
+    selectedText.setText(stateName);
+
+    // ✅ Marcar como seleccionado y resaltar visualmente
+    this.selectedFeature.set('highlight', true);
+    this.selectedFeature.setStyle(this.selectedStyle);
+
+    // ✅ Actualizar estado seleccionado
+    this.selectedState = {
+      name: stateName,
+      practices: this.statePractices[stateName] || 'Información no disponible.'
+    };
+  setTimeout(() => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}, 100);
+
+    this.selectedMatrixState = stateName;
+
+    // ✅ Cargar imágenes del estado seleccionado
+    const normalizedState = this.normalizeStateName(stateName);
+    this.carouselImages = this.stateImages[stateName] || [];
+
+    // ✅ Zoom al estado seleccionado
+    const extent = this.selectedFeature.getGeometry()?.getExtent();
+    if (extent) {
+      this.map.getView().fit(extent, { padding: [50, 50, 50, 50], duration: 500, maxZoom: 8 });
     }
 
+    // ✅ Determinar región a partir de capas visibles (si usas esto)
+    const regionesEstado = Object.entries(this.regionLayers)
+      .filter(([region, layer]) => {
+        const features = layer.getSource()?.getFeatures() || [];
+        return features.some(f => f.get('name') === stateName);
+      })
+      .map(([region]) => region);
+
+    this.regionesSeleccionadas = regionesEstado;
+
+    // ✅ Forzar refresco visual
+    this.statesLayer.changed();
+  } else {
+    // Si se deseleccionó todo
+    this.selectedState = null;
+    this.selectedMatrixState = null;
+    this.carouselImages = [];
+    this.regionesSeleccionadas = [];
+  }
     this.statesLayer.changed();
   });
 
@@ -362,42 +410,36 @@ this.map.on('pointermove', (event) => {
   const pixel = this.map.getEventPixel(event.originalEvent);
   const feature = this.map.forEachFeatureAtPixel(pixel, f => f);
 
-  if (feature) {
-    const stateName = feature.get('name');
-    const count = feature.get('count') || 0;
+ if (feature && feature.get('highlight')) {
+  const stateName = feature.get('name');
+  const count = feature.get('count') || 0;
 
-    this.tooltipText = `${stateName}: ${count} práctica${count === 1 ? '' : 's'}`;
+  this.tooltipText = `${stateName}: ${count} práctica${count === 1 ? '' : 's'}`;
 
-    const pointerEvent = event.originalEvent as PointerEvent;
-    const tooltipWidth = 80;
-    const tooltipHeight = 80;
+  const pointerEvent = event.originalEvent as PointerEvent;
+  const tooltipWidth = 80;
+  const tooltipHeight = 80;
 
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
 
-    // Posición inicial deseada: centrado horizontal al mouse y abajo
-    let x = pointerEvent.clientX - tooltipWidth / 2;
-    let y = pointerEvent.clientY - 100;
+  let x = pointerEvent.clientX - tooltipWidth / 2;
+  let y = pointerEvent.clientY - 100;
 
-    // Ajuste para que no se salga por la izquierda
-    if (x < 10) x = 10;
-
-    // Ajuste para que no se salga por la derecha
-    if (x + tooltipWidth > viewportWidth - 10) {
-      x = viewportWidth - tooltipWidth - 10;
-    }
-
-    // Ajuste si se sale por abajo
-    if (y + tooltipHeight > viewportHeight - 10) {
-      y = pointerEvent.clientY - tooltipHeight - 20;
-    }
-
-    this.tooltipX = x;
-    this.tooltipY = y;
-    this.showTooltip = true;
-  } else {
-    this.showTooltip = false;
+  if (x < 10) x = 10;
+  if (x + tooltipWidth > viewportWidth - 10) {
+    x = viewportWidth - tooltipWidth - 10;
   }
+  if (y + tooltipHeight > viewportHeight - 10) {
+    y = pointerEvent.clientY - tooltipHeight - 20;
+  }
+
+  this.tooltipX = x;
+  this.tooltipY = y;
+  this.showTooltip = true;
+} else {
+  this.showTooltip = false;
+}
 });
 }
   
@@ -425,29 +467,26 @@ private getFeatureStyle(feature: any): Style {
 
 
   // Método para limpiar la selección (modificado)
-  clearSelection(): void {
+ clearSelection(): void {
   const source = this.statesLayer.getSource();
   if (source) {
-    source.forEachFeature(feature => feature.set('highlight', false));
+    source.forEachFeature(feature => {
+      feature.set('highlight', false);   // ❗ quitar highlight
+      feature.setStyle(undefined);            // ❗ quitar estilo aplicado manualmente
+    });
     this.statesLayer.changed();
   }
 
+  this.selectedFeature = null;           // ❗ limpiar selección visual
   this.selectedState = null;
   this.selectedMatrixState = null;
   this.regionesSeleccionadas = [];
   this.categoriasSeleccionadas = [];
   this.carouselImages = [];
-  
-  // Centrar vista
+
+  // Centrar vista en México
   this.map.getView().animate({ center: fromLonLat([-102.0, 23.8]), zoom: 5, duration: 500 });
 }
-
-  
-
-    // NUEVO: Crear capas regionales
-    
-  
-   
 
     onBordersChanged(feature: any): boolean {
   if (this.regionesSeleccionadas.length === 0) return true;
@@ -482,12 +521,6 @@ emitFilteredStates(): void {
   const estadosUnicos = [...new Set(this.filteredMatrixStates.map(s => s.trim()))].filter(s => !!s);
   // Aquí emites un evento o actualizas algo con estadosUnicos
   console.log('Estados filtrados emitidos:', estadosUnicos);
-}
-
-
-    private updateLayerStyle(): void {
-  // Solo forzamos que la capa reevalúe estilos
-  this.statesLayer.changed();
 }
 
     get carouselBackgroundStyle(): { [klass: string]: any } {
@@ -559,6 +592,7 @@ emitFilteredStates(): void {
 }
 
 updateCountsOnMap(counts: { [estado: string]: number }) {
+   if (!this.statesLayer || !this.statesLayer.getSource()) return;
   const source = this.statesLayer.getSource();
   if (!source) return;
 
@@ -590,5 +624,95 @@ updateCountsOnMap(counts: { [estado: string]: number }) {
   this.statesLayer.changed();
 }
 
-    
+private mapInitialized = false;
+mostrarTodasLasPracticas = true;
+ocultarVideoYMostrarMapa(): void {
+  this.mostrarOpcionesIniciales = false;
+  this.mostrarMapa = true;
+  this.mostrarVideo = false;
+
+  this.selectedCategories = [];
+  this.regionesSeleccionadas = [];
+  this.selectedBorders = [];
+  this.selectedNaturalezas = [];
+  this.poblacionSeleccionada = [];
+  this.selectedTiposDeActor = null;
+  this.selectedMatrixState = null;
+
+  this.mostrarTodasLasPracticas = false; // 👈 Esto es lo que cambia la lógica
+  this.modoResumen = 'resumido';
+  if (!this.mapInitialized) {
+    setTimeout(() => this.initializeMapWhenReady(), 300);
+  } else if (this.map) {
+    // Si el mapa ya existe, solo actualizar
+    this.map.updateSize();
+    this.hacerZoomAMexico();
+  }
+
+     setTimeout(() => {
+    if (this.mostrarMapa) {
+      this.initializeMapWhenReady();
+    }
+  }, 300);
 }
+
+private initializeMapWhenReady(): void {
+  const container = document.getElementById('map-container');
+  if (!container) {
+    setTimeout(() => this.initializeMapWhenReady(), 100);
+    return;
+  }
+
+  if (!this.map) {
+    this.initializeMap();
+  } else {
+    this.map.updateSize();
+    this.hacerZoomAMexico();
+  }
+}
+mostrarVideoTutorial() {
+  this.mostrarOpcionesIniciales = false;
+  this.mostrarVideo = true;
+}
+cerrarVideoTutorial() {
+  this.mostrarVideo = false;
+  this.mostrarOpcionesIniciales = true;
+}
+volverAInicio(): void {
+  this.mostrarOpcionesIniciales = true;
+  this.mostrarMapa = false;
+  this.mostrarVideo = false;
+  this.selectedState = null;
+
+  // 🔴 Destruye el mapa para evitar errores al volver
+  if (this.map) {
+    this.map.setTarget(undefined); // Quita la referencia al DOM
+    this.map = null as any;   // Asegura que se cree uno nuevo después
+  }
+}
+getColorPorVolumen(): string {
+  if (!this.selectedState || !this.allData) return '#1a365d';
+
+  const estado = this.selectedState.name;
+  const normalizado = this.normalizeStateName(estado);
+
+  const tieneVolumen3 = this.allData.some(p =>
+    this.normalizeStateName(p.estado || p.entidad || '') === normalizado &&
+    p.volumen === 3
+  );
+
+  const tieneVolumen2 = this.allData.some(p =>
+    this.normalizeStateName(p.estado || p.entidad || '') === normalizado &&
+    p.volumen === 2
+  );
+
+  if (tieneVolumen3) return '#28a745'; // verde
+  if (tieneVolumen2) return '#ffc107'; // amarillo
+  return '#dc3545'; // rojo por defecto (volumen 1)
+}
+
+
+
+}
+
+    

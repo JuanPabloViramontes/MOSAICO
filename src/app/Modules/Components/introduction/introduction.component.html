@@ -1,20 +1,22 @@
 <div class="container-fluid px-0">
   <div class="row align-items-stretch rounded-4 overflow-hidden"
-       style="min-height: 300px; background: #004080;">
+       style="min-height: 300px; background: #f4f4f4;">
 
     <!-- Imagen principal -->
     <div class="col-md-5 d-flex align-items-stretch p-0">
-      <img src="assets/images/OIM2.jpg"
+      <img src="assets/images/tapachula.png"
            alt="OIM"
            class="img-fluid w-100"
            style="object-fit: cover; transition: all 0.3s ease;"
-           onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.3)'"
+           onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 15px rgba(0,0,0,0.2)'"
            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
     </div>
 
     <!-- Descripción inicial -->
-    <div class="col-md-7 text-white d-flex flex-column justify-content-center p-4">
-      <h3 class="fw-bold mb-3 text-center text-md-start">Buenas Prácticas en Política Migratoria Local</h3>
+    <div class="col-md-7 d-flex flex-column justify-content-center p-4" style="color: #333;">
+      <h3 class="fw-bold mb-3 text-center text-md-start" style="color: #1a365d;">
+        Buenas Prácticas en Política Migratoria Local
+      </h3>
       <p class="small" style="line-height: 1.7;">
         Esta recopilación presenta iniciativas desarrolladas por entidades federativas en México para atender a personas en situación de movilidad. A través de tres volúmenes, se documentan programas y mecanismos implementados desde lo local.
       </p>
@@ -30,7 +32,7 @@
 
         <!-- Botón CONOFAM -->
         <div class="text-center mt-3">
-          <a href="https://conofam.org/" target="_blank" class="btn btn-outline-light btn-sm d-inline-flex align-items-center gap-2">
+          <a href="https://conofam.org/" target="_blank" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-2">
             <i class="bi bi-box-arrow-up-right"></i> Visitar sitio oficial de <strong>CONOFAM</strong>
           </a>
         </div>
@@ -38,17 +40,17 @@
 
       <!-- Botones -->
       <div class="text-center mt-3">
-        <button class="btn btn-outline-light btn-sm me-2"
+        <button class="btn btn-outline-primary btn-sm me-2"
                 type="button"
+                (click)="isTextoExpandido = !isTextoExpandido"
+                [attr.aria-expanded]="isTextoExpandido"
                 data-bs-toggle="collapse"
                 data-bs-target="#textoExpandido"
-                aria-expanded="false"
                 aria-controls="textoExpandido">
-          Leer más
+          {{ isTextoExpandido ? 'Leer menos' : 'Leer más' }}
         </button>
 
-        <!-- Botón "Conoce nuestro propósito" con mismo efecto -->
-        <button class="btn btn-outline-light btn-sm"
+        <button class="btn btn-outline-primary btn-sm"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#propositoCollapse"
@@ -60,16 +62,17 @@
     </div>
   </div>
 </div>
-
 <!-- Sección colapsable del propósito -->
-<div class="collapse mt-4 transition-collapse" id="propositoCollapse" #propositoCollapse>
-  <div class="card shadow-lg border-0 rounded-4 overflow-hidden animate-fade-in"
-       style="background: #004080;">
-
+<div class="collapse mt-4" id="propositoCollapse">
+  <div class="card shadow-sm border-0 rounded-4 overflow-hidden"
+       style="background: #f4f4f4;"> <!-- Cambié de blanco a gris claro -->
+  
     <div class="row g-0 align-items-stretch">
       <!-- Texto -->
-      <div class="col-md-8 p-4 d-flex flex-column justify-content-center order-2 order-md-1 text-white">
-        <h5 class="fw-bold mb-3">Mosaico: Explorador de buenas prácticas en política migratoria local</h5>
+      <div class="col-md-8 p-4 d-flex flex-column justify-content-center order-2 order-md-1" style="color: #333;">
+        <h5 class="fw-bold mb-3" style="color: #1a365d;">
+          Mosaico: Explorador de buenas prácticas en política migratoria local
+        </h5>
         <p class="small" style="line-height: 1.8;">
           <strong>Mosaico</strong> es una herramienta interactiva y accesible que permite consultar las buenas prácticas recopiladas en los tres volúmenes.
           A través de filtros por categoría, estado y población objetivo, facilita el análisis de iniciativas locales en migración.
@@ -77,24 +80,24 @@
         </p>
 
         <div class="text-center mt-3">
-          <button class="btn btn-outline-light btn-sm"
+          <button class="btn btn-outline-primary btn-sm"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#propositoCollapse"
                   aria-expanded="true"
                   aria-controls="propositoCollapse">
-            Cerrar sección
+            <i class="bi bi-chevron-up"></i>
           </button>
         </div>
       </div>
 
       <!-- Imagen -->
       <div class="col-md-4 order-1 order-md-2">
-        <img src="assets/images/OIM.png"
+        <img src="assets/images/OIM2.jpg"
              alt="Propósito OIM"
              class="img-fluid w-100 h-100"
              style="object-fit: cover; min-height: 300px; transition: all 0.3s ease;"
-             onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.3)'"
+             onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 15px rgba(0,0,0,0.2)'"
              onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
       </div>
     </div>

@@ -1,4 +1,3 @@
-/* Estilo general para body y contenedor principal */
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -9,7 +8,6 @@ body {
   flex-direction: column;
 }
 
-/* Contenedor que rodea el router outlet */
 .container {
   flex: 1 0 auto;
   max-width: 1200px;
@@ -21,7 +19,6 @@ body {
   backdrop-filter: blur(8px);
 }
 
-/* Footer con degradado sutil y texto centrado */
 footer {
   flex-shrink: 0;
   background: linear-gradient(90deg, #003366, #0059b3);
@@ -33,7 +30,6 @@ footer {
   box-shadow: inset 0 1px 5px rgba(255, 255, 255, 0.1);
 }
 
-/* app-nav-menu fijo en la parte superior */
 app-nav-menu {
   position: sticky;
   top: 0;
@@ -47,13 +43,11 @@ app-nav-menu {
   transition: background-color 0.3s ease;
 }
 
-/* Para que app-nav-menu al hacer scroll cambie ligeramente */
 app-nav-menu.scrolled {
   background: #00264d;
   box-shadow: 0 6px 18px rgba(0, 64, 128, 0.9);
 }
 
-/* Scrollbar estilizada en azul */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -69,7 +63,6 @@ app-nav-menu.scrolled {
   border: 2px solid #003366;
 }
 
-/* Efecto hover para elementos interactivos dentro del contenedor */
 .container a, 
 .container button {
   transition: background-color 0.3s ease, color 0.3s ease;

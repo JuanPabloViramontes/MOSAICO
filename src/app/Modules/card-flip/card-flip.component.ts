@@ -8,14 +8,13 @@ import { Component } from '@angular/core';
 })
 export class CardFlipComponent {
 
-  hoverImage: string = 'assets/images/cat-03.png';
-hoverFilter: string = 'none'; // Filtro por defecto
+hoverImage: string = 'assets/images/cat-03.png';
+hoverFilter: string = 'none'; 
 
 onCardHover(image?: string, color?: string) {
   this.hoverImage = image || 'assets/images/cat-03.png';
   this.hoverFilter = 'brightness(1.05) contrast(1.1)';
 }
-
 
  cards = [
   {
@@ -166,5 +165,4 @@ onCardHover(image?: string, color?: string) {
     `
   }
 ];
-
 }

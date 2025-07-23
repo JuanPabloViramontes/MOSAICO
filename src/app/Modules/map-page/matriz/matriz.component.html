@@ -1,10 +1,7 @@
-<!-- CONTENEDOR PARA PDF -->
 <div id="pdfContainer" style="padding: 20px; background-color: #fff; color: #000; font-family: Arial, sans-serif;">
 
   <div style="max-width: 1200px; margin: 0 auto;">
-    <!-- Filtros + buscador alineados con la tabla -->
     <div class="mb-3 d-flex flex-wrap justify-content-between align-items-center no-print gap-2">
-      <!-- Campo de búsqueda -->
       <div class="search-container" style="width: 300px;">
         <div class="input-group">
           <input type="text" class="form-control" placeholder="Buscar buenas prácticas..." [(ngModel)]="searchTerm" (keyup.enter)="applySearch()">
@@ -14,7 +11,6 @@
         </div>
       </div>
 
-      <!-- Botones -->
       <div class="btn-group" role="group">
         <button class="btn btn-outline-primary" [class.active]="matrizNivel === 'resumido'" (click)="matrizNivel = 'resumido'">Resumido</button>
         <button class="btn btn-outline-primary" [class.active]="matrizNivel === 'intermedio'" (click)="matrizNivel = 'intermedio'">Intermedio</button>
@@ -29,9 +25,7 @@
     </div>
 
 
-<!-- CONTENEDOR PARA PDF -->
 <div id="pdfContainer" style="padding: 20px; background-color: #fff; color: #000; font-family: Arial, sans-serif;">
-  <!-- Encabezado institucional visible solo en PDF -->
   <div class="only-pdf" style="text-align: center; margin-bottom: 20px;">
     <img src="assets/images/oim-logo.png" alt="Logo OIM" height="60" style="margin-bottom: 10px;" />
     <h2 style="margin: 0;">Matriz de Buenas Prácticas</h2>
@@ -41,7 +35,6 @@
     </p>
   </div>
 
-  <!-- Introducción visible solo en PDF -->
   <p class="only-pdf" style="font-size: 0.95rem; text-align: justify;">
     Este documento presenta un conjunto de buenas prácticas implementadas por gobiernos locales en coordinación con diversos actores,
     con el objetivo de atender los retos asociados a la movilidad humana en México. La información contenida es útil para tomadores
@@ -49,7 +42,6 @@
     en sus territorios.
   </p>
 
-  <!-- TABLA -->
   <div class="table-responsive" id="matrizTabla">
     <table class="table table-bordered table-striped align-middle text-center">
       <thead class="table-primary">
@@ -104,7 +96,6 @@
   </div>
 </div>
 
-<!-- Modal -->
 <app-modal-practica
   *ngIf="modalVisible && selectedPractica"
   [show]="modalVisible"

@@ -17,19 +17,20 @@ export class LayersComponent {
     conInterseccionalidades: boolean
     tipos_de_actor: string | null ,
   }>();
+
   showRegions = false;
   showCategories = false;
   showBorders = false;
   selectedCategories: number[] = [];
-selectedRegions: string[] = [];
-selectedBorders: string[] = [];
-selectedNaturalezas: string[] = [];
-selectedPoblacionesObjetivo: string[] = [];
-mostrarConInterseccionalidades = false;
-showNaturaleza = false;
-selectedTipoDeActor: string | null = null;
-showTiposDeActor = false;
-showPoblaciones = false;
+  selectedRegions: string[] = [];
+  selectedBorders: string[] = [];
+  selectedNaturalezas: string[] = [];
+  selectedPoblacionesObjetivo: string[] = [];
+  mostrarConInterseccionalidades = false;
+  showNaturaleza = false;
+  selectedTipoDeActor: string | null = null;
+  showTiposDeActor = false;
+  showPoblaciones = false;
 
   tiposDeActor = [
   "En colaboración con organismos internacionales",
@@ -124,7 +125,6 @@ getEmoji(unicode: string): string {
   return `&#x${unicode};`;
 }
 
-  // Regiones
 toggleRegion(region: any, event: Event) {
   const checked = (event.target as HTMLInputElement).checked;
   if (checked) {
@@ -139,7 +139,6 @@ isRegionChecked(region: any): boolean {
   return this.selectedRegions.includes(region.key);
 }
 
-// Fronteras
 toggleBorder(border: any, event: Event) {
   const checked = (event.target as HTMLInputElement).checked;
   if (checked) {
@@ -154,7 +153,6 @@ isBorderChecked(border: any): boolean {
   return this.selectedBorders.includes(border.key);
 }
 
-// Naturaleza (antes guardabas labels, ahora siempre keys)
 toggleNaturaleza(naturaleza: { key: string; label: string }, event: Event): void {
   const checked = (event.target as HTMLInputElement).checked;
   if (checked) {
@@ -169,7 +167,6 @@ isNaturalezaChecked(naturaleza: { key: string; label: string }): boolean {
   return this.selectedNaturalezas.includes(naturaleza.key);
 }
 
-// Categorías (usando número, igual creamos nuevos arrays)
 toggleCategory(categoria: any, event: Event) {
   const checked = (event.target as HTMLInputElement).checked;
   const catNum = Number(categoria.categoria.split('.')[0].trim());
@@ -186,7 +183,6 @@ isCategoryChecked(categoria: any): boolean {
   return this.selectedCategories.includes(catNum);
 }
 
-// Población objetivo
 togglePoblacion(poblacion: any, event: Event) {
   const checked = (event.target as HTMLInputElement).checked;
   if (checked) {
@@ -201,7 +197,7 @@ isPoblacionChecked(poblacion: any): boolean {
   return this.selectedPoblacionesObjetivo.includes(poblacion.key);
 }
 
-  emitFilters() {
+emitFilters() {
   this.filtersChanged.emit({
     regions: this.selectedRegions,
     categories: this.selectedCategories,
@@ -224,5 +220,4 @@ resetFilters(): void {
 
   this.emitFilters();
 }
-
 }

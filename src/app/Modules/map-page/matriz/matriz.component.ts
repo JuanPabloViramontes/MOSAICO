@@ -13,9 +13,7 @@ declare var bootstrap: any;
   standalone: false
 })
 export class MatrizComponent implements OnInit, OnChanges {
-  filtrosActivos: any = {};
-  currentDate: Date = new Date();
-    @Input() mapElement: HTMLElement | null = null; 
+  @Input() mapElement: HTMLElement | null = null; 
   @Input() showAllPracticas: boolean = true;
   @ViewChild('matrizTabla', { static: false }) matrizTablaRef!: ElementRef;
   @Input() modoResumen: 'resumido' | 'intermedio' | 'detallado' | 'completo' = 'resumido';
@@ -29,6 +27,37 @@ export class MatrizComponent implements OnInit, OnChanges {
   @Input() selectedTiposDeActor: string | null = null;
   @Output() onDownloadPDF = new EventEmitter<{practica: any, filteredData: any[]}>();
   @Output() filteredStatesChanged = new EventEmitter<string[]>();
+  @Output() filteredStateCountsChanged = new EventEmitter<{ [estado: string]: number }>();
+  filtrosActivos: any = {};
+  currentDate: Date = new Date();
+  allData: any[] = [];
+  modalVisible = false;
+  selectedPractica: any = null;
+
+  poblacionObjetivo = [
+    { key: 'retornados', label: 'Retornados', unicode: '0031' },
+    { key: 'transito', label: 'En tránsito', unicode: '0032' },
+    { key: 'mexicanos_extranjero', label: 'Mexicanos en el extranjero', unicode: '0033' },
+    { key: 'refugiados_asilados', label: 'Refugiados y asilados', unicode: '0034' },
+    { key: 'migracion_destino', label: 'Migración de destino', unicode: '0035' },
+    { key: 'migracion_interna', label: 'Migración interna', unicode: '0036' },
+    { key: 'poblacion_no_migrante', label: 'Población no migrante', unicode: '0037' },
+    { key: 'personas_desplazadas', label: 'Personas desplazadas', unicode: '0038' }
+  ];
+
+  matrizNivel: 'resumido' | 'intermedio' | 'completo' = 'resumido';
+
+  borderStatesMap: { [key: string]: string[] } = {
+    frontera_norte: ['Baja California', 'Sonora', 'Chihuahua', 'Coahuila', 'Nuevo León', 'Tamaulipas'],
+    frontera_sur: ['Chiapas', 'Tabasco', 'Campeche', 'Quintana Roo']
+  };
+  
+  regionStatesMap: { [key: string]: string[] } = {
+    norte: ['Baja California', 'Baja California Sur', 'Sonora', 'Chihuahua', 'Coahuila', 'Nuevo León', 'Tamaulipas', 'Sinaloa', 'Durango'],
+    occidente: ['Nayarit', 'Zacatecas', 'Jalisco', 'Aguascalientes', 'Colima', 'Guanajuato', 'Michoacán', 'San Luis Potosí'],
+    centro: ['Querétaro', 'Hidalgo', 'México', 'Ciudad de México', 'Tlaxcala', 'Morelos', 'Puebla'],
+    sureste: ['Guerrero', 'Veracruz', 'Oaxaca', 'Tabasco', 'Chiapas', 'Yucatán', 'Campeche', 'Quintana Roo']
+  };
 
   ngAfterViewInit(): void {
     this.initializeTooltips();
@@ -45,6 +74,7 @@ initializeTooltips(): void {
   );
   tooltipTriggerList.forEach((el) => new bootstrap.Tooltip(el));
 }
+
 async descargarPDF(): Promise<void> {
   const fecha = new Date().toLocaleDateString('es-MX', {
     year: 'numeric',
@@ -54,210 +84,218 @@ async descargarPDF(): Promise<void> {
 
   const container = document.createElement('div');
   container.style.fontFamily = 'Inter, Arial, sans-serif';
-  container.style.width = '100%';
+  container.style.width = '297mm';
+  container.style.margin = '0 auto';
   container.style.padding = '0';
+  container.style.backgroundColor = '#ffffff';
 
-  // PRIMERA PÁGINA
-  const primeraPagina = document.createElement('div');
-  primeraPagina.style.padding = '20mm 15mm';
-  primeraPagina.style.boxSizing = 'border-box';
-  primeraPagina.style.pageBreakAfter = 'always';
+  const portada = document.createElement('div');
+  portada.style.padding = '20mm 15mm';
+  portada.style.pageBreakAfter = 'always';
+  portada.style.height = '190mm';
+  portada.style.display = 'flex';
+  portada.style.flexDirection = 'column';
+  portada.style.justifyContent = 'space-between';
 
-primeraPagina.innerHTML += `
-  <div style="text-align: center; margin-bottom: 30px; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto;">
-    <img src="assets/images/logos.jpg" alt="Logos" style="width: 100%; height: auto; max-height: 200px; border-radius: 8px;"
-         onerror="this.onerror=null;this.src='https://placehold.co/600x150/0c2e8d/ffffff?text=Logos+Placeholder';" />
-  </div>
-`;
-
-  primeraPagina.innerHTML += `
-    <div style="text-align: center; margin-bottom: 30px; width: 100%; max-width: 700px; margin-left: auto; margin-right: auto;">
-      <img src="assets/images/Banner.jpg" alt="Banner" style="width: 100%; height: auto; max-height: 220px; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.2);" onerror="this.onerror=null;this.src='https://placehold.co/600x200/1e40af/ffffff?text=Banner+Placeholder';" />
+  portada.innerHTML = `
+    <div>
+      <div style="text-align: center; margin-bottom: 30px;">
+        <img src="assets/images/logos.jpg" alt="Logos"
+          style="width: 100%; max-width: 500px; height: auto;"
+          onerror="this.onerror=null;this.src='https://placehold.co/600x150/0c2e8d/ffffff?text=Logos+Placeholder';" />
+      </div>
+      <div style="text-align: center; margin-bottom: 30px;">
+        <img src="assets/images/Banner.jpg" alt="Banner"
+          style="width: 100%; max-width: 600px; height: auto; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.2);" 
+          onerror="this.onerror=null;this.src='https://placehold.co/600x200/1e40af/ffffff?text=Banner+Placeholder';" />
+      </div>
+      <div style="border-bottom: 4px solid #0c2e8d; width: 60%; margin: 30px auto;"></div>
+      <h1 style="text-align: center; color: #0c2e8d; font-size: 2.5rem; margin: 20px 0;">Matriz de Buenas Prácticas</h1>
+      <h3 style="text-align: center; color: #1e40af; font-size: 1.5rem;">Buenas prácticas en contexto migratorio a nivel local</h3>
+      <p style="text-align: center; color: #6b7280; font-size: 1.1rem;">Fecha de descarga: ${fecha}</p>
     </div>
-    <div style="border-bottom: 4px solid #0c2e8d; width: 70%; margin: 30px auto 40px auto; border-radius: 2px;"></div>
-  `;
-
-  primeraPagina.innerHTML += `
-    <h1 style="text-align: center; color: #0c2e8d; margin-bottom: 15px; font-size: 2.2rem; font-weight: 700;">Matriz de Buenas Prácticas</h1>
-    <h3 style="text-align: center; color: #1e40af; margin-bottom: 25px; font-size: 1.4rem; font-weight: 600;">Buenas prácticas en contexto migratorio a nivel local</h3>
-    <p style="text-align: center; font-size: 1rem; color: #6b7280; margin-bottom: 40px;">Fecha de descarga: ${fecha}</p>
-  `;
-
-  primeraPagina.innerHTML += `
-    <div style="font-size: 1.05rem; text-align: justify; margin: 30px auto; color: #111827; line-height: 1.7; max-width: 800px;">
-      <p style="margin-bottom: 15px;">Este documento reúne un conjunto de buenas prácticas impulsadas por gobiernos locales en coordinación con diversos actores
+    <div style="text-align: justify; color: #111827; line-height: 1.6; font-size: 1rem;">
+      <p>Este documento reúne un conjunto de buenas prácticas impulsadas por gobiernos locales en coordinación con diversos actores
       para atender los desafíos vinculados a la atención de personas migrantes y en otros procesos de movilidad en México.</p>
       <p>La información aquí presentada corresponde a los filtros seleccionados en el mapa interactivo de Mosaico y ofrece
       herramientas útiles para tomadores de decisiones, organizaciones de la sociedad civil y cualquier instancia interesada
       en replicar o adaptar experiencias exitosas en sus territorios.</p>
     </div>
   `;
-  container.appendChild(primeraPagina);
+  container.appendChild(portada);
 
-  // SEGUNDA PÁGINA
-  const segundaPagina = document.createElement('div');
-  segundaPagina.style.padding = '20mm 15mm';
-  segundaPagina.style.boxSizing = 'border-box';
-  segundaPagina.style.pageBreakAfter = 'always';
+  const filtrosYMapa = document.createElement('div');
+  filtrosYMapa.style.padding = '20mm 15mm';
+  filtrosYMapa.style.pageBreakAfter = 'always';
+  filtrosYMapa.style.height = '190mm';
 
-  segundaPagina.innerHTML += `
-    <h2 style="text-align: center; color: #0c2e8d; margin-bottom: 30px; font-size: 1.8rem; font-weight: 700;">Detalles de la Búsqueda y Visualización</h2>
-    <div style="margin: 20px auto 40px auto; padding: 20px; border-left: 6px solid #1e40af; background-color: #f0f8ff; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-width: 800px;">
-      <h3 style="color: #1e40af; margin-bottom: 15px; border-bottom: 2px solid #dbeafe; padding-bottom: 10px; font-size: 1.3rem; font-weight: 600;">Filtros Aplicados</h3>
-      <ul style="font-size: 1rem; margin: 0; padding-left: 25px; color: #1f2937; line-height: 2;">
-        <li><strong>Regiones:</strong> ${this.selectedRegions.length > 0 ? this.selectedRegions.join(', ') : 'Ninguna'}</li>
-        <li><strong>Fronteras:</strong> ${this.selectedBorders.length > 0 ? this.selectedBorders.join(', ') : 'Ninguna'}</li>
-        <li><strong>Categorías:</strong> ${this.selectedCategories.length > 0 ? this.selectedCategories.join(', ') : 'Ninguna'}</li>
-        <li><strong>Naturaleza de política pública:</strong> ${this.selectedNaturalezas.length > 0 ? this.selectedNaturalezas.join(', ') : 'Ninguna'}</li>
-        <li><strong>Población objetivo:</strong> ${this.selectedPoblacionObjetivo.length > 0 ? this.selectedPoblacionObjetivo.join(', ') : 'Ninguna'}</li>
+  filtrosYMapa.innerHTML = `
+    <h2 style="text-align: center; color: #0c2e8d; margin-bottom: 25px; font-size: 2rem;">Detalles de la Búsqueda y Visualización</h2>
+    <div style="margin: 20px auto; padding: 20px; border-left: 6px solid #1e40af; background-color: #f0f8ff; border-radius: 10px; max-width: 100%;">
+      <h3 style="color: #1e40af; margin-bottom: 15px; font-size: 1.3rem;">Filtros Aplicados</h3>
+      <ul style="padding-left: 25px; color: #1f2937; font-size: 1rem; line-height: 1.6;">
+        <li><strong>Regiones:</strong> ${this.selectedRegions.length ? this.selectedRegions.join(', ') : 'Ninguna'}</li>
+        <li><strong>Fronteras:</strong> ${this.selectedBorders.length ? this.selectedBorders.join(', ') : 'Ninguna'}</li>
+        <li><strong>Categorías:</strong> ${this.selectedCategories.length ? this.selectedCategories.join(', ') : 'Ninguna'}</li>
+        <li><strong>Naturaleza de política pública:</strong> ${this.selectedNaturalezas.length ? this.selectedNaturalezas.join(', ') : 'Ninguna'}</li>
+        <li><strong>Población objetivo:</strong> ${this.selectedPoblacionObjetivo.length ? this.selectedPoblacionObjetivo.map(key => this.poblacionObjetivo.find(p => p.key === key)?.label || key).join(', ') : 'Ninguna'}</li>
         <li><strong>Interseccionalidad:</strong> ${this.mostrarSoloInterseccionalidad ? 'Sí' : 'No'}</li>
         <li><strong>Tipo de actor:</strong> ${this.selectedTiposDeActor || 'Ninguno'}</li>
       </ul>
     </div>
   `;
 
-  const mapaElem = this.mapElement;
-  if (mapaElem) {
+  if (this.mapElement) {
     try {
-      const canvas = await html2canvas(mapaElem as HTMLElement, {
-        scale: 2,
+      const canvas = await html2canvas(this.mapElement, {
+        scale: 1.2,
         useCORS: true,
-        logging: true
+        allowTaint: true,
+        scrollX: 0,
+        scrollY: 0,
+        width: this.mapElement.offsetWidth,
+        height: this.mapElement.offsetHeight,
+        ignoreElements: (el: Element) => el.classList.contains('tooltip') || el.tagName === 'BUTTON'
       });
-      const imgData = canvas.toDataURL('image/png');
-      const wrapper = document.createElement('div');
-      wrapper.style.textAlign = 'center';
-      wrapper.style.marginTop = '40px';
-      wrapper.style.marginBottom = '20px';
 
       const img = document.createElement('img');
-      img.src = imgData;
-      img.style.maxWidth = '90%';
-      img.style.height = 'auto';
-      img.style.border = '4px solid #dbeafe';
-      img.style.borderRadius = '12px';
-      img.style.boxShadow = '0 10px 20px rgba(0,0,0,0.25)';
-      img.style.padding = '5px';
-      img.style.backgroundColor = '#ffffff';
+      img.src = canvas.toDataURL('image/png');
+      img.style.maxWidth = '70%'; 
+      img.style.maxHeight = '45%'; 
+      img.style.display = 'block';
+      img.style.margin = '15px auto'; 
+      img.style.borderRadius = '8px';
+      img.style.border = '3px solid #dbeafe';
 
-      const caption = document.createElement('p');
-      caption.style.fontSize = '0.9rem';
-      caption.style.color = '#4b5563';
-      caption.style.marginTop = '15px';
-      caption.textContent = 'Visualización del mapa interactivo con los filtros aplicados.';
-
-      wrapper.appendChild(img);
-      wrapper.appendChild(caption);
-      segundaPagina.appendChild(wrapper);
-    } catch (error) {
-      console.warn('Error capturando imagen del mapa:', error);
-      segundaPagina.innerHTML += `<p style="text-align: center; color: #cc0000; font-size: 0.9rem; margin-top: 30px; padding: 10px; background-color: #ffebeb; border-radius: 8px;">
-                                    (No se pudo generar la imagen del mapa.)
-                                  </p>`;
+      filtrosYMapa.appendChild(img);
+    } catch (err) {
+      const errorMsg = document.createElement('p');
+      errorMsg.style.textAlign = 'center';
+      errorMsg.style.color = 'red';
+      errorMsg.textContent = 'No se pudo generar imagen del mapa.';
+      filtrosYMapa.appendChild(errorMsg);
     }
   }
-  container.appendChild(segundaPagina);
 
-  // TERCERA PÁGINA
-  const terceraPagina = document.createElement('div');
-  terceraPagina.style.padding = '20mm 15mm';
-  terceraPagina.style.boxSizing = 'border-box';
+  container.appendChild(filtrosYMapa);
 
-  terceraPagina.innerHTML += `
-    <h2 style="text-align: center; color: #0c2e8d; margin-bottom: 30px; font-size: 1.8rem; font-weight: 700;">Matriz de Buenas Prácticas Detallada</h2>
-    <p style="text-align: center; font-size: 0.95rem; color: #4b5563; margin-bottom: 20px;">A continuación se presenta la tabla completa de buenas prácticas basada en los filtros seleccionados.</p>
-  `;
+  const matrizSection = document.createElement('div');
+  matrizSection.style.padding = '15mm 5mm'; 
 
-  const tabla = document.querySelector('#matrizTabla')?.cloneNode(true) as HTMLElement;
-  if (tabla) {
-    tabla.style.fontSize = '9px';
-    tabla.style.marginTop = '20px';
-    tabla.style.marginBottom = '30px';
-    tabla.style.borderCollapse = 'collapse';
-    tabla.style.width = '100%';
-    tabla.style.tableLayout = 'fixed';
+  const tituloMatriz = document.createElement('h2');
+  tituloMatriz.style.textAlign = 'center';
+  tituloMatriz.style.color = '#0c2e8d';
+  tituloMatriz.style.marginBottom = '15px';
+  tituloMatriz.style.fontSize = '1.5rem';
+  tituloMatriz.textContent = 'Matriz de Buenas Prácticas Detallada';
+  
+  matrizSection.appendChild(tituloMatriz);
 
-    tabla.querySelectorAll('th').forEach(th => {
+  const originalTable = document.getElementById('matrizTabla');
+  if (originalTable) {
+    const tableClone = originalTable.cloneNode(true) as HTMLElement;
+
+    tableClone.style.width = '100%';
+    tableClone.style.tableLayout = 'fixed';
+    tableClone.style.borderCollapse = 'collapse';
+    tableClone.style.fontSize = '7px';
+    tableClone.style.lineHeight = '1.2';
+    tableClone.style.marginTop = '10px';
+    tableClone.style.marginLeft = '-3mm'; 
+    tableClone.style.pageBreakInside = 'auto';
+    tableClone.style.wordWrap = 'break-word';
+
+    const headers = tableClone.querySelectorAll('th');
+    const columnWidths = [
+      '7%',  
+      '11%',  
+      '4%',  
+      '8%',   
+      '14%',  
+      '11%',  
+      '12%',  
+      '8%',   
+      '13%', 
+      '12%' 
+    ];
+
+    headers.forEach((th, index) => {
+      if (columnWidths[index]) {
+        (th as HTMLElement).style.width = columnWidths[index];
+        (th as HTMLElement).style.minWidth = columnWidths[index];
+        (th as HTMLElement).style.maxWidth = columnWidths[index];
+      }
       (th as HTMLElement).style.backgroundColor = '#1e40af';
       (th as HTMLElement).style.color = 'white';
-      (th as HTMLElement).style.padding = '8px 5px';
+      (th as HTMLElement).style.padding = '5px 2px'; 
       (th as HTMLElement).style.border = '1px solid #1e3a8a';
-      (th as HTMLElement).style.textAlign = 'left';
+      (th as HTMLElement).style.fontSize = '7px';
       (th as HTMLElement).style.fontWeight = 'bold';
+      (th as HTMLElement).style.textAlign = 'center';
+      (th as HTMLElement).style.verticalAlign = 'middle';
+      (th as HTMLElement).style.wordWrap = 'break-word';
+      (th as HTMLElement).style.hyphens = 'auto';
     });
 
-    tabla.querySelectorAll('td').forEach(td => {
-      (td as HTMLElement).style.padding = '7px 5px';
-      (td as HTMLElement).style.border = '1px solid #d1d5db';
-      (td as HTMLElement).style.verticalAlign = 'top';
-      (td as HTMLElement).style.wordWrap = 'break-word';
+    const rows = tableClone.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+      const cells = row.querySelectorAll('td');
+      cells.forEach((td, index) => {
+        if (columnWidths[index]) {
+          (td as HTMLElement).style.width = columnWidths[index];
+          (td as HTMLElement).style.minWidth = columnWidths[index];
+          (td as HTMLElement).style.maxWidth = columnWidths[index];
+        }
+        (td as HTMLElement).style.padding = '4px 2px'; 
+        (td as HTMLElement).style.border = '1px solid #d1d5db';
+        (td as HTMLElement).style.fontSize = '6px';
+        (td as HTMLElement).style.verticalAlign = 'top';
+        (td as HTMLElement).style.wordWrap = 'break-word';
+        (td as HTMLElement).style.hyphens = 'auto';
+        (td as HTMLElement).style.overflowWrap = 'break-word';
+        (td as HTMLElement).style.textAlign = 'left';
+        
+      });
     });
 
-    tabla.querySelectorAll('tr:nth-child(even)').forEach(tr => {
-      (tr as HTMLElement).style.backgroundColor = '#f9fafb';
-    });
-
-    terceraPagina.appendChild(tabla);
-  } else {
-    terceraPagina.innerHTML += `<p style="text-align: center; color: #cc0000; font-size: 0.9rem; margin-top: 30px; padding: 10px; background-color: #ffebeb; border-radius: 8px;">
-                                  (No se pudo encontrar la tabla con ID 'matrizTabla'.)
-                                </p>`;
+    matrizSection.appendChild(tableClone);
   }
 
-  container.appendChild(terceraPagina);
+  container.appendChild(matrizSection);
 
   const options = {
-    margin: [15, 15, 15, 15],
-    filename: `Matriz_Buenas_Practicas_${new Date().toISOString().slice(0, 10)}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
+    margin: [5, 3, 5, 3],
+    filename: `Matriz_Buenas_Practicas_${fecha.replace(/[/]/g, '-')}.pdf`,
+    image: { type: 'jpeg', quality: 0.95 },
     html2canvas: {
-      scale: 2,
-      logging: true,
+      scale: 1.5,
       useCORS: true,
+      allowTaint: true,
+      logging: false,
+      dpi: 150,
+      letterRendering: true,
+      ignoreElements: (el: Element) => el.classList.contains('no-print')
     },
     jsPDF: {
       unit: 'mm',
       format: 'a4',
-      orientation: 'portrait',
-      hotfixes: ["px_scaling"]
+      orientation: 'landscape'
+    },
+    pagebreak: {
+      mode: ['avoid-all', 'css'],
+      before: '.page-break-before',
+      after: '.page-break-after'
     }
   };
 
-  await html2pdf().set(options).from(container).save();
+  try {
+    await html2pdf().set(options).from(container).save();
+  } catch (error) {
+    console.error('Error generando PDF:', error);
+  }
 }
 
-  poblacionObjetivo = [
-    { key: 'retornados', label: 'Retornados', unicode: '0031' },
-    { key: 'transito', label: 'En tránsito', unicode: '0032' },
-    { key: 'mexicanos_extranjero', label: 'Mexicanos en el extranjero', unicode: '0033' },
-    { key: 'refugiados_asilados', label: 'Refugiados y asilados', unicode: '0034' },
-    { key: 'migracion_destino', label: 'Migración de destino', unicode: '0035' },
-    { key: 'migracion_interna', label: 'Migración interna', unicode: '0036' },
-    { key: 'poblacion_no_migrante', label: 'Población no migrante', unicode: '0037' },
-    { key: 'personas_desplazadas', label: 'Personas desplazadas', unicode: '0038' }
-  ];
-
-
-  matrizNivel: 'resumido' | 'intermedio' | 'completo' = 'resumido';
-
-  borderStatesMap: { [key: string]: string[] } = {
-    frontera_norte: ['Baja California', 'Sonora', 'Chihuahua', 'Coahuila', 'Nuevo León', 'Tamaulipas'],
-    frontera_sur: ['Chiapas', 'Tabasco', 'Campeche', 'Quintana Roo']
-  };
-  
-  regionStatesMap: { [key: string]: string[] } = {
-    norte: ['Baja California', 'Baja California Sur', 'Sonora', 'Chihuahua', 'Coahuila', 'Nuevo León', 'Tamaulipas', 'Sinaloa', 'Durango'],
-    occidente: ['Nayarit', 'Zacatecas', 'Jalisco', 'Aguascalientes', 'Colima', 'Guanajuato', 'Michoacán', 'San Luis Potosí'],
-    centro: ['Querétaro', 'Hidalgo', 'México', 'Ciudad de México', 'Tlaxcala', 'Morelos', 'Puebla'],
-    sureste: ['Guerrero', 'Veracruz', 'Oaxaca', 'Tabasco', 'Chiapas', 'Yucatán', 'Campeche', 'Quintana Roo']
-  };
-
-  allData: any[] = [];
-
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
-
-  modalVisible = false;
-  selectedPractica: any = null;
 
 ngOnInit(): void {
   forkJoin([
@@ -270,28 +308,19 @@ ngOnInit(): void {
       let vol2Data = res2.buenas_practicas2 || [];
       const vol3Data = res3.buenas_practicas3 || [];
 
-      // ✅ Convertir nombres del volumen 2 a mayúsculas
       vol2Data = vol2Data.map((item: any) => ({
         ...item,
         buena_practica: item.buena_practica?.toUpperCase?.() || ''
       }));
 
-      console.log('Volumen 1:', vol1Data.length, 'objetos');
-      console.log('Volumen 2:', vol2Data.length, 'objetos');
-      console.log('Volumen 3:', vol3Data.length, 'objetos');
-
       this.allData = [...vol2Data, ...vol3Data, ...vol1Data];
     },
     error: (err) => {
-      console.error('Error al cargar uno de los volúmenes:', err);
       this.allData = [];
     }
   });
 }
-  // Agrega esta propiedad
 searchTerm: string = '';
-
-// Modifica el getter filteredData para incluir la búsqueda
 get filteredData(): any[] {
    const hasSearch = !!this.searchTerm?.trim();
 
@@ -304,7 +333,6 @@ get filteredData(): any[] {
       : all;
   }
 
-
   const hasRegion = this.selectedRegions.length > 0;
   const hasBorder = this.selectedBorders.length > 0;
   const hasState = !!this.selectedState;
@@ -314,7 +342,6 @@ get filteredData(): any[] {
   const hasInterseccionalidad = this.mostrarSoloInterseccionalidad;
   const hasTipoDeActor = !!this.selectedTiposDeActor;
 
-
   const hasAnyFilter = hasRegion || hasBorder || hasState || hasCategory || hasNaturaleza || hasPoblacion || hasInterseccionalidad || hasTipoDeActor || hasSearch;
  if (this.showAllPracticas) {
     return this.allData.filter(row => {
@@ -323,17 +350,14 @@ get filteredData(): any[] {
       );
     });
   }
-  // Si no hay filtros activos, no mostrar nada
   if (!hasAnyFilter) {
     return [];
   }
 
-  // 🔁 Obtener todos los estados que coinciden por filtro
   const statesFromBorders = hasBorder ? this.selectedBorders.flatMap(border => this.borderStatesMap[border] || []) : [];
   const statesFromRegions = hasRegion ? this.selectedRegions.flatMap(region => this.regionStatesMap[region] || []) : [];
   const statesFromState = hasState && this.selectedState ? [this.selectedState] : [];
 
-  // 🔁 Intersección entre los filtros geográficos
   let geographicStates: string[] = [];
 
   if (hasRegion || hasBorder || hasState) {
@@ -356,7 +380,6 @@ get filteredData(): any[] {
   }
 }
 
-
   return this.allData.filter(row => {
     const rowState = row.estado?.trim().toLowerCase();
     const categoriaNum = parseInt(row.categoria?.split('.')[0], 10);
@@ -368,7 +391,6 @@ get filteredData(): any[] {
     : [];
 
 const selectedActor = this.selectedTiposDeActor?.toLowerCase().trim();
-
 const matchesTipoDeActor = !hasTipoDeActor || tiposActoresArray.some(
   actor => actor.toLowerCase().trim() === selectedActor
 );
@@ -382,8 +404,6 @@ const matchesTipoDeActor = !hasTipoDeActor || tiposActoresArray.some(
     const matchesSearch = !hasSearch || Object.values(row).some(val =>
       val && val.toString().toLowerCase().includes(this.searchTerm.toLowerCase())
     );
-
-    // 👇 Lógica AND: debe cumplir todo lo activo
     return matchesGeo &&
            matchesCategory &&
            matchesNaturaleza &&
@@ -403,11 +423,8 @@ get stateCounts(): { [estado: string]: number } {
       counts[estado] = (counts[estado] || 0) + 1;
     }
   }
-
   return counts;
 }
-
-@Output() filteredStateCountsChanged = new EventEmitter<{ [estado: string]: number }>();
 
 emitFilteredStates(): void {
   const estados = this.filteredData.map(item => item.estado?.trim()).filter(Boolean);
@@ -423,8 +440,8 @@ emitFilteredStates(): void {
 
 toggleShowAll() {
   this.showAllPracticas = !this.showAllPracticas;
-  this.applySearch(); // actualiza el filtrado
-  setTimeout(() => this.initializeTooltips(), 0); // espera a que el DOM se actualice
+  this.applySearch(); 
+  setTimeout(() => this.initializeTooltips(), 0); 
 }
 
 clearFilters() {
@@ -460,7 +477,6 @@ getActivePoblaciones(poblacionData: any) {
   return this.poblacionObjetivo.filter(item => poblacionData[item.key] === 1);
 }
 
-// Método para aplicar la búsqueda
 applySearch() {
 }
 
@@ -484,8 +500,7 @@ getPoblacionEmojis(poblacion: any): SafeHtml {
     this.selectedPractica = null;
   }
 
- // matriz.component.ts
 encodeURIComponentWrapper(value: string): string {
   return encodeURIComponent(value);
 }
-   }
+}

@@ -1,5 +1,5 @@
 <div class="container-fluid p-0">
-  <!-- Banner principal -->
+  <!-- Banner -->
   <div *ngIf="mostrarOpcionesIniciales" class="text-white text-center rounded-top-4 overflow-hidden position-relative"
        style="
          background-image:
@@ -13,7 +13,7 @@
          outline-offset: -8px;
          min-height: 400px;">
 
-    <!-- Overlay clickeable SOLO para el banner de fondo -->
+    <!-- Overlay -->
     <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; cursor: pointer; z-index: 999;" 
          [routerLink]="['/home']"></div>
 
@@ -28,7 +28,6 @@
     </div>
   </div>
 
-  <!-- Franja azul con botones -->
   <div *ngIf="mostrarOpcionesIniciales" class="text-white text-center py-4 rounded-bottom-4" style="background-color: #0c2e8d;">
     <div class="d-flex justify-content-center gap-4 flex-wrap">
       <button class="btn btn-outline-light btn-lg px-4"
@@ -42,9 +41,8 @@
     </div>
   </div>
 
-  <!-- 🔸 Video tutorial (visible SOLO cuando mostrarVideo === true) -->
+  <!-- 🔸 Video tutorial-->
   <div *ngIf="mostrarVideo" class="video-container position-relative text-center" style="padding-top: 60px; margin: 0 auto; max-width: 960px;">
-    <!-- Encabezado homogéneo para video -->
     <div class="header-intro d-flex align-items-center justify-content-between flex-wrap mb-4 px-3"
          style="
            background-color: #0a2472; 
@@ -53,14 +51,12 @@
            border-radius: 8px;
            box-shadow: 0 4px 6px rgb(26 54 93 / 0.5);
          ">
-      <!-- Botones -->
       <div class="d-flex gap-2">
         <button (click)="cerrarVideoTutorial()" class="btn btn-outline-light btn-sm">
           <i class="bi bi-arrow-left"></i> Volver
         </button>
       </div>
 
-      <!-- Logo + texto -->
       <div class="d-flex align-items-center gap-3 flex-grow-1 justify-content-center text-center text-md-start">
         <img src="../../../../assets/images/Mosaico.png" alt="Mosaico Logo" style="height: 40px;" />
         <div>
@@ -86,10 +82,9 @@
     </div>
   </div>
 
-  <!-- 🌐 Estado seleccionado (SÓLO cuando mostrarMapa y hay selectedState) -->
+  <!-- Selected state -->
   <div *ngIf="mostrarMapa && selectedState" class="container-fluid px-0 my-3" #stateCard>
     <div class="row align-items-stretch rounded-4 overflow-hidden shadow" style="min-height: 300px; background: linear-gradient(135deg, #0c2e8d, #0a2472);">
-      <!-- Imagen del estado -->
       <div class="col-md-5 d-flex align-items-stretch p-0">
         <img [src]="carouselImages[0] || 'assets/images/default-estado.jpg'" alt="Imagen del estado"
              class="img-fluid w-100 h-100"
@@ -98,7 +93,6 @@
              onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'" />
       </div>
 
-      <!-- Contenido del estado -->
       <div class="col-md-7 text-white d-flex justify-content-center align-items-end p-4 position-relative">
         <div class="p-3 rounded shadow-lg text-center text-md-start estado-card-hover w-100"
              [ngStyle]="{
@@ -108,7 +102,6 @@
           <h2 class="fw-bold mb-2">{{ selectedState.name }}</h2>
           <p class="small mb-3">{{ selectedState.practices }}</p>
 
-          <!-- Botones -->
           <div class="d-flex justify-content-center flex-wrap gap-3 mt-3">
             <button (click)="clearSelection()" class="btn btn-outline-light btn-sm px-4">
               Volver al mapa completo
@@ -121,7 +114,6 @@
           </div>
         </div>
 
-        <!-- Leyenda de colores posicionada a la derecha -->
         <div class="bg-white bg-opacity-10 text-white rounded px-3 py-2 position-absolute end-0 top-0 mt-2 me-2"
              style="font-size: 0.75rem; min-width: 200px;">
           <p class="mb-1">
@@ -165,9 +157,6 @@
       </div>
     </div>
 
-      
-
-        <!-- 🧭 Mini tutorial + leyenda -->
         <div class="bg-white bg-opacity-10 rounded px-3 py-2 d-flex flex-wrap justify-content-between align-items-start gap-3" style="font-size: 0.85rem;">
           <div>
             <p class="mb-1">🌎 Conoce el <strong>contexto migratorio</strong> por estado.</p>
@@ -175,7 +164,6 @@
             <p class="mb-0">🔍 Busca <strong>palabras clave</strong> en la sección inferior izquierda.</p>
           </div>
           
-          <!-- 🔴 Indicadores -->
           <div class="d-flex flex-column gap-1 text-white">
             <div class="d-flex align-items-center">
               <div style="width: 12px; height: 12px; background-color: #dc3545; margin-right: 6px; border-radius: 2px;"></div>
@@ -189,11 +177,7 @@
         </div>
       </div>
     
-
-    <!-- Contenedor del mapa y los filtros -->
     <div class="map-container shadow rounded position-relative">
-
-      <!-- 🎛️ Panel de filtros -->
       <div *ngIf="mostrarFiltrosYMapa"
            class="position-absolute end-0 me-3 mb-3 ms-3 bg-white bg-opacity-75 rounded-3 shadow-sm px-3 py-2"
            style="top: -20px; z-index: 10; width: 260px; height: 100%; overflow-y: auto; font-size: 0.85rem;">
@@ -204,12 +188,10 @@
         <hr class="my-2" />
       </div>
 
-      <!-- 🗺️ Mapa -->
     <div id="map-container" class="map" style="height: 600px;" #mapContainerDiv></div>
     </div>
   </div>
 
-  <!-- Tooltip personalizado (sigue respondiendo a mostrarMapa para evitar que aparezca encima del video) -->
   <div class="tooltip bs-tooltip-top show" role="tooltip"
        [style.top.px]="tooltipY"
        [style.left.px]="tooltipX"
@@ -222,7 +204,6 @@
   <app-matriz
     (filteredStatesChanged)="onFilteredStatesChanged($event)"
     (filteredStateCountsChanged)="updateCountsOnMap($event)"
-    (onDownloadPDF)="generarPDF($event)" 
     [selectedState]="selectedMatrixState" 
     [selectedRegions]="regionesSeleccionadas"
     [selectedCategories]="categoriasSeleccionadas"

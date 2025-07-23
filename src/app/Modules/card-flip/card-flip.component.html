@@ -1,7 +1,5 @@
 
 <h2 class="fw-bold mb-3 text-center">Mosaico de buenas prácticas</h2>
-
-<!-- Tarjetas -->
 <div class="boxesContainer">
   <div
     class="cardBox"
@@ -10,7 +8,7 @@
     (mouseleave)="onCardHover()"
   >
     <div class="card">
-      <!-- Lado frontal -->
+      <!-- Front side -->
       <div class="front text-white position-relative">
         <ng-container *ngIf="card.frontImage">
           <img
@@ -24,8 +22,7 @@
         <p class="mb-0">{{ card.frontText }}</p>
       </div>
       </div>
-
-      <!-- Lado trasero -->
+      <!-- Back side  -->
       <div class="back text-dark">
         <ng-container *ngIf="card.backImage">
           <img

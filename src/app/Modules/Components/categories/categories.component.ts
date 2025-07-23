@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-
 declare var bootstrap: any;
 
 @Component({
@@ -12,6 +11,7 @@ export class CategoriesComponent implements AfterViewInit {
   @ViewChild('carouselTrack', { static: true }) carousel!: ElementRef;
   selectedCard: any = null;
   activeImageIndex: number = 0;
+  selectedImageSrc: string | null = null;
 
   cards = [
     {
@@ -157,7 +157,6 @@ export class CategoriesComponent implements AfterViewInit {
     this.selectedCard.modalContent.selectedOption = value;
   }
 }
-selectedImageSrc: string | null = null;
 
 openImageLightbox() {
   this.selectedImageSrc = this.selectedCard?.modalContent.images[this.activeImageIndex]?.src || null;
@@ -167,8 +166,6 @@ openImageLightbox() {
     modalInstance.show();
   }
 }
-
-
 
   trackByCardId(index: number, card: any): any {
     return card.id || index;

@@ -1,20 +1,16 @@
-/* Oculta elementos con esta clase en pantalla */
 .only-pdf {
   display: none;
 }
 
-/* Oculta elementos con esta clase solo en impresión/PDF */
 .no-print {
   display: block;
 }
 
 @media print {
-  /* En impresión/PDF muestra los elementos con only-pdf */
   .only-pdf {
     display: block !important;
   }
 
-  /* En impresión/PDF oculta los elementos con no-print */
   .no-print {
     display: none !important;
   }
@@ -30,14 +26,13 @@
   font-size: 2.3rem;
   vertical-align: middle;
 }
-/* Estilo para TODOS los encabezados de la tabla */
+
 .table-primary th {
-  background-color: #0c2e8d;  /* Azul OIM */
-  color: white !important;    /* Texto blanco */
-  border-color: #0a2472;      /* Borde más oscuro (opcional) */
+  background-color: #0c2e8d;  
+  color: white !important;    
+  border-color: #0a2472;      
 }
 
-/* Opcional: Estilo para hover */
 .table-primary th:hover {
-  background-color: #0a2472;  /* Azul más oscuro al pasar el mouse */
+  background-color: #0a2472;  
 }

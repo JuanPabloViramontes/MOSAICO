@@ -23,16 +23,16 @@ import { FeatureLike } from 'ol/Feature';
 })
 
 export class MapComponent implements OnInit  {
-  @ViewChild('mapContainerDiv') mapContainerDiv!: ElementRef; 
-  @Output() mapElementReady = new EventEmitter<HTMLElement>(); 
-  @ViewChild('stateCard') stateCard!: ElementRef<HTMLDivElement>;
-   @ViewChild('mapaYmatriz') mapaYmatriz!: ElementRef;
-    @ViewChild('introVideo') introVideoRef!: ElementRef<HTMLVideoElement>;
+@Output() mapElementReady = new EventEmitter<HTMLElement>(); 
+@ViewChild('mapContainerDiv') mapContainerDiv!: ElementRef; 
+@ViewChild('stateCard') stateCard!: ElementRef<HTMLDivElement>;
+@ViewChild('mapaYmatriz') mapaYmatriz!: ElementRef;
+@ViewChild('introVideo') introVideoRef!: ElementRef<HTMLVideoElement>;
 
-      public mapElementForPDF: HTMLElement | null = null; 
-    mostrarMatrizInicial: boolean = true;
+  public mapElementForPDF: HTMLElement | null = null; 
+  mostrarMatrizInicial: boolean = true;
   private _estadosDesdeMatriz: string[] = [];
-   public mapaAnimado = false;
+  public mapaAnimado = false;
   private map!: Map;
   private mapView!: View;
   private allData: any[] = [];
@@ -61,8 +61,11 @@ export class MapComponent implements OnInit  {
   public modoResumen: 'resumido' | 'intermedio' | 'completo' = 'resumido';
   public selectedCategories: string[] = [];
   filtrosActivos: any = {};
-  private selectedStates: Set<string> = new Set();
-
+  highlightedBorderStates: Set<string> = new Set();
+  filteredMatrixStates: string[] = [];
+  private mapInitialized = false;
+  mostrarTodasLasPracticas = true;
+  
  private stateImages: { [key: string]: string[] } = {
   'Aguascalientes': ['assets/images/Estados/aguascalientes.jpeg'],
   'Baja California': ['assets/images/Estados/bajacalifornia.png'],
@@ -90,7 +93,7 @@ export class MapComponent implements OnInit  {
   'San Luis Potosí': ['assets/images/Estados/sanluis.jpeg'],
   'Sinaloa': ['assets/images/Estados/sinaloa.png'], 
   'Sonora': ['assets/images/Estados/sonora.png'],
-  'Tabasco': ['assets/images/Estados/tabascoo.png'], //Mala resolución
+  'Tabasco': ['assets/images/Estados/tabascoo.png'], 
   'Tamaulipas': ['assets/images/Estados/tamaulipas.png'],
   'Tlaxcala': ['assets/images/Estados/tlaxcala.png'],
   'Veracruz': ['assets/images/Estados/veracruz.png'],
@@ -133,14 +136,17 @@ export class MapComponent implements OnInit  {
     'Zacatecas': 'Zacatecas es un estado históricamente expulsor de población, con fuerte vínculo con comunidades migrantes en Estados Unidos. Registra flujos de retorno y tránsito. La entidad destaca por un robusto marco institucional liderado por la Secretaría del Zacatecano Migrante (SEZAMI), que implementa programas de reunificación familiar, reintegración laboral, traslado humanitario y asesoría jurídica para personas en movilidad. A través de leyes locales, consejos interinstitucionales y plataformas digitales, promueve la protección de derechos, el vínculo con la diáspora y la participación comunitaria, con énfasis en mujeres, personas adultas mayores y niñez migrante.'
   };
 
+   public defaultBackgroundStyle = {
+      'background-color': '#123456', 
+      'min-height': '300px'
+    };
+
   borderStatesMap: { [key: string]: string[] } = {
     frontera_norte: ['Baja California', 'Sonora', 'Chihuahua', 'Coahuila', 'Nuevo León', 'Tamaulipas'],
     frontera_sur: ['Chiapas', 'Tabasco', 'Campeche', 'Quintana Roo']
   };
   
-  highlightedBorderStates: Set<string> = new Set();
-
-  constructor(private http: HttpClient) {}
+ constructor(private http: HttpClient) {}
 
 ngOnInit(): void {
   this.modoResumen = 'resumido';
@@ -159,20 +165,6 @@ ngAfterViewInit() {
     });
   }
 }
-
-
-private checkMapaYMatrizAvailability(attempts = 0, maxAttempts = 5) {
-  if (this.mapaYmatriz?.nativeElement) {
-    console.log('✅ mapaYmatriz está disponible', this.mapaYmatriz.nativeElement);
-    // Aquí puedes ejecutar la lógica que depende del elemento
-  } else if (attempts < maxAttempts) {
-    console.warn(`Intento ${attempts + 1}: mapaYmatriz no disponible aún`);
-    setTimeout(() => this.checkMapaYMatrizAvailability(attempts + 1), 200);
-  } else {
-    console.error('❌ mapaYmatriz no disponible después de varios intentos');
-  }
-}
-
 
 set estadosDesdeMatriz(value: string[]) {
   this._estadosDesdeMatriz = value;
@@ -210,14 +202,21 @@ public applyMatrixStates(states: string[]): void {
   this.statesLayer.changed();
 }
 
+private checkMapaYMatrizAvailability(attempts = 0, maxAttempts = 5) {
+  if (!this.mapaYmatriz?.nativeElement && attempts < maxAttempts) {
+    setTimeout(() => this.checkMapaYMatrizAvailability(attempts + 1), 200);
+  }
+}
+
 private normalizeStateName(stateName: string): string {
   return stateName
     .toLowerCase()
-    .normalize("NFD")                  // separa acentos
-    .replace(/[\u0300-\u036f]/g, "")  // elimina acentos
-    .replace(/\s+/g, '')              // elimina espacios
-    .replace(/[^a-z]/g, '');          // elimina caracteres especiales si hubiera
+    .normalize("NFD")                 
+    .replace(/[\u0300-\u036f]/g, "")  
+    .replace(/\s+/g, '')         
+    .replace(/[^a-z]/g, '');         
 }
+
 private obtenerTodasLasCategorias(): string[] {
   const categorias = new Set<string>();
   for (const practica of this.allData) {
@@ -227,9 +226,6 @@ private obtenerTodasLasCategorias(): string[] {
   }
   return Array.from(categorias);
 }
-
-
-filteredMatrixStates: string[] = [];
 
 onFilteredStatesChanged(filteredStates: string[]) {
   this.filteredMatrixStates = filteredStates || [];
@@ -248,10 +244,8 @@ onFilteredStatesChanged(filteredStates: string[]) {
       ...(res3.buenas_practicas3 || [])
     ];
 
-    // Emitir estados filtrados iniciales (sin filtros aplicados)
     this.emitFilteredStates();
   } catch (error) {
-    console.error('Error loading data:', error);
     this.allData = [];
   }
   this.setPracticeCountsForAllStates();
@@ -261,7 +255,6 @@ private setPracticeCountsForAllStates(): void {
   const source = this.statesLayer?.getSource();
   if (!source) return;
 
-  // Crear un mapa de conteo por estado
   const counts: Record<string, number> = {};
   for (const practice of this.allData) {
     const rawState = practice.estado || practice.entidad || '';
@@ -269,31 +262,25 @@ private setPracticeCountsForAllStates(): void {
     counts[normalized] = (counts[normalized] || 0) + 1;
   }
 
-  // Asignar conteos a cada feature (estado)
   source.forEachFeature((feature) => {
     const name = this.normalizeStateName(feature.get('name') || '');
     const count = counts[name] || 0;
 
     feature.set('count', count);
-    feature.set('highlight', count > 0); // opcional: marcar si tiene prácticas
+    feature.set('highlight', count > 0);
     feature.setStyle(this.getFeatureStyle(feature));
   });
 
-  this.statesLayer.changed(); // actualizar visualmente
+  this.statesLayer.changed(); 
 }
 public hacerZoomAMexico(): void {
   this.mostrarFiltrosYMapa = true;
   this.mapaAnimado = false;
-  
-  // Primero asegúrate de que mostrarMapa es true
   this.mostrarMapa = true;
   
-  // Espera a que Angular actualice la vista
   setTimeout(() => {
     this.mapaAnimado = true;
-    
-    // Zoom al mapa
-    if (this.map) {
+        if (this.map) {
       const mexicoCenter = fromLonLat([-102.0, 23.8]);
       this.map.getView().animate({
         center: mexicoCenter,
@@ -305,23 +292,17 @@ public hacerZoomAMexico(): void {
         this.map.getView().setMinZoom(5);
       }, 1100);
     }
-
-    // Scroll con verificación robusta
     setTimeout(() => {
       if (!this.mapaYmatriz?.nativeElement) {
-        console.warn('Elemento mapaYmatriz no disponible para scroll');
-        // Intenta nuevamente después de un breve retraso
         setTimeout(() => this.hacerZoomAMexico(), 200);
         return;
       }
-
       try {
         const element = this.mapaYmatriz.nativeElement;
         const offset = 100;
         const y = element.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top: y, behavior: 'smooth' });
       } catch (error) {
-        console.error('Error al hacer scroll:', error);
       }
     }, 300);
   }, 50);
@@ -329,23 +310,19 @@ public hacerZoomAMexico(): void {
 
   private initializeMap(): void {
     if (!document.getElementById('map-container')) {
-    console.error('El contenedor del mapa no existe');
     return;
   }
-    // 1. Configuración del visor centrado en México
   this.mapView = new View({
   center: fromLonLat([0, 20]),
   zoom: 2,
-  minZoom: 2, // Vista inicial global
+  minZoom: 2, 
   maxZoom: 10
 });
 
-    // 2. Capa base
     const baseLayer = new TileLayer({
       source: new OSM()
     });
 
-    // Estilo para selección
     const selectedText = new Text({
       text: '',
       font: 'bold 14px Arial',
@@ -357,12 +334,12 @@ public hacerZoomAMexico(): void {
   this.selectedStyle = new Style({
   stroke: new Stroke({
     color: '#ff0000',
-    width: 5  // Más grueso que el hover
+    width: 5  
   }),
   fill: new Fill({
     color: 'rgba(255, 0, 0, 0.3)'
   }),
-  zIndex: 100  // Mayor prioridad
+  zIndex: 100  
 });
 
     this.statesLayer = new VectorLayer({
@@ -374,7 +351,6 @@ public hacerZoomAMexico(): void {
   zIndex: 3
 });
 
-    // 4. Crear el mapa
     this.map = new Map({
       target: 'map-container',
       layers: [baseLayer, this.statesLayer],
@@ -382,51 +358,43 @@ public hacerZoomAMexico(): void {
     });
     this.setPracticeCountsForAllStates();
 
-    // 5. Interacción de selección con clic (modificado)
  const select = new Select({
   condition: click,
   layers: [this.statesLayer],
-  style: null // Usaremos nuestro propio estilo
+  style: null 
 });
 select.on('select', (e) => {
-  // Resetear el estilo del feature previamente seleccionado
   if (this.selectedFeature) {
     this.selectedFeature.set('selected', false);
-    this.selectedFeature.setStyle(this.getFeatureStyle(this.selectedFeature)); // Restablecer el estilo
+    this.selectedFeature.setStyle(this.getFeatureStyle(this.selectedFeature)); 
   }
 
-  // Establecer nuevo feature seleccionado
   this.selectedFeature = e.selected[0];
   
   if (this.selectedFeature) {
     const stateName = this.selectedFeature.get('name') || '';
     this.selectedFeature.set('selected', true);
-    this.selectedFeature.setStyle(this.getFeatureStyle(this.selectedFeature)); // Aplicar nuevo estilo
+    this.selectedFeature.setStyle(this.getFeatureStyle(this.selectedFeature)); 
     
-    // Actualizar el estado del componente
     this.selectedState = {
       name: stateName,
       practices: this.statePractices[stateName] || 'Información no disponible.'
     };
 
-    // Desplazar la vista hacia arriba
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 100);
 
     this.selectedMatrixState = stateName;
 
-    // Cargar imágenes del estado seleccionado
     const normalizedState = this.normalizeStateName(stateName);
     this.carouselImages = this.stateImages[stateName] || [];
 
-    // Zoom al estado seleccionado
     const extent = this.selectedFeature.getGeometry()?.getExtent();
     if (extent) {
       this.map.getView().fit(extent, { padding: [50, 50, 50, 50], duration: 500, maxZoom: 8 });
     }
 
-    // Determinar región a partir de capas visibles
     const regionesEstado = Object.entries(this.regionLayers)
       .filter(([region, layer]) => {
         const features = layer.getSource()?.getFeatures() || [];
@@ -435,32 +403,25 @@ select.on('select', (e) => {
       .map(([region]) => region);
 
     this.regionesSeleccionadas = regionesEstado;
-
-    // Forzar refresco visual
     this.statesLayer.changed();
   } else {
-    // Si se deseleccionó todo
     this.selectedState = null;
     this.selectedMatrixState = null;
     this.carouselImages = [];
     this.regionesSeleccionadas = [];
   }
 
-  // Asegúrate de que el layer se actualice
   this.statesLayer.changed();
 });
 
   this.map.addInteraction(select);
 
-// 1. Primero define el tipo correcto para la función de estilo
 type StyleFunction = (feature: FeatureLike, resolution: number) => Style | Style[] | void;
 
-// 2. Actualiza la interacción hoverSelect
 const hoverSelect = new Select({
   condition: pointerMove,
   layers: [this.statesLayer],
   filter: (feature) => {
-    // Solo aplicar hover si no hay ningún estado seleccionado
     return !this.selectedFeature;
   },
   style: new Style({
@@ -517,7 +478,6 @@ this.map.on('pointermove', (event) => {
   const count = feature.get('count') || 0;
   const maxCount = 13;
 
-  // Estado seleccionado (máxima prioridad)
   if (isSelected) {
     return new Style({
       stroke: new Stroke({
@@ -537,7 +497,6 @@ this.map.on('pointermove', (event) => {
     });
   }
 
-  // Estado resaltado (segunda prioridad)
   if (isHighlighted) {
     return new Style({
       fill: new Fill({ 
@@ -547,7 +506,6 @@ this.map.on('pointermove', (event) => {
     });
   }
 
-  // Estado normal
   const baseOpacity = Math.min(0.1 + (0.5 * count / maxCount), 0.6);
   return new Style({
     fill: new Fill({ 
@@ -567,8 +525,6 @@ clearSelection(): void {
   this.selectedState = null;
   this.selectedMatrixState = null;
   this.carouselImages = [];
-  
-  // Forzar actualización del estilo de todos los features
   const source = this.statesLayer.getSource();
   if (source) {
     source.forEachFeature(feature => {
@@ -578,22 +534,22 @@ clearSelection(): void {
   
   this.statesLayer.changed();
   
-  // Animación de zoom out a la vista de México
   if (this.map) {
     this.map.getView().animate({
       center: fromLonLat([-102.0, 23.8]),
       zoom: 5,
-      duration: 1000 // Duración de 1 segundo para la animación
+      duration: 1000 
     });
   }
 }
 
-    onBordersChanged(feature: any): boolean {
+onBordersChanged(feature: any): boolean {
   if (this.regionesSeleccionadas.length === 0) return true;
   
   const stateName = feature.get('name');
   return this.regionesSeleccionadas.includes(stateName);
 }
+
 onFiltersChanged(event: {
   regions: string[],
   categories: number[],
@@ -603,7 +559,6 @@ onFiltersChanged(event: {
   conInterseccionalidades: boolean,
   tipos_de_actor: string | null
 }) {
-  // Limpiar selección cuando se aplican filtros
   this.clearSelection();
   
   this.regionesSeleccionadas = event.regions;
@@ -621,100 +576,41 @@ onFiltersChanged(event: {
 
 emitFilteredStates(): void {
   const estadosUnicos = [...new Set(this.filteredMatrixStates.map(s => s.trim()))].filter(s => !!s);
-  // Aquí emites un evento o actualizas algo con estadosUnicos
-  console.log('Estados filtrados emitidos:', estadosUnicos);
 }
 
-    get carouselBackgroundStyle(): { [klass: string]: any } {
+get carouselBackgroundStyle(): { [klass: string]: any } {
       if (this.carouselImages.length > 0) {
         return {
           backgroundImage: `url(${this.carouselImages[0]})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          filter: 'blur(5px)', // se aplica si el fondo está separado
+          filter: 'blur(5px)', 
           position: 'relative',
         };
       } else {
         return this.defaultBackgroundStyle;
       }
-    }
-        
-    public defaultBackgroundStyle = {
-      'background-color': '#123456', // o el color/fondo que tenías antes
-      'min-height': '300px'
     };
     
-    generarPDF({ practica, filteredData }: { practica: any, filteredData: any[] }) {
-  const container = document.createElement('div');
-  container.style.padding = '20px';
-  container.style.fontFamily = 'Arial, sans-serif';
-  container.style.fontSize = '12px';
-  container.style.color = '#333';
-
-  const selectedState = this.selectedState?.name || 'Estado no identificado';
-  const introduction = this.selectedState?.practices || 'Sin descripción disponible.';
-
-    container.innerHTML = `
-    <div style="text-align: center; margin-bottom: 20px;">
-      <img src="assets/images/logos.jpg" alt="Logo OIM" style="height: 60px; margin-bottom: 10px;" />
-      <h2 style="margin: 0; color: #002e6d;">Buenas Prácticas en ${selectedState}</h2>
-    </div>
-
-    <p style="margin-bottom: 20px;">${introduction}</p>
-
-    <table style="width: 100%; border-collapse: collapse;">
-      <thead>
-        <tr style="background-color: #004080; color: white;">
-          <th style="padding: 8px; border: 1px solid #ccc;">Buena práctica</th>
-          <th style="padding: 8px; border: 1px solid #ccc;">Estado</th>
-          <th style="padding: 8px; border: 1px solid #ccc;">Naturaleza política</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${filteredData.map(row => `
-          <tr>
-            <td style="padding: 8px; border: 1px solid #ccc;">${row.buena_practica}</td>
-            <td style="padding: 8px; border: 1px solid #ccc;">${row.estado}</td>
-            <td style="padding: 8px; border: 1px solid #ccc;">${row.naturaleza_politica_publica}</td>
-          </tr>
-        `).join('')}
-      </tbody>
-    </table>
-  `;
-
-  const options = {
-    margin: 0.5,
-    filename: `buenas-practicas-${selectedState.toLowerCase().replace(/\s/g, '-')}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-  };
-
-  html2pdf().set(options).from(container).save();
-}
-
 updateCountsOnMap(counts: { [estado: string]: number }) {
    if (!this.statesLayer || !this.statesLayer.getSource()) return;
   const source = this.statesLayer.getSource();
   if (!source) return;
 
-  // Función para normalizar nombres: quitar acentos, espacios y pasar a minúsculas
   const normalizeStateName = (name: string): string => {
     return name
       .toLowerCase()
-      .normalize('NFD')                // Descomponer acentos
-      .replace(/[\u0300-\u036f]/g, '') // Quitar acentos
-      .replace(/\s+/g, '')             // Quitar espacios
-      .replace(/[^\w]/g, '');          // Quitar caracteres no alfanuméricos
+      .normalize('NFD')                
+      .replace(/[\u0300-\u036f]/g, '') 
+      .replace(/\s+/g, '')            
+      .replace(/[^\w]/g, '');         
   };
 
-  // Crear un nuevo objeto con las claves normalizadas
   const normalizedCounts: { [estadoNormalizado: string]: number } = {};
   for (const estado in counts) {
     normalizedCounts[normalizeStateName(estado)] = counts[estado];
   }
 
-  // Recorrer las features y asignar el count correspondiente
   source.forEachFeature((feature) => {
     const featureName = normalizeStateName(feature.get('name') || '');
     const count = normalizedCounts[featureName] || 0;
@@ -726,29 +622,21 @@ updateCountsOnMap(counts: { [estado: string]: number }) {
   this.statesLayer.changed();
 }
 
-private mapInitialized = false;
-mostrarTodasLasPracticas = true;
-
 ocultarVideoYMostrarMapa(): void {
     this.mostrarOpcionesIniciales = false;
     this.mostrarVideo = false;
     this.mostrarMapa = true;
-    this.mostrarMatrizInicial = false; // Oculta la matriz inicial
+    this.mostrarMatrizInicial = false; 
 
-    // Usa un pequeño setTimeout para asegurar que el DOM se haya actualizado
-    // y el elemento del mapa esté presente antes de intentar asignarlo
     setTimeout(() => {
       this.mostrarFiltrosYMapa = true;
-      this.initializeMapWhenReady(); // Asegura que el mapa de OpenLayers se inicialice
+      this.initializeMapWhenReady(); 
 
-      // ✅ 4. Re-asigna la referencia aquí también para casos donde el mapa
-      // se hace visible después de ngAfterViewInit (ej. al hacer clic en "Empezar a interactuar")
       if (this.mapContainerDiv) {
         this.mapElementForPDF = this.mapContainerDiv.nativeElement;
       }
-    }, 100); // Pequeño retraso para permitir la renderización del DOM
+    }, 100); 
 
-    // ... restablecimiento de filtros y otras propiedades
     this.selectedCategories = [];
     this.regionesSeleccionadas = [];
     this.selectedBorders = [];
@@ -764,13 +652,11 @@ ocultarVideoYMostrarMapa(): void {
 private initializeMapWhenReady(): void {
   const container = document.getElementById('map-container');
   if (!container) {
-    console.warn('Contenedor del mapa no encontrado, reintentando...');
     setTimeout(() => this.initializeMapWhenReady(), 200);
     return;
   }
 
   if (!this.map) {
-    console.log('Inicializando mapa...');
     this.initializeMap();
     this.mapInitialized = true;
   } else {
@@ -781,29 +667,30 @@ private initializeMapWhenReady(): void {
     }
   setTimeout(() => this.hacerZoomAMexico(), 300);
 }
-mostrarVideoTutorial() {
-  this.mostrarOpcionesIniciales = false; // Oculta las opciones iniciales
-  this.mostrarVideo = true;            // Muestra el video
-  this.mostrarMapa = false;            // Asegura que el mapa esté oculto
-  this.mostrarFiltrosYMapa = false;    // Asegura que los filtros del mapa estén ocultos
 
-  // ✅ ¡Aquí está el ajuste clave!
-  this.mostrarMatrizInicial = false;   // Oculta la matriz inicial cuando se muestra el video
+mostrarVideoTutorial() {
+  this.mostrarOpcionesIniciales = false;
+  this.mostrarVideo = true;    
+  this.mostrarMapa = false;           
+  this.mostrarFiltrosYMapa = false;    
+
+  this.mostrarMatrizInicial = false;   
 }
+
 cerrarVideoTutorial() {
   this.mostrarVideo = false;
   this.mostrarOpcionesIniciales = true;
 }
+
 volverAInicio(): void {
   this.mostrarOpcionesIniciales = true;
   this.mostrarMapa = false;
   this.mostrarVideo = false;
   this.selectedState = null;
 
-  // 🔴 Destruye el mapa para evitar errores al volver
   if (this.map) {
-    this.map.setTarget(undefined); // Quita la referencia al DOM
-    this.map = null as any;   // Asegura que se cree uno nuevo después
+    this.map.setTarget(undefined); 
+    this.map = null as any;   
   }
 }
 getColorPorVolumen(): string {
@@ -822,15 +709,14 @@ getColorPorVolumen(): string {
     p.volumen === 2
   );
 
-  if (tieneVolumen3) return '#28a745'; // verde
-  if (tieneVolumen2) return '#ffc107'; // amarillo
-  return '#dc3545'; // rojo por defecto (volumen 1)
+  if (tieneVolumen3) return '#28a745'; 
+  if (tieneVolumen2) return '#ffc107'; 
+  return '#dc3545'; 
 }
 
 guardarFiltros(filtros: any): void {
   this.filtrosActivos = filtros;
 }
-
 }
 
     

@@ -4,7 +4,7 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 interface Practica {
   estado: string;
   poblaciones: string[];
-  subcategoria: string; // Aquí usamos directamente la subcategoría como unidad de práctica
+  subcategoria: string; 
   criterios?: string[];
 }
 
@@ -20,7 +20,12 @@ interface Conteo {
   encapsulation: ViewEncapsulation.None
 })
 export class MosaicoComponent implements OnInit {
-
+  estadosActivos: Conteo[] = [];
+  poblacionesCubiertas: Conteo[] = [];
+  categoriasInnovadoras: Conteo[] = [];
+  subcategoriasSinPractica: string[] = [];
+  subcategoriasSinPracticaTexto = '';
+  vaciosTexto = '';
   flipped = false;
 
   practicas: Practica[] = [
@@ -77,13 +82,6 @@ export class MosaicoComponent implements OnInit {
       '13.1. Reunificación familiar temporal'
     ] }
   ];
-
-  estadosActivos: Conteo[] = [];
-  poblacionesCubiertas: Conteo[] = [];
-  categoriasInnovadoras: Conteo[] = [];
-  subcategoriasSinPractica: string[] = [];
-  subcategoriasSinPracticaTexto = '';
-  vaciosTexto = '';
 
   ngOnInit(): void {
     this.estadosActivos = this.contarPor('estado');

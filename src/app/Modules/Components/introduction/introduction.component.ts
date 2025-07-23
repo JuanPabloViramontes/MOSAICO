@@ -24,15 +24,13 @@ ngAfterViewInit() {
   toggleProposito() {
   this.isPropositoOpen = !this.isPropositoOpen;
 
-  // Hacer scroll solo si se está abriendo
   if (this.isPropositoOpen) {
     setTimeout(() => {
       this.propositoCollapse?.nativeElement.scrollIntoView({
         behavior: 'smooth',
         block: 'start'
       });
-    }, 350); // duración de la animación de Bootstrap
+    }, 350); 
   }
 }
-
 }

@@ -109,7 +109,7 @@ onCardHover(image?: string, color?: string) {
   {
     frontImage: 'assets/images/mosaico/categorias-15.jpg',
     backImage: 'assets/images/mosaico/categorias-16.jpg',
-    frontText: '8. Programas y apoyos asistenciales a migrantes.',
+    frontText: '8. Programas y apoyos sociales.',
     backText: `
       <ul>
         <li>8.1 Apoyos económicos o en especie</li>

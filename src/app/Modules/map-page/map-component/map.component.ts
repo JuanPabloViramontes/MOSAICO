@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
@@ -13,6 +13,7 @@ import { fromLonLat } from 'ol/proj';
 import { forkJoin, lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import html2pdf from 'html2pdf.js';
+import { FeatureLike } from 'ol/Feature';
 
 @Component({
   selector: 'app-map',
@@ -20,10 +21,16 @@ import html2pdf from 'html2pdf.js';
   styleUrls: ['./map.component.css'],
   standalone: false,
 })
+
 export class MapComponent implements OnInit  {
+  @ViewChild('mapContainerDiv') mapContainerDiv!: ElementRef; 
+  @Output() mapElementReady = new EventEmitter<HTMLElement>(); 
   @ViewChild('stateCard') stateCard!: ElementRef<HTMLDivElement>;
    @ViewChild('mapaYmatriz') mapaYmatriz!: ElementRef;
     @ViewChild('introVideo') introVideoRef!: ElementRef<HTMLVideoElement>;
+
+      public mapElementForPDF: HTMLElement | null = null; 
+    mostrarMatrizInicial: boolean = true;
   private _estadosDesdeMatriz: string[] = [];
    public mapaAnimado = false;
   private map!: Map;
@@ -47,29 +54,55 @@ export class MapComponent implements OnInit  {
   public tooltipX: number = 0;
   public tooltipY: number = 0;
   public showTooltip: boolean = false;
-mostrarFiltrosYMapa = false;
-mostrarOpcionesIniciales = true;
-mostrarVideo = false;
-mostrarMapa = false;
-public modoResumen: 'resumido' | 'intermedio' | 'completo' = 'resumido';
-public selectedCategories: string[] = [];
+  mostrarFiltrosYMapa = false;
+  mostrarOpcionesIniciales = true;
+  mostrarVideo = false;
+  mostrarMapa = false;
+  public modoResumen: 'resumido' | 'intermedio' | 'completo' = 'resumido';
+  public selectedCategories: string[] = [];
+  filtrosActivos: any = {};
+  private selectedStates: Set<string> = new Set();
 
-
-
-
-  private stateImages: {[key: string]: string[]} = {
-    'Nuevo León': ['assets/images/Estados/nuevoleon1.jpeg', 'assets/images/Estados/nuevoleon2.jpg', 'assets/images/Estados/nuevoleon3.jpg'],
-    'Jalisco': ['assets/images/Estados/nuevoleon1.jpeg', 'assets/images/OIM3.jpeg', 'assets/images/OIM4.jpeg'],
-     'Chihuahua': ['assets/images/Estados/chihuahua.png'],
-
-  };
+ private stateImages: { [key: string]: string[] } = {
+  'Aguascalientes': ['assets/images/Estados/aguascalientes.jpeg'],
+  'Baja California': ['assets/images/Estados/bajacalifornia.png'],
+  'Baja California Sur': ['assets/images/Estados/bajacaliforniasur.png'],
+  'Campeche': ['assets/images/Estados/campeche.png'],
+  'Chiapas': ['assets/images/Estados/chiapas.png'],
+  'Chihuahua': ['assets/images/Estados/chihuahua.png'],
+  'Ciudad de México': ['assets/images/Estados/cdmx.png'],
+  'Coahuila': ['assets/images/Estados/coahuila.png'],
+  'Colima': ['assets/images/Estados/colima.jpeg'],
+  'Durango': ['assets/images/Estados/durango.png'],
+  'Guanajuato': ['assets/images/Estados/guanajuato.png'],
+  'Guerrero': ['assets/images/Estados/guerrero.jpeg'],
+  'Hidalgo': ['assets/images/Estados/hidalgo.png'],
+  'Jalisco': ['assets/images/Estados/jalisco.jpeg'],
+  'México': ['assets/images/Estados/mexico.png'], 
+  'Michoacán': ['assets/images/Estados/michoacan.png'],
+  'Morelos': ['assets/images/Estados/morelos.jpeg'],
+  'Nayarit': ['assets/images/Estados/nayarit.png'],
+  'Nuevo León': ['assets/images/Estados/monterrey.png'],
+  'Oaxaca': ['assets/images/Estados/oaxaca.png'],
+  'Puebla': ['assets/images/Estados/puebla.jpeg'],
+  'Querétaro': ['assets/images/Estados/queretaro.png'],
+  'Quintana Roo': ['assets/images/Estados/quintanaroo.jpeg'],
+  'San Luis Potosí': ['assets/images/Estados/sanluis.jpeg'],
+  'Sinaloa': ['assets/images/Estados/sinaloa.png'], 
+  'Sonora': ['assets/images/Estados/sonora.png'],
+  'Tabasco': ['assets/images/Estados/tabascoo.png'], //Mala resolución
+  'Tamaulipas': ['assets/images/Estados/tamaulipas.png'],
+  'Tlaxcala': ['assets/images/Estados/tlaxcala.png'],
+  'Veracruz': ['assets/images/Estados/veracruz.png'],
+  'Yucatán': ['assets/images/Estados/yucatan.jpeg'],
+  'Zacatecas': ['assets/images/Estados/zacatecas.png']
+};
   
   private statePractices: {[key: string]: string} = {
     'Aguascalientes': 'Aguascalientes es un estado con presencia migratoria moderada y diversa. Recibe personas extranjeras en tránsito, solicitantes de asilo y residentes temporales, principalmente de Guatemala, Cuba, Nicaragua, Haití, Honduras y Venezuela. También es punto de retorno para personas mexicanas repatriadas desde Estados Unidos, y registra baja incidencia de migración irregular, incluida la de niñas, niños y adolescentes.',
     'Baja California': 'Baja California es un estado fronterizo con alto flujo migratorio: personas en tránsito, solicitantes de asilo haitianos y centroamericanos, trabajadores agrícolas (incluyendo población indígena), y deportados. Cuenta con una Ley estatal para la atención de migrantes que garantiza trato digno, no discriminación y protección especial a niñas, niños y víctimas de delito así como ONGs  y albergues locales complementan con asistencia legal, humanitaria e integración comunitaria.',
-    'Baja California Sur': 'Programas de integración laboral en el sector turístico...',
+    'Baja California Sur': 'Este estado aún no ha sido parte de un volumen de buenas prácticas',
     'Campeche': 'Campeche es un estado que se caracteriza principalmente por flujos internos y de retorno. Su perfil migratorio destaca la articulación entre gobiernos y sociedad civil mediante comités estatales y municipales para atender a migrantes y garantizar su acceso a derechos humanos, así cómo la implemetación protocolos de atención, mecanismos de quejas ante la CNDH y acciones con enfoque en no discriminación.',
-    'CDMX': 'Ciudad de México es el principal punto de llegada y destino, con atención a solicitantes de asilo, refugio, tránsito y retorno. Cuenta con una legislación avanzada protege contra la discriminación; se facilitan asilo, salud, albergue y asesoría jurídica. La capital opera con un enfoque interseccional, atendiendo prioridades por género, edad y condición migratoria.',
     'Chiapas': 'Chiapas, puerta de entrada sur y estado con ley sobre desplazamiento interno, cuenta con normas específicas para albergues de niñez migrante. Destacan el proyecto “Oficios con Perspectiva de Género y DD. HH.”, que capacita a mujeres (incluidas mujeres migrantes), en oficios de la construcción para su autonomía económica; un Protocolo DIF que estandariza la protección de niñas, niños y adolescentes en movilidad y cinco Centros de Asistencia Social rehabilitados para su primera acogida; la profesionalización de Protección Civil y su protocolo para caravanas migrantes; y el Programa de Educación Migrante (PEMCH), que asegura inscripción y regularización escolar de NNA sin importar estatus migratorio.',
     'Chihuahua': 'Chihuahua es un estado fonterizo con grandes flujos de tránsito, retorno y presencia de personas desplazadas internas de otras entidades federativas. Cuenta con programas de protección a solicitantes de asilo y deportados desde EE. UU, e implementa atención a niñez migrante, albergues y brigadas móviles, en coordinación con organismos internacionales, con enfoque humanitario y de derechos.',
     'Ciudad de México': 'Ciudad de México es el principal punto de llegada y destino, con atención a solicitantes de asilo, refugio, tránsito y retorno. Cuenta con una legislación avanzada protege contra la discriminación; se facilitan asilo, salud, albergue y asesoría jurídica. La capital opera con un enfoque interseccional, atendiendo prioridades por género, edad y condición migratoria.',
@@ -80,9 +113,9 @@ public selectedCategories: string[] = [];
     'Guerrero': 'Estado de origen, tránsito y retorno, con alta vulnerabilidad. Promueve acciones contra la trata de personas y la migración forzada, asimismo opera brigadas, módulos de atención y acompañamiento psicosocial para población retornada, con especial atención a mujeres, niñas y comunidades indígenas.',
     'Hidalgo': 'Hidalgo, entidad del centro del país con importantes flujos de migración interna y salida internacional, cuenta con la Subsecretaría de Desarrollo Social y Humano para atender a personas en movilidad y con la Ley de Migrantes Hidalguenses y en Contextos de Movilidad como marco de protección. A través del Programa de Asistencia Social Migratoria se ofrece acompañamiento jurídico, repatriación, búsqueda de personas y cobertura de costos para documentos de viaje y trámites consulares. La legislación estatal garantiza principios de no discriminación, unidad familiar e interés superior de la niñez, y obliga a coordinar acciones de seguridad, salud y orientación junto con dependencias federales y municipales.',
     'Jalisco': 'Jalisco es una entidad clave en el panorama migratorio nacional, ya que confluyen en su territorio los cuatro principales flujos: tránsito, destino, retorno y migración interna. Además, alberga a personas solicitantes y sujetas de Protección Internacional. En coordinación con organismos internacionales, el estado ha fortalecido sus programas con enfoque de integración local, promoviendo el acceso a servicios de salud, empleo y educación para personas migrantes y refugiadas. Cuenta con albergues tanto gubernamentales como de la sociedad civil, varios de ellos con enfoque familiar, y atención a niñas, niños y adolescentes en situación de movilidad.',
-    'Estado de México': 'El Estado de México es una entidad receptora de retornados y movilidad interna. Ofrece asesoría jurídica, salud y regularización migratoria en centros de atención estatales y prioriza la infancia, la población indígena y los grupos vulnerables. Adicionalmente fomenta la participación comunitaria y combate la discriminación en escuelas y albergues.',
+    'México': 'El Estado de México es una entidad receptora de retornados y movilidad interna. Ofrece asesoría jurídica, salud y regularización migratoria en centros de atención estatales y prioriza la infancia, la población indígena y los grupos vulnerables. Adicionalmente fomenta la participación comunitaria y combate la discriminación en escuelas y albergues.',
     'Michoacán': 'Michoacán es un estado perteneciente a la región historíca de la migración con presencia principalmente de flujos migratorios de de origen, tránsito, y retorno con presencia de personas retornadas desde EE. UU, asimismo se han identificado personas Desplazadas Internas. Entre sus servicios, ofrece asistencia legal y vocacional a deportados, y programas de prevención de tráfico de personas.',
-    'Morelos': 'Programas educativos interculturales...',
+    'Morelos': 'Este estado aún no ha sido parte de un volumen de buenas prácticas',
     'Nayarit': 'Nayarit, estado de origen, retorno y migración interna, cuenta con el Instituto de Atención y Protección a Migrantes y su propia ley estatal. Destacan el programa “La Mujer Nayarita Migrante”, que canaliza casos de mujeres en movilidad a salud, educación y justicia; el plan de reunificación temporal “Uniendo Corazones Nayaritas” que facilita el viaje de personas adultas mayores para reencontrarse con hijos en EE. UU.; ventanilla de Registro Civil en la sede del instituto para trámites de identidad; y vínculos con ICATEN para capacitación laboral de migrantes retornados. Cada año se otorga el Premio “Ernesto Galarza” a personas o asociaciones migrantes que impulsan el desarrollo y la cultura del estado.',
     'Nuevo León': 'Nuevo León es destino laboral y educativo para migrantes internos, solicitantes de refugio y personas desplazadas, y mantiene vínculos de emigración hacia EE. UU. La atención se articula desde la Dirección para la No Discriminación e Igualdad y la Mesa de Igualdad e Inclusión, que coordina salud, empleo, educación e identidad con COMAR, INM y OSC. Destacan un Espacio de Atención junto a COMAR con ventanilla informativa y asesoría jurídica; la vinculación de albergues y estancias infantiles con escuelas que inscriben a niñas y niños sin documentación plena; y la feria mensual “Tequio Hub Intercultural” que impulsa emprendimientos. Siete centros de salud brindan consulta y vacunas COVID‑19 sin exigir CURP, y la Ley estatal de Víctimas reconoce el desplazamiento forzado interno.',
     'Oaxaca': 'Oaxaca es un estado de origen, tránsito y retorno, con una importante presencia de comunidades indígenas migrantes. Las dinámicas migratorias están marcadas por la pobreza, la desigualdad y la migración forzada, tanto interna como internacional, el estado ha impulsado acciones de protección para personas retornadas, búsqueda de personas desaparecidas, atención psicojurídica a familiares y mecanismos de acompañamiento comunitario. Sus acciones y políticas destacan por sus enfoques intercultural e interseccional, especialmente en la atención a mujeres, niñez migrante e integrantes de pueblos originarios, promoviendo procesos dignos y seguros.',
@@ -90,7 +123,7 @@ public selectedCategories: string[] = [];
     'Querétaro': 'Querétaro es un estado de destino, tránsito y retorno, con una creciente presencia de personas migrantes y repatriadas desde Estados Unidos. A través del Consejo Estatal de Atención a Migrantes y un marco normativo local, se implementan programas de acompañamiento integral para personas en retorno voluntario, que incluyen asistencia psicosocial, orientación legal, capacitación laboral y apoyo al emprendimiento. También se han fortalecido mecanismos de protección a solicitantes de asilo y población en situación de vulnerabilidad, con especial atención a mujeres, niñez migrante.',
     'Quintana Roo': 'Quintana Roo es un estado fronterizo y turístico con el mayor flujo de entradas internacionales, en su mayoría documentadas y de carácter recreativo, además de visitantes regionales provenientes de Belice. Atrae residentes temporales y permanentes —principalmente de Cuba, Estados Unidos, Argentina y Canadá— y expide tarjetas humanitarias a personas caribeñas y sudamericanas, mientras mantiene baja incidencia de migración irregular y repatriaciones. El gobierno estatal impulsa un sólido marco de protección: programas de identidad civil flexibles, representación y acogida para niñas, niños y adolescentes migrantes, asesoría jurídica especializada, refugios y atención integral para mujeres en movilidad víctimas de violencia, así como políticas y capacitación para prevenir la trata de personas. Ventanillas municipales y acciones de sensibilización garantizan el acceso a derechos con enfoque diferencial e intercultural.',
     'San Luis Potosí': 'San Luis Potosí es un estado de tránsito, destino y retorno, con población extranjera en movilidad y personas mexicanas repatriadas desde Estados Unidos. Cuenta con una red de 58 enlaces municipales coordinados por el Instituto de Migración y Enlace Internacional, que promueven acceso a servicios, derechos humanos e integración comunitaria. Destacan programas de reunificación familiar para adultos mayores, atención a niñas, niños y adolescentes en movilidad, y colaboración con albergues y organizaciones civiles. El estado impulsa acciones con enfoque intercultural e interseccional, priorizando a mujeres, pueblos indígenas y personas en situación de vulnerabilidad.',
-    'Sinaloa': 'Red de atención a migrantes extracontinentales...',
+    'Sinaloa': 'Este estado aún no ha sido parte de un volumen de buenas prácticas',
     'Sonora': 'Sonora, estado fronterizo con EE. UU., concentra flujos de tránsito, deportaciones y migración interna. Cuenta con una Ley de Protección a Migrantes y un Consejo Estatal que coordina salud, seguridad y programas de movilidad laboral y atención a NNA. Destacan el albergue “Tin Otoch” para niñas, niños y adolescentes no acompañados, y un programa de reunificación familiar en EE. UU. Implementa módulos de orientación jurídica y acciones humanitarias conjuntas con Grupos Beta, priorizando género y derechos humanos. ',
     'Tabasco': 'Tabasco es un estado estratégico en la frontera sur, con alto tránsito migratorio, especialmente por vías terrestres como El Ceibo y Tenosique. En 2022 fue la segunda entidad con más personas detectadas en situación migratoria irregular y registró un aumento notable en repatriaciones. Ante este contexto, ha desarrollado acciones como albergues para NNA migrantes, programas de educación para personas retornadas, licencias de conducir para personas extranjeras, ferias de empleo, campañas de registro civil, vacunación abierta y un programa estatal sobre migración. Estas medidas buscan garantizar derechos y atención integral con enfoque humanitario.',
     'Tamaulipas': 'Estado estratégico por su ubicación fronteriza con EE.UU., Tamaulipas concentra una intensa movilidad internacional, particularmente en cruces terrestres y flujos de repatriación. Aunque no es un destino frecuente de residencia para personas extranjeras, sí representa un punto clave de tránsito y retorno, lo que le otorga una alta complejidad migratoria. A través del Instituto Tamaulipeco para los Migrantes, se implementan programas centrados en identidad, salud, acceso a derechos, reunificación familiar, migración laboral segura y vinculación con comunidades en EE.UU. Las acciones incluyen atención médica, legal y social, certificación de habilidades, proyectos productivos y gestión de trámites binacionales.',
@@ -114,10 +147,32 @@ ngOnInit(): void {
   this.selectedCategories = this.obtenerTodasLasCategorias();
   this.loadData();
 }
-
 ngAfterViewInit() {
-  this.initializeMapWhenReady();
+  if (this.mapContainerDiv) {
+      this.mapElementForPDF = this.mapContainerDiv.nativeElement;
+    }
+  const video = this.introVideoRef?.nativeElement;
+  if (video) {
+    video.addEventListener('ended', () => {
+      this.mostrarVideo = false;
+      this.mostrarMapa = true;
+    });
+  }
 }
+
+
+private checkMapaYMatrizAvailability(attempts = 0, maxAttempts = 5) {
+  if (this.mapaYmatriz?.nativeElement) {
+    console.log('✅ mapaYmatriz está disponible', this.mapaYmatriz.nativeElement);
+    // Aquí puedes ejecutar la lógica que depende del elemento
+  } else if (attempts < maxAttempts) {
+    console.warn(`Intento ${attempts + 1}: mapaYmatriz no disponible aún`);
+    setTimeout(() => this.checkMapaYMatrizAvailability(attempts + 1), 200);
+  } else {
+    console.error('❌ mapaYmatriz no disponible después de varios intentos');
+  }
+}
+
 
 set estadosDesdeMatriz(value: string[]) {
   this._estadosDesdeMatriz = value;
@@ -200,7 +255,6 @@ onFilteredStatesChanged(filteredStates: string[]) {
     this.allData = [];
   }
   this.setPracticeCountsForAllStates();
-  this.hacerZoomAMexico(); // 👈 AÑADE ESTA LÍNEA
 }
 
 private setPracticeCountsForAllStates(): void {
@@ -227,41 +281,51 @@ private setPracticeCountsForAllStates(): void {
 
   this.statesLayer.changed(); // actualizar visualmente
 }
-
-
 public hacerZoomAMexico(): void {
-  
   this.mostrarFiltrosYMapa = true;
-
-  // Reinicia la animación por si ya se había activado antes
   this.mapaAnimado = false;
-  setTimeout(() => this.mapaAnimado = true, 50); // delay mínimo para reiniciar
+  
+  // Primero asegúrate de que mostrarMapa es true
+  this.mostrarMapa = true;
+  
+  // Espera a que Angular actualice la vista
+  setTimeout(() => {
+    this.mapaAnimado = true;
+    
+    // Zoom al mapa
+    if (this.map) {
+      const mexicoCenter = fromLonLat([-102.0, 23.8]);
+      this.map.getView().animate({
+        center: mexicoCenter,
+        zoom: 5,
+        duration: 1000
+      });
 
-  // Zoom al mapa
-  if (this.map) {
-    const mexicoCenter = fromLonLat([-102.0, 23.8]);
+      setTimeout(() => {
+        this.map.getView().setMinZoom(5);
+      }, 1100);
+    }
 
-    this.map.getView().animate({
-      center: mexicoCenter,
-      zoom: 5,
-      duration: 1000
-    });
-  }
+    // Scroll con verificación robusta
+    setTimeout(() => {
+      if (!this.mapaYmatriz?.nativeElement) {
+        console.warn('Elemento mapaYmatriz no disponible para scroll');
+        // Intenta nuevamente después de un breve retraso
+        setTimeout(() => this.hacerZoomAMexico(), 200);
+        return;
+      }
 
-  // Scroll casi al mismo tiempo que el zoom
-setTimeout(() => {
-  if (!this.mapaYmatriz || !this.mapaYmatriz.nativeElement) {
-    console.warn('mapaYmatriz no está disponible');
-    return;
-  }
-
-  const offset = 100; // distancia desde el top (ajústalo a tu gusto)
-  const y = this.mapaYmatriz.nativeElement.getBoundingClientRect().top + window.scrollY - offset;
-
-  window.scrollTo({ top: y, behavior: 'smooth' });
-}, 300);
+      try {
+        const element = this.mapaYmatriz.nativeElement;
+        const offset = 100;
+        const y = element.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      } catch (error) {
+        console.error('Error al hacer scroll:', error);
+      }
+    }, 300);
+  }, 50);
 }
-
 
   private initializeMap(): void {
     if (!document.getElementById('map-container')) {
@@ -269,10 +333,10 @@ setTimeout(() => {
     return;
   }
     // 1. Configuración del visor centrado en México
-   this.mapView = new View({
-  center: fromLonLat([0, 20]), // Vista global
+  this.mapView = new View({
+  center: fromLonLat([0, 20]),
   zoom: 2,
-  minZoom: 2,
+  minZoom: 2, // Vista inicial global
   maxZoom: 10
 });
 
@@ -290,16 +354,16 @@ setTimeout(() => {
       offsetY: -15
     });
 
-    this.selectedStyle = new Style({
-      stroke: new Stroke({
-        color: '#ff0000',
-        width: 3
-      }),
-      fill: new Fill({
-        color: 'rgba(255, 0, 0, 0.3)'
-      }),
-      text: selectedText
-    });
+  this.selectedStyle = new Style({
+  stroke: new Stroke({
+    color: '#ff0000',
+    width: 5  // Más grueso que el hover
+  }),
+  fill: new Fill({
+    color: 'rgba(255, 0, 0, 0.3)'
+  }),
+  zIndex: 100  // Mayor prioridad
+});
 
     this.statesLayer = new VectorLayer({
   source: new VectorSource({
@@ -319,54 +383,50 @@ setTimeout(() => {
     this.setPracticeCountsForAllStates();
 
     // 5. Interacción de selección con clic (modificado)
-    const select = new Select({
-      condition: click,
-      layers: [this.statesLayer],
-      style: null
-    });
-
-    select.on('select', (e) => {
-  // Si había una selección previa, quitar estilo y desmarcar highlight
+ const select = new Select({
+  condition: click,
+  layers: [this.statesLayer],
+  style: null // Usaremos nuestro propio estilo
+});
+select.on('select', (e) => {
+  // Resetear el estilo del feature previamente seleccionado
   if (this.selectedFeature) {
-    this.selectedFeature.set('highlight', false);
-    this.selectedFeature.setStyle(null);
+    this.selectedFeature.set('selected', false);
+    this.selectedFeature.setStyle(this.getFeatureStyle(this.selectedFeature)); // Restablecer el estilo
   }
 
-  // Asignar nueva selección
+  // Establecer nuevo feature seleccionado
   this.selectedFeature = e.selected[0];
-
+  
   if (this.selectedFeature) {
     const stateName = this.selectedFeature.get('name') || '';
-
-    // ✅ Establecer nombre en el texto de selección
-    selectedText.setText(stateName);
-
-    // ✅ Marcar como seleccionado y resaltar visualmente
-    this.selectedFeature.set('highlight', true);
-    this.selectedFeature.setStyle(this.selectedStyle);
-
-    // ✅ Actualizar estado seleccionado
+    this.selectedFeature.set('selected', true);
+    this.selectedFeature.setStyle(this.getFeatureStyle(this.selectedFeature)); // Aplicar nuevo estilo
+    
+    // Actualizar el estado del componente
     this.selectedState = {
       name: stateName,
       practices: this.statePractices[stateName] || 'Información no disponible.'
     };
-  setTimeout(() => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}, 100);
+
+    // Desplazar la vista hacia arriba
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
 
     this.selectedMatrixState = stateName;
 
-    // ✅ Cargar imágenes del estado seleccionado
+    // Cargar imágenes del estado seleccionado
     const normalizedState = this.normalizeStateName(stateName);
     this.carouselImages = this.stateImages[stateName] || [];
 
-    // ✅ Zoom al estado seleccionado
+    // Zoom al estado seleccionado
     const extent = this.selectedFeature.getGeometry()?.getExtent();
     if (extent) {
       this.map.getView().fit(extent, { padding: [50, 50, 50, 50], duration: 500, maxZoom: 8 });
     }
 
-    // ✅ Determinar región a partir de capas visibles (si usas esto)
+    // Determinar región a partir de capas visibles
     const regionesEstado = Object.entries(this.regionLayers)
       .filter(([region, layer]) => {
         const features = layer.getSource()?.getFeatures() || [];
@@ -376,7 +436,7 @@ setTimeout(() => {
 
     this.regionesSeleccionadas = regionesEstado;
 
-    // ✅ Forzar refresco visual
+    // Forzar refresco visual
     this.statesLayer.changed();
   } else {
     // Si se deseleccionó todo
@@ -385,25 +445,33 @@ setTimeout(() => {
     this.carouselImages = [];
     this.regionesSeleccionadas = [];
   }
-    this.statesLayer.changed();
-  });
+
+  // Asegúrate de que el layer se actualice
+  this.statesLayer.changed();
+});
 
   this.map.addInteraction(select);
 
-  const hoverSelect = new Select({
+// 1. Primero define el tipo correcto para la función de estilo
+type StyleFunction = (feature: FeatureLike, resolution: number) => Style | Style[] | void;
+
+// 2. Actualiza la interacción hoverSelect
+const hoverSelect = new Select({
   condition: pointerMove,
   layers: [this.statesLayer],
-  style: (feature) => {
-    return new Style({
-      stroke: new Stroke({
-        color: '#ff9900',
-        width: 2
-      }),
-      fill: new Fill({
-        color: 'rgba(19, 82, 207, 0.2)'
-      })
-    });
-  }
+  filter: (feature) => {
+    // Solo aplicar hover si no hay ningún estado seleccionado
+    return !this.selectedFeature;
+  },
+  style: new Style({
+    stroke: new Stroke({
+      color: '#ff9900',
+      width: 2
+    }),
+    fill: new Fill({
+      color: 'rgba(19, 82, 207, 0.2)'
+    })
+  })
 });
 this.map.addInteraction(hoverSelect);
 this.map.on('pointermove', (event) => {
@@ -442,50 +510,82 @@ this.map.on('pointermove', (event) => {
 }
 });
 }
-  
-private getFeatureStyle(feature: any): Style {
-  const count = feature.get('count') || 0; // Número de veces que aparece
+  private getFeatureStyle(feature: any): Style {
+  const stateName = feature.get('name');
+  const isSelected = this.selectedFeature?.get('name') === stateName;
+  const isHighlighted = feature.get('highlight') || false;
+  const count = feature.get('count') || 0;
   const maxCount = 13;
 
-  // Escala de opacidad para el fondo normal (sin highlight)
-  const baseOpacity = Math.min(0.1 + (0.5 * count / maxCount), 0.6);
-
-  if (feature.get('highlight')) {
-    // Para resaltado: relleno más fuerte y borde más grueso
+  // Estado seleccionado (máxima prioridad)
+  if (isSelected) {
     return new Style({
-      fill: new Fill({ color: `rgba(70, 130, 180, ${Math.min(0.4 + 0.6 * count / maxCount, 0.9)})` }), // azul steelblue con opacidad variable y más alta
-      stroke: new Stroke({ color: '#483D8B', width: 4 }) // borde dark slate blue más grueso
+      stroke: new Stroke({
+        color: '#ff0000',
+        width: 5
+      }),
+      fill: new Fill({
+        color: 'rgba(255, 0, 0, 0.3)'
+      }),
+      text: new Text({
+        text: stateName,
+        font: 'bold 14px Arial',
+        fill: new Fill({ color: '#000' }),
+        stroke: new Stroke({ color: '#fff', width: 3 }),
+        offsetY: -15
+      })
     });
   }
 
-  // Para estado normal: relleno más claro y borde más fino
+  // Estado resaltado (segunda prioridad)
+  if (isHighlighted) {
+    return new Style({
+      fill: new Fill({ 
+        color: `rgba(70, 130, 180, ${Math.min(0.4 + 0.6 * count / maxCount, 0.9)})` 
+      }),
+      stroke: new Stroke({ color: '#483D8B', width: 4 })
+    });
+  }
+
+  // Estado normal
+  const baseOpacity = Math.min(0.1 + (0.5 * count / maxCount), 0.6);
   return new Style({
-    fill: new Fill({ color: `rgba(173, 216, 230, ${baseOpacity * 0.6})` }), // azul claro con opacidad proporcional menor
-    stroke: new Stroke({ color: '#7B68EE', width: 1.5 }) // borde lavanda suave, más fino
+    fill: new Fill({ 
+      color: `rgba(173, 216, 230, ${baseOpacity * 0.6})` 
+    }),
+    stroke: new Stroke({ color: '#7B68EE', width: 1.5 })
   });
 }
 
-
-  // Método para limpiar la selección (modificado)
- clearSelection(): void {
+clearSelection(): void {
+  if (this.selectedFeature) {
+    this.selectedFeature.set('selected', false);
+    this.selectedFeature.setStyle(this.getFeatureStyle(this.selectedFeature));
+    this.selectedFeature = null;
+  }
+  
+  this.selectedState = null;
+  this.selectedMatrixState = null;
+  this.carouselImages = [];
+  
+  // Forzar actualización del estilo de todos los features
   const source = this.statesLayer.getSource();
   if (source) {
     source.forEachFeature(feature => {
-      feature.set('highlight', false);   // ❗ quitar highlight
-      feature.setStyle(undefined);            // ❗ quitar estilo aplicado manualmente
+      feature.setStyle(this.getFeatureStyle(feature));
     });
-    this.statesLayer.changed();
   }
-
-  this.selectedFeature = null;           // ❗ limpiar selección visual
-  this.selectedState = null;
-  this.selectedMatrixState = null;
-  this.regionesSeleccionadas = [];
-  this.categoriasSeleccionadas = [];
-  this.carouselImages = [];
-
-  // Centrar vista en México
-  this.map.getView().animate({ center: fromLonLat([-102.0, 23.8]), zoom: 5, duration: 500 });
+  
+  this.statesLayer.changed();
+  
+  // Animación de zoom out a la vista de México
+  if (this.map) {
+    this.map.getView().animate({
+      center: fromLonLat([-102.0, 23.8]),
+      zoom: 5,
+      duration: 1000 // Duración de 1 segundo para la animación
+    });
+  }
 }
 
     onBordersChanged(feature: any): boolean {
@@ -494,7 +594,7 @@ private getFeatureStyle(feature: any): Style {
   const stateName = feature.get('name');
   return this.regionesSeleccionadas.includes(stateName);
 }
-   onFiltersChanged(event: {
+onFiltersChanged(event: {
   regions: string[],
   categories: number[],
   borders: string[],
@@ -503,6 +603,9 @@ private getFeatureStyle(feature: any): Style {
   conInterseccionalidades: boolean,
   tipos_de_actor: string | null
 }) {
+  // Limpiar selección cuando se aplican filtros
+  this.clearSelection();
+  
   this.regionesSeleccionadas = event.regions;
   this.categoriasSeleccionadas = event.categories;
   this.selectedBorders = event.borders;
@@ -511,7 +614,6 @@ private getFeatureStyle(feature: any): Style {
   this.mostrarConInterseccionalidades = event.conInterseccionalidades;
   this.selectedTiposDeActor = event.tipos_de_actor;
 
-  // Forzar actualización de estados filtrados
   this.emitFilteredStates();
   this.applyMatrixStates(this.filteredMatrixStates);
   this.statesLayer.changed();
@@ -626,53 +728,67 @@ updateCountsOnMap(counts: { [estado: string]: number }) {
 
 private mapInitialized = false;
 mostrarTodasLasPracticas = true;
+
 ocultarVideoYMostrarMapa(): void {
-  this.mostrarOpcionesIniciales = false;
-  this.mostrarMapa = true;
-  this.mostrarVideo = false;
+    this.mostrarOpcionesIniciales = false;
+    this.mostrarVideo = false;
+    this.mostrarMapa = true;
+    this.mostrarMatrizInicial = false; // Oculta la matriz inicial
 
-  this.selectedCategories = [];
-  this.regionesSeleccionadas = [];
-  this.selectedBorders = [];
-  this.selectedNaturalezas = [];
-  this.poblacionSeleccionada = [];
-  this.selectedTiposDeActor = null;
-  this.selectedMatrixState = null;
+    // Usa un pequeño setTimeout para asegurar que el DOM se haya actualizado
+    // y el elemento del mapa esté presente antes de intentar asignarlo
+    setTimeout(() => {
+      this.mostrarFiltrosYMapa = true;
+      this.initializeMapWhenReady(); // Asegura que el mapa de OpenLayers se inicialice
 
-  this.mostrarTodasLasPracticas = false; // 👈 Esto es lo que cambia la lógica
-  this.modoResumen = 'resumido';
-  if (!this.mapInitialized) {
-    setTimeout(() => this.initializeMapWhenReady(), 300);
-  } else if (this.map) {
-    // Si el mapa ya existe, solo actualizar
-    this.map.updateSize();
-    this.hacerZoomAMexico();
+      // ✅ 4. Re-asigna la referencia aquí también para casos donde el mapa
+      // se hace visible después de ngAfterViewInit (ej. al hacer clic en "Empezar a interactuar")
+      if (this.mapContainerDiv) {
+        this.mapElementForPDF = this.mapContainerDiv.nativeElement;
+      }
+    }, 100); // Pequeño retraso para permitir la renderización del DOM
+
+    // ... restablecimiento de filtros y otras propiedades
+    this.selectedCategories = [];
+    this.regionesSeleccionadas = [];
+    this.selectedBorders = [];
+    this.selectedNaturalezas = [];
+    this.poblacionSeleccionada = [];
+    this.selectedTiposDeActor = null;
+    this.selectedMatrixState = null;
+    this.mostrarTodasLasPracticas = false;
+    this.modoResumen = 'resumido';
   }
 
-     setTimeout(() => {
-    if (this.mostrarMapa) {
-      this.initializeMapWhenReady();
-    }
-  }, 300);
-}
 
 private initializeMapWhenReady(): void {
   const container = document.getElementById('map-container');
   if (!container) {
-    setTimeout(() => this.initializeMapWhenReady(), 100);
+    console.warn('Contenedor del mapa no encontrado, reintentando...');
+    setTimeout(() => this.initializeMapWhenReady(), 200);
     return;
   }
 
   if (!this.map) {
+    console.log('Inicializando mapa...');
     this.initializeMap();
+    this.mapInitialized = true;
   } else {
     this.map.updateSize();
-    this.hacerZoomAMexico();
   }
+   if (container) {
+      this.mapElementReady.emit(container);
+    }
+  setTimeout(() => this.hacerZoomAMexico(), 300);
 }
 mostrarVideoTutorial() {
-  this.mostrarOpcionesIniciales = false;
-  this.mostrarVideo = true;
+  this.mostrarOpcionesIniciales = false; // Oculta las opciones iniciales
+  this.mostrarVideo = true;            // Muestra el video
+  this.mostrarMapa = false;            // Asegura que el mapa esté oculto
+  this.mostrarFiltrosYMapa = false;    // Asegura que los filtros del mapa estén ocultos
+
+  // ✅ ¡Aquí está el ajuste clave!
+  this.mostrarMatrizInicial = false;   // Oculta la matriz inicial cuando se muestra el video
 }
 cerrarVideoTutorial() {
   this.mostrarVideo = false;
@@ -711,7 +827,9 @@ getColorPorVolumen(): string {
   return '#dc3545'; // rojo por defecto (volumen 1)
 }
 
-
+guardarFiltros(filtros: any): void {
+  this.filtrosActivos = filtros;
+}
 
 }
 

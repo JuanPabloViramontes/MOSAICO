@@ -84,7 +84,7 @@ naturaleza_politica_publica = [
     {
       key: 'centro',
       name: 'Centro',
-      states: ['Querétaro', 'Hidalgo', 'México', 'Ciudad de México', 'Tlaxcala', 'Morelos', 'Puebla']
+      states: ['Querétaro', 'Hidalgo', 'Ciudad de México', 'México', 'Tlaxcala', 'Morelos', 'Puebla']
     },
     {
       key: 'sureste',
@@ -212,4 +212,17 @@ isPoblacionChecked(poblacion: any): boolean {
     tipos_de_actor: this.selectedTipoDeActor || null }
   );
 }
+
+resetFilters(): void {
+  this.selectedRegions = [];
+  this.selectedBorders = [];
+  this.selectedCategories = [];
+  this.selectedNaturalezas = [];
+  this.selectedPoblacionesObjetivo = [];
+  this.mostrarConInterseccionalidades = false;
+  this.selectedTipoDeActor = null;
+
+  this.emitFilters();
+}
+
 }

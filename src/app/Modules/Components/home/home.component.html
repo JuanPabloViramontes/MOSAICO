@@ -1,29 +1,25 @@
 <div class="container-fluid p-0">
   <!-- Encabezado con imagen -->
-  <div class="text-white text-center py-5 rounded-top-4 overflow-hidden"
-       style="
-         background-image:
-           linear-gradient(rgba(146, 174, 202, 0.95), rgba(255, 255, 255, 0.95)),
-           url('../../../../assets/images/Banner.jpg');
-         background-size: cover;
-         background-position: center bottom;
-         background-repeat: no-repeat;
-         background-blend-mode: multiply;
-         outline: 4px solid #000000;
-         outline-offset: -8px;
-       ">
+<div class="text-white text-center py-5 rounded-top-4 overflow-hidden"
+     style="
+       background-image:
+          linear-gradient(rgba(146, 174, 202, 0.3), rgba(255, 255, 255, 0.3)),
+         url('../../../../assets/images/mosaicoBanner.jpg');
+       background-size: 100% auto;  /* <-- aquí el cambio */
+       background-position: center center; /* <-- aquí el cambio */
+       background-repeat: no-repeat;
+       background-blend-mode: multiply;
+       outline: 4px solid #000000;
+       outline-offset: -8px;
+     ">
+
     <div class="container">
       <nav class="navbar" style="height: 100px; display: flex; justify-content: center; align-items: center;">
-        <a class="navbar-brand" [routerLink]="['/']" style="height: 100%; display: flex; align-items: center;">
-          <img src="../../../../assets/images/Mosaico.png" alt="Mosaico" style="max-height: 80px; width: auto;" />
-        </a>
+  
       </nav>
-      <h2 class="lead text-light">
-        <strong>Un mapa interactivo sobre las políticas migratorias a nivel local</strong>
+          <h2 class="lead text-light mt-4" style="margin-top: 6rem !important;">
+          <strong>Un mapa interactivo sobre las políticas migratorias a nivel local</strong>
       </h2>
-      <p class="lead text-light">
-        <strong>Explora las buenas prácticas en contexto migratorio</strong>
-      </p>
     </div>
   </div>
 

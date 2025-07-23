@@ -42,7 +42,9 @@
       "autoridades_enunciadas": "Secretaría General de Gobierno lidera. Involucra a instancias como el INM, CEDH. También cuenta con un consejo consultivo",
       "tipos_actores": ["OFAMs", "En colaboración con OSC", "En colaboración con autoridades federales"],
       "resultados": "Coordinación de la política migratoria (temas presupuestales, ejecución, planeación de programas)",
-      "comentarios": "En colaboración con autoridades federales, OSC y OFAMs"
+      "comentarios": "En colaboración con autoridades federales, OSC y OFAMs",
+      "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+      "pagina_pdf": 15
     },
     {
       "volumen": 1,
@@ -86,7 +88,9 @@
       "autoridades_enunciadas": "Subsecretaría de Auntos Migratorios del Estado de Baja California",
       "tipos_actores": ["OFAMs", "En colaboración con albergues", "En colaboración con OSC"],
       "resultados": "Generan incentivos de condonación de pagos, donativos mensuales, entre otros aspectos para el buen funcionamiento de albergues e SC.",
-      "comentarios": "En colaboración con OSC, albergues y OFAMs"
+      "comentarios": "En colaboración con OSC, albergues y OFAMs",
+       "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+      "pagina_pdf": 17
     },
     {
       "volumen": 1,
@@ -130,7 +134,9 @@
       "autoridades_enunciadas": "Subsecretaría de Asuntos Migratorios del Estado de Baja California en coordinación con el INM",
       "tipos_actores": ["OFAMs", "En colaboración con autoridades federales"],
       "resultados": "Apoyo en derecho a la identidad, servicios de salud, oferta de empleo, etc.",
-      "comentarios": "En colaboración con autoridades federales"
+      "comentarios": "En colaboración con autoridades federales",
+       "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+      "pagina_pdf": 19
     },
     {
         "volumen": 1,
@@ -174,7 +180,9 @@
         "autoridades_enunciadas": "Secretaría de Educación del Estado de Baja California",
         "tipos_actores": ["Autoridades del sector educación"],
         "resultados": "",
-        "comentarios": "Autoridades del sector educación"
+        "comentarios": "Autoridades del sector educación",
+         "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+      "pagina_pdf": 21
       },
       {
         "volumen": 1,
@@ -218,7 +226,9 @@
         "autoridades_enunciadas": "Poder Ejecutivo del Gobierno del Estado de Baja California",
         "tipos_actores": ["En colaboración con autoridades federales", "En colaboración con autoridades municipales"],
         "resultados": "",
-        "comentarios": "En colaboración con autoridades municipales"
+        "comentarios": "En colaboración con autoridades municipales",
+         "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+      "pagina_pdf": 23
       },
       {
         "volumen": 1,
@@ -262,7 +272,9 @@
         "autoridades_enunciadas": "Comisión Interinstitucional Contra la Trata de Personas",
         "tipos_actores": ["Autoridades que atienden agendas de protección a derechos humanos", "En colaboración con autoridades federales"],
         "resultados": "",
-        "comentarios": "Autoridades que atienden agendas de protección a derechos humanos"
+        "comentarios": "Autoridades que atienden agendas de protección a derechos humanos",
+         "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+      "pagina_pdf": 25
       },
       {
         "volumen": 1,
@@ -306,7 +318,9 @@
         "autoridades_enunciadas": "Jurisdicción de Servicios de Salud de Tijuana",
         "tipos_actores": ["Autoridades del sector salud", "En colaboración con albergues"],
         "resultados": "",
-        "comentarios": ""
+        "comentarios": "",
+         "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+      "pagina_pdf": 27
       },
       {
         "volumen": 1,
@@ -350,7 +364,9 @@
         "autoridades_enunciadas": "Sistema para el Desarrollo Integral de la Familia (DIF) Baja Calfornia",
         "tipos_actores": ["Autoridades que atienden agendas de protección a derechos humanos"],
         "resultados": "",
-        "comentarios": ""
+        "comentarios": "",
+         "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+      "pagina_pdf": 29
       },
       {
         "volumen": 1,
@@ -394,7 +410,9 @@
         "autoridades_enunciadas": "Sistema para el Desarrollo Integral de la Familia (DIF) Baja Calfornia",
         "tipos_actores": ["Autoridades que atienden agendas de protección a derechos humanos"],
         "resultados": "",
-        "comentarios": ""
+        "comentarios": "",
+         "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+      "pagina_pdf": 31
       },
         {
           "volumen": 1,
@@ -438,7 +456,9 @@
           "autoridades_enunciadas": "Consejo Estatal de Población (COESPO)",
           "tipos_actores": ["OFAMs", "Autoridades del sector económico", "Autoridades registrales"],
           "resultados": "Apoyo en derecho a la identidad, servicios de salud, oferta de empleo, Contacto consular y vinculación con otros organismos, etc.",
-          "comentarios": ""
+          "comentarios": "",
+           "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+      "pagina_pdf": 36
         },
         {
           "volumen": 1,
@@ -482,7 +502,9 @@
           "autoridades_enunciadas": "Consejo Estatal de Población (COESPO)",
           "tipos_actores": ["OFAMs", "En colaboración con autoridades federales", "En colaboración con OSC", "En colaboración con autoridades municipales", "En colaboración con instituciones académicas", "En colaboración con organismos internacionales"],
           "resultados": "Coordinación de la política migratoria (temas presupuestales, ejecución, planeación de programas)",
-          "comentarios": ""
+          "comentarios": "",
+           "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+           "pagina_pdf": 40  
         },
         {
           "volumen": 1,
@@ -526,7 +548,9 @@
           "autoridades_enunciadas": "Consejo Estatal de Población (COESPO)",
           "tipos_actores": ["OFAMs", "En colaboración con autoridades federales", "Autoridades registrales", "En colaboración con representaciones consulares"],
           "resultados": "Apoyo en derecho a la identidad, servicios de salud, oferta de empleo, Contacto consular y vinculación con otros organismos, etc.",
-          "comentarios": ""
+          "comentarios": "",
+           "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+           "pagina_pdf": 43
         },
         {
           "volumen": 1,
@@ -570,7 +594,9 @@
           "autoridades_enunciadas": "Consejo Estatal de Población (COESPO)",
           "tipos_actores": ["OFAMs", "En colaboración con organismos internacionales"],
           "resultados": "Comisión de NNA; asistencia humanitaria; salud.",
-          "comentarios": ""
+          "comentarios": "",
+          "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+          "pagina_pdf": 45
         },
         {
           "volumen": 1,
@@ -614,7 +640,9 @@
           "autoridades_enunciadas": "Sistema para el Desarrollo Integral de la Familia (DIF) de Chihuahua",
           "tipos_actores": ["Autoridades que atienden agendas de protección a derechos humanos", "En colaboración con organismos internacionales"],
           "resultados": "Atención a NNA",
-          "comentarios": ""
+          "comentarios": "",
+           "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+           "pagina_pdf": 48
         },
         {
           "volumen": 1,
@@ -658,7 +686,9 @@
           "autoridades_enunciadas": "Jurisdicción Sanitaria II de la Secretaría de Salud del Estado de Chihuahua",
           "tipos_actores": ["Autoridades del sector salud", "En colaboración con organismos internacionales"],
           "resultados": "Atención a NNA",
-          "comentarios": ""
+          "comentarios": "",
+           "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+           "pagina_pdf": 50
         },
             {
               "volumen": 1,
@@ -702,7 +732,9 @@
               "autoridades_enunciadas": "Secretaría de Asuntos Legislativos y Jurídicos del H. Congreso del Estado de Chihuahua",
               "tipos_actores": ["Autoridades legislativas"],
               "resultados": "",
-              "comentarios": ""
+              "comentarios": "",
+               "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+               "pagina_pdf": 52
             },
             {
               "volumen": 1,
@@ -746,7 +778,9 @@
               "autoridades_enunciadas": " H. Congreso del Estado de Chihuahua del Gobierno del Estado de Chihuahua",
               "tipos_actores": ["Autoridades legislativas"],
               "resultados": "Reformas legales y establecimiento del Día Estatal del Migrante",
-              "comentarios": ""
+              "comentarios": "",
+               "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+               "pagina_pdf": 54
             },
             {
               "volumen": 1,
@@ -790,7 +824,9 @@
               "autoridades_enunciadas": "Sistema para el Desarrollo Integral de la Familia (DIF) de Chihuahua",
               "tipos_actores": ["Autoridades que atienden agendas de protección a derechos humanos", "En colaboración con organismos internacionales", "En colaboración con autoridades federales"],
               "resultados": "Protección y asistencia a NNA migrantes no acompañados",
-              "comentarios": ""
+              "comentarios": "",
+               "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+               "pagina_pdf": 56
             },
             {
               "volumen": 1,
@@ -834,7 +870,9 @@
               "autoridades_enunciadas": "Dirección de Atención y Protección al Migrante y su Familia del Estado de Durango (DAPMF)",
               "tipos_actores": ["OFAMs", "Autoridades registrales", "En colaboración con autoridades federales", "En colaboración con autoridades municipales"],
               "resultados": "Garantizan el derecho a la identidad ofreciendo servicios de acceso a documentación",
-              "comentarios": ""
+              "comentarios": "",
+               "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+               "pagina_pdf": 60
             },
             {
               "volumen": 1,
@@ -878,7 +916,9 @@
               "autoridades_enunciadas": "Dirección de Atención y Protección al Migrante y su Familia del Estado de Durango (DAPMF)",
               "tipos_actores": ["OFAMs", "En colaboración con autoridades municipales"],
               "resultados": "Vinculación para acceso a servicios municipales",
-              "comentarios": "Vinculación para acceso a servicios municipales"
+              "comentarios": "Vinculación para acceso a servicios municipales",
+               "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+               "pagina_pdf": 62
             },
                 {
                   "volumen": 1,
@@ -922,7 +962,9 @@
                   "autoridades_enunciadas": "Dirección de Atención y Protección al Migrante y su Familia del Estado de Durango (DAPMF)",
                   "tipos_actores": ["OFAMs", "En colaboración con autoridades municipales", "En colaboración con representaciones consulares"],
                   "resultados": "Coordinación con mas de 20 dependencias para facilitar procesos de vinculación y acceso a servicios",
-                  "comentarios": ""
+                  "comentarios": "",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 64
                 },
                 {
                   "volumen": 1,
@@ -966,7 +1008,9 @@
                   "autoridades_enunciadas": "Dirección de Atención y Protección al Migrante y su Familia del Estado de Durango (DAPMF)",
                   "tipos_actores": ["OFAMs"],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                   "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                   "pagina_pdf": 66
                 },
                 {
                   "volumen": 1,
@@ -1010,7 +1054,9 @@
                   "autoridades_enunciadas": "Dirección de Atención y Protección al Migrante y su Familia del Estado de Durango (DAPMF)",
                   "tipos_actores": ["OFAMs", "En colaboración con representaciones consulares"],
                   "resultados": "Reunificación familiar temporal",
-                  "comentarios": ""
+                  "comentarios": "",
+                   "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 68
                 },
                 {
                   "volumen": 1,
@@ -1054,7 +1100,9 @@
                   "autoridades_enunciadas": "Dirección de Atención y Protección al Migrante y su Familia del Estado de Durango (DAPMF)",
                   "tipos_actores": ["OFAMs", "En colaboración con representaciones consulares"],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 70
                 },
                 {
                   "volumen": 1,
@@ -1098,7 +1146,9 @@
                   "autoridades_enunciadas": "Dirección de Atención y Protección al Migrante y su Familia del Estado de Durango (DAPMF)",
                   "tipos_actores": ["OFAMs"],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                   "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 72
                 },
                 {
                   "volumen": 1,
@@ -1142,7 +1192,9 @@
                   "autoridades_enunciadas": "Dirección de Atención a Personas Migrantes de Jalisco",
                   "tipos_actores": ["OFAMs", "En colaboración con autoridades municipales", "En colaboración con OSC"],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                   "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 77
                 },
                  {
                   "volumen": 1,
@@ -1186,7 +1238,9 @@
                   "autoridades_enunciadas": "Dirección de Atención a Personas Migrantes de Jalisco",
                   "tipos_actores": ["OFAMs"],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                   "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 79
                 },
                  {
                   "volumen": 1,
@@ -1230,7 +1284,9 @@
                   "autoridades_enunciadas": "Dirección de Atención a Personas Migrantes de Jalisco",
                   "tipos_actores": ["OFAMs", "En colaboración con autoridades municipales", "En colaboración con OSC"],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                   "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 80
                 },
                 {
                   "volumen": 1,
@@ -1274,7 +1330,9 @@
                   "autoridades_enunciadas": "Secretaría del Migrante del estado de Michoacán (SEMIGRANTE)",
                   "tipos_actores": ["OFAMs"],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                   "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 83
                 },
                 {
                   "volumen": 1,
@@ -1318,7 +1376,9 @@
                   "autoridades_enunciadas": "Secretaría del Migrante del estado de Michoacán (SEMIGRANTE)",
                   "tipos_actores": ["OFAMs"],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                   "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 85
                 },
                 {
                   "volumen": 1,
@@ -1362,7 +1422,9 @@
                   "autoridades_enunciadas": "Secretaría del Migrante del estado de Michoacán (SEMIGRANTE)",
                   "tipos_actores": ["OFAMs", "En colaboración con representaciones consulares"],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                   "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                   "pagina_pdf": 87
                 },
                 {
                    "volumen": 1,
@@ -1406,7 +1468,9 @@
                    "autoridades_enunciadas": "Secretaría del Migrante del estado de Michoacán (SEMIGRANTE)",
                    "tipos_actores": ["OFAMs"],
                    "resultados": "",
-                   "comentarios": ""
+                   "comentarios": "",
+                    "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                   "pagina_pdf": 88
                  },
                  {
                    "volumen": 1,
@@ -1450,7 +1514,9 @@
                    "autoridades_enunciadas": "Secretaría del Migrante del estado de Michoacán (SEMIGRANTE)",
                    "tipos_actores": ["OFAMs"],
                    "resultados": "",
-                   "comentarios": ""
+                   "comentarios": "",
+                    "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                   "pagina_pdf": 90
                 },
                 {
                   "volumen": 1,
@@ -1494,7 +1560,9 @@
                   "autoridades_enunciadas": "Secretaría del Migrante del estado de Michoacán (SEMIGRANTE)",
                   "tipos_actores": ["OFAMs", "En colaboración con representaciones consulares"],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                   "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                   "pagina_pdf": 92
                 },
                 {
                   "volumen": 1,
@@ -1543,7 +1611,9 @@
                     "En colaboración con OSC"
                   ],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 93
                 },
                 {
                   "volumen": 1,
@@ -1592,7 +1662,9 @@
                     "Autoridades del sector salud"
                   ],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 95
                 },
                 {
                   "volumen": 1,
@@ -1639,7 +1711,9 @@
                     "En colaboración con autoridades municipales"
                   ],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 99
                 },
                 {
                   "volumen": 1,
@@ -1686,7 +1760,9 @@
                     "En colaboración con representaciones consulares"
                   ],
                   "resultados": "Reunificación familiar temporal",
-                  "comentarios": ""
+                  "comentarios": "",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 101
                 },
                 {
                   "volumen": 1,
@@ -1734,12 +1810,14 @@
                     "En colaboración con colectivos de personas en contexto de movilidad"
                   ],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 102
                 },
                 {
                   "volumen": 1,
                   "region": "Centro",
-                  "estado": "CDMX",
+                  "estado": "Ciudad de México",
                   "estados_fronterizos": "No aplica",
                   "numero": 1,
                   "buena_practica": "PROGRAMA DE SEGURO DE DESEMPLEO",
@@ -1781,12 +1859,14 @@
                     "En colaboración con autoridades federales"
                   ],
                   "resultados": "Asistencia en materia de alimentación, salud, identidad, equidad, cohesión e integración social. Difusión de servicios sociales encaminados a garantizar el acceso a la justicia y los derechos humanos. Canalizar a INM.",
-                  "comentarios": ""
+                  "comentarios": "",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 108
                 },
                 {
                   "volumen": 1,
                   "region": "Centro",
-                  "estado": "CDMX",
+                  "estado": "Ciudad de México",
                   "estados_fronterizos": "No aplica",
                   "numero": 2,
                   "buena_practica": "VENTANILLA INFORMATIVA",
@@ -1828,12 +1908,14 @@
                     "En colaboración con organismos internacionales"
                   ],
                   "resultados": "Apoyo económico a personas que hayan perdido su empleo.",
-                  "comentarios": ""
+                  "comentarios": "",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 110
                 },             
                 {
                   "volumen": 1,
                   "region": "Centro",
-                  "estado": "CDMX",
+                  "estado": "Ciudad de México",
                   "estados_fronterizos": "No aplica",
                   "numero": 3,
                   "buena_practica": "LEY DE INTERCULTURALIDAD, ATENCIÓN A MIGRANTES Y MOVILIDAD HUMANA EN EL DISTRITO FEDERAL",
@@ -1874,12 +1956,14 @@
                     "Autoridades legislativas"
                   ],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 112
                 },
                 {
                   "volumen": 1,
                   "region": "Centro",
-                  "estado": "CDMX",
+                  "estado": "Ciudad de México",
                   "estados_fronterizos": "No aplica",
                   "numero": 4,
                   "buena_practica": "CREACIÓN DE LA SUBDIRECCIÓN DE MIGRANTES",
@@ -1924,12 +2008,14 @@
                     "En colaboración con albergues"
                   ],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 114
                 },
                 {
                   "volumen": 1,
                   "region": "Centro",
-                  "estado": "CDMX",
+                  "estado": "Ciudad de México",
                   "estados_fronterizos": "No aplica",
                   "numero": 5,
                   "buena_practica": "PADRÓN DE HUÉSPEDES Y MIGRANTES EN RETORNO DE LA CDMX",
@@ -1970,12 +2056,14 @@
                     "OFAMs"
                   ],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 116
                 },
                 {
                   "volumen": 1,
                   "region": "Centro",
-                  "estado": "CDMX",
+                  "estado": "Ciudad de México",
                   "estados_fronterizos": "No aplica",
                   "numero": 6,
                   "buena_practica": "PLAN INTEGRAL DE ATENCIÓN A LA SALUD DE LA POBLACIÓN MIGRANTE",
@@ -2016,12 +2104,14 @@
                     "Autoridades del sector salud"
                   ],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 118
                 },
                 {
                   "volumen": 1,
                   "region": "Centro",
-                  "estado": "Estado de México",
+                  "estado": "México",
                   "estados_fronterizos": "No aplica",
                   "numero": 1,
                   "buena_practica": "PROGRAMA MIGRANTE MEXIQUENSE",
@@ -2064,12 +2154,14 @@
                     "Autoridades del sector salud"
                   ],
                   "resultados": "Apoyo a migrantes de retorno en fechas específicas (diciembre, semana santa, verano). Programa anual",
-                  "comentarios": ""
+                  "comentarios": "",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 122
                 },
                 {
                   "volumen": 1,
                   "region": "Centro",
-                  "estado": "Estado de México",
+                  "estado": "México",
                   "estados_fronterizos": "No aplica",
                   "numero": 2,
                   "buena_practica": "TRASLADO DE MIGRANTES FALLECIDOS",
@@ -2110,12 +2202,14 @@
                     "OFAMs"
                   ],
                   "resultados": "Apoyo a familiares de personas fallecidas en el extranjero, apoyo económico, gestión de trámites y de traslado.",
-                  "comentarios": ""
+                  "comentarios": "",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 124
                 },
                 {
                   "volumen": 1,
                   "region": "Centro",
-                  "estado": "Estado de México",
+                  "estado": "México",
                   "estados_fronterizos": "No aplica",
                   "numero": 3,
                   "buena_practica": "LÍNEA MIGRANTE MEXIQUENSE",
@@ -2156,12 +2250,14 @@
                     "OFAMs"
                   ],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 125
                 },
                 {
                   "volumen": 1,
                   "region": "Centro",
-                  "estado": "Estado de México",
+                  "estado": "México",
                   "estados_fronterizos": "No aplica",
                   "numero": 4,
                   "buena_practica": "APOYO A LA CREACIÓN DE CLUBES DE MIGRANTES",
@@ -2203,7 +2299,9 @@
                     "En colaboración con colectivos de personas en contexto de movilidad"
                   ],
                   "resultados": "",
-                  "comentarios": ""
+                  "comentarios": "",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 126
                 },
                 {
                   "volumen": 1,
@@ -2249,7 +2347,9 @@
                     "OFAMs"
                   ],
                   "resultados": "Con auxilio de las Oficinas de Representación en Estados Unidos. Facilitación de documentos, trámites, obtención de actas.",
-                  "comentarios": "Gestión de trámites"
+                  "comentarios": "Gestión de trámites",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 131
                 },
                 {
                   "volumen": 1,
@@ -2295,7 +2395,9 @@
                     "OFAMs"
                   ],
                   "resultados": "Apoyo a familiares de personas fallecidas en el extranjero, apoyo económico, gestión de trámites y de traslado.",
-                  "comentarios": ""
+                  "comentarios": "",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 132
                 },
                 {
                   "volumen": 1,
@@ -2341,7 +2443,9 @@
                     "OFAMs"
                   ],
                   "resultados": "Apoyo económico para el desarrollo de programas de: servicios, venta de productos, transformación, establecimientos de alimentos procesados, productos agropecuarios.",
-                  "comentarios": ""
+                  "comentarios": "",
+                  "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                  "pagina_pdf": 133
                 },
                        {
                          "volumen": 1,
@@ -2385,7 +2489,9 @@
                          "autoridades_enunciadas": "Instituto Poblano de Asistencia al Migrante",
                          "tipos_actores": ["OFAMs"],
                          "resultados": "",
-                         "comentarios": ""
+                         "comentarios": "",
+                          "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                          "pagina_pdf": 135
                        },
                        {
                          "volumen": 1,
@@ -2433,7 +2539,9 @@
                            "Autoridades registrales"
                          ],
                          "resultados": "",
-                         "comentarios": ""
+                         "comentarios": "",
+                         "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                          "pagina_pdf": 141
                        },
                        {
                          "volumen": 1,
@@ -2477,7 +2585,9 @@
                          "autoridades_enunciadas": "Dirección General de Atención a Migrantes de Veracruz",
                          "tipos_actores": ["OFAMs"],
                          "resultados": "Reunificación familiar temporal. Enfoque a adultos mayores de 60 años.",
-                         "comentarios": ""
+                         "comentarios": "",
+                         "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                          "pagina_pdf": 143
                        },
                        {
                          "volumen": 1,
@@ -2526,7 +2636,9 @@
                            "En colaboración con representaciones consulares"
                          ],
                          "resultados": "",
-                         "comentarios": ""
+                         "comentarios": "",
+                         "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                          "pagina_pdf": 147
                         },
                         {
                           "volumen": 1,
@@ -2573,7 +2685,9 @@
                           "En colaboración con autoridades municipales"
                         ],
                           "resultados": "Los enlaces municipales mantienen actualizado al instituto sobre las necesidades identificadas por la población migrante en sus comunidades.",
-                          "comentarios": ""
+                          "comentarios": "",
+                          "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                          "pagina_pdf": 149
                         },
                         {
                           "volumen": 1,
@@ -2620,7 +2734,9 @@
                           "OFAMs",
                           "Autoridades del sector educación"
                         ],
-                          "comentarios": ""
+                          "comentarios": "",
+                          "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                          "pagina_pdf": 151
                         },
                         {
                           "volumen": 1,
@@ -2667,7 +2783,9 @@
                            "En colaboración con representaciones consulares"
                           ],
                           "resultados": "Reunificación familiar temporal. Enfoque a adultos mayores de 60 años. Y personas mayores como embajadores culturales.",
-                          "comentarios": ""
+                          "comentarios": "",
+                          "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                          "pagina_pdf": 152
                         },
                         {
                           "volumen": 1,
@@ -2714,7 +2832,9 @@
                            "Autoridades registrales"
                           ],
                           "resultados": "Brindar certeza jurídica a las personas yucatecas maya hablantes.",
-                          "comentarios": ""
+                          "comentarios": "",
+                          "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                          "pagina_pdf": 154
                         },
                         {
                           "volumen": 1,
@@ -2761,7 +2881,9 @@
                             "En colaboración con colectivos de personas en contexto de movilidad"
                             ],
                           "resultados": "",
-                          "comentarios": ""
+                          "comentarios": "",
+                          "pdf_url":  "https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf",
+                          "pagina_pdf": 155
                         }
   ]
 }

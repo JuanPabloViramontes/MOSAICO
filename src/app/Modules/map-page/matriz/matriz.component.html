@@ -62,7 +62,6 @@
           <th *ngIf="matrizNivel !== 'resumido'" style="min-width: 200px;">Subcategoría</th>
           <th *ngIf="matrizNivel === 'completo'" style="min-width: 170;">Población objetivo</th>
           <th *ngIf="matrizNivel === 'completo'" style="min-width: 170px;">Tipos de actor</th>
-          <th *ngIf="matrizNivel === 'completo'">Autoridades enunciadas</th>
         </tr>
       </thead>
 
@@ -70,12 +69,13 @@
      <tr *ngFor="let row of filteredData; let i = index" [attr.id]="'practica-' + i">
   <td>{{ row.estado }}</td>
   <td>{{ row.naturaleza_politica_publica }}</td>
-  <td>
-  <a
-    href="https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2024-07/buenas-practicas-volumen-2_final.pdf"
-    target="_blank"
-    rel="noopener"
-    class="text-primary text-decoration-underline"
+ <td>
+  <a 
+    [href]="row.pdf_url + '#nameddest=' + encodeURIComponentWrapper(row.pdf_bookmark)" 
+    [attr.title]="'Página ' + row.pagina_pdf"
+    class="text-decoration-none"
+    data-bs-toggle="tooltip"
+    data-bs-placement="top"
   >
     {{ row.buena_practica }}
   </a>
@@ -91,7 +91,6 @@
               </span>
             </td>
             <td>{{ formatTiposActores(row.tipos_actores) }}</td>
-            <td>{{ row.autoridades_enunciadas }}</td>
           </ng-container>
         </tr>
 

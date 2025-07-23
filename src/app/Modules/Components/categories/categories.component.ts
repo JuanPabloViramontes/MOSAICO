@@ -21,7 +21,7 @@ export class CategoriesComponent implements AfterViewInit {
       question: '¿DÓNDE SE IMPLEMENTÓ LA BUENA PRÁCTICA?',
       description: 'Este campo indica en qué estado de la República Mexicana se desarrolló la acción. Nos permite reconocer qué territorios están construyendo respuestas locales a los retos de la migración, visibilizando esfuerzos que promueven la dignidad, inclusión y derechos de las personas en movilidad.',
           images: [
-          { src: 'assets/images/regiones.png', caption: 'Regiones' },
+          { src: 'assets/images/variables/regiones.png', caption: 'Regiones' },
         ],
       }
     },
@@ -32,8 +32,7 @@ export class CategoriesComponent implements AfterViewInit {
         question: '¿LA ENTIDAD TIENE FRONTERA INTERNACIONAL?',
         description: 'Aquí se señala si el estado colinda con Estados Unidos, Guatemala o Belice. Esta información es clave, ya que las dinámicas migratorias en zonas fronterizas suelen marcar lógicas específicas y requieren estrategias específicas para garantizar derechos y responder a contextos de alta movilidad.',
         images: [
-          { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
-          { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
+          { src: 'assets/images/variables/fronterizo.png', caption: 'Estado fronterizo de Chihuahua' },
         ],
       }
     },
@@ -44,8 +43,7 @@ export class CategoriesComponent implements AfterViewInit {
         question: '¿CUÁL FUE EL ENFOQUE DE LA ACCIÓN IMPLEMENTADA?',
         description: 'Identifica el área central de la buena práctica, como salud, educación, vivienda, integración, atención humanitaria, regularización o participación ciudadana. Visibilizar estos enfoques permite mapear las prioridades territoriales y detectar áreas que requieren mayor atención o fortalecimiento.',
         images: [
-          { src: 'assets/images/atardecer-detail1.jpg', caption: 'Atardecer en la playa' },
-          { src: 'assets/images/atardecer-detail2.jpg', caption: 'Atardecer en la montaña' }
+          { src: 'assets/images/variables/buenapractica.png', caption: 'Niña recibe su acta de nacimiento acompañada de sus padres guatemaltecos' },
         ],
       }
     },
@@ -56,8 +54,7 @@ export class CategoriesComponent implements AfterViewInit {
         question: '¿A QUÉ TIPO DE MOVILIDAD RESPONDE LA ACCIÓN?',
         description: 'Esta categoría permite identificar a qué perfil de población migrante se dirige la práctica: personas en tránsito, solicitantes de asilo, retornadas, desplazadas internas o comunidades receptoras. Diferenciar estos perfiles ayuda a comprender mejor las necesidades específicas de cada grupo.',
         images: [
-          { src: 'assets/images/atardecer-detail1.jpg', caption: 'Atardecer en la playa' },
-          { src: 'assets/images/atardecer-detail2.jpg', caption: 'Atardecer en la montaña' }
+      { src: 'assets/images/variables/situacionmigratoria.png', caption: 'El Paso, Texas' },
         ],
       }
     },
@@ -68,8 +65,7 @@ export class CategoriesComponent implements AfterViewInit {
         question: '¿LA ACCIÓN TOMA EN CUENTA OTRAS CONDICIONES DE VULNERABILIDAD?',
         description: 'Señala si la práctica considera factores como género, edad, discapacidad, diversidad, pertenencia étnica o situación socioeconómica. Esto permite identificar acciones con enfoque interseccional.',
         images: [
-          { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
-          { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
+           { src: 'assets/images/variables/interseccionalidades.png', caption: 'Caravana de migrantes pasando por Chiapas' },
         ],
       }
     },
@@ -80,8 +76,9 @@ export class CategoriesComponent implements AfterViewInit {
         question: '¿EN QUÉ VOLUMEN DEL REPOSITORIO SE ENCUENTRA LA PRÁCTICA?',
         description: 'Este campo ubica la buena práctica dentro del repositorio, de acuerdo con el año en que fue registrada o integrada. Es útil para conocer la transformación de las respuestas institucionales a lo largo del tiempo y facilitar la consulta organizada de la información.',
         images: [
-          { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
-          { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
+           { src: 'assets/images/variables/volumen1.png', caption: 'Portada de volumen 1' },
+           { src: 'assets/images/variables/volumen2.png', caption: 'Portada de volumen 2' },
+           { src: 'assets/images/variables/volumen3.png', caption: 'Portada de volumen 3' },
         ],
       }
     },
@@ -92,8 +89,7 @@ export class CategoriesComponent implements AfterViewInit {
         question: '¿QUIÉNES PARTICIPARON EN LA IMPLEMENTACIÓN?',
         description: 'Describe los actores clave involucrados en la puesta en marcha de la práctica, como gobiernos locales, organizaciones de la sociedad civil, agencias internacionales, sector privado o comunidades migrantes. Reconocer la participación multisectorial refuerza la importancia de la colaboración para lograr impactos sostenibles.',
         images: [
-          { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
-          { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
+          { src: 'assets/images/variables/actores.png', caption: 'Sede del Instituto Nacional de Migración (INM) en CDMX' },
         ],
       }
     },
@@ -104,8 +100,7 @@ export class CategoriesComponent implements AfterViewInit {
         question: '¿CUÁNDO SE PUSO EN MARCHA LA ACCIÓN?',
         description: 'Permite conocer el año de inicio de la práctica. Esta información es relevante para entender si se trata de una acción reciente, sostenida en el tiempo o adaptada a nuevos contextos, lo que puede indicar su efectividad y capacidad de respuesta ante escenarios cambiantes.',
         images: [
-          { src: 'assets/images/cempa-detail1.jpg', caption: 'Cultivo de cempasúchil' },
-          { src: 'assets/images/cempa-detail2.jpg', caption: 'Decoración tradicional' }
+          { src: 'assets/images/variables/temporalidad.png', caption: 'Migrantes cruzando el Río Grande' },
         ],
       }
     }

@@ -1,77 +1,95 @@
 <div class="container-fluid p-0">
-
-  <!-- 🔹 Vista inicial con opciones -->
-  <div *ngIf="mostrarOpcionesIniciales" class="text-white text-center py-5"
+  <!-- Banner principal -->
+  <div *ngIf="mostrarOpcionesIniciales" class="text-white text-center rounded-top-4 overflow-hidden position-relative"
        style="
-         background-image: linear-gradient(rgba(146, 174, 202, 0.95), rgba(255, 255, 255, 0.95)), url('../../../../assets/images/Banner.jpg');
-         background-size: cover;
-         background-position: center;
+         background-image:
+           linear-gradient(rgba(146, 174, 202, 0.3), rgba(255, 255, 255, 0.3)),
+           url('../../../../assets/images/mosaicoBanner.jpg');
+         background-size: 100% auto;
+         background-position: center center;
          background-repeat: no-repeat;
          background-blend-mode: multiply;
-         outline: 4px solid #2c3e50;
+         outline: 4px solid #000000;
          outline-offset: -8px;
          min-height: 400px;">
-    <div class="container">
-      <nav class="navbar mb-3" style="height: 80px; display: flex; justify-content: center; align-items: center;">
-        <a class="navbar-brand" [routerLink]="['/']" style="height: 100%; display: flex; align-items: center;">
-          <img src="../../../../assets/images/Mosaico.png" alt="Mosaico" style="max-height: 80px; width: auto;" />
-        </a>
+
+    <!-- Overlay clickeable SOLO para el banner de fondo -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; cursor: pointer; z-index: 999;" 
+         [routerLink]="['/home']"></div>
+
+    <div class="container position-relative" style="z-index: 2;">
+      <nav class="navbar" style="height: 100px; display: flex; justify-content: center; align-items: center;">
       </nav>
-      <h2 class="lead text-light fw-bold mb-3">
-        Un mapa interactivo sobre las políticas migratorias a nivel local
-      </h2>
+
+      <h2 class="lead text-light mt-4" style="margin-top: 11rem !important;"></h2>
       <p class="lead text-light mb-4">
-        Explora las <strong>buenas prácticas</strong> en contexto <strong>migratorio</strong> a nivel local.
+         <strong> Explora las buenas prácticas en contexto migratorio a nivel local.</strong> 
       </p>
-      <div class="d-flex justify-content-center gap-4 flex-wrap">
-        <button class="btn btn-lg px-4 shadow text-white"
-                style="background-color: #0c2e8d; border: none;"
-                (click)="ocultarVideoYMostrarMapa()">
-          Empezar a interactuar
-        </button>
-        <button class="btn btn-outline-light btn-lg px-4"
-                (click)="mostrarVideoTutorial()">
-          Ver video tutorial
-        </button>
-      </div>
     </div>
   </div>
 
-  <!-- 🔸 Video tutorial -->
-  <div *ngIf="mostrarVideo" class="video-container position-relative text-center" style="margin: 30px auto; max-width: 960px;">
+  <!-- Franja azul con botones -->
+  <div *ngIf="mostrarOpcionesIniciales" class="text-white text-center py-4 rounded-bottom-4" style="background-color: #0c2e8d;">
+    <div class="d-flex justify-content-center gap-4 flex-wrap">
+      <button class="btn btn-outline-light btn-lg px-4"
+              (click)="ocultarVideoYMostrarMapa()">
+        Empezar a interactuar
+      </button>
+      <button class="btn btn-outline-light btn-lg px-4"
+              (click)="mostrarVideoTutorial()">
+        Ver video tutorial
+      </button>
+    </div>
+  </div>
+
+  <!-- 🔸 Video tutorial (visible SOLO cuando mostrarVideo === true) -->
+  <div *ngIf="mostrarVideo" class="video-container position-relative text-center" style="padding-top: 60px; margin: 0 auto; max-width: 960px;">
     <!-- Encabezado homogéneo para video -->
-<div class="header-intro d-flex align-items-center justify-content-center mb-4 position-relative"
+    <div class="header-intro d-flex align-items-center justify-content-between flex-wrap mb-4 px-3"
          style="
-           background-color: #1a365d; 
+           background-color: #0a2472; 
            color: white; 
            padding: 12px 20px; 
            border-radius: 8px;
            box-shadow: 0 4px 6px rgb(26 54 93 / 0.5);
          ">
-      <img src="../../../../assets/images/Mosaico.png" alt="Mosaico Logo" style="height: 40px; margin-right: 15px;" />
-      <div>
-        <h3 class="mb-0" style="font-weight: 700;">Video Tutorial</h3>
-        <p class="mb-0" style="font-size: 0.9rem; opacity: 0.85;">
-          Aprende a usar el mosaico para explorar buenas prácticas migratorias.
-        </p>
+      <!-- Botones -->
+      <div class="d-flex gap-2">
+        <button (click)="cerrarVideoTutorial()" class="btn btn-outline-light btn-sm">
+          <i class="bi bi-arrow-left"></i> Volver
+        </button>
+      </div>
+
+      <!-- Logo + texto -->
+      <div class="d-flex align-items-center gap-3 flex-grow-1 justify-content-center text-center text-md-start">
+        <img src="../../../../assets/images/Mosaico.png" alt="Mosaico Logo" style="height: 40px;" />
+        <div>
+          <h3 class="mb-0 fw-bold">Video Tutorial</h3>
+          <p class="mb-0" style="font-size: 0.9rem; opacity: 0.85;">
+            Aprende a usar el mosaico para explorar buenas prácticas migratorias.
+          </p>
+        </div>
       </div>
     </div>
+
     <div class="map-container shadow rounded overflow-hidden mb-3" style="height: 600px;">
-      <video #introVideo class="w-100" autoplay muted playsinline style="object-fit: cover; height: 100%; width: 100%;">
-        <source src="assets/videos/Manual_completo.mp4" type="video/mp4" />
-        Tu navegador no soporta el video.
-      </video>
+      <iframe
+        width="100%"
+        height="100%"
+        src="https://www.youtube.com/embed/4lyqMioqw_A?autoplay=1&mute=1&playsinline=1"
+        title="Video Tutorial"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        style="object-fit: cover;"
+      ></iframe>
     </div>
-   <button (click)="cerrarVideoTutorial()" 
-        class="btn btn-outline-light btn-sm position-absolute start-0 top-0 translate-middle-y mt-4 ms-3"
-        style="z-index: 1;">
-  <i class="bi bi-arrow-left"></i> Volver
-</button>
   </div>
 
-  <!-- 🌐 Estado seleccionado -->
-<div *ngIf="selectedState" class="container-fluid px-0 my-3" #stateCard>
-    <div class="row align-items-stretch rounded-4 overflow-hidden shadow" style="min-height: 300px; background: linear-gradient(135deg, #0f2145, #2c3e50);">
+  <!-- 🌐 Estado seleccionado (SÓLO cuando mostrarMapa y hay selectedState) -->
+  <div *ngIf="mostrarMapa && selectedState" class="container-fluid px-0 my-3" #stateCard>
+    <div class="row align-items-stretch rounded-4 overflow-hidden shadow" style="min-height: 300px; background: linear-gradient(135deg, #0c2e8d, #0a2472);">
+      <!-- Imagen del estado -->
       <div class="col-md-5 d-flex align-items-stretch p-0">
         <img [src]="carouselImages[0] || 'assets/images/default-estado.jpg'" alt="Imagen del estado"
              class="img-fluid w-100 h-100"
@@ -80,114 +98,131 @@
              onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'" />
       </div>
 
-      <div class="col-md-7 text-white d-flex flex-column justify-content-center p-4">
-<div class="p-3 rounded shadow-lg text-center text-md-start estado-card-hover"
-     [ngStyle]="{
-       'transition': 'all 0.3s ease',
-       'border-left': '4px solid ' + getColorPorVolumen()
-     }">
+      <!-- Contenido del estado -->
+      <div class="col-md-7 text-white d-flex justify-content-center align-items-end p-4 position-relative">
+        <div class="p-3 rounded shadow-lg text-center text-md-start estado-card-hover w-100"
+             [ngStyle]="{
+               'transition': 'all 0.3s ease',
+               'border-left': '4px solid ' + getColorPorVolumen()
+             }">
           <h2 class="fw-bold mb-2">{{ selectedState.name }}</h2>
           <p class="small mb-3">{{ selectedState.practices }}</p>
-          <div class="d-flex justify-content-center gap-3 mt-3">
+
+          <!-- Botones -->
+          <div class="d-flex justify-content-center flex-wrap gap-3 mt-3">
             <button (click)="clearSelection()" class="btn btn-outline-light btn-sm px-4">
               Volver al mapa completo
             </button>
             <a href="https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2024-07/buenas-practicas-volumen-2_final.pdf"
                target="_blank"
-               class="btn btn-outline-light btn-sm px-4">
-              Ir al manual
+               class="btn btn-outline-light btn-sm px-4 d-inline-block text-center align-middle">
+              Ir al documento
             </a>
           </div>
+        </div>
+
+        <!-- Leyenda de colores posicionada a la derecha -->
+        <div class="bg-white bg-opacity-10 text-white rounded px-3 py-2 position-absolute end-0 top-0 mt-2 me-2"
+             style="font-size: 0.75rem; min-width: 200px;">
+          <p class="mb-1">
+            <span style="display: inline-block; width: 12px; height: 12px; background-color: #dc3545; border-radius: 2px; margin-right: 8px;"></span>
+            <strong>Volumen 1</strong>
+          </p>
+          <p class="mb-1">
+            <span style="display: inline-block; width: 12px; height: 12px; background-color: #ffc107; border-radius: 2px; margin-right: 8px;"></span>
+            <strong>Volumen 2</strong> 
+          </p>
+          <p class="mb-0">
+            <span style="display: inline-block; width: 12px; height: 12px; background-color: #28a745; border-radius: 2px; margin-right: 8px;"></span>
+            <strong>Volumen 3</strong> 
+          </p>
         </div>
       </div>
     </div>
   </div>
-<!-- 🗺️ Mapa interactivo -->
-<div class="container my-4 position-relative" *ngIf="mostrarMapa">
 
- <div class="header-intro d-flex flex-wrap align-items-start justify-content-start gap-3 mb-4"
-     style="
-       background-color: #1a365d; 
-       color: white; 
-       padding: 20px; 
-       border-radius: 12px;
-       box-shadow: 0 4px 6px rgb(26 54 93 / 0.5);
-     ">
+  <div class="container my-4 position-relative" *ngIf="mostrarMapa" #mapaYmatriz>
+  <div class="header-intro d-flex flex-wrap align-items-start justify-content-start gap-3 mb-4"
+    style="
+      background-color: #0a2472;
+      color: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgb(26 54 93 / 0.5);
+    ">
 
-  <!-- 🔙 Botón de regreso -->
-  <button (click)="volverAInicio()" 
-          class="btn btn-outline-light btn-sm me-3 mb-2">
-    <i class="bi bi-arrow-left"></i> Volver
-  </button>
+    <button (click)="volverAInicio()"
+            class="btn btn-outline-light btn-sm me-3 mb-2">
+      <i class="bi bi-arrow-left"></i> Volver
+    </button>
 
-  <!-- 🔸 Logo + texto -->
-  <img src="../../../../assets/images/Mosaico.png" alt="Mosaico Logo" style="height: 40px;" />
+    <div class="d-flex align-items-center gap-3"> <img src="../../../../assets/images/Mosaico.png" alt="Mosaico Logo" style="height: 40px;" />
 
-  <div class="flex-grow-1">
-    <h3 class="mb-1 fw-bold">Mapa Interactivo</h3>
-    <p class="mb-2" style="font-size: 0.9rem; opacity: 0.85;">
-      Explora las buenas prácticas a nivel local.
-    </p>
+      <div> <h3 class="mb-1 fw-bold">Mapa Interactivo</h3>
+        <p class="mb-2" style="font-size: 0.9rem; opacity: 0.85;">
+          Explora las buenas prácticas a nivel local.
+        </p>
+      </div>
+    </div>
 
-    <!-- 🧭 Mini tutorial -->
-    <div class="bg-white bg-opacity-10 rounded px-3 py-2" style="font-size: 0.85rem;">
-      <p class="mb-1">🌎 Conoce el <strong>contexto migratorio</strong> por estado.</p>
-      <p class="mb-1">🎯 <strong>Selecciona los filtros</strong> que desees y conoce los estados con buenas prácticas coincidentes.</p>
-      <p class="mb-0">🔍 Busca <strong>palabras clave</strong> en la sección inferior izquierda.</p>
+      
+
+        <!-- 🧭 Mini tutorial + leyenda -->
+        <div class="bg-white bg-opacity-10 rounded px-3 py-2 d-flex flex-wrap justify-content-between align-items-start gap-3" style="font-size: 0.85rem;">
+          <div>
+            <p class="mb-1">🌎 Conoce el <strong>contexto migratorio</strong> por estado.</p>
+            <p class="mb-1">🎯 <strong>Selecciona los filtros</strong> que desees y conoce los estados con buenas prácticas coincidentes.</p>
+            <p class="mb-0">🔍 Busca <strong>palabras clave</strong> en la sección inferior izquierda.</p>
+          </div>
+          
+          <!-- 🔴 Indicadores -->
+          <div class="d-flex flex-column gap-1 text-white">
+            <div class="d-flex align-items-center">
+              <div style="width: 12px; height: 12px; background-color: #dc3545; margin-right: 6px; border-radius: 2px;"></div>
+              <span style="font-size: 0.75rem;">Todas las buenas prácticas del estado</span>
+            </div>
+            <div class="d-flex align-items-center">
+              <div style="width: 12px; height: 12px; background-color: #0d6efd; margin-right: 6px; border-radius: 2px;"></div>
+              <span style="font-size: 0.75rem;">Buenas prácticas coincidentes con los filtros</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    <!-- Contenedor del mapa y los filtros -->
+    <div class="map-container shadow rounded position-relative">
+
+      <!-- 🎛️ Panel de filtros -->
+      <div *ngIf="mostrarFiltrosYMapa"
+           class="position-absolute end-0 me-3 mb-3 ms-3 bg-white bg-opacity-75 rounded-3 shadow-sm px-3 py-2"
+           style="top: -20px; z-index: 10; width: 260px; height: 100%; overflow-y: auto; font-size: 0.85rem;">
+        <app-layers 
+          side="left" 
+          (filtersChanged)="onFiltersChanged($event); guardarFiltros($event)">
+        </app-layers>
+        <hr class="my-2" />
+      </div>
+
+      <!-- 🗺️ Mapa -->
+    <div id="map-container" class="map" style="height: 600px;" #mapContainerDiv></div>
     </div>
   </div>
 
-  <!-- 🟥🟨🟩 Leyenda de colores por volumen -->
-  <div class="bg-white bg-opacity-10 rounded px-3 py-2"
-       style="font-size: 0.85rem; min-width: 230px;">
-    <p class="mb-1">
-      <span style="display: inline-block; width: 12px; height: 12px; background-color: #dc3545; border-radius: 2px; margin-right: 8px;"></span>
-      <strong>Volumen 1</strong> – rojo
-    </p>
-    <p class="mb-1">
-      <span style="display: inline-block; width: 12px; height: 12px; background-color: #ffc107; border-radius: 2px; margin-right: 8px;"></span>
-      <strong>Volumen 2</strong> – amarillo
-    </p>
-    <p class="mb-0">
-      <span style="display: inline-block; width: 12px; height: 12px; background-color: #28a745; border-radius: 2px; margin-right: 8px;"></span>
-      <strong>Volumen 3</strong> – verde
-    </p>
-  </div>
-
-</div>
-
-
-  <!-- Contenedor del mapa y los filtros -->
-  <div class="map-container shadow rounded position-relative" #mapaYmatriz>
-
-    <!-- 🎛️ Panel de filtros -->
-<div *ngIf="mostrarFiltrosYMapa"
-     class="position-absolute end-0 me-3 mb-3 ms-3 bg-white bg-opacity-75 rounded-3 shadow-sm px-3 py-2"
-     style="top: -20px; z-index: 10; width: 260px; height: 100%; overflow-y: auto; font-size: 0.85rem;">
-      <app-layers side="left" (filtersChanged)="onFiltersChanged($event)"></app-layers>
-      <hr class="my-2" />
-    </div>
-
-    <!-- 🗺️ Mapa -->
-    <div id="map-container" class="map" style="height: 600px;"></div>
-  </div>
-</div>
-
-
-  <!-- Tooltip personalizado -->
+  <!-- Tooltip personalizado (sigue respondiendo a mostrarMapa para evitar que aparezca encima del video) -->
   <div class="tooltip bs-tooltip-top show" role="tooltip"
        [style.top.px]="tooltipY"
        [style.left.px]="tooltipX"
-       *ngIf="showTooltip">
+       *ngIf="mostrarMapa && showTooltip">
     <div class="tooltip-arrow"></div>
     <div class="tooltip-inner">{{ tooltipText }}</div>
   </div>
-  <!-- 📊 Matriz -->
-<div class="mt-5" *ngIf="!mostrarVideo">
-  <app-matriz 
+
+<div class="mt-5" *ngIf="mostrarMapa || mostrarMatrizInicial">
+  <app-matriz
     (filteredStatesChanged)="onFilteredStatesChanged($event)"
     (filteredStateCountsChanged)="updateCountsOnMap($event)"
-    (onDownloadPDF)="generarPDF($event)"
+    (onDownloadPDF)="generarPDF($event)" 
     [selectedState]="selectedMatrixState" 
     [selectedRegions]="regionesSeleccionadas"
     [selectedCategories]="categoriasSeleccionadas"
@@ -197,7 +232,6 @@
     [mostrarSoloInterseccionalidad]="mostrarConInterseccionalidades"
     [selectedTiposDeActor]="selectedTiposDeActor"
     [modoResumen]="modoResumen"
-    [showAllPracticas]="mostrarTodasLasPracticas">
-  </app-matriz>
-</div>
+    [showAllPracticas]="mostrarTodasLasPracticas"
+    [mapElement]="mapElementForPDF" ></app-matriz>
 </div>

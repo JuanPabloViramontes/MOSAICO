@@ -1,15 +1,18 @@
-/* Contenedor general */
+@media (hover: none), (pointer: coarse) {
+  .card:hover {
+    transform: none;
+  }
+}
+
 .boxesContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 0; /* Sin relleno */
+  padding: 0; 
   margin: 0 auto;
-  max-width: 1000px; /* o el ancho que defina tus filas completas */
+  max-width: 1000px; 
 }
 
-
-/* Cada tarjeta contenedora */
 .cardBox {
   width: 250px;
   min-height: 300px;
@@ -17,7 +20,6 @@
   perspective: 1000px;
 }
 
-/* Efecto flip */
 .card {
   width: 100%;
   height: 100%;
@@ -30,7 +32,6 @@
   transform: rotateY(180deg);
 }
 
-/* Cara frontal y trasera */
 .front,
 .back {
   position: absolute;
@@ -50,7 +51,6 @@
   /* Fondo más formal */
 }
 
-/* Fondo trasero adicional (ahora azul suave también) */
 .back {
   transform: rotateY(180deg);
   font-size: 0.75rem;

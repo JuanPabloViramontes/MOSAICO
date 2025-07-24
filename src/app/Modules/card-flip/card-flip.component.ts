@@ -165,4 +165,5 @@ onCardHover(image?: string, color?: string) {
     `
   }
 ];
+
 }

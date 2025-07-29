@@ -21,11 +21,6 @@ export class DocumentsComponent {
       link: 'https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-3-buenas-practicas_web.pdf'
     },
     {
-      title: 'Protocolo de Atención a Personas en Contexto de Movilidad para Gobiernos Municipales',
-      description: 'Herramienta elaborada por 11 municipios en el marco del Proyecto PROFIL. Ofrece lineamientos para acompañar a personas en movilidad en procesos de regularización, acceso a servicios y protección de derechos, facilitando su integración local.',
-      link: 'https://www.bivica.org/file/view/id/6995'
-    },
-    {
       title: 'Guía de elementos esenciales para la creación de política migratoria a nivel local en materia de integración',
       description: 'Herramienta práctica dirigida a gobiernos locales para diseñar políticas de integración y reintegración de personas migrantes, con enfoque de atención integral y adaptación a contextos locales diversos.',
       link: 'https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2024-07/guia-de-elementos-esenciales-para-publicacion.pdf'

@@ -153,6 +153,7 @@ ngOnInit(): void {
   this.selectedCategories = this.obtenerTodasLasCategorias();
   this.loadData();
 }
+
 ngAfterViewInit() {
   if (this.mapContainerDiv) {
       this.mapElementForPDF = this.mapContainerDiv.nativeElement;
@@ -687,12 +688,15 @@ volverAInicio(): void {
   this.mostrarMapa = false;
   this.mostrarVideo = false;
   this.selectedState = null;
+  this.mostrarMatrizInicial = true; // Mantener la matriz visible
+
 
   if (this.map) {
     this.map.setTarget(undefined); 
     this.map = null as any;   
   }
 }
+
 getColorPorVolumen(): string {
   if (!this.selectedState || !this.allData) return '#1a365d';
 
@@ -718,5 +722,3 @@ guardarFiltros(filtros: any): void {
   this.filtrosActivos = filtros;
 }
 }
-
-    

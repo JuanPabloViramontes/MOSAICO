@@ -41,8 +41,7 @@
     </div>
   </div>
 
-  <!-- 🔸 Video tutorial-->
-  <div *ngIf="mostrarVideo" class="video-container position-relative text-center" style="padding-top: 60px; margin: 0 auto; max-width: 960px;">
+¿  <div *ngIf="mostrarVideo" class="video-container position-relative text-center" style="padding-top: 60px; margin: 0 auto; max-width: 960px;">
     <div class="header-intro d-flex align-items-center justify-content-between flex-wrap mb-4 px-3"
          style="
            background-color: #0a2472; 
@@ -82,7 +81,6 @@
     </div>
   </div>
 
-  <!-- Selected state -->
   <div *ngIf="mostrarMapa && selectedState" class="container-fluid px-0 my-3" #stateCard>
     <div class="row align-items-stretch rounded-4 overflow-hidden shadow" style="min-height: 300px; background: linear-gradient(135deg, #0c2e8d, #0a2472);">
       <div class="col-md-5 d-flex align-items-stretch p-0">
@@ -114,7 +112,6 @@
           </div>
         </div>
 
-        <!-- Desktop: posición absoluta en la esquina -->
 <div class="d-none d-md-block bg-white bg-opacity-10 text-white rounded px-3 py-2 position-absolute end-0 top-0 mt-2 me-2"
      style="font-size: 0.75rem; min-width: 200px;">
   <p class="mb-1">
@@ -131,7 +128,6 @@
   </p>
 </div>
 
-<!-- Mobile: bloque normal debajo del contenido -->
 <div class="d-block d-md-none bg-white bg-opacity-10 text-white rounded px-3 py-2 mt-3"
      style="font-size: 0.85rem;">
   <p class="mb-1">
@@ -197,8 +193,8 @@
       </div>
     
     <div class="map-container shadow rounded position-relative">
-     <!-- Filtros en desktop: posición absoluta sobre el mapa -->
-<div *ngIf="mostrarFiltrosYMapa" class="d-none d-md-block position-absolute end-0 me-3 mb-3 ms-3 bg-white bg-opacity-75 rounded-3 shadow-sm px-3 py-2"
+
+      <div *ngIf="mostrarFiltrosYMapa" class="d-none d-md-block position-absolute end-0 me-3 mb-3 ms-3 bg-white bg-opacity-75 rounded-3 shadow-sm px-3 py-2"
      style="top: -20px; z-index: 10; width: 260px; height: 100%; overflow-y: auto; font-size: 0.85rem;">
   <app-layers 
     side="left" 
@@ -207,7 +203,6 @@
   <hr class="my-2" />
 </div>
 
-<!-- Filtros en móviles: bloque normal encima del mapa -->
 <div *ngIf="mostrarFiltrosYMapa" class="d-block d-md-none mb-3 px-3">
   <div class="bg-white bg-opacity-75 rounded-3 shadow-sm px-3 py-2">
     <app-layers 

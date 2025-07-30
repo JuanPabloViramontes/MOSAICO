@@ -1,4 +1,3 @@
-
 <h2 class="fw-bold mb-3 text-center">Mosaico de buenas prácticas</h2>
 <div class="boxesContainer">
   <div
@@ -7,7 +6,11 @@
     (mouseenter)="onCardHover(card.hoverPreview, card.color)"
     (mouseleave)="onCardHover()"
   >
-    <div class="card">
+    <div
+      class="card"
+      [class.flipped]="card.flipped"
+      (click)="onCardClick(card, $event)"
+    >
       <!-- Front side -->
       <div class="front text-white position-relative">
         <ng-container *ngIf="card.frontImage">
@@ -19,10 +22,11 @@
           />
         </ng-container>
         <div class="card-text p-3 fw-bold fs-3" style="z-index: 1; position: relative; border-radius: 0.5rem;">
-        <p class="mb-0">{{ card.frontText }}</p>
+          <p class="mb-0">{{ card.frontText }}</p>
+        </div>
       </div>
-      </div>
-      <!-- Back side  -->
+
+      <!-- Back side -->
       <div class="back text-dark">
         <ng-container *ngIf="card.backImage">
           <img

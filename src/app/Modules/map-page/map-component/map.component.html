@@ -4,7 +4,7 @@
        style="
          background-image:
            linear-gradient(rgba(146, 174, 202, 0.3), rgba(255, 255, 255, 0.3)),
-           url('../../../../assets/images/mosaicoBanner.jpg');
+           url('assets/images/mosaicoBanner.jpg');
          background-size: 100% auto;
          background-position: center center;
          background-repeat: no-repeat;
@@ -41,7 +41,7 @@
     </div>
   </div>
 
-¿  <div *ngIf="mostrarVideo" class="video-container position-relative text-center" style="padding-top: 60px; margin: 0 auto; max-width: 960px;">
+ <div *ngIf="mostrarVideo" class="video-container position-relative text-center" style="padding-top: 60px; margin: 0 auto; max-width: 960px;">
     <div class="header-intro d-flex align-items-center justify-content-between flex-wrap mb-4 px-3"
          style="
            background-color: #0a2472; 
@@ -104,11 +104,11 @@
             <button (click)="clearSelection()" class="btn btn-outline-light btn-sm px-4">
               Volver al mapa completo
             </button>
-            <a href="https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2024-07/buenas-practicas-volumen-2_final.pdf"
-               target="_blank"
-               class="btn btn-outline-light btn-sm px-4 d-inline-block text-center align-middle">
-              Ir al documento
-            </a>
+            <a [href]="getDocumentoPorVolumen()"
+            target="_blank"
+            class="btn btn-outline-light btn-sm px-4 d-inline-block text-center align-middle">
+           Ir al documento
+         </a>
           </div>
         </div>
 

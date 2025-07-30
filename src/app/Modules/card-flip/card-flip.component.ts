@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-card-flip',
@@ -6,10 +6,22 @@ import { Component } from '@angular/core';
   templateUrl: './card-flip.component.html',
   styleUrl: './card-flip.component.css'
 })
-export class CardFlipComponent {
+export class CardFlipComponent implements OnInit {
 
+ngOnInit() {
+  this.isTouchDevice = matchMedia('(hover: none), (pointer: coarse)').matches;
+}
+
+isTouchDevice = false;
 hoverImage: string = 'assets/images/cat-03.png';
 hoverFilter: string = 'none'; 
+
+onCardClick(card: any, event: MouseEvent) {
+  if (this.isTouchDevice) {
+    event.stopPropagation();
+    card.flipped = !card.flipped;
+  }
+}
 
 onCardHover(image?: string, color?: string) {
   this.hoverImage = image || 'assets/images/cat-03.png';
@@ -28,7 +40,8 @@ onCardHover(image?: string, color?: string) {
       </ul>
     `,
     color: 'blue',
-    hoverPreview: 'assets/images/cat-02.png'
+    hoverPreview: 'assets/images/cat-02.png',
+    flipped: false 
   },
   {
     frontImage: 'assets/images/mosaico/categorias-03.jpg',
@@ -41,7 +54,8 @@ onCardHover(image?: string, color?: string) {
       </ul>
     `,
       color: 'orange',
-    hoverPreview: 'assets/images/cat-03.png'
+    hoverPreview: 'assets/images/cat-03.png',
+    flipped: false 
   },
   {
     frontImage: 'assets/images/mosaico/categorias-05.jpg',
@@ -53,7 +67,8 @@ onCardHover(image?: string, color?: string) {
       </ul>
     `,
       color: 'green',
-    hoverPreview: 'assets/images/cat-01.png'
+    hoverPreview: 'assets/images/cat-01.png',
+    flipped: false 
   },
   {
     frontImage: 'assets/images/mosaico/categorias-07.jpg',
@@ -67,7 +82,8 @@ onCardHover(image?: string, color?: string) {
         <li>4.4 Vinculación entre estados</li>
         <li>4.5 Apoyo a clubes y federaciones de mexicanos en el exterior</li>
       </ul>
-    `
+    `,
+    flipped: false 
   },
   {
     frontImage: 'assets/images/mosaico/categorias-09.jpg',
@@ -77,7 +93,8 @@ onCardHover(image?: string, color?: string) {
       <ul>
         <li>5.1 Jornadas de regularización</li>
       </ul>
-    `
+    `,
+    flipped: false 
   },
   {
     frontImage: 'assets/images/mosaico/categorias-11.jpg',
@@ -89,7 +106,8 @@ onCardHover(image?: string, color?: string) {
         <li>6.2 Instalación y rehabilitación de albergues del estado</li>
         <li>6.3 Apoyos para albergues de la sociedad civil</li>
       </ul>
-    `
+    `,
+    flipped: false 
   },
   {
     frontImage: 'assets/images/mosaico/categorias-13.jpg',
@@ -103,7 +121,8 @@ onCardHover(image?: string, color?: string) {
         <li>7.4 Seguridad para personas migrantes</li>
         <li>7.5 Acceso a la justicia</li>
       </ul>
-    `
+    `,
+    flipped: false 
   },
   {
     frontImage: 'assets/images/mosaico/categorias-15.jpg',
@@ -114,7 +133,8 @@ onCardHover(image?: string, color?: string) {
         <li>8.1 Apoyos económicos o en especie</li>
         <li>8.2 Asesoría o acompañamiento para prestaciones de seguridad social</li>
       </ul>
-    `
+    `,
+    flipped: false 
   },
   {
     frontImage: 'assets/images/mosaico/categorias-17.jpg',
@@ -126,7 +146,8 @@ onCardHover(image?: string, color?: string) {
         <li>9.2 Estrategias para difundir emprendimientos migrantes</li>
         <li>9.3 Vinculación y acompañamiento para obtener empleos</li>
       </ul>
-    `
+    `,
+    flipped: false 
   },
   {
     frontImage: 'assets/images/mosaico/categorias-19.jpg',
@@ -136,13 +157,15 @@ onCardHover(image?: string, color?: string) {
       <ul>
         <li>10.1 Fortalecimiento de vínculos culturales</li>
       </ul>
-    `
+    `,
+    flipped: false 
   },
   {
     frontImage: 'assets/images/mosaico/categorias-21.jpg',
     backImage: 'assets/images/mosaico/categorias-22.jpg',
     frontText: '11. Procesos de sensibilización a población no migrante.',
-    backText: ``
+    backText: ``,
+    flipped: false 
   },
   {
     frontImage: 'assets/images/mosaico/categorias-23.jpg',
@@ -152,7 +175,8 @@ onCardHover(image?: string, color?: string) {
       <ul>
         <li>12.1 Profesionalización de autoridades que atienden directamente a población migrante</li>
       </ul>
-    `
+    `,
+    flipped: false 
   },
   {
     frontImage: 'assets/images/mosaico/categorias-25.jpg',
@@ -162,8 +186,8 @@ onCardHover(image?: string, color?: string) {
       <ul>
         <li>13.1 Reunificación familiar temporal</li>
       </ul>
-    `
+    `,
+    flipped: false 
   }
 ];
-
 }

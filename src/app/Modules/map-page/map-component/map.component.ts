@@ -31,7 +31,7 @@ export class MapComponent implements OnInit  {
 
   public mapElementForPDF: HTMLElement | null = null; 
   mostrarMatrizInicial: boolean = true;
-  private _estadosDesdeMatriz: string[] = [];
+  private _statesDesdeMatriz: string[] = [];
   public mapaAnimado = false;
   private map!: Map;
   private mapView!: View;
@@ -67,42 +67,42 @@ export class MapComponent implements OnInit  {
   mostrarTodasLasPracticas = true;
   
  private stateImages: { [key: string]: string[] } = {
-  'Aguascalientes': ['assets/images/Estados/aguascalientes.jpeg'],
-  'Baja California': ['assets/images/Estados/bajacalifornia.png'],
-  'Baja California Sur': ['assets/images/Estados/bajacaliforniasur.png'],
-  'Campeche': ['assets/images/Estados/campeche.png'],
-  'Chiapas': ['assets/images/Estados/chiapas.png'],
-  'Chihuahua': ['assets/images/Estados/chihuahua.png'],
-  'Ciudad de México': ['assets/images/Estados/cdmx.png'],
-  'Coahuila': ['assets/images/Estados/coahuila.png'],
-  'Colima': ['assets/images/Estados/colima.jpeg'],
-  'Durango': ['assets/images/Estados/durango.png'],
-  'Guanajuato': ['assets/images/Estados/guanajuato.png'],
-  'Guerrero': ['assets/images/Estados/guerrero.jpeg'],
-  'Hidalgo': ['assets/images/Estados/hidalgo.png'],
-  'Jalisco': ['assets/images/Estados/jalisco.jpeg'],
-  'México': ['assets/images/Estados/mexico.png'], 
-  'Michoacán': ['assets/images/Estados/michoacan.png'],
-  'Morelos': ['assets/images/Estados/morelos.jpeg'],
-  'Nayarit': ['assets/images/Estados/nayarit.png'],
-  'Nuevo León': ['assets/images/Estados/monterrey.png'],
-  'Oaxaca': ['assets/images/Estados/oaxaca.png'],
-  'Puebla': ['assets/images/Estados/puebla.jpeg'],
-  'Querétaro': ['assets/images/Estados/queretaro.png'],
-  'Quintana Roo': ['assets/images/Estados/quintanaroo.jpeg'],
-  'San Luis Potosí': ['assets/images/Estados/sanluis.jpeg'],
-  'Sinaloa': ['assets/images/Estados/sinaloa.png'], 
-  'Sonora': ['assets/images/Estados/sonora.png'],
-  'Tabasco': ['assets/images/Estados/tabascoo.png'], 
-  'Tamaulipas': ['assets/images/Estados/tamaulipas.png'],
-  'Tlaxcala': ['assets/images/Estados/tlaxcala.png'],
-  'Veracruz': ['assets/images/Estados/veracruz.png'],
-  'Yucatán': ['assets/images/Estados/yucatan.jpeg'],
-  'Zacatecas': ['assets/images/Estados/zacatecas.png']
+  'Aguascalientes': ['assets/images/states/aguascalientes.jpeg'],
+  'Baja California': ['assets/images/states/bajacalifornia.jpg'], 
+  'Baja California Sur': ['assets/images/states/bajacaliforniasur.jpg'], 
+  'Campeche': ['assets/images/states/campeche.png'],
+  'Chiapas': ['assets/images/states/chiapas.jpg'], 
+  'Chihuahua': ['assets/images/states/chihuahua.jpg'],  
+  'Ciudad de México': ['assets/images/states/cdmx.png'],
+  'Coahuila': ['assets/images/states/coahuila.png'],
+  'Colima': ['assets/images/states/colima.jpeg'],
+  'Durango': ['assets/images/states/durango.jpg'],
+  'Guanajuato': ['assets/images/states/guanajuato.png'],
+  'Guerrero': ['assets/images/states/guerrero.jpeg'],
+  'Hidalgo': ['assets/images/states/hidalgo.jpg'], 
+  'Jalisco': ['assets/images/states/jalisco.jpeg'], 
+  'México': ['assets/images/states/mexico.png'], 
+  'Michoacán': ['assets/images/states/michoacan.jpg'],
+  'Morelos': ['assets/images/states/morelos.jpeg'],
+  'Nayarit': ['assets/images/states/nayarit.png'],
+  'Nuevo León': ['assets/images/states/monterrey.jpg'], 
+  'Oaxaca': ['assets/images/states/oaxaca.jpg'],
+  'Puebla': ['assets/images/states/puebla.jpeg'],
+  'Querétaro': ['assets/images/states/queretaro.png'],
+  'Quintana Roo': ['assets/images/states/quintanaroo.jpeg'],
+  'San Luis Potosí': ['assets/images/states/sanluis.jpeg'],
+  'Sinaloa': ['assets/images/states/sinaloa.jpg'], 
+  'Sonora': ['assets/images/states/sonora.png'],
+  'Tabasco': ['assets/images/states/tabasco.jpeg'], 
+  'Tamaulipas': ['assets/images/states/tamaulipas.jpg'],
+  'Tlaxcala': ['assets/images/states/tlaxcala.jpg'],
+  'Veracruz': ['assets/images/states/veracruz.jpg'], 
+  'Yucatán': ['assets/images/states/yucatan.jpeg'],
+  'Zacatecas': ['assets/images/states/zacatecas.jpg']
 };
   
   private statePractices: {[key: string]: string} = {
-    'Aguascalientes': 'Aguascalientes es un estado con presencia migratoria moderada y diversa. Recibe personas extranjeras en tránsito, solicitantes de asilo y residentes temporales, principalmente de Guatemala, Cuba, Nicaragua, Haití, Honduras y Venezuela. También es punto de retorno para personas mexicanas repatriadas desde Estados Unidos, y registra baja incidencia de migración irregular, incluida la de niñas, niños y adolescentes.',
+    'Aguascalientes': 'Aguascalientes es un estado con presencia migratoria moderada y diversa. Recibe personas extranjeras en tránsito, solicitantes de asilo y residentes temporales, principalmente de Guatemala, Cuba, Nicaragua, Haití, Honduras y Venezuela. También es punto de retorno para personas mexicanas repatriadas desde states Unidos, y registra baja incidencia de migración irregular, incluida la de niñas, niños y adolescentes.',
     'Baja California': 'Baja California es un estado fronterizo con alto flujo migratorio: personas en tránsito, solicitantes de asilo haitianos y centroamericanos, trabajadores agrícolas (incluyendo población indígena), y deportados. Cuenta con una Ley estatal para la atención de migrantes que garantiza trato digno, no discriminación y protección especial a niñas, niños y víctimas de delito así como ONGs  y albergues locales complementan con asistencia legal, humanitaria e integración comunitaria.',
     'Baja California Sur': 'Este estado aún no ha sido parte de un volumen de buenas prácticas',
     'Campeche': 'Campeche es un estado que se caracteriza principalmente por flujos internos y de retorno. Su perfil migratorio destaca la articulación entre gobiernos y sociedad civil mediante comités estatales y municipales para atender a migrantes y garantizar su acceso a derechos humanos, así cómo la implemetación protocolos de atención, mecanismos de quejas ante la CNDH y acciones con enfoque en no discriminación.',
@@ -122,10 +122,10 @@ export class MapComponent implements OnInit  {
     'Nayarit': 'Nayarit, estado de origen, retorno y migración interna, cuenta con el Instituto de Atención y Protección a Migrantes y su propia ley estatal. Destacan el programa “La Mujer Nayarita Migrante”, que canaliza casos de mujeres en movilidad a salud, educación y justicia; el plan de reunificación temporal “Uniendo Corazones Nayaritas” que facilita el viaje de personas adultas mayores para reencontrarse con hijos en EE. UU.; ventanilla de Registro Civil en la sede del instituto para trámites de identidad; y vínculos con ICATEN para capacitación laboral de migrantes retornados. Cada año se otorga el Premio “Ernesto Galarza” a personas o asociaciones migrantes que impulsan el desarrollo y la cultura del estado.',
     'Nuevo León': 'Nuevo León es destino laboral y educativo para migrantes internos, solicitantes de refugio y personas desplazadas, y mantiene vínculos de emigración hacia EE. UU. La atención se articula desde la Dirección para la No Discriminación e Igualdad y la Mesa de Igualdad e Inclusión, que coordina salud, empleo, educación e identidad con COMAR, INM y OSC. Destacan un Espacio de Atención junto a COMAR con ventanilla informativa y asesoría jurídica; la vinculación de albergues y estancias infantiles con escuelas que inscriben a niñas y niños sin documentación plena; y la feria mensual “Tequio Hub Intercultural” que impulsa emprendimientos. Siete centros de salud brindan consulta y vacunas COVID‑19 sin exigir CURP, y la Ley estatal de Víctimas reconoce el desplazamiento forzado interno.',
     'Oaxaca': 'Oaxaca es un estado de origen, tránsito y retorno, con una importante presencia de comunidades indígenas migrantes. Las dinámicas migratorias están marcadas por la pobreza, la desigualdad y la migración forzada, tanto interna como internacional, el estado ha impulsado acciones de protección para personas retornadas, búsqueda de personas desaparecidas, atención psicojurídica a familiares y mecanismos de acompañamiento comunitario. Sus acciones y políticas destacan por sus enfoques intercultural e interseccional, especialmente en la atención a mujeres, niñez migrante e integrantes de pueblos originarios, promoviendo procesos dignos y seguros.',
-    'Puebla': 'Puebla es un estado de tránsito, destino y retorno para personas migrantes, incluyendo población repatriada desde Estados Unidos, cuenta con centros estatales que ofrecen asistencia médica, jurídica y psicosocial a quienes retornan, así como talleres de reintegración social y laboral. Se destaca la protección a mujeres, infancia y población LGBTTTIQ+, junto con iniciativas comunitarias y campañas interculturales que promueven la inclusión y combaten la discriminación.',
-    'Querétaro': 'Querétaro es un estado de destino, tránsito y retorno, con una creciente presencia de personas migrantes y repatriadas desde Estados Unidos. A través del Consejo Estatal de Atención a Migrantes y un marco normativo local, se implementan programas de acompañamiento integral para personas en retorno voluntario, que incluyen asistencia psicosocial, orientación legal, capacitación laboral y apoyo al emprendimiento. También se han fortalecido mecanismos de protección a solicitantes de asilo y población en situación de vulnerabilidad, con especial atención a mujeres, niñez migrante.',
-    'Quintana Roo': 'Quintana Roo es un estado fronterizo y turístico con el mayor flujo de entradas internacionales, en su mayoría documentadas y de carácter recreativo, además de visitantes regionales provenientes de Belice. Atrae residentes temporales y permanentes —principalmente de Cuba, Estados Unidos, Argentina y Canadá— y expide tarjetas humanitarias a personas caribeñas y sudamericanas, mientras mantiene baja incidencia de migración irregular y repatriaciones. El gobierno estatal impulsa un sólido marco de protección: programas de identidad civil flexibles, representación y acogida para niñas, niños y adolescentes migrantes, asesoría jurídica especializada, refugios y atención integral para mujeres en movilidad víctimas de violencia, así como políticas y capacitación para prevenir la trata de personas. Ventanillas municipales y acciones de sensibilización garantizan el acceso a derechos con enfoque diferencial e intercultural.',
-    'San Luis Potosí': 'San Luis Potosí es un estado de tránsito, destino y retorno, con población extranjera en movilidad y personas mexicanas repatriadas desde Estados Unidos. Cuenta con una red de 58 enlaces municipales coordinados por el Instituto de Migración y Enlace Internacional, que promueven acceso a servicios, derechos humanos e integración comunitaria. Destacan programas de reunificación familiar para adultos mayores, atención a niñas, niños y adolescentes en movilidad, y colaboración con albergues y organizaciones civiles. El estado impulsa acciones con enfoque intercultural e interseccional, priorizando a mujeres, pueblos indígenas y personas en situación de vulnerabilidad.',
+    'Puebla': 'Puebla es un estado de tránsito, destino y retorno para personas migrantes, incluyendo población repatriada desde states Unidos, cuenta con centros estatales que ofrecen asistencia médica, jurídica y psicosocial a quienes retornan, así como talleres de reintegración social y laboral. Se destaca la protección a mujeres, infancia y población LGBTTTIQ+, junto con iniciativas comunitarias y campañas interculturales que promueven la inclusión y combaten la discriminación.',
+    'Querétaro': 'Querétaro es un estado de destino, tránsito y retorno, con una creciente presencia de personas migrantes y repatriadas desde states Unidos. A través del Consejo Estatal de Atención a Migrantes y un marco normativo local, se implementan programas de acompañamiento integral para personas en retorno voluntario, que incluyen asistencia psicosocial, orientación legal, capacitación laboral y apoyo al emprendimiento. También se han fortalecido mecanismos de protección a solicitantes de asilo y población en situación de vulnerabilidad, con especial atención a mujeres, niñez migrante.',
+    'Quintana Roo': 'Quintana Roo es un estado fronterizo y turístico con el mayor flujo de entradas internacionales, en su mayoría documentadas y de carácter recreativo, además de visitantes regionales provenientes de Belice. Atrae residentes temporales y permanentes —principalmente de Cuba, states Unidos, Argentina y Canadá— y expide tarjetas humanitarias a personas caribeñas y sudamericanas, mientras mantiene baja incidencia de migración irregular y repatriaciones. El gobierno estatal impulsa un sólido marco de protección: programas de identidad civil flexibles, representación y acogida para niñas, niños y adolescentes migrantes, asesoría jurídica especializada, refugios y atención integral para mujeres en movilidad víctimas de violencia, así como políticas y capacitación para prevenir la trata de personas. Ventanillas municipales y acciones de sensibilización garantizan el acceso a derechos con enfoque diferencial e intercultural.',
+    'San Luis Potosí': 'San Luis Potosí es un estado de tránsito, destino y retorno, con población extranjera en movilidad y personas mexicanas repatriadas desde states Unidos. Cuenta con una red de 58 enlaces municipales coordinados por el Instituto de Migración y Enlace Internacional, que promueven acceso a servicios, derechos humanos e integración comunitaria. Destacan programas de reunificación familiar para adultos mayores, atención a niñas, niños y adolescentes en movilidad, y colaboración con albergues y organizaciones civiles. El estado impulsa acciones con enfoque intercultural e interseccional, priorizando a mujeres, pueblos indígenas y personas en situación de vulnerabilidad.',
     'Sinaloa': 'Este estado aún no ha sido parte de un volumen de buenas prácticas',
     'Sonora': 'Sonora, estado fronterizo con EE. UU., concentra flujos de tránsito, deportaciones y migración interna. Cuenta con una Ley de Protección a Migrantes y un Consejo Estatal que coordina salud, seguridad y programas de movilidad laboral y atención a NNA. Destacan el albergue “Tin Otoch” para niñas, niños y adolescentes no acompañados, y un programa de reunificación familiar en EE. UU. Implementa módulos de orientación jurídica y acciones humanitarias conjuntas con Grupos Beta, priorizando género y derechos humanos. ',
     'Tabasco': 'Tabasco es un estado estratégico en la frontera sur, con alto tránsito migratorio, especialmente por vías terrestres como El Ceibo y Tenosique. En 2022 fue la segunda entidad con más personas detectadas en situación migratoria irregular y registró un aumento notable en repatriaciones. Ante este contexto, ha desarrollado acciones como albergues para NNA migrantes, programas de educación para personas retornadas, licencias de conducir para personas extranjeras, ferias de empleo, campañas de registro civil, vacunación abierta y un programa estatal sobre migración. Estas medidas buscan garantizar derechos y atención integral con enfoque humanitario.',
@@ -133,7 +133,7 @@ export class MapComponent implements OnInit  {
     'Tlaxcala': 'Tlaxcala es un estado principalmente de origen y retorno, con migración interna moderada y una Dirección de Atención a Migrantes respaldada por una ley estatal específica. A través del programa “La DAM cerca de ti” instala ventanillas municipales capacitadas para asesorar sobre trámites consulares y derechos en el exterior. Además, el programa de reunificación “Uniendo Historias” subsidia parte de los costos de viaje para familias tlaxcaltecas que visitan a parientes en EE. UU., fortaleciendo vínculos y protección consular.',
     'Veracruz': 'Estado costero del Golfo que combina migración de origen, tránsito y retorno. Cuenta con la Dirección General de Atención a Migrantes, creada para coordinar asistencia, proyectos productivos e identidad civil. Entre sus acciones sobresale un Programa Piloto de Regularización que orienta y acompaña a personas extranjeras en sus trámites ante el INM, además de gestiones de doble nacionalidad, traslado de restos, pensiones y traducción de documentos. La DGAM articula registro civil, consulados, albergues y autoridades federales para garantizar derechos y arraigar a la población en sus comunidades.',
     'Yucatán': 'Estado de origen y destino con fuerte identidad maya; INDEMAYA lidera la atención migratoria. Mesas interinstitucionales y una red de enlaces municipales acercan trámites de identidad, pensiones y visas a comunidades mayahablantes. “Cabecitas Blancas/Sueños del Mayab” reúne a personas adultas mayores con sus familias en EE. UU. y promueve la cultura. Un programa escolar previene riesgos de migración irregular; INDEMAYA traduce documentos oficiales y gestiona la “Casa del Yucateco” en San Francisco para asesoría y difusión cultural.',
-    'Zacatecas': 'Zacatecas es un estado históricamente expulsor de población, con fuerte vínculo con comunidades migrantes en Estados Unidos. Registra flujos de retorno y tránsito. La entidad destaca por un robusto marco institucional liderado por la Secretaría del Zacatecano Migrante (SEZAMI), que implementa programas de reunificación familiar, reintegración laboral, traslado humanitario y asesoría jurídica para personas en movilidad. A través de leyes locales, consejos interinstitucionales y plataformas digitales, promueve la protección de derechos, el vínculo con la diáspora y la participación comunitaria, con énfasis en mujeres, personas adultas mayores y niñez migrante.'
+    'Zacatecas': 'Zacatecas es un estado históricamente expulsor de población, con fuerte vínculo con comunidades migrantes en states Unidos. Registra flujos de retorno y tránsito. La entidad destaca por un robusto marco institucional liderado por la Secretaría del Zacatecano Migrante (SEZAMI), que implementa programas de reunificación familiar, reintegración laboral, traslado humanitario y asesoría jurídica para personas en movilidad. A través de leyes locales, consejos interinstitucionales y plataformas digitales, promueve la protección de derechos, el vínculo con la diáspora y la participación comunitaria, con énfasis en mujeres, personas adultas mayores y niñez migrante.'
   };
 
    public defaultBackgroundStyle = {
@@ -167,15 +167,15 @@ ngAfterViewInit() {
   }
 }
 
-set estadosDesdeMatriz(value: string[]) {
-  this._estadosDesdeMatriz = value;
+set statesDesdeMatriz(value: string[]) {
+  this._statesDesdeMatriz = value;
   if (this.map && value) {
     this.applyMatrixStates(value);
   }
 }
 
-get estadosDesdeMatriz() {
-  return this._estadosDesdeMatriz;
+get statesDesdeMatriz() {
+  return this._statesDesdeMatriz;
 }
 public applyMatrixStates(states: string[]): void {
   if (!this.statesLayer) return;
@@ -576,7 +576,7 @@ onFiltersChanged(event: {
 }
 
 emitFilteredStates(): void {
-  const estadosUnicos = [...new Set(this.filteredMatrixStates.map(s => s.trim()))].filter(s => !!s);
+  const statesUnicos = [...new Set(this.filteredMatrixStates.map(s => s.trim()))].filter(s => !!s);
 }
 
 get carouselBackgroundStyle(): { [klass: string]: any } {
@@ -716,6 +716,32 @@ getColorPorVolumen(): string {
   if (tieneVolumen3) return '#28a745'; 
   if (tieneVolumen2) return '#ffc107'; 
   return '#dc3545'; 
+}
+
+getDocumentoPorVolumen(): string {
+  if (!this.selectedState || !this.allData) return '#';
+
+  const estado = this.selectedState.name;
+  const normalizado = this.normalizeStateName(estado);
+
+  // Busca el volumen asociado en allData
+  const registro = this.allData.find(p =>
+    this.normalizeStateName(p.estado || p.entidad || '') === normalizado
+  );
+
+  if (!registro || !registro.volumen) return '#';
+
+  // Devuelve la URL según el volumen detectado
+  switch (registro.volumen) {
+    case 3:
+      return 'https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-3-buenas-practicas_web.pdf';
+    case 2:
+      return 'https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2024-07/buenas-practicas-volumen-2_final.pdf';
+    case 1:
+      return 'https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2025-07/volumen-1-buenas-practicas-en-politica-migratoria.pdf';
+    default:
+      return '#';
+  }
 }
 
 guardarFiltros(filtros: any): void {

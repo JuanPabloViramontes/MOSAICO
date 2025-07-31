@@ -1,24 +1,22 @@
 <div class="container-fluid p-0">
   <!-- Image Header -->
-<div class="text-white text-center py-5 rounded-top-4 overflow-hidden"
-     style="
-       background-image:
-          linear-gradient(rgba(146, 174, 202, 0.3), rgba(255, 255, 255, 0.3)),
-         url('assets/images/mosaicoBanner.jpg');
-       background-size: 100% auto;  /* <-- aquí el cambio */
-       background-position: center center; /* <-- aquí el cambio */
-       background-repeat: no-repeat;
-       background-blend-mode: multiply;
-       outline: 4px solid #000000;
-       outline-offset: -8px;
-     ">
-
-    <div class="container">
-      <nav class="navbar" style="height: 100px; display: flex; justify-content: center; align-items: center;">
-  
-      </nav>
-          <h2 class="lead text-light mt-4" style="margin-top: 6rem !important;">
-          <strong>Un mapa interactivo sobre las políticas migratorias a nivel local</strong>
+  <div class="position-relative overflow-hidden rounded-top-4">
+    <img 
+      src="assets/images/mosaicoBanner.jpg" 
+      alt="Banner" 
+      class="img-fluid w-100 d-block" 
+      style="object-fit: cover; max-height: 400px; width: 100%;"
+    />
+    <div 
+      class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center"
+      style="
+        outline: 4px solid #000000;
+        outline-offset: -8px;
+      "
+    >
+      <nav class="navbar" style="height: 100px;"></nav>
+      <h2 class="lead text-light mt-4" style="margin-top: 6rem !important;">
+        <strong>Un mapa interactivo sobre las políticas migratorias a nivel local</strong>
       </h2>
     </div>
   </div>

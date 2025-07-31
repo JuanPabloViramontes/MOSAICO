@@ -31,14 +31,14 @@
     pointer-events: none;
   }
 }
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .banner-header {
-    min-height: 120px !important; /* reduce la altura del banner */
+    min-height: 240px !important;
     background-size: cover !important;
-    background-position: center !important;
+    background-position: center center !important;
     outline: none !important;
     border-radius: 0 !important;
-    padding: 1rem 0 !important;
+    padding: 0 !important;
   }
 
   .banner-header h2,
@@ -82,7 +82,7 @@
 .tooltip {
   position: fixed;
   z-index: 1070;
-  transform: translate(-50%, -100%); /* Centro horizontal, arriba vertical */
+  transform: translate(-50%, -100%); 
   pointer-events: none;
   white-space: nowrap;
   font-size: 0.875rem;

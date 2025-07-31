@@ -1,5 +1,5 @@
 #impact-section {
-  margin-top: 200px; /* Ajusta este valor según lo necesites */
+  margin-top: 200px;
 }
 
 .oim-btn:hover {
@@ -13,4 +13,11 @@
   background-color: rgba(255, 255, 255, 0.12);
   transform: scale(0.98);
   box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  h2.lead {
+    font-size: 1.25rem;
+    padding: 0 1rem;
+  }
 }

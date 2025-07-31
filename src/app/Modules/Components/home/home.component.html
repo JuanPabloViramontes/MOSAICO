@@ -1,26 +1,27 @@
 <div class="container-fluid p-0">
-  <!-- Image Header -->
-  <div class="position-relative overflow-hidden rounded-top-4">
-    <img 
-      src="assets/images/mosaicoBanner.jpg" 
-      alt="Banner" 
-      class="img-fluid w-100 d-block" 
-      style="object-fit: cover; max-height: 400px; width: 100%;"
-    />
-    <div 
-      class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center"
-      style="
-        outline: 4px solid #000000;
-        outline-offset: -8px;
-      "
-    >
+  <!-- Banner con imagen de fondo y blend mode -->
+  <div class="banner-header text-white text-center rounded-top-4 overflow-hidden position-relative"
+       style="
+       background-image:
+           linear-gradient(rgba(146, 174, 202, 0.3), rgba(255, 255, 255, 0.3)),
+           url('assets/images/mosaicoBanner.jpg');
+         background-size: 100% auto;
+         background-position: center center;
+         background-repeat: no-repeat;
+         background-blend-mode: multiply;
+         outline: 4px solid #000000;
+         outline-offset: -8px;
+         min-height: 400px;">
+
+    <div class="container position-relative h-100 d-flex flex-column justify-content-center align-items-center">
       <nav class="navbar" style="height: 100px;"></nav>
-      <h2 class="lead text-light mt-4" style="margin-top: 6rem !important;">
-        <strong>Un mapa interactivo sobre las políticas migratorias a nivel local</strong>
-      </h2>
+     <h2 class="lead text-light mt-4" style="margin-top: 11rem !important;">
+  <strong>Un mapa interactivo sobre las políticas migratorias a nivel local</strong>
+</h2>
     </div>
   </div>
 
+  <!-- Botón debajo del banner -->
   <div class="text-center py-3 rounded-bottom-4" style="background-color: #0c2e8d;">
     <a [routerLink]="['/map']"
        class="btn btn-lg px-4 text-white rounded-3 oim-btn"
@@ -35,6 +36,7 @@
   </div>
 </div>
 
+<!-- Secciones del contenido -->
 <app-introduction class="d-block my-5"></app-introduction>
 <app-categories class="d-block my-5"></app-categories>
 <app-card-flip></app-card-flip>

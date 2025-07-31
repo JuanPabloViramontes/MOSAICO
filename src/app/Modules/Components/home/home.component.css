@@ -16,8 +16,28 @@
 }
 
 @media (max-width: 768px) {
-  h2.lead {
-    font-size: 1.25rem;
+  .banner-header {
+    min-height: 240px !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    outline: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+  }
+
+  .banner-header h2,
+  .banner-header p {
+    font-size: 0.85rem !important;
+    margin: 0 !important;
+  }
+
+  .banner-header .container {
     padding: 0 1rem;
   }
+
+  .navbar {
+    height: auto !important;
+    margin-bottom: 0.5rem;
+  }
+
 }

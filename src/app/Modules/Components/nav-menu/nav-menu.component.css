@@ -1,0 +1,18 @@
+.logo-img {
+  height: 70px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* En móviles, alinea el logo a la izquierda */
+@media (max-width: 576px) {
+  .container {
+    justify-content: flex-start !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .logo-img {
+    height: 50px;
+  }
+}
